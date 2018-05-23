@@ -35,13 +35,13 @@ public class WebLogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         // 记录下请求内容
-        logger.info("请求地址 : " + request.getRequestURL().toString());
-        logger.info("HTTP METHOD : " + request.getMethod());
+        //logger.info("请求地址 : " + request.getRequestURL().toString());
+        //logger.info("HTTP METHOD : " + request.getMethod());
         // 获取真实的ip地址
         //logger.info("IP : " + IPAddressUtil.getClientIpAddress(request));
-        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
-                + joinPoint.getSignature().getName());
-        logger.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
+        /*logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
+                + joinPoint.getSignature().getName());*/
+        //logger.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
         //loggger.info("参数 : " + joinPoint.getArgs());
 
     }
@@ -56,7 +56,13 @@ public class WebLogAspect {
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object object = pjp.proceed();// object 为方法的返回值
-        logger.info("耗时 : " + (System.currentTimeMillis() - startTime) + "毫秒");
+        if((System.currentTimeMillis() - startTime) > 1000){
+            logger.info("耗时 : " + (System.currentTimeMillis() - startTime) + "毫秒");
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = attributes.getRequest();
+            logger.info("请求地址 : " + request.getRequestURL().toString());
+            logger.info("HTTP METHOD : " + request.getMethod());
+        }
         return object;
     }
 }

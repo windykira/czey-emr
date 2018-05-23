@@ -1,88 +1,62 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>常州市第二人民医院住院电子病历</title>
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/pace-theme-loading-bar.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
 </head>
 <body>
 <!-- navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="/病人列表.html"><img src="/img/logo.png" height="30" class="d-inline-block align-top" alt=""> 常州市第二人民医院住院电子病历</a></div>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="index.html"><img src="/img/logo.png" height="30"
+                                                           class="d-inline-block align-top" alt=""> 常州市第二人民医院住院电子病历</a>
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-            	<li th:each="menu : ${menus}" class="nav-item">
-            		<a class="nav-link nav-btn" th:dataUrl="${menu.attributes.url}" th:text="${menu.text}"></a>
+                <li th:each="menu : ${menus}" class="nav-item" style="cursor:pointer;">
+                    <a class="nav-link" th:href="${menu.attributes.url}" th:text="${menu.text}"
+                       onclick="loadPage(this);return false;"></a>
                 </li>
-<!--                 <li class="nav-item active" dataUrl=""><a class="nav-link">${menu.text}</a></li> -->
-<!--                 <li class="nav-item"> <a class="nav-link">模板管理</a></li> -->
-<!--                 <li class="nav-item"> <a class="nav-link">知识库管理</a></li> -->
-<!--                 <li class="nav-item"> <a class="nav-link">系统设置</a></li> -->
+                <!--<li class="nav-item nav-01 active"><a class="nav-link" href="javascript:;">病人列表</a></li>
+                <li class="nav-item nav-02"><a class="nav-link" href="javascript:;">模板管理</a></li>
+                <li class="nav-item nav-03"><a class="nav-link" href="javascript:;">知识库管理</a></li>
+                <li class="nav-item nav-04"><a class="nav-link" href="javascript:;">系统设置</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-cog" aria-hidden="true"></i> 设置</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> 帮助</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-cog" aria-hidden="true"></i> 设置</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question-circle"
+                                                                     aria-hidden="true"></i> 帮助</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html"><i class="fa fa-sign-out"
+                                                                              aria-hidden="true"></i> 退出</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <!-- /navbar -->
 
-<div class="sidebar">
-<!--     <div class="panel panel-default"> -->
-<!--         <div class="panel-heading"> -->
-<!--             <h4 class="panel-title">任务提醒</h4> -->
-<!--         </div> -->
-<!--         <ul class="list-group"> -->
-<!--             <li class="list-group-item"><strong>病程列表</strong></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--             <li class="list-group-item"><a href="#">崔天明【副主任（主任/科主任首次查房记录）】</a></li> -->
-<!--         </ul> -->
-		<iframe class="J_iframe" id="iframe_menu" name="iframe_menu" width="100%" height="99%"
-                    src="" frameborder="0" data-id=""
-                    seamless></iframe>
-<!--     </div> -->
-</div>
-<div class="main">
- <iframe class="J_iframe" id="iframe_content" name="iframe_content" width="100%" height="99%"
-                    src="" frameborder="0" data-id=""
-                    seamless></iframe>
-</div>
-
+<!-- content -->
+<div class="content" id="content"></div>
+<!-- /content -->
 <!-- footer -->
 <footer class="footer">
-    <h5 class="pull-left mr-20"><i class="fa fa-user-md fa-lg text-primary" aria-hidden="true"></i> 郑正   住院医生</h5>
-    <h5 class="pull-left"><i class="fa fa-clock-o fa-lg text-primary" aria-hidden="true"></i> 2018年5月17日  10:30:36</h5>
+    <h5 class="pull-left mr-20"><i class="fa fa-user-md fa-lg text-primary" aria-hidden="true"></i> 郑正 住院医生</h5>
+    <h5 class="pull-left"><i class="fa fa-clock-o fa-lg text-primary" aria-hidden="true"></i> 2018年5月17日 10:30:36</h5>
     <nav class="pull-right">
         <ul class="pagination pagination-sm">
             <li><a href="#">上一页</a></li>
@@ -91,23 +65,72 @@
     </nav>
 </footer>
 <!-- /footer -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-
-<script src="/js/appjs/emr/patient/patients.js"></script>
-</body>
-
+<div th:include="emrinclude::footer"></div>
 <script>
-$(function () {
-	$(".nav-btn").click(function(){
-		var menuUrl = $(this).attr("dataUrl");
-		$("#iframe_menu").attr("src",menuUrl);
-		$(".nav-item").removeClass("active");
-		$(this).parent().addClass("active");
-		
-	});
-});
+    $(".pace .pace-progress").css({
+        width: "300px"
+    });
 </script>
+<script>
+    //导航高亮
+    $("#navbar li").click(function () {
+        $(this).addClass("active").siblings(".active").removeClass("active");
+    });
+
+    function loadPage(ele) {
+
+        $.ajax({
+            cache: true,
+            type: "GET",
+            url: $(ele).attr("href"),
+            async: false,
+            error: function (request) {
+                parent.layer.alert("Connection error");
+            },
+            success: function (data) {
+                $("#content").html(data);
+            }
+        });
+    }
+
+    //加载页面
+    //$("#content").load("patients.html");
+    /*$("#navbar .nav-01").click(function(){
+
+     $.ajax({
+     cache: true,
+     type: "GET",
+     url: "/test",
+     async: false,
+     error: function (request) {
+     parent.layer.alert("Connection error");
+     },
+     success: function (data) {
+     $("#content").html(data);
+     }
+     });
+     });*/
+
+    /*$("#navbar .nav-02").click(function(){
+     $.ajax({
+     cache: true,
+     type: "GET",
+     url: "/test1",
+     async: false,
+     error: function (request) {
+     parent.layer.alert("Connection error");
+     },
+     success: function (data) {
+     $("#content").html(data);
+     }
+     });
+     });
+     $("#navbar .nav-03").click(function(){
+     $("#content").load("repository-manager.html");
+     });
+     $("#navbar .nav-04").click(function(){
+     $("#content").load("sys-setup.html");
+     });*/
+</script>
+</body>
 </html>

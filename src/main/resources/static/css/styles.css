@@ -140,3 +140,7 @@ a:hover {
 	line-height: 30px;
 	background-color: #eee;
 }
+
+.nav-link{
+	cursor:pointer;
+}

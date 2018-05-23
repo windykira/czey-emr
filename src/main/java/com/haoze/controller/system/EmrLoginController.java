@@ -63,7 +63,7 @@ public class EmrLoginController extends BaseController {
     }
 
     @Note("系统设置")
-    @GetMapping("/system")
+    @GetMapping("/emrsys/system")
     String system(Model model) {
         List<Tree<EmrMenuEntity>> menus = emrMenuService.listMenuTree(getUser().getID());
         model.addAttribute("menus",menus);
@@ -91,48 +91,6 @@ public class EmrLoginController extends BaseController {
         model.addAttribute("userDepartments", userDepartments);
         model.addAttribute("picUrl","/img/photo_s.jpg");
         return "index";
-    }
-
-    @PostMapping("/main" )
-    String main(Model model, @RequestParam Map<String, Object> params) {
-
-        List<Tree<EmrMenuEntity>> menus = emrMenuService.listMenuTree(getUser().getID());
-        List<Tree<EmrMenuEntity>> returnMenus = new ArrayList();
-        for(Tree<EmrMenuEntity> emrMenuEntityTree : menus){
-            returnMenus.add(emrMenuEntityTree);
-        }
-        Map<String,Object> paramsMap = new HashMap();
-        paramsMap.put("userID",getUser().getID());
-        model.addAttribute("menus", returnMenus);
-        model.addAttribute("name", getUser().getAccount());
-        model.addAttribute("userName", getUser().getUserName());
-        model.addAttribute("userId", getUser().getID());
-        model.addAttribute("userDepartments", 1);
-        model.addAttribute("picUrl","/img/photo_s.jpg");
-        return "index_v1";
-    }
-    
-    @GetMapping(value="/submenu/patientList")
-    String patientList(Model model) {
-
-        return "/submenu/patientListSubMenu";
-    }
-    
-    @GetMapping(value="/submenu/normalList/{menuName}")
-    String normalList(Model model, @PathVariable String menuName) {
-    	String name = "";
-    	if("1".equals(menuName)) {
-    		name="模板管理";
-    	}
-    	if("2".equals(menuName)) {
-    		name="知识库管理";
-    	}
-    	if("3".equals(menuName)) {
-    		name="系统管理";
-    	}
-    	List<Map> list = emrMenuService.getSubMenuByName(name);
-    	model.addAttribute("subMenus", list);
-        return "/submenu/normalSubMenu";
     }
 
 }
