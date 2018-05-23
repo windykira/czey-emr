@@ -9,6 +9,7 @@ import com.haoze.model.system.menu.entity.EmrMenuEntity;
 import com.haoze.service.system.EmrDepartmentService;
 import com.haoze.service.system.EmrMenuService;
 import com.haoze.utils.MD5Util;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -62,10 +63,12 @@ public class EmrLoginController extends BaseController {
         }
     }
 
-    @Note("系统设置")
-    @GetMapping("/emrsys/system")
-    String system(Model model) {
-        List<Tree<EmrMenuEntity>> menus = emrMenuService.listMenuTree(getUser().getID());
+    @Note("系统管理")
+    @GetMapping("/emrsys/system/{menuId}")
+    String system(Model model,@PathVariable("menuId") String menuId) {
+        Map<String,Object> paramMap = new HashedMap();
+        paramMap.put("parentMenu",menuId);
+        List<EmrMenuEntity> menus = emrMenuService.listMenus(paramMap);
         model.addAttribute("menus",menus);
         model.addAttribute("userId", getUser().getID());
         return "/emrsys/system";

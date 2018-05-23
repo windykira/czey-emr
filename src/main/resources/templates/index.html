@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/pace-theme-loading-bar.css">
+    <!--<link rel="stylesheet" href="/css/pace-theme-loading-bar.css">-->
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -29,8 +29,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li th:each="menu : ${menus}" class="nav-item" style="cursor:pointer;">
-                    <a class="nav-link" th:href="${menu.attributes.url}" th:text="${menu.text}"
-                       onclick="loadPage(this);return false;"></a>
+                    <a class="nav-link" th:url="${menu.attributes.url}" th:text="${menu.text}" th:menuId="${menu.id}"></a>
                 </li>
                 <!--<li class="nav-item nav-01 active"><a class="nav-link" href="javascript:;">病人列表</a></li>
                 <li class="nav-item nav-02"><a class="nav-link" href="javascript:;">模板管理</a></li>
@@ -42,7 +41,7 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question-circle"
                                                                      aria-hidden="true"></i> 帮助</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html"><i class="fa fa-sign-out"
+                <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"
                                                                               aria-hidden="true"></i> 退出</a></li>
             </ul>
         </div>
@@ -53,6 +52,7 @@
 <!-- content -->
 <div class="content" id="content"></div>
 <!-- /content -->
+
 <!-- footer -->
 <footer class="footer">
     <h5 class="pull-left mr-20"><i class="fa fa-user-md fa-lg text-primary" aria-hidden="true"></i> 郑正 住院医生</h5>
@@ -72,27 +72,28 @@
     });
 </script>
 <script>
-    //导航高亮
-    $("#navbar li").click(function () {
-        $(this).addClass("active").siblings(".active").removeClass("active");
-    });
+    $(function() {
 
-    function loadPage(ele) {
-
-        $.ajax({
-            cache: true,
-            type: "GET",
-            url: $(ele).attr("href"),
-            async: false,
-            error: function (request) {
-                parent.layer.alert("Connection error");
-            },
-            success: function (data) {
-                $("#content").html(data);
-            }
+        //导航高亮
+        $("#navbar li").click(function () {
+            $(this).addClass("active").siblings(".active").removeClass("active");
         });
-    }
 
+        $(".nav-link").click(function () {
+            $.ajax({
+                cache: true,
+                type: "GET",
+                url: $(this).attr("url")+"/"+$(this).attr("menuId"),
+                async: false,
+                error: function (request) {
+                    parent.layer.alert("Connection error");
+                },
+                success: function (data) {
+                    $("#content").html(data);
+                }
+            });
+        });
+    });
     //加载页面
     //$("#content").load("patients.html");
     /*$("#navbar .nav-01").click(function(){

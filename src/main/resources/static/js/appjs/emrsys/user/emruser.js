@@ -306,7 +306,7 @@ function add(empId) {
         title: '增加用户',
         maxmin: true,
         shadeClose: false,
-        area: ['800px', '520px'],
+        area: ['820px', '520px'],
         content: '/emrsys/user/add/' + empId
     });
 }

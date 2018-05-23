@@ -4,6 +4,7 @@ import com.haoze.common.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -17,8 +18,8 @@ public class EmrPatientController extends BaseController{
 
     private String prefix = "emr/patient/";
 
-    @GetMapping("/patients")
-    String index(Model model) {
+    @GetMapping("/patients/{menuId}")
+    String index(Model model,@PathVariable("menuId") String menuId) {
         return prefix + "patients";
     }
 }

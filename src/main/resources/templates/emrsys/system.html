@@ -1,12 +1,51 @@
 <div class="sidebar">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <!--<div class="panel-heading">
       <h4 class="panel-title">菜单管理</h4>
-    </div>
+    </div>-->
     <ul class="list-group">
-      <a th:each="menu : ${menus}" class="list-group-item" style="cursor:pointer;" th:dataUrl="${menu.attributes.url}" th:text="${menu.text}"></a>
+      <a th:each="menu : ${menus}" class="list-group-item" style="cursor:pointer;" th:url="${menu.menuUrl}" th:text="${menu.menuName}"></a>
       <!--<li class="list-group-item"><a href="#">菜单管理</a></li>-->
     </ul>
   </div>
 </div>
-<div class="main">系统设置</div>
+<div class="main"></div>
+<script>
+
+  $(function() {
+    //默认加载用户管理页面
+    loadUser();
+
+    $(".list-group a").click(function () {
+      $(this).addClass("active").siblings(".active").removeClass("active");
+    });
+  });
+
+  $(".list-group-item").click(function(){
+    $.ajax({
+      type: "GET",
+      url: $(this).attr("url"),
+      async: false,
+      error: function (request) {
+        parent.layer.alert("Connection error");
+      },
+      success: function (data) {
+        $(".main").html(data);
+      }
+    });
+  });
+
+  function loadUser(){
+    $.ajax({
+      type: "GET",
+      url: "/emrsys/user",
+      async: false,
+      error: function (request) {
+        parent.layer.alert("Connection error");
+      },
+      success: function (data) {
+        $(".main").html(data);
+      }
+    });
+  }
+</script>

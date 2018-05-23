@@ -135,9 +135,9 @@ public class EmrUserController extends BaseController {
     @RequiresPermissions("sys:user:resetPwd")
     @PostMapping("/postResetPassWord")
     @ResponseBody
-    ResponseResult postResetPassWord(EmrUserVO emrUserVO) {
+    ResponseResult postResetPassWord(EmrUserEntity emrUserEntity) {
 
-        return emrUserService.resetPassWord(emrUserVO.getEmrUser());
+        return emrUserService.resetPassWord(emrUserEntity);
     }
 
     @Note("更新用户")
