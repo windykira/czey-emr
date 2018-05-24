@@ -26,6 +26,13 @@ public interface EmrUserService {
     EmrUserEntity get(String userId);
 
     /**
+     * 查询用户
+     * @param paramMap
+     * @return
+     */
+    EmrUserEntity getByAccountAndPassword(Map<String, Object> paramMap);
+
+    /**
      * 查询用户信息
      * @param queryParam
      * @return

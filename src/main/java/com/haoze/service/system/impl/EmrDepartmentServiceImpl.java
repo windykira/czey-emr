@@ -1,9 +1,12 @@
 package com.haoze.service.system.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.haoze.common.model.QueryParam;
 import com.haoze.common.model.Tree;
 import com.haoze.dao.system.EmrDepartmentDao;
 import com.haoze.dao.system.EmrUserDepartmentDao;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
+import com.haoze.model.system.department.po.UserDepartmentPO;
 import com.haoze.service.system.EmrDepartmentService;
 import com.haoze.utils.TreeBuildUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +39,16 @@ public class EmrDepartmentServiceImpl implements EmrDepartmentService {
     public List<EmrDepartmentEntity> listEmrDepartments(Map<String, Object> paramMap) {
         return emrDepartmentMapper.listEmrDepartments(paramMap);
     }
-    
+
     @Override
     public int count(Map<String, Object> paramMap) {
     	return emrDepartmentMapper.count(paramMap);
     }
     
     @Override
-    public List<EmrDepartmentEntity> list(Map<String, Object> paramMap) {
-    	return emrDepartmentMapper.list(paramMap);
+    public List<EmrDepartmentEntity> list(QueryParam queryParam) {
+        PageHelper.startPage(queryParam.getPage(),queryParam.getLimit());
+        return emrDepartmentMapper.list(queryParam);
     }
     @Override
     public int save(Map<String, Object> params) {

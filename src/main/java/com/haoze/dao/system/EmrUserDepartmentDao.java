@@ -1,5 +1,6 @@
 package com.haoze.dao.system;
 
+import com.haoze.model.system.department.po.UserDepartmentPO;
 import com.haoze.model.system.user.entity.EmrUserDepartmentEntity;
 
 import java.util.List;
@@ -29,4 +30,10 @@ public interface EmrUserDepartmentDao {
      * @return
      */
     List<String> listUserDepartments(String userId);
+
+    /**
+     *查询用户关联科室列表
+     * @return
+     */
+    List<UserDepartmentPO> listDepartmentsByUserId(String userId);
 }

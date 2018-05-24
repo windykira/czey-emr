@@ -29,9 +29,9 @@
       </div>
       <div class="form-group clearfix">
         <label for="inputPassword"> <span class="icon-key"></span> </label>
-        <input class="form-control" type="password" id="inputPassword" name="password" value="111111" placeholder="请输入密码">
+        <input class="form-control" type="password" id="inputPassword" name="passWord" value="111111" placeholder="请输入密码">
       </div>
-      <button type="button" class="login-btn">登录</button>
+      <button type="button" class="login-btn" id="login">登录</button>
     </form>
   </div>
   <!-- /login-box --> 
@@ -57,8 +57,9 @@
 
 <script type="text/javascript">
 
+  var departmentData = "";
   $(document).ready(function () {
-    $(".login-btn").on('click',function(){$("#signupForm").submit();});
+    $("#login").on('click',function(){$("#signupForm").submit();});
     validateRule();
   });
 
@@ -72,6 +73,30 @@
 
     $.ajax({
       type: "POST",
+      url:"/emrsys/user/checkForDepartment",
+      data: $('#signupForm').serialize(),
+      success:function(data){
+          if(data.code == 1){
+            if(data.userDepartments > 1){
+              departmentData = data.departmentsData;
+              layer.open({
+                type : 2,
+                closeBtn:0,
+                title : '选择科室',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '800px', '400px' ],
+                content :  'emrsys/dept/choose'
+              })
+            }
+          }else{
+            layer.msg(data.msg);
+          }
+      }
+    });
+
+    /*$.ajax({
+      type: "POST",
       url: ctx+"login",
       data: $('#signupForm').serialize(),
       success: function (r) {
@@ -79,22 +104,12 @@
           var index = layer.load(1, {
             shade: [0.1,'#fff'] //0.1透明度的白色背景
           });
-
-          /*layer.open({
-           type : 2,
-           CloseBtn:0,
-           title : '选择科室',
-           maxmin : true,
-           shadeClose : false, // 点击遮罩关闭层
-           area : [ '1200px', '600px' ],
-           content :  'emrsys/department/choose'
-           });*/
           parent.location.href = '/index';
         } else {
           layer.msg(r.msg);
         }
       },
-    });
+    });*/
   }
 
   function validateRule() {
@@ -104,7 +119,7 @@
         username: {
           required: true
         },
-        password: {
+        passWord: {
           required: true
         }
       },
@@ -112,7 +127,7 @@
         username: {
           required: icon + "请输入您的用户名",
         },
-        password: {
+        passWord: {
           required: icon + "请输入您的密码",
         }
       }

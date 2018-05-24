@@ -6,6 +6,7 @@ $(function () {
         status = $("input[name='status']:checked").val();
         loadPage(status);
     });
+
 });
 
 function firstLoadPage(status){
@@ -307,7 +308,7 @@ function add(empId) {
         maxmin: true,
         shadeClose: false,
         area: ['820px', '520px'],
-        content: '/emrsys/user/add/' + empId
+        content: ['/emrsys/user/add/' + empId,'no']
     });
 }
 function remove(id) {

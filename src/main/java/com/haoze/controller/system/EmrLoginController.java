@@ -8,8 +8,10 @@ import com.haoze.dao.system.EmrDepartmentDao;
 import com.haoze.model.system.menu.entity.EmrMenuEntity;
 import com.haoze.service.system.EmrDepartmentService;
 import com.haoze.service.system.EmrMenuService;
+import com.haoze.utils.CurrentUser;
 import com.haoze.utils.MD5Util;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -51,9 +53,9 @@ public class EmrLoginController extends BaseController {
     @Note("登录")
     @PostMapping("/login")
     @ResponseBody
-    ResponseResult userLogin(String username, String password) {
-        password = MD5Util.encrypt(username, password);
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+    ResponseResult userLogin(String username, String passWord) {
+        passWord = MD5Util.encrypt(username, passWord);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, passWord);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -95,5 +97,7 @@ public class EmrLoginController extends BaseController {
         model.addAttribute("picUrl","/img/photo_s.jpg");
         return "index";
     }
+
+
 
 }

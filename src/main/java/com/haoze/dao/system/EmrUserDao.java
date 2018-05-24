@@ -33,6 +33,13 @@ public interface EmrUserDao {
     EmrUserEntity get(String userId);
 
     /**
+     * 根据账号和密码获取用户信息
+     * @param paramMap
+     * @return
+     */
+    EmrUserEntity getByAccountAndPassword(Map<String,Object> paramMap);
+
+    /**
      * 删除用户
      * @param userId
      */

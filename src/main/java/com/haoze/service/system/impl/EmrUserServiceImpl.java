@@ -57,6 +57,11 @@ public class EmrUserServiceImpl implements EmrUserService {
     }
 
     @Override
+    public EmrUserEntity getByAccountAndPassword(Map<String, Object> paramMap) {
+        return emrUserMapper.getByAccountAndPassword(paramMap);
+    }
+
+    @Override
     public Page<EmrUserEntity> listUsers(QueryParam queryParam) {
         PageHelper.startPage(queryParam.getPage(),queryParam.getLimit());
         queryParam.put("delFlag", DelFlagEnum.Not_Deleted.getEnumValue());

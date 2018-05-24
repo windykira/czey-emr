@@ -4,6 +4,8 @@ import com.haoze.model.system.user.entity.EmrUserEntity;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
+import java.util.List;
+
 /**
  * 当前用户工具。
  * @author maxl

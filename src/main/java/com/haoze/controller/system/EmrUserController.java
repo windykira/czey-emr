@@ -7,6 +7,7 @@ import com.haoze.common.enumeration.system.user.UserCreateStatusEnum;
 import com.haoze.common.model.PaginationResult;
 import com.haoze.common.model.QueryParam;
 import com.haoze.common.model.ResponseResult;
+import com.haoze.dao.system.EmrDepartmentDao;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
 import com.haoze.model.system.role.entity.EmrRoleEntity;
 import com.haoze.model.system.role.vo.EmrRoleVO;
@@ -19,6 +20,11 @@ import com.haoze.service.system.EmrRoleService;
 import com.haoze.service.system.EmrUserService;
 import com.haoze.utils.FullNameUtil;
 import com.haoze.utils.MD5Util;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +52,8 @@ public class EmrUserController extends BaseController {
     EmrDepartmentService emrDepartmentService;
     @Autowired
     EmrHisEmpService emrHisEmpService;
+    @Autowired
+    EmrDepartmentDao emrDepartmentDao;
 
     private String prefix = "emrsys/user";
 
@@ -147,6 +155,30 @@ public class EmrUserController extends BaseController {
     ResponseResult update(EmrUserVO emrUserVO) {
 
         return emrUserService.update(emrUserVO);
+    }
+
+    @PostMapping("/checkForDepartment")
+    @ResponseBody
+    ResponseResult checkForDepartment(String username, String passWord) {
+
+        //查询用户账号是否存在
+        Map<String, Object> paramMap = new HashedMap();
+        paramMap.put("account",username);
+        paramMap.put("passWord",MD5Util.encrypt(username,passWord));
+        int countNumbers = emrUserService.countUsers(paramMap);
+        if (countNumbers < 1) {
+            return ResponseResult.failure(0,"账号或密码有误。");
+        }
+        EmrUserEntity emrUserEntity = emrUserService.getByAccountAndPassword(paramMap);
+        if ("2".equals(emrUserEntity.getStatus())) {
+            return ResponseResult.failure(0,"账号已被锁定,请联系管理员。");
+        }
+        paramMap.put("userID",emrUserEntity.getID());
+        List<EmrDepartmentEntity> departmentEntities = emrDepartmentDao.listEmrDepartmentsByUserId(emrUserEntity.getID());
+        Map<String, Object> resultMap = new HashedMap();
+        resultMap.put("userDepartments",departmentEntities.size());
+        resultMap.put("departmentsData",departmentEntities);
+        return ResponseResult.success(resultMap);
     }
 
 }

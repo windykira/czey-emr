@@ -44,6 +44,12 @@
         FROM SYS_USER WHERE PK_USER = #{_parameter}
     </select>
 
+    <select id="getByAccountAndPassword" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SYS_USER WHERE ACCOUNT = #{account} and PWD = #{passWord}
+    </select>
+
     <select id="listUsers" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
@@ -60,6 +66,8 @@
         <where>
             <if test="ID != null and ID != ''"> and PK_USER = #{ID} </if>
             <if test="userName != null and userName != ''"> and NAME_USER = #{userName} </if>
+            <if test="account != null and account != ''"> and ACCOUNT = #{account} </if>
+            <if test="passWord != null and passWord != ''"> and PWD = #{passWord} </if>
             <if test="delFlag != null and delFlag != ''"> and DEL_FLAG = #{delFlag} </if>
         </where>
     </select>

@@ -72,6 +72,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/main/open/**", "anon");
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/kickoff", "anon");
+        filterChainDefinitionMap.put("/emrsys/user/checkForDepartment", "anon");
+        filterChainDefinitionMap.put("/emrsys/dept/choose", "anon");
 
         filterChainDefinitionMap.put("/**", "kickoff,authc");
         /*filterChainDefinitionMap.put("/index", "authc");

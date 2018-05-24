@@ -1,7 +1,9 @@
 package com.haoze.service.system;
 
+import com.haoze.common.model.QueryParam;
 import com.haoze.common.model.Tree;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
+import com.haoze.model.system.department.po.UserDepartmentPO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,7 @@ public interface EmrDepartmentService {
      * @return
      */
     List<EmrDepartmentEntity> listEmrDepartments(Map<String, Object> paramMap);
-    
+
     /**
      * 查询科室列表数量
      * @param paramMap
@@ -38,10 +40,10 @@ public interface EmrDepartmentService {
     
     /**
      * 查询科室列表
-     * @param paramMap
+     * @param queryParam
      * @return
      */
-	List<EmrDepartmentEntity> list(Map<String, Object> paramMap);
+	List<EmrDepartmentEntity> list(QueryParam queryParam);
 	
 	 /**
      * 新增科室
