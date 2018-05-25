@@ -1,26 +1,60 @@
-var departmentId = "";
 $().ready(function () {
     var userId = parent.$("#userId").val();
-    if(departmentId == ""){
-        loadDepartment();
-        validateRule();
-    }
+    loadDepartment();
+    validateRule();
 
 });
 
 $.validator.setDefaults({
     submitHandler: function () {
-        //businessRefresh();
+        loadSystem();
     }
 });
 
-$(".btn-primary").click(function () {
+function loadSystem(){
+
+    var parentIndex = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+    parent.$("#departmentId").val($("#sysdept").val());
+    $.ajax({
+        type: "POST",
+        url: parent.ctx+"login",
+        data: parent.$('#signupForm').serialize(),
+        success: function (r) {
+            if (r.code == 1) {
+                var index = layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+                parent.location.href = '/index';
+                parent.layer.close(parentIndex);
+            } else {
+                layer.msg(r.msg);
+            }
+        },
+    })
+}
+
+
+/*$(".btn-primary").click(function () {
 
     //parent.location.href = '/index';
-    departmentId = $("#sysdept").val();
-    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-    parent.layer.close(index);
-});
+    var parentIndex = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+    $.ajax({
+        type: "POST",
+        url: parent.ctx+"login",
+        data: parent.$('#signupForm').serialize(),
+        success: function (r) {
+            if (r.code == 1) {
+                var index = layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+                parent.location.href = '/index';
+                parent.layer.close(parentIndex);
+            } else {
+                layer.msg(r.msg);
+            }
+        },
+    })
+});*/
 
 function businessRefresh() {
 
@@ -69,7 +103,7 @@ function loadDepartment() {
     for (var i = 0; i < data.length; i++) {
         html += '<option value="' + data[i].id + '">' + data[i].departmentName + '</option>'
     }
-    (".chosen-select").append(html);
+    $(".chosen-select").append(html);
     $(".chosen-select").chosen({
         maxHeight: 200
     });

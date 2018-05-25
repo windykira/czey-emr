@@ -159,12 +159,12 @@ public class EmrUserController extends BaseController {
 
     @PostMapping("/checkForDepartment")
     @ResponseBody
-    ResponseResult checkForDepartment(String username, String passWord) {
+    ResponseResult checkForDepartment(String username, String password) {
 
         //查询用户账号是否存在
         Map<String, Object> paramMap = new HashedMap();
         paramMap.put("account",username);
-        paramMap.put("passWord",MD5Util.encrypt(username,passWord));
+        paramMap.put("passWord",MD5Util.encrypt(username,password));
         int countNumbers = emrUserService.countUsers(paramMap);
         if (countNumbers < 1) {
             return ResponseResult.failure(0,"账号或密码有误。");

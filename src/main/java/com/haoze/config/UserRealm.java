@@ -4,7 +4,9 @@ import com.haoze.dao.system.EmrUserDao;
 import com.haoze.model.system.user.entity.EmrUserEntity;
 import com.haoze.service.system.EmrMenuService;
 import com.haoze.utils.ApplicationContextUtil;
+import com.haoze.utils.CurrentUser;
 import com.haoze.utils.ShiroUtil;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -92,6 +94,7 @@ public class UserRealm extends AuthorizingRealm {
 		if ("2".equals(emrUserEntity.getStatus())) {
 			throw new LockedAccountException("账号已被锁定,请联系管理员。");
 		}
+		//CurrentUser.setCurrentUserOrganization(emrUserEntity.getUserOrganization());
 		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(emrUserEntity, passWord, getName());
 		return simpleAuthenticationInfo;
 	}

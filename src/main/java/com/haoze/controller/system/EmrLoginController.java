@@ -10,6 +10,7 @@ import com.haoze.service.system.EmrDepartmentService;
 import com.haoze.service.system.EmrMenuService;
 import com.haoze.utils.CurrentUser;
 import com.haoze.utils.MD5Util;
+import com.haoze.utils.ShiroUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -53,12 +54,13 @@ public class EmrLoginController extends BaseController {
     @Note("登录")
     @PostMapping("/login")
     @ResponseBody
-    ResponseResult userLogin(String username, String passWord) {
-        passWord = MD5Util.encrypt(username, passWord);
-        UsernamePasswordToken token = new UsernamePasswordToken(username, passWord);
+    ResponseResult userLogin(String username, String password,String departmentId) {
+        password = MD5Util.encrypt(username, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
+            CurrentUser.setCurrentUserDepartment(departmentId);
             return ResponseResult.success();
         } catch (AuthenticationException e) {
             return ResponseResult.failure("用户账号或密码错误");
@@ -88,16 +90,19 @@ public class EmrLoginController extends BaseController {
 
         Map<String,Object> paramsMap = new HashMap();
         paramsMap.put("userID",getUser().getID());
-        int userDepartments = emrDepartmentDao.countUserDepartments(paramsMap);
         model.addAttribute("menus", returnMenus);
         model.addAttribute("name", getUser().getAccount());
         model.addAttribute("userName", getUser().getUserName());
         model.addAttribute("userId", getUser().getID());
-        model.addAttribute("userDepartments", userDepartments);
+        model.addAttribute("departmentId",CurrentUser.getCurrentUserDepartment());
         model.addAttribute("picUrl","/img/photo_s.jpg");
         return "index";
     }
 
-
+    @GetMapping("/logout")
+    String logout() {
+        ShiroUtil.logout();
+        return "redirect:/login";
+    }
 
 }

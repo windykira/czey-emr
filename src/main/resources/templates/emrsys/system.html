@@ -36,6 +36,11 @@
   });
 
   function loadUser(){
+    $(".list-group a").each(function(i,e){
+      if($(this).attr("url") == "emrsys/user/"){
+        $(this).addClass("active");
+      }
+    });
     $.ajax({
       type: "GET",
       url: "/emrsys/user",
@@ -44,6 +49,7 @@
         parent.layer.alert("Connection error");
       },
       success: function (data) {
+        //debugger;
         $(".main").html(data);
       }
     });

@@ -21,7 +21,6 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <input type="hidden" id="userId" th:value="${userId}"/>
-            <input type="hidden" id="userDepartments" th:value="${userDepartments}"/>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span
                     class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
@@ -76,19 +75,6 @@
 <script>
     $(function() {
 
-        /*var userDepartments = $("#userDepartments").val();
-        if(userDepartments > 1){
-            layer.open({
-                type : 2,
-                closeBtn:0,
-                title : '选择科室',
-                maxmin : true,
-                shadeClose : false, // 点击遮罩关闭层
-                area : [ '800px', '400px' ],
-                content :  'emrsys/dept/choose'
-            })
-        }*/
-
         //导航高亮
         $("#navbar li").click(function () {
             $(this).addClass("active").siblings(".active").removeClass("active");
@@ -105,6 +91,7 @@
                 },
                 success: function (data) {
                     $("#content").html(data);
+                    //parent.location.href = '/index';
                 }
             });
         });

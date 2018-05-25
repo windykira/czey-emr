@@ -14,6 +14,16 @@ import java.util.List;
 public class CurrentUser {
 
     private final static String CURRENT_DEPT_KEY = "userDepartment";
+    private final static String CURRENT_Organization_KEY = "userOrganization";
+
+    public static void setCurrentUserOrganization(String organizationId){
+        ShiroUtil.getSession().setAttribute(ShiroUtil.getUserId() + CURRENT_Organization_KEY,organizationId);
+    }
+
+    public static String getCurrentUserOrganization(){
+        return ShiroUtil.getSession().getAttribute(ShiroUtil.getUserId() + CURRENT_Organization_KEY) == null ? "" :
+                ShiroUtil.getSession().getAttribute(ShiroUtil.getUserId() + CURRENT_Organization_KEY).toString();
+    }
 
     public static String getCurrentUserDepartment(){
         return ShiroUtil.getSession().getAttribute(ShiroUtil.getUserId() + CURRENT_DEPT_KEY) == null ? "" :
