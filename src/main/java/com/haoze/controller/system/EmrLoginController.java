@@ -47,7 +47,8 @@ public class EmrLoginController extends BaseController {
     EmrDepartmentDao emrDepartmentDao;
 
     @GetMapping({ "/", "" ,"/login"})
-    String login() {
+    String login(Model model) {
+        model.addAttribute("userId", CurrentUser.getUserId());
         return "login";
     }
 
@@ -75,7 +76,7 @@ public class EmrLoginController extends BaseController {
         List<EmrMenuEntity> menus = emrMenuService.listMenus(paramMap);
         model.addAttribute("menus",menus);
         model.addAttribute("userId", getUser().getID());
-        return "/emrsys/system";
+        return "emrsys/system";
     }
 
     @Note("请求访问主页")

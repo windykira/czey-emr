@@ -3,6 +3,7 @@
     <!--<div class="panel-heading">
       <h4 class="panel-title">菜单管理</h4>
     </div>-->
+    <input type="hidden" id="userId" th:value="${userId}"/>
     <ul class="list-group">
       <a th:each="menu : ${menus}" class="list-group-item" style="cursor:pointer;" th:url="${menu.menuUrl}" th:text="${menu.menuName}"></a>
       <!--<li class="list-group-item"><a href="#">菜单管理</a></li>-->

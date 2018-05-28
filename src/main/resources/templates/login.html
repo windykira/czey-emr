@@ -29,6 +29,7 @@
     <!--<div class="erro-massage">请输入用户名</div>-->
     <form class="clearfix" id="signupForm">
       <input id="departmentId" name="departmentId" type="hidden">
+      <input type="hidden" id="userId" th:value="${userId}"/>
       <div class="form-group clearfix">
         <label for="inputUser"> <span class="icon-user"></span> </label>
         <input class="form-control" type="text" id="inputUser" name="username" value="admin" placeholder="请输入用户名">

@@ -40,6 +40,9 @@ public class CurrentUser {
     }
 
     public static String getUserId() {
+        if(getUser() == null){
+            return "";
+        }
         return getUser().getID();
     }
 
