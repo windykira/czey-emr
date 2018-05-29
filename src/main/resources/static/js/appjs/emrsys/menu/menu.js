@@ -25,7 +25,10 @@ var load = function () {
                         visible: false,
                         align: 'center',
                         valign: 'center',
-                        width: '5%'
+                        width: '5%',
+                        formatter: function (value, row, index) {
+                            return index + 1;
+                        }
                     },
                     {
                         title: '菜单名称',

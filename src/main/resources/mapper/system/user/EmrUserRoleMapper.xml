@@ -30,6 +30,13 @@
         PK_USER = #{_parameter}
     </select>
 
+    <select id="getUserRoleNames" resultType="String" parameterType="String">
+        select WMSYS.WM_CONCAT(sr.NAME_ROLE) NAME_ROLE
+        from SYS_ROLE sr INNER JOIN SYS_USER_ROLE sur on sr.PK_ROLE = sur.PK_ROLE
+        where sur.PK_USER = #{_parameter}
+        GROUP BY sur.PK_USER
+    </select>
+
     <delete id="removeByUserId" parameterType="String">
         delete from sys_user_role where PK_USER = #{_parameter}
     </delete>

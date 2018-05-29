@@ -8,6 +8,7 @@ import com.haoze.dao.system.EmrDepartmentDao;
 import com.haoze.model.system.menu.entity.EmrMenuEntity;
 import com.haoze.service.system.EmrDepartmentService;
 import com.haoze.service.system.EmrMenuService;
+import com.haoze.service.system.EmrUserService;
 import com.haoze.utils.CurrentUser;
 import com.haoze.utils.MD5Util;
 import com.haoze.utils.ShiroUtil;
@@ -45,6 +46,8 @@ public class EmrLoginController extends BaseController {
     EmrDepartmentService emrDepartmentService;
     @Autowired
     EmrDepartmentDao emrDepartmentDao;
+    @Autowired
+    EmrUserService emrUserService;
 
     @GetMapping({ "/", "" ,"/login"})
     String login(Model model) {
@@ -97,6 +100,7 @@ public class EmrLoginController extends BaseController {
         model.addAttribute("userId", getUser().getID());
         model.addAttribute("departmentId",CurrentUser.getCurrentUserDepartment());
         model.addAttribute("picUrl","/img/photo_s.jpg");
+        model.addAttribute("footerName",getUser().getUserName() + " " + emrUserService.getUserRoleNames(getUser().getID()));
         return "index";
     }
 

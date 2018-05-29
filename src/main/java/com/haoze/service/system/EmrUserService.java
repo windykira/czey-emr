@@ -80,4 +80,11 @@ public interface EmrUserService {
      */
     ResponseResult update(EmrUserVO emrUserVO);
 
+    /**
+     * 查询用户关联全部角色名称
+     * @param userId
+     * @return
+     */
+    String getUserRoleNames(String userId);
+
 }

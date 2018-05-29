@@ -48,11 +48,7 @@ public class EmrUserServiceImpl implements EmrUserService {
     @Override
     public EmrUserEntity get(String userId) {
 
-        //EmrUserVO emrUserVO = new EmrUserVO();
-        //List<String> roleIds = emrUserRoleMapper.listUserRoleIds(userId);
         EmrUserEntity user = emrUserMapper.get(userId);
-        //emrUserVO.setEmrUserEntity(user);
-        //emrUserVO.setRoleIds(roleIds);
         return user;
     }
 
@@ -247,6 +243,11 @@ public class EmrUserServiceImpl implements EmrUserService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return ResponseResult.failure(0, "更新失败");
         }
+    }
+
+    @Override
+    public String getUserRoleNames(String userId) {
+        return emrUserRoleMapper.getUserRoleNames(userId);
     }
 
 

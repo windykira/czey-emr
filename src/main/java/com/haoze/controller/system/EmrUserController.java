@@ -133,8 +133,7 @@ public class EmrUserController extends BaseController {
     @GetMapping("/resetPassWord/{id}")
     String resetPassWord(@PathVariable("id") String userId, Model model) {
 
-        EmrUserEntity emrUserEntity = new EmrUserEntity();
-        emrUserEntity.setID(userId);
+        EmrUserEntity emrUserEntity = emrUserService.get(userId);
         model.addAttribute("user", emrUserEntity);
         return prefix + "/resetpwd";
     }
