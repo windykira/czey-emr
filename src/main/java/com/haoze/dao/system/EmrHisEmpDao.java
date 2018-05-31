@@ -41,6 +41,7 @@ public interface EmrHisEmpDao extends BaseDao<EmrHisEmpEntity,String> {
      */
     void update(EmrHisEmpEntity emrHisEmpEntity);
 
-    int insert(EmrHisEmpEntity record);
+    void insert(EmrHisEmpEntity record);
+
     int insertSelective(EmrHisEmpEntity record);
 }

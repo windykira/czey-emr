@@ -1,8 +1,13 @@
 package com.haoze.controller.emr;
 
-import com.haoze.common.controller.BaseController;
-import com.haoze.service.emr.SymptomService;
-import com.haoze.utils.PageUtil;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Map;
+import com.haoze.common.controller.BaseController;
+import com.haoze.service.emr.SymptomService;
+import com.haoze.utils.PageUtil;
 
 /**
  * 用户相关控制器信息。
@@ -58,14 +60,6 @@ public class DcController extends BaseController {
         return prefix + "/bgcolorMenu";
     }
 
-    @GetMapping("listSymp")
-    @ResponseBody
-    PageUtil listSymp(Model model) {
-    	List<Map<String, String>> list = service.listSympAndSimuSymp();
-    	int total = list.size();
-    	PageUtil pageUtil = new PageUtil(list, total);
-        return pageUtil;
-    }
     @GetMapping("getSympTree")
     @ResponseBody
     List<Map> getSympTree(Model model) {

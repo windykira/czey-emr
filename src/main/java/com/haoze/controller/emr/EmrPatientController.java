@@ -30,7 +30,6 @@ public class EmrPatientController extends BaseController{
         return prefix + "patients";
     }
 
-
     @GetMapping("getPatientList")
     @ResponseBody
     String getPatientList(Model model, HttpServletRequest request) {

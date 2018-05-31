@@ -23,6 +23,18 @@ public class QueryParam extends LinkedHashMap<String, Object> {
         this.put("limit", limit);
     }
 
+    public static QueryParam getDefaultQueryParam(){
+        QueryParam queryParam = new QueryParam();
+        queryParam.put("page", 1);
+        queryParam.put("limit", Integer.MAX_VALUE);
+        return queryParam;
+    }
+
+    public QueryParam(){
+        this.put("page", 1);
+        this.put("limit", Integer.MAX_VALUE);
+    }
+
     public int getPage() {
         return page;
     }

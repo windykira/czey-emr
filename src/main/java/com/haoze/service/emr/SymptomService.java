@@ -13,7 +13,6 @@ import java.util.Map;
 @Service
 public interface SymptomService {
 
-    List<Map<String, String>> listSympAndSimuSymp();
     
     List<Map> getSympTree();
 
