@@ -21,6 +21,16 @@
     PK_TMP_CLASS, PK_ORG, CODE_CLASS, NAME_CLASS, PY_CODE, WB_CODE, PK_CATALOG, STOP_FLAG, 
     CREATOR, CREATE_TIME, MODIFIER, MODIFY_TIME, DEL_FLAG
   </sql>
+
+  <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from EMR_TMP_CLASS
+    <where>
+      <if test="cataLogId != null and cataLogId!= ''"> AND PK_CATALOG = #{cataLogId} </if>
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
