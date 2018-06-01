@@ -11,7 +11,7 @@ function loadPage(url){
             parent.layer.alert("Connection error");
         },
         success: function (data) {
-            $(".main").html(data);
+            $(".main").initPage(data);
         }
     });
 }

@@ -27,4 +27,13 @@
         }, 1000);
     };
 
+    $.fn.initPage = function(r){
+
+        if($(r).find("#emrLoginPage").val() == undefined){
+            this.html(r);
+        }else{
+            parent.location.href = "/login";
+        }
+    }
+
 })(jQuery);

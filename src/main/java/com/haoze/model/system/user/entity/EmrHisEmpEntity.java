@@ -6,22 +6,66 @@ import com.haoze.common.model.BaseEntity;
 public class EmrHisEmpEntity extends BaseEntity{
 
     private String pkEmp;
+    private String pkOrg;//所属机构
     private String jobNum;//工号
+    private String empNo;
+    private String czeyJobNum;
     private String empName;//姓名
     private String deptId;//部门名称
     private String sex;//性别
     private String idCard;//身份证号
+    private String wbCode;//五笔码
+    private String pyCode;//拼音码
     private String nativePlace;//所在地址
     private String joinjobDate;//入职日期
     private String entDate;//离职日期
+    private String job;//职务
     private String itemName;//职务
     private String mobilePhone;//电话
     private String politicalStatus;//政治面貌
-    private String joinpartyDate;//入党时间
     private String academicDegree;//学历
     private String school;//毕业院校
     private String createStatus;//创建状态：1-未创建，2-已创建
-    private String pkOrg;//所属机构
+
+    public String getEmpNo() {
+        return empNo;
+    }
+
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
+    }
+
+    public String getCzeyJobNum() {
+        return czeyJobNum;
+    }
+
+    public void setCzeyJobNum(String czeyJobNum) {
+        this.czeyJobNum = czeyJobNum;
+    }
+
+    public String getWbCode() {
+        return wbCode;
+    }
+
+    public void setWbCode(String wbCode) {
+        this.wbCode = wbCode;
+    }
+
+    public String getPyCode() {
+        return pyCode;
+    }
+
+    public void setPyCode(String pyCode) {
+        this.pyCode = pyCode;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
 
     public String getPkOrg() {
         return pkOrg;
@@ -133,14 +177,6 @@ public class EmrHisEmpEntity extends BaseEntity{
 
     public void setPoliticalStatus(String politicalStatus) {
         this.politicalStatus = politicalStatus == null ? null : politicalStatus.trim();
-    }
-
-    public String getJoinpartyDate() {
-        return joinpartyDate;
-    }
-
-    public void setJoinpartyDate(String joinpartyDate) {
-        this.joinpartyDate = joinpartyDate == null ? null : joinpartyDate.trim();
     }
 
     public String getAcademicDegree() {

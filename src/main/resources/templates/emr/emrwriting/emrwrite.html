@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/plugins/default/default.css" />
     <link rel="shortcut icon" href="img/favicon.ico">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -52,6 +53,7 @@
             <button id="btnPop4" type="button" class="btn btn-default">处方</button>
             <button id="btnPop5" type="button" class="btn btn-default">手术</button>
         </div>
+        <div th:include="dc_div"></div>
     </div>
     <!--<textarea name="editor1">常州市第二人民医院住院病案首页</textarea>-->
     <!-- 弹出窗1 -->
@@ -367,9 +369,9 @@
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" style="margin-bottom:8px;">
-                            <li class="active"><a href="#home" data-toggle="tab">全院</a></li>
-                            <li><a href="#profile" data-toggle="tab">科室</a></li>
-                            <li><a href="#messages" data-toggle="tab">个人</a></li>
+                            <li value="1" class="active" onclick="reloadTemplateTable(this.value)"><a href="#home" data-toggle="tab">全院</a></li>
+                            <li value="2" onclick="reloadTemplateTable(this.value)"><a href="#profile" data-toggle="tab">科室</a></li>
+                            <li value="3" onclick="reloadTemplateTable(this.value)"><a href="#messages" data-toggle="tab">个人</a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -389,7 +391,9 @@
                         </div>
                     </div>
                     <div class="col-sm-7 col-md-8">
-                        <table class="table table-bordered table-striped">
+                        <table id="templateTable" data-mobile-responsive="true">
+                        </table>
+                        <!--<table class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th> 模板名称 </th>
@@ -444,7 +448,7 @@
                                 <td>2018-06-18</td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table>-->
                     </div>
                 </div>
             </div>

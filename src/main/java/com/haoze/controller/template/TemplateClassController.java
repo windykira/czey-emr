@@ -1,22 +1,23 @@
 package com.haoze.controller.template;
 
+import com.github.pagehelper.Page;
 import com.haoze.common.annotation.Note;
 import com.haoze.common.controller.BaseController;
+import com.haoze.common.model.PaginationResult;
 import com.haoze.common.model.QueryParam;
 import com.haoze.model.system.role.entity.EmrRoleEntity;
 import com.haoze.model.system.user.entity.EmrHisEmpEntity;
 import com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity;
+import com.haoze.model.template.templateclass.po.EmrTemplateClassVO;
 import com.haoze.service.template.EmrTemplateClassService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 模板类型控制器。
@@ -38,5 +39,15 @@ public class TemplateClassController extends BaseController{
         QueryParam queryParam = QueryParam.getDefaultQueryParam();
         queryParam.put("cataLogId",cataLogId);
         return emrTemplateClassService.list(queryParam);
+    }
+
+    @GetMapping("/listEmrTemplateClass")
+    @ResponseBody
+    PaginationResult listEmrTemplateClass(Model model, @RequestParam Map<String, Object> params) {
+        QueryParam queryParam = new QueryParam(params);
+        Page<EmrTemplateClassVO> emrTemplateClasses = emrTemplateClassService.listEmrTemplateClass(queryParam);
+        int total = emrTemplateClassService.count(queryParam);
+        PaginationResult paginationResult = new PaginationResult(emrTemplateClasses,total);
+        return paginationResult;
     }
 }

@@ -2,257 +2,419 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
-<head th:include="emrinclude :: header"></head>
+<head th:include="emrinclude :: header">
+
+</head>
+
+<link rel="stylesheet" href="/css/body.css" />
+
 <body class="gray-bg">
+<!--右击菜单-->
+<div id="rMenu" >
+	<a class="list-group-item" id="insertSympMenu" onclick="insertSymp();">插入症状选框</a>
+	<a class="list-group-item" id="insertSimuMenu" onclick="insertSimus();">插入排他症状</a>
+	<a class="list-group-item" id="insertThisMenu" onclick="insertInput();">插入当前节点内容</a>
+	<a class="list-group-item" onclick="expand();">展开下一级</a>
+	<a class="list-group-item" onclick="expandSon();">展开所有子节点</a>
+	<a class="list-group-item" onclick="collapse();">折叠子节点</a>
+	<a class="list-group-item" onclick="expandAll();">全部展开</a>
+	<a class="list-group-item" onclick="collapseAll();">全部折叠</a>
+</div>
 <!-- <div class="wrapper wrapper-content "> -->
 	<div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<div class="ibox ibox-body">
 					<div class="ibox-title">
 						<h5>选择症状</h5>
 <!-- 						<input id="searchTree"/> -->
 					</div>
 					<div class="ibox-content">
-						<table id="exampleTable">
-               			</table>
+						<div class="zTreeDemoBackground left">
+							<ul id="sympTree" class="ztree">
+							</ul>
+						</div>
+						<!--<table id="exampleTable">-->
+               			<!--</table>-->
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-10">
+				<div class="">
+					<button class="btn btn-default" type="button" onclick="frontpage()" data-toggle="modal" data-backdrop="static" data-target="#addMedical">新增</button>
+					<button class="btn btn-default" type="button" onclick="saveTemplate()">保存</button>
+					<button class="btn btn-default" type="button" onclick="pp()">删除</button>
+					<button class="btn btn-default" type="button">存为个人模板</button>
+					<button class="btn btn-default" type="button">预览</button>
+					<button class="btn btn-default" type="button">打印</button>
+					<button class="btn btn-default" type="button" onclick="change_page()">改页面</button>
+
+					<button class="btn btn-default" type="button" onclick="page_setting()">页面设置</button>
+					<button class="btn btn-default" type="button" onclick="zoom()">缩放</button>
+				</div>
 			<div th:replace="dc_div"></div> 
 			</div>
-		</div>
-		<!--shiro控制bootstraptable行内按钮是否可见-->
-		<div>
-			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="sys:user:edit">
-			<script type="text/javascript">
-				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="sys:user:remove">
-			<script type="text/javascript">
-				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="sys:user:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
 		</div>
 	</div>
 	<div th:include="emrinclude :: footer"></div>
 	
 </body>
 <script>
+	$(window).resize(function() {
+		resize();
+	});
 	function resize(){
-		alert("resize")
 		var h = $("body").height();
-		$("#myWriter").css("height",h-35);
-	}
-	function test(){
-		alert(1)
+		$("#myWriter").css("height",h-68);
 	}
 
 
 	$(document).ready(function () {
 	    load();
+		parent.layer.full(parent.index1)
+		setTimeout(resize,5000)
+//		resize();
 	});
+	var zTree;
+	var selectedNode;
 	var load = function () {
-	    $('#exampleTable')
-	        .bootstrapTreeTable(
-	            {
-	                id: 'ID',
-	                code: 'ID',
-	                parentCode: 'PID',
-	                type: "GET", // 请求数据的ajax类型
-	                url: 'getSympTree', // 请求数据的ajax的url
-	                //ajaxParams: {sort:'order_num'}, // 请求数据的ajax的data属性
-	                expandColumn: '0',// 在哪一列上面显示展开按钮
-	                striped: true, // 是否各行渐变色
-	                bordered: true, // 是否显示边框
-	                expandAll: false, // 是否全部展开
-	                
-	                // toolbar : '#exampleToolbar',
-	                columns: [
-	                    {
-	                        title: '名称',
-	                        field: 'NAME',
-// 	                        visible: false,
-// 	                        align: 'center',
-	                        valign: 'center',
-	                        width: '100%'
-// 	                    },
-// 	                    {
-// 	                        title: '菜单名称',
-// 	                        valign: 'center',
-// 	                        field: 'menuName',
-// 	                        width: '20%'
-// 	                    },
+		$.ajax({
+			url: "getSympTree",
+			dataType: "json",
 
-// 	                    {
-// 	                        title: '图标',
-// 	                        field: 'menuIcon',
-// 	                        align: 'center',
-// 	                        valign: 'center',
-// 	                        width : '5%',
-// 	                        formatter: function (item, index) {
-// 	                            return item.menuIcon == null ? ''
-// 	                                : '<i class="' + item.menuIcon
-// 	                                + ' fa-lg"></i>';
-// 	                        }
-// 	                    },
-// 	                    {
-// 	                        title: '菜单类型',
-// 	                        field: 'menuType',
-// 	                        align: 'center',
-// 	                        valign: 'center',
-// 	                        width : '10%',
-// 	                        formatter: function (item, index) {
-// 	                            if (item.menuType == 1) {
-// 	                                return '<span class="label label-primary">目录</span>';
-// 	                            }
-// 	                            if (item.menuType == 2) {
-// 	                                return '<span class="label label-success">菜单</span>';
-// 	                            }
-// 	                            if (item.menuType == 3) {
-// 	                                return '<span class="label label-warning">按钮</span>';
-// 	                            }
-// 	                        }
-// 	                    },
-// 	                    {
-// 	                        title: '链接地址',
-// 	                        valign: 'center',
-// 	                        width : '20%',
-// 	                        field: 'menuUrl'
-// 	                    },
-// 	                    {
-// 	                        title: '权限标识',
-// 	                        valign: 'center',
-// 	                        width : '20%',
-// 	                        field: 'menuPermission'
-// 	                    },
-// 	                    {
-// 	                        title: '操作',
-// 	                        field: 'id',
-// 	                        align: 'center',
-// 	                        valign: 'center',
-// 	                        formatter: function (item, index) {
-// 	                        	if(item)
-// 	                            var e = '<a class="btn btn-primary btn-sm '
-// 	                                + '" href="#" mce_href="#" title="插入" onclick="insertSymp(\''
-// 	                                + item.id
-// 	                                + '\')"><i class="fa fa-edit"></i></a> ';
-// 	                            var p = '<a class="btn btn-primary btn-sm '
-// 	                                + s_add_h
-// 	                                + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
-// 	                                + item.id
-// 	                                + '\')"><i class="fa fa-plus"></i></a> ';
-// 	                            var d = '<a class="btn btn-warning btn-sm '
-// 	                                + s_remove_h
-// 	                                + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-// 	                                + item.id
-// 	                                + '\')"><i class="fa fa-remove"></i></a> ';
-// 	                            return e + d + p;
-// 	                        }
-	                    }]
-	            });
-	    $('#exampleTable').dblclick(function(e){
-	    	
-	    	var a = $(e.target)[0].innerText;
-	    	if(a=='名称'){
-	    		return null;
-	    	}else if(a=='症状'){
-	    		$.ajax({
-	 				url:"getSympInfo",
-	 				dataType:"json",
-	 				success:function(data){
-						 myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
-						    
-						var sympInput = myWriter.ComCreateXTextInputFieldElement();
-						sympInput.ID = "症状";
-						sympInput.BackgroundText = "请选择症状";
-						sympInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
-						sympInput.FieldSettings.EditStyle = 1;
-						sympInput.FieldSettings.MultiSelect = true;
-						sympInput.FieldSettings.DynamicListItems = false;
-						//sympInput.FieldSettings.ListSource = myWriter.ComCreateListSourceInfo();
-// 						sympInput.FieldSettings.ListSource.RuntimeItems = myWriter.ComCreateListItemCollection();
-// 						sympInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue("男", "sexMan");
-// 						sympInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue("女", "sexWoman");
-	 					for(var i in data){
-	 						sympInput.FieldSettings.ListSource.Items.AddByTextValue(data[i]["NAME"], data[i]["NAME"]);
-	 					}
-	 					sympInput.startBorderText = "症状";
-// 						sympInput.ValueBinding = myWriter.ComCreateXDataBinding();
-// 						sympInput.ValueBinding.DataSource = "Patient";
-// 						sympInput.ValueBinding.BindingPath = "Sex";
-						myWriter.ExecuteCommand("InsertInputField", false, sympInput);   
-						//切换到下一行
-						myWriter.ExecuteCommand("MoveTo" , false , "NextLine");
-						//加载伴随症状
-						$.ajax({
-			 				url:"getSimuInfo",
-			 				dataType:"json",
-			 				success:function(data){
-								myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
-			 					for(var i in data){
-// 			 						myWriter.ExecuteCommand("InsertString", false, "，");
-// 			 						simuInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue(data[i]["NAME"], data[i]["ID"]);
-			 						var simuInput = myWriter.ComCreateXTextInputFieldElement();
-									simuInput.ID = data[i]["NAME"];
-									simuInput.BackgroundText = "有/无";
-									simuInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
-									simuInput.FieldSettings.EditStyle = 1;
-									simuInput.FieldSettings.MultiSelect = false;
-									simuInput.FieldSettings.DynamicListItems = false;
-									//设置可见性表达式
-									var exp="";
-									var symps = data[i]["SYMPS"];
-									var symplist = symps.split(",");
-									for(var t in symplist){
-										if(exp==""){
-											exp = exp + "FIND('"+symplist[t]+"',[症状])>=0";
-										}else{
-											exp = exp + "||FIND('"+symplist[t]+"',[症状])>=0";
-										}
-									}
-									simuInput.VisibleExpression=exp;
-									simuInput.endBorderText = data[i]["NAME"]+"，";
-									//simuInput.FieldSettings.ListSource = myWriter.ComCreateListSourceInfo();
-// 									simuInput.FieldSettings.ListSource.RuntimeItems = myWriter.ComCreateListItemCollection();
-			 						simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
-			 						simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
-			 						simuInput.innerText="有";
-// 									simuInput.ValueBinding = myWriter.ComCreateXDataBinding();
-//			 						simuInput.ValueBinding.DataSource = "Patient";
-//			 						simuInput.ValueBinding.BindingPath = "Sex";
-									myWriter.ExecuteCommand("InsertInputField", false, simuInput);   
-			 					}
-			 					myWriter.ExecuteCommand("InsertString", false, "。");
-			 				},
-			 				error:function(){
-			 					alert("读取数据时发生错误");
-			 				}
-			 			})
-	 				},
-	 				error:function(){
-	 					alert("读取数据时发生错误");
-	 				}
-	 			})
-	    	}else{
-	    		
-	    	}
-	    })
+			success: function (data) {
+				var setting = {
+					data: {
+						simpleData: {
+							enable: true
+						}
+					},
+					callback: {
+						onRightClick: function (event, treeId, treeNode) {
+							if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+								showRMenu("root", event.clientX, event.clientY);
+							} else if (treeNode && !treeNode.noR) {
+								showRMenu("node", event.clientX, event.clientY);
+							}
+							selectedNode = treeNode;
+//							alert('right')
+						}
+					}
+				};
+
+				zTree = $.fn.zTree.init($("#sympTree"), setting, data);
+			}
+		})
 	}
-	
-	
+		var rMenu = $("#rMenu");
+//		function //显示右键菜单
+	function showRMenu(type, x, y) {
+		rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible","z-index":99,"cursor":"pointer"}); //设置右键菜单的位置、可见
+		$("body").bind("mousedown", onBodyMouseDown);
+	}
+//隐藏右键菜单
+	function hideRMenu() {
+		if (rMenu) rMenu.css({"visibility": "hidden"}); //设置右键菜单不可见
+		$("body").unbind("mousedown", onBodyMouseDown);
+	}
+//鼠标按下事件
+	function onBodyMouseDown(event){
+		if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
+			rMenu.css({"visibility" : "hidden"});
+		}
+	}
 
+//展开下一级子节点
+	function expand(){
+		hideRMenu();
+		var selectNodes = zTree.getSelectedNodes();
+		zTree.expandNode(selectNodes[0], true, null, null);
+	}
+//展开所有子节点
+	function expandSon(){
+		hideRMenu();
+		var selectNodes = zTree.getSelectedNodes();
+		zTree.expandNode(selectNodes[0], true, true, null);
+	}
+//折叠子节点
+	function collapse(){
+		hideRMenu();
+		var selectNodes = zTree.getSelectedNodes();
+		zTree.expandNode(selectNodes[0], false, null, null);
+	}
+//全部展开
+	function expandAll(){
+		hideRMenu();
+		zTree.expandAll(true);
+	}
+//全部折叠
+	function collapseAll(){
+		hideRMenu();
+		zTree.expandAll(false);
+	}
+//插入
+	function insertInput(){
+
+		var attr = selectedNode["attrType"];
+		var lv = selectedNode["lv"];
+		if(attr==='0'&&lv==='0'){//症状总览
+			alert("症状总览")
+			insertAllSymp(selectedNode);
+		}
+		if(attr==='1'&&lv==='1'){//症状
+			alert("症状")
+			insertSympPack(selectedNode)
+		}
+		if(attr==='1'&&lv==='2'){//症状描述
+			insertSympDescript(selectedNode);
+			alert("症状描述")
+		}
+		if(attr==='2'&&lv==='2'){//伴随症状
+			insertSimuSympList(selectedNode);
+		}
+		if(attr==='2'&&lv==='3'){//伴随症状具体
+			alert("伴随症状具体")
+			insertSimuSymp(selectedNode);
+		}
+		if(attr==='1'&&lv==='3'){//症状描述具体
+			alert("症状描述具体,作为父节点的选项,不可单独插入")
+		}
+		hideRMenu();
+	}
+
+	//插入 一个 伴随症状选框
+	function insertSimuSymp(node){
+		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+		var simuInput = myWriter.ComCreateXTextInputFieldElement();
+		simuInput.ID = node["id"];
+		simuInput.BackgroundText = "有/无";
+		simuInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
+		simuInput.FieldSettings.EditStyle = 1;
+		simuInput.FieldSettings.MultiSelect = false;
+		simuInput.FieldSettings.DynamicListItems = false;
+		var sympId = node.getParentNode().getParentNode().id;
+		simuInput.VisibleExpression="FIND('"+sympId+"',[zz])>=0";
+		simuInput.endBorderText = node["name"]+"，";
+		simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
+		simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
+		simuInput.innerText="有";
+		myWriter.ExecuteCommand("InsertInputField", false, simuInput);
+	}
+
+	//插入 一系列 伴随症状选框
+	function insertSimuSympList(node){
+		var list = node.children;
+		for(var i in list){
+			insertSimuSymp(list[i]);
+		}
+	}
+	//插入症状描述选框
+	function insertSympDescript(node){
+		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+		var simuInput = myWriter.ComCreateXTextInputFieldElement();
+		simuInput.ID = node["id"];
+		simuInput.BackgroundText = "请选择";
+		simuInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
+		simuInput.FieldSettings.EditStyle = 1;
+		simuInput.FieldSettings.MultiSelect = false;
+		simuInput.FieldSettings.DynamicListItems = false;
+		var sympId = node.getParentNode().id;
+		simuInput.VisibleExpression="FIND('"+sympId+"',[zz])>=0";
+		simuInput.startBorderText = node["name"];
+		simuInput.endBorderText = "，";
+
+		//获取下拉选项数值
+		var list = node.children;
+		for(var i in list){
+			simuInput.FieldSettings.ListSource.Items.AddByTextValue(list[i]["name"],list[i]["id"] );
+		}
+//		simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
+//		simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
+//		simuInput.innerText="有";
+		myWriter.ExecuteCommand("InsertInputField", false, simuInput);
+	}
+	//插入一个症状的系列内容：描述+伴随症状
+	function insertSympPack(node){
+		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+		var input = myWriter.ComCreateXTextInputFieldElement();
+		input.FieldSettings = myWriter.ComCreateInputFieldSettings();
+		input.FieldSettings.EditStyle = 1;
+		input.VisibleExpression="FIND('"+node.id+"',[zz])>=0";
+		input.innerText=node.name+"：";
+		myWriter.ExecuteCommand("InsertInputField", false, input);
+		var list = node.children;
+		for(var i in list){
+			if(list[i]["attrType"]==="1"){//插入描述
+				insertSympDescript(list[i]);
+			}
+//			if(list[i]["attrType"]==="2"){//插入伴随症状
+//				insertSimuSympList(list[i]);
+//			}
+		}
+	}
+	//插入症状多选
+	function insertSymptomMultiSel(node){
+		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+		var sympInput = myWriter.ComCreateXTextInputFieldElement();
+		sympInput.ID = "zz";
+		sympInput.BackgroundText = "请选择症状";
+		sympInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
+		sympInput.FieldSettings.EditStyle = 1;
+		sympInput.FieldSettings.MultiSelect = true;
+		sympInput.FieldSettings.DynamicListItems = false;
+		//加载症状选项
+		var list = node.children;
+		for(var i in list){
+			sympInput.FieldSettings.ListSource.Items.AddByTextValue(list[i]["name"], list[i]["id"]);
+		}
+		sympInput.startBorderText = "症状【";
+		sympInput.endBorderText = "】";
+		myWriter.ExecuteCommand("InsertInputField", false, sympInput);
+	}
+
+	function insertSymp(){
+		insertSymptomMultiSel(selectedNode);
+	}
+
+	function insertSimus(){
+		var root = zTree.getNodes()[0].children;
+		var simus = {};
+		var simus_size = 0;
+		for(var i= 0,len=root.length;i<len;i++){
+			var sympList = root[i].children;
+			var sympName =  root[i].name;
+			var sympId =  root[i].id;
+			console.log(sympName)
+			for(var j= 0,len1=sympList.length;j<len1;j++){
+				if(sympList[j].attrType==='2'){//只用伴随症状
+					var simuList = sympList[j].children;//获取所有伴随症状的叶子节点
+					for(var k= 0,len2=simuList.length;k<len2;k++){
+						var simu = simuList[k];
+						if(!simus[simu.name]){//当前伴随症状第一次出现
+//							simus[simu.name]["sympId"] = sympId;
+							simus[simu.name] = {"exp":"FIND('"+sympId+"',[zz])>=0"};
+							simus_size++;
+						}else{//name已存在
+							simus[simu.name]["exp"] += "||FIND('"+sympId+"',[zz])>=0"
+						}
+					}
+				}
+			}
+		}
+		var count=1;
+		for(var simu in simus){
+			var punc = "，";
+			if(count===simus_size) punc = "。";
+			myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+			var simuInput = myWriter.ComCreateXTextInputFieldElement();
+//			simuInput.ID = node["id"];
+			simuInput.Name = simu;
+			simuInput.BackgroundText = "有/无";
+			simuInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
+			simuInput.FieldSettings.EditStyle = 1;
+			simuInput.FieldSettings.MultiSelect = false;
+			simuInput.FieldSettings.DynamicListItems = false;
+			simuInput.VisibleExpression = simus[simu].exp;
+			simuInput.endBorderText = simu+punc
+			simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
+			simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
+			simuInput.innerText="无";
+			myWriter.ExecuteCommand("InsertInputField", false, simuInput);
+			count++;
+		}
+		hideRMenu();
+	}
+	//插入所有症状内容
+	function insertAllSymp(node){
+		var list = node.children;
+		for(var i in list){
+//			myWriter.ExecuteCommand("InsertString", false, list[i].name+"：");
+			insertSympPack(list[i]);
+//			myWriter.ExecuteCommand("InsertString", false, "\n");
+		}
+	}
+
+
+
+
+
+
+
+	function page_setting(){
+		myWriter.ExecuteCommand("FilePageSettings",true,null);
+	}
+	myWriter.ExecuteCommand("Zoom",false,"95%");
+	myWriter.ExecuteCommand("RuleVisible",true,null);
+	myWriter.BackColorString='#B1CAEB';
+	//function zoom(){
+	//	myWriter.ExecuteCommand("Zoom",false,"104%");
+	//}
+	function frontpage(){
+//     var contextPath = $('#contextPath').attr('href');//获取应用的根目录，我的绝对路径是http://localhost:80/
+//     myWriter.ExecuteCommand("FileOpen", false, contextPath+"/cab/index.xml");
+		$.ajax({
+			url:"getXML/index",
+			dataType:"text",
+			success:function(data){
+				myWriter.ExecuteCommand("FileOpenString", false, data);
+			},
+			error:function(){
+				alert("读取出错");
+			}
+		})
+	}
+	function print(){
+		myWriter.ExecuteCommand("FilePrint",true,null);
+	}
+
+	function bindDataSource(data){
+// 	var jsonstr2 = '{"NAME":"张冰心","SEX":"女","AGE":"30","MARITAL_STATUS":null,"AREA_NAME":"安徽省滁州市定远县","NATION":null,"OCCUPATION":null,"SERVICE_AGENCY":null,"MAILING_ADDRESS":"江苏省常州市武进区聚盛花园8幢甲单元202室","INDATE":"2018-05-14"}';
+// 	var jsonstr = '{"NAME":"张三","career":"农民","gender":"女","careerAdress":"常州二院","age":"55","adress":"什么路多少号","marriage":"已婚","teller":"儿子","birthplace":"常州","inDate":"","nation":"","recDate":""}';
+		var jsonstr = JSON.stringify(data);
+		//jsonstr = jsonstr.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'");
+		var json = JSON.parse(jsonstr);
+		var xml = JSON2XML(json);
+		alert(xml);
+		myWriter.SetDocumentParameterValueXml("patient", xml);
+		myWriter.WriteDataFromDataSourceToDocument();
+	}
+	function JSON2XML(json){
+		var xml = "<x>";
+		for(var i in json){
+			var text = json[i]||"";
+			xml = xml + "<" + i + ">" + text + "</" + i + ">";
+		}
+		xml = xml + "</x>";
+		return xml;
+	}
+
+	function saveTemplate(){
+		var templateData = {
+			templateName : parent.templateName,
+			rangeSel : parent.rangeSel,
+			typeSel : parent.typeSel,
+			xml : myWriter.XMLText
+		}
+		$.ajax({
+			url:"/template/temp/save",
+			type : "POST",
+			data : templateData,
+			dataType :"json",
+			success:function(data){
+				if (data.code == 1) {
+					parent.layer.msg("操作成功");
+					parent.reLoad();
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
+
+				} else {
+					parent.layer.alert(data.msg)
+				}
+			},
+			error:function(){
+				alert("读取出错");
+			}
+		})
+	}
 </script>
 </html>

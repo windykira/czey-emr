@@ -1,16 +1,13 @@
 package com.haoze.service.emr.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.haoze.dao.emr.SymptomDao;
+import com.haoze.service.emr.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.haoze.dao.emr.SymptomDao;
-import com.haoze.model.emr.symp.entity.SimuSympEntity;
-import com.haoze.service.emr.SymptomService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 部门数据服务实现类。

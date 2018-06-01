@@ -1,7 +1,10 @@
 package com.haoze.service.template;
 
+import com.github.pagehelper.Page;
 import com.haoze.common.model.BaseService;
+import com.haoze.common.model.QueryParam;
 import com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity;
+import com.haoze.model.template.templateclass.po.EmrTemplateClassVO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +14,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface EmrTemplateClassService extends BaseService<EmrTemplateClassEntity,String>{
+
+    /**
+     * 查询模板相关信息
+     * @param queryParam
+     * @return
+     */
+    Page<EmrTemplateClassVO> listEmrTemplateClass(QueryParam queryParam);
 }

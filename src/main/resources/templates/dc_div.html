@@ -1,70 +1,78 @@
 <div th:fragment="dc">
-<div width="100%" style="position:absolute;z-index:100">
-<!-- 工具栏 -->
-<div style="display:block;" class="ke-toolbar" unselectable="on">
-	<span id="ctrlz_btn" class="ke-outline" data-name="undo" title="后退(Ctrl+Z)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-undo" unselectable="on"></span></span>
-	<span id="ctrly_btn" class="ke-outline" data-name="redo" title="前进(Ctrl+Y)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-redo" unselectable="on"></span></span>
-	<span class="ke-inline-block ke-separator"></span>
-	<span id="preview_btn"class="ke-outline" data-name="preview" title="预览" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-preview" unselectable="on"></span></span>
-	<span id="print_btn" class="ke-outline" data-name="print" title="打印(Ctrl+P)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-print" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="cut" title="剪切(Ctrl+X)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-cut" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="copy" title="复制(Ctrl+C)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-copy" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="paste" title="粘贴(Ctrl+V)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-paste" unselectable="on"></span></span>
-	<span class="ke-inline-block ke-separator"></span>
-	<span id="align_left_btn" class="ke-outline" data-name="justifyleft" title="左对齐" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyleft" unselectable="on"></span></span>
-	<span id="align_center_btn" class="ke-outline" data-name="justifycenter" title="居中" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifycenter" unselectable="on"></span></span>
-	<span id="align_right_btn"class="ke-outline" data-name="justifyright" title="右对齐" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyright" unselectable="on"></span></span>
-	<span id="align_justify_btn" class="ke-outline" data-name="justifyfull" title="两端对齐" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyfull" unselectable="on"></span></span>
-	<span class="ke-inline-block ke-separator"></span>
-<!-- 		<div class="ke-hr"></div> -->
-	<span id="font_btn" class="ke-outline" data-name="fontname" title="字体" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontname" unselectable="on"></span></span>
-	<span id="size_btn" class="ke-outline" data-name="fontsize" title="文字大小" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontsize" unselectable="on"></span></span>
-	<span class="ke-inline-block ke-separator"></span>
-	<span id="color_btn" class="ke-outline" data-name="forecolor" title="文字颜色" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-forecolor" unselectable="on"></span></span>
-	<span id="bgcolor_btn" class="ke-outline" data-name="hilitecolor" title="文字背景" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hilitecolor" unselectable="on"></span></span>
-	<span id="bold_btn" class="ke-outline" data-name="bold" title="粗体(Ctrl+B)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-bold" unselectable="on"></span></span>
-	<span id="italic_btn" class="ke-outline" data-name="italic" title="斜体(Ctrl+I)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-italic" unselectable="on"></span></span>
-	<span id="underline_btn" class="ke-outline" data-name="underline" title="下划线(Ctrl+U)" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-underline" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="removeformat" title="删除格式" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-removeformat" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="table" title="表格" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-table" unselectable="on"></span></span>
-	<span class="ke-outline" data-name="hr" title="插入横线" unselectable="on">
-	<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hr" unselectable="on"></span></span>
-	<span><button onclick="frontpage()">加载首页</button></span>
-	<span><button onclick="save()">保存</button></span>
-	<span><button onclick="past()">诊疗经过</button></span>
-	<span><button onclick="sub_symp()">鉴别症状</button></span>
-	<span><button onclick="bindDataSource()">绑定数据</button></span>
-	<span><button onclick="pp()">测试</button></span>
-	<span><button onclick="saveTemplate()">保存模板</button></span>
-</div>
+<div width="100%" style="z-index:100">
+	<!--<div class="">-->
+		<!--<button class="btn btn-default" type="button" onclick="frontpage()" data-toggle="modal" data-backdrop="static" data-target="#addMedical">新增</button>-->
+		<!--<button class="btn btn-default" type="button" onclick="saveTemplate()">保存</button>-->
+		<!--<button class="btn btn-default" type="button" onclick="pp()">删除</button>-->
+		<!--<button class="btn btn-default" type="button">存为个人模板</button>-->
+		<!--<button class="btn btn-default" type="button">预览</button>-->
+		<!--<button class="btn btn-default" type="button">打印</button>-->
+		<!--<button class="btn btn-default" type="button" onclick="change_page()">改页面</button>-->
+
+		<!--<button class="btn btn-default" type="button" onclick="page_setting()">页面设置</button>-->
+		<!--<button class="btn btn-default" type="button" onclick="zoom()">缩放</button>-->
+	<!--</div>-->
+	<!-- 工具栏 -->
+	<div style="display:block;" class="ke-toolbar" unselectable="on">
+		<span id="ctrlz_btn" class="ke-outline" data-name="undo" title="后退(Ctrl+Z)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-undo" unselectable="on"></span></span>
+		<span id="ctrly_btn" class="ke-outline" data-name="redo" title="前进(Ctrl+Y)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-redo" unselectable="on"></span></span>
+		<span class="ke-inline-block ke-separator"></span>
+		<span id="preview_btn"class="ke-outline" data-name="preview" title="预览" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-preview" unselectable="on"></span></span>
+		<span id="print_btn" class="ke-outline" data-name="print" title="打印(Ctrl+P)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-print" unselectable="on"></span></span>
+		<span class="ke-outline" data-name="cut" title="剪切(Ctrl+X)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-cut" unselectable="on"></span></span>
+		<span class="ke-outline" data-name="copy" title="复制(Ctrl+C)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-copy" unselectable="on"></span></span>
+		<span class="ke-outline" data-name="paste" title="粘贴(Ctrl+V)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-paste" unselectable="on"></span></span>
+		<span class="ke-inline-block ke-separator"></span>
+		<span id="align_left_btn" class="ke-outline" data-name="justifyleft" title="左对齐" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyleft" unselectable="on"></span></span>
+		<span id="align_center_btn" class="ke-outline" data-name="justifycenter" title="居中" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifycenter" unselectable="on"></span></span>
+		<span id="align_right_btn"class="ke-outline" data-name="justifyright" title="右对齐" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyright" unselectable="on"></span></span>
+		<span id="align_justify_btn" class="ke-outline" data-name="justifyfull" title="两端对齐" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyfull" unselectable="on"></span></span>
+		<span class="ke-inline-block ke-separator"></span>
+	<!-- 		<div class="ke-hr"></div> -->
+		<span id="font_btn" class="ke-outline" data-name="fontname" title="字体" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontname" unselectable="on"></span></span>
+		<span id="size_btn" class="ke-outline" data-name="fontsize" title="文字大小" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontsize" unselectable="on"></span></span>
+		<span class="ke-inline-block ke-separator"></span>
+		<span id="color_btn" class="ke-outline" data-name="forecolor" title="文字颜色" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-forecolor" unselectable="on"></span></span>
+		<span id="bgcolor_btn" class="ke-outline" data-name="hilitecolor" title="文字背景" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hilitecolor" unselectable="on"></span></span>
+		<span id="bold_btn" class="ke-outline" data-name="bold" title="粗体(Ctrl+B)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-bold" unselectable="on"></span></span>
+		<span id="italic_btn" class="ke-outline" data-name="italic" title="斜体(Ctrl+I)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-italic" unselectable="on"></span></span>
+		<span id="underline_btn" class="ke-outline" data-name="underline" title="下划线(Ctrl+U)" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-underline" unselectable="on"></span></span>
+		<span class="ke-outline" data-name="removeformat" title="删除格式" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-removeformat" unselectable="on"></span></span>
+		<span id="grid_btn" class="ke-outline" data-name="table" title="表格" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-table" unselectable="on"></span></span>
+		<span class="ke-outline" data-name="hr" title="插入横线" unselectable="on">
+		<span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hr" unselectable="on"></span></span>
+		<!--<span><button onclick="frontpage()">加载首页</button></span>-->
+		<!--<span><button onclick="save()">保存</button></span>-->
+		<!--<span><button onclick="past()">诊疗经过</button></span>-->
+		<!--<span><button onclick="sub_symp()">鉴别症状</button></span>-->
+		<!--<span><button onclick="bindDataSource()">绑定数据</button></span>-->
+		<!--<span><button onclick="pp()">测试</button></span>-->
+		<!--<span><button onclick="saveTemplate()">保存模板</button></span>-->
+	</div>
 	<iframe id="font_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:321px;z-index:100" src="fontMenu"></iframe>
-	
 	<iframe id="size_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:255px;z-index:100" src="sizeMenu"></iframe>
-	
 	<iframe id="color_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="colorMenu"></iframe>
-	
 	<iframe id="bgcolor_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="bgcolorMenu"></iframe>
-				
 	<script type="text/javascript" src="/js/jquery.min.js" ></script>
 	<script>
 	//文档点击事件--控制下拉菜单的显示隐藏
@@ -84,58 +92,11 @@
 		})
 	    
 	});
-	
-	//绑定下拉菜单点击事件
-// 	$("#font_menu").delegate('span','click',function () {//
-// 	    alert($(this).html());   
-// 	})
-// 	$("#size_menu").delegate('.ke-menu-item','click',function () {
-// 	    alert($(this).html());   
-// 	})
-// 	$("#color_menu").delegate('td','click',function () {
-// 	    alert($(this).attr("title"));   
-// 	})
-// 	$("#bgcolor_menu").delegate('td','click',function () {
-// 	    alert($(this).attr("title"));   
-// 	})
-	
-	
-	
-	//下拉菜单代理各个选项
-// 	$("#font_menu").delegate('.ke-menu-item','mouseenter',function () {
-// 	    $(this).addClass("ke-menu-item-on")   
-// 	})
-// 	$("#font_menu").delegate('.ke-menu-item','mouseleave',function () {
-// 	    $(this).removeClass("ke-menu-item-on")  
-// 	})
-// 	$("#size_menu").delegate('.ke-menu-item','mouseenter',function () {
-// 	    $(this).addClass("ke-menu-item-on")   
-// 	})
-// 	$("#size_menu").delegate('.ke-menu-item','mouseleave',function () {
-// 	    $(this).removeClass("ke-menu-item-on")  
-// 	})
-// 	$("#color_menu").delegate('td','mouseenter',function () {
-// 	    $(this).addClass("ke-colorpicker-cell-selected")   
-// 	})
-// 	$("#color_menu").delegate('td','mouseleave',function () {
-// 	    $(this).removeClass("ke-colorpicker-cell-selected")  
-// 	})
-// 	$("#bgcolor_menu").delegate('td','mouseenter',function () {
-// 	    $(this).addClass("ke-colorpicker-cell-selected")   
-// 	})
-// 	$("#bgcolor_menu").delegate('td','mouseleave',function () {
-// 	    $(this).removeClass("ke-colorpicker-cell-selected")  
-// 	})
-	
-	//悬浮时显示边框
-// 	$(".ke-toolbar").delegate('.ke-outline','mouseenter',function () {
-		
-// 	    $(this).addClass("ke-on")  
-// 	})
-// 	$(".ke-toolbar").delegate('.ke-outline','mouseleave',function () {
-		
-// 	    $(this).removeClass("ke-on")  
-// 	})
+	<!--工具栏按钮-->
+	//打印按钮
+	$("#print_btn").click(function(e){
+		print();
+	});
 	//字体按钮
 	$("#font_btn").click(function(e){
 		var top = $(this).position().top+$(this).height()+8;
@@ -187,9 +148,11 @@
 // 		e.stopPropagation();
 		//TODO: 获取文档中选中内容的对应属性并显示勾选
 	});
+	//左对齐按钮
 	$("#align_left_btn").click(function(){
 		myWriter.ExecuteCommand("AlignLeft", false , null );
 	})
+	//居中按钮
 	$("#align_center_btn").click(function(){
 		myWriter.ExecuteCommand("AlignCenter", false , null );
 	})
@@ -214,7 +177,7 @@
 		}else{
 			$("#italic_btn").addClass("ke-on");
 		}
-	})	
+	})
 	$("#underline_btn").click(function(){
 		myWriter.ExecuteCommand("Underline", false , null );
 		if($("#italic_btn").hasClass("ke-on")){
@@ -222,15 +185,18 @@
 		}else{
 			$("#italic_btn").addClass("ke-on");
 		}
-	})	
-	
+	})
+	$("#grid_btn").click(function(){
+		myWriter.ExecuteCommand("Table_InsertTable", true , null );
+	})
+
 	</script>
 </div>
-	<div style="position:absolute;top:26px;z-index:1;width:100%">
+	<div style="z-index:1;width:100%">
 	<object id="myWriter" name="myWriter" onclick="closeMenu()"
 					classid="clsid:00012345-6789-ABCD-EF01-2345678900ff" 
 				    codebase="http://172.30.100.155:8081/cab/DCWriterWeb.cab"
-					style="position:relative ;width: 99%;border:solid 1 black">
+					style="position:relative ;width: 100%;overflow-x:hidden;border:solid 1 black">
 				    <param name="CodeBaseForUpdateAssembly"   
 				        value="http://172.30.100.155:8081/cab/DCWriterWeb.cab#Version=1,2015,12,23" />
 				    <param name="BackColor" value="Gray" />
@@ -245,8 +211,8 @@
 	</div>
 </div>	
 <!-- //getScheme()获取协议，getServerName()获取服务器名，getServerPort()服务器端口，getContextPath() APP根路径 -->
-<a th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} "
- id="contextPath"></a>
+<!--<a th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} "-->
+ <!--id="contextPath"></a>-->
 <script type="text/javascript">
 //设置右键菜单
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertrowup", "Table_InsertRowUp", "在上面插入表格行");
@@ -255,178 +221,9 @@ myWriter.AddContextMenuSeparatorByTypeName("XTextTableCellElement");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "mergecell", "Table_MergeCell", "合并单元格");
 myWriter.AddContextMenuItemByTypeName("XTextInputFieldElement", "openProperty", "ElementProperties", "属性");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "openProperty1", "ElementProperties", "属性");
+myWriter.AddContextMenuItemByTypeName("XTextDocument", "insertInput", "InsertInputField", "插入输入域");
+myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertInput1", "InsertInputField", "插入输入域");
 
-function frontpage(){
-//     var contextPath = $('#contextPath').attr('href');//获取应用的根目录，我的绝对路径是http://localhost:80/
-//     myWriter.ExecuteCommand("FileOpen", false, contextPath+"/cab/index.xml");
-	$.ajax({
-		url:"getXML/index",
-		dataType:"text",
-		success:function(data){
-            myWriter.ExecuteCommand("FileOpenString", false, data);
-		},
-		error:function(){
-			alert("读取出错");
-		}
-	})
-}
-function pp(){
-	$.ajax({
-		url:"getPatientList",
-		dataType:"json",
-		success:function(data){
-			console.log(data);
-//             myWriter.ExecuteCommand("InsertXML", false, data);
-		},
-		error:function(){
-			alert("读取出错");
-		}
-	})
-}
-function save() {
-//     myWriter.ExecuteCommand("FileSave", true, "C://dc//temp.xml");
-}
-function past(){
-	$.ajax({
-		url:"getXML/past",
-		dataType:"text",
-		success:function(data){
-			console.log(data);
-            myWriter.ExecuteCommand("InsertXML", false, data);
-		},
-		error:function(){
-			alert("读取出错");
-		}
-	})
-}
-function sub_symp(){
-	$.ajax({
-			url:"getSympInfo",
-			dataType:"json",
-			success:function(data){
-			 myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
-			    
-			var sympInput = myWriter.ComCreateXTextInputFieldElement();
-			sympInput.ID = "鉴别症状";
-			sympInput.BackgroundText = "请选择鉴别症状";
-			sympInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
-			sympInput.FieldSettings.EditStyle = 1;
-			sympInput.FieldSettings.MultiSelect = true;
-			sympInput.FieldSettings.DynamicListItems = false;
-			//sympInput.FieldSettings.ListSource = myWriter.ComCreateListSourceInfo();
-//				sympInput.FieldSettings.ListSource.RuntimeItems = myWriter.ComCreateListItemCollection();
-//				sympInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue("男", "sexMan");
-//				sympInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue("女", "sexWoman");
-				for(var i in data){
-					sympInput.FieldSettings.ListSource.Items.AddByTextValue(data[i]["NAME"], data[i]["NAME"]);
-				}
-				sympInput.startBorderText = "鉴别症状";
-//				sympInput.ValueBinding = myWriter.ComCreateXDataBinding();
-//				sympInput.ValueBinding.DataSource = "Patient";
-//				sympInput.ValueBinding.BindingPath = "Sex";
-			myWriter.ExecuteCommand("InsertInputField", false, sympInput);   
-			//加载鉴别症状
-			$.ajax({
- 				url:"getSimuInfo",
- 				dataType:"json",
- 				success:function(data){
-					myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
- 					for(var i in data){
-//	 						myWriter.ExecuteCommand("InsertString", false, "，");
-//	 						simuInput.FieldSettings.ListSource.RuntimeItems.AddByTextValue(data[i]["NAME"], data[i]["ID"]);
- 						var simuInput = myWriter.ComCreateXTextInputFieldElement();
-						simuInput.ID = data[i]["NAME"];
-						simuInput.BackgroundText = "有/无";
-						simuInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
-						simuInput.FieldSettings.EditStyle = 1;
-						simuInput.FieldSettings.MultiSelect = false;
-						simuInput.FieldSettings.DynamicListItems = false;
-						//设置可见性表达式
-						var exp="";
-						var symps = data[i]["SYMPS"];
-						var symplist = symps.split(",");
-						for(var t in symplist){
-							if(exp==""){
-								exp = exp + "FIND('"+symplist[t]+"',[鉴别症状])>=0";
-							}else{
-								exp = exp + "||FIND('"+symplist[t]+"',[鉴别症状])>=0";
-							}
-						}
-						simuInput.VisibleExpression=exp;
-						simuInput.endBorderText = data[i]["NAME"]+"，";
-						//simuInput.FieldSettings.ListSource = myWriter.ComCreateListSourceInfo();
-//							simuInput.FieldSettings.ListSource.RuntimeItems = myWriter.ComCreateListItemCollection();
- 						simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
- 						simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
-//  						simuInput.SetTextRawDOM("有",1,1);
-				
-						simuInput.innerText="有";
-// 						simuInput.ValueBinding = myWriter.ComCreateXDataBinding();
-// 						simuInput.ValueBinding.DataSource = "Patient";
-// 						simuInput.ValueBinding.BindingPath = "Sex";
-						myWriter.ExecuteCommand("InsertInputField", false, simuInput);   
- 					}
- 					myWriter.ExecuteCommand("InsertString", false, "。");
- 				},
- 				error:function(){
- 					alert("读取数据时发生错误");
- 				}
- 			})
-			},
-			error:function(){
-				alert("读取数据时发生错误");
-			}
-		})
-}
-function bindDataSource(data){
-// 	var jsonstr2 = '{"NAME":"张冰心","SEX":"女","AGE":"30","MARITAL_STATUS":null,"AREA_NAME":"安徽省滁州市定远县","NATION":null,"OCCUPATION":null,"SERVICE_AGENCY":null,"MAILING_ADDRESS":"江苏省常州市武进区聚盛花园8幢甲单元202室","INDATE":"2018-05-14"}';
-// 	var jsonstr = '{"NAME":"张三","career":"农民","gender":"女","careerAdress":"常州二院","age":"55","adress":"什么路多少号","marriage":"已婚","teller":"儿子","birthplace":"常州","inDate":"","nation":"","recDate":""}';
-	var jsonstr = JSON.stringify(data);
-	//jsonstr = jsonstr.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'");
-	var json = JSON.parse(jsonstr);
-	var xml = JSON2XML(json);
-	alert(xml);
-    myWriter.SetDocumentParameterValueXml("patient", xml);
-    myWriter.WriteDataFromDataSourceToDocument();
-}
-function JSON2XML(json){
-	var xml = "<x>";
-	for(var i in json){
-		var text = json[i]||"";
-		xml = xml + "<" + i + ">" + text + "</" + i + ">";
-	}
-	xml = xml + "</x>";
-	return xml;
-}
-
-function saveTemplate(){
-	var templateData = {
-			templateName : parent.templateName,
-			rangeSel : parent.rangeSel,
-			typeSel : parent.typeSel,
-			xml : myWriter.XMLText
-	}
-	$.ajax({
-		url:"/template/temp/save",
-		type : "POST",
-		data : templateData,
-		dataType :"json",
-		success:function(data){
-			if (data.code == 1) {
-				parent.layer.msg("操作成功");
-				parent.reLoad();
-				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				parent.layer.close(index);
-
-			} else {
-				parent.layer.alert(data.msg)
-			}
-		},
-		error:function(){
-			alert("读取出错");
-		}
-	})
-}
 </script>
 <script language=javascript  for="myWriter" event="EventMouseClickExt(eventSender,eventArgs)">
 	//关闭菜单

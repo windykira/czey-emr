@@ -158,28 +158,24 @@ function add() {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add',
-        yes : function(){
-          alert(2)
-        },
 		end : function(){
-			if(openFlag===1){
-                var myWindow;
-				var index1 =layer.open({
-					type : 2,
-					title : '增加',
-					maxmin : true,
-					shadeClose : false, // 点击遮罩关闭层
-					area : [ '800px', '520px' ],
-					content : '/emr/dc/index',
-                    yes : function(index, layero){
-                        alert('yes')
-                        myWindow = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
-                        myWindow.test();
-                    }
-				});
-				layer.full(index1);
-                myWindow.test();
-			}
+
 		}
 	});
+}
+var index1;
+function loadEditPage(){
+    index1 =layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : '/emr/dc/index',
+        yes : function(index, layero){
+            myWindow = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+        },
+
+    });
+    //layer.full(index1);
 }

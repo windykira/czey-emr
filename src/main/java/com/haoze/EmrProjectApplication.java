@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
-@MapperScan("com.haoze.dao")
+@MapperScan({"com.haoze.dao","com.haoze.common.model"})
 @SpringBootApplication
 public class EmrProjectApplication {
 

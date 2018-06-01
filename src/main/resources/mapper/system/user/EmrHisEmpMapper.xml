@@ -6,6 +6,11 @@
   <resultMap id="BaseResultMap" type="com.haoze.model.system.user.entity.EmrHisEmpEntity" >
     <result column="PK_EMP" property="pkEmp" jdbcType="VARCHAR" />
     <result column="JOB_NUM" property="jobNum" jdbcType="VARCHAR" />
+
+    <result column="EMP_NO" property="empNo" jdbcType="VARCHAR" />
+    <result column="CZEYJOB_NUM" property="czeyJobNum" jdbcType="VARCHAR" />
+    <result column="JOB" property="job" jdbcType="VARCHAR" />
+
     <result column="EMP_NAME" property="empName" jdbcType="VARCHAR" />
     <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
     <result column="SEX" property="sex" jdbcType="VARCHAR" />
@@ -16,7 +21,6 @@
     <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
     <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
     <result column="POLITICAL_STATUS" property="politicalStatus" jdbcType="VARCHAR" />
-    <result column="JOINPARTY_DATE" property="joinpartyDate" jdbcType="VARCHAR" />
     <result column="ACADEMIC_DEGREE" property="academicDegree" jdbcType="VARCHAR" />
     <result column="SCHOOL" property="school" jdbcType="VARCHAR" />
     <result column="CREATESTATUS" property="createStatus" jdbcType="VARCHAR" />
@@ -24,7 +28,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    PK_EMP,JOB_NUM,EMP_NAME,DEPT_ID,SEX,ID_CARD,NATIVE_PLACE,JOINJOB_DATE,ENT_DATE,ITEM_NAME,MOBILE_PHONE,POLITICAL_STATUS,JOINPARTY_DATE,ACADEMIC_DEGREE,
+    PK_EMP,JOB_NUM,EMP_NO,CZEYJOB_NUM,JOB,EMP_NAME,DEPT_ID,SEX,ID_CARD,NATIVE_PLACE,JOINJOB_DATE,ENT_DATE,ITEM_NAME,MOBILE_PHONE,POLITICAL_STATUS,ACADEMIC_DEGREE,
     SCHOOL,CREATESTATUS,PK_ORG
   </sql>
 
@@ -63,13 +67,13 @@
       DEPT_ID, SEX, ID_CARD,
       NATIVE_PLACE, JOINJOB_DATE, ENT_DATE, 
       ITEM_NAME, MOBILE_PHONE, POLITICAL_STATUS, 
-      JOINPARTY_DATE, ACADEMIC_DEGREE, SCHOOL
+      ACADEMIC_DEGREE, SCHOOL
       )
     values (#{pkEmp,jdbcType=VARCHAR}, #{jobNum,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
       #{deptId1,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
       #{nativePlace,jdbcType=VARCHAR}, #{joinjobDate,jdbcType=VARCHAR}, #{entDate,jdbcType=VARCHAR}, 
       #{itemName,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, 
-      #{joinpartyDate,jdbcType=VARCHAR}, #{academicDegree,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}
+      #{academicDegree,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}
       )
   </insert>
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haoze.dao.template.TemplateDao">
+
 	<resultMap id="BaseResultMap" type="com.haoze.model.template.temp.entity.TemplateEntity">
 	  <id column="PK_TEMPLATE" jdbcType="VARCHAR" property="pkTemplate" />
 	  <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />

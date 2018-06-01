@@ -98,11 +98,12 @@
                  parent.layer.alert("Connection error");
                  },
                  success: function (data) {
-                     if($(data).find("#userId").val() == ""){
+                     /*if($(data).find("#userId").val() == ""){
                          parent.location.href = "/login";
                      }else {
                          $("#content").html(data);
-                     }
+                     }*/
+                     $("#content").initPage(data);
                  }
              });
         });
@@ -127,7 +128,7 @@
                 },
                 success: function (data) {
                     //debugger;
-                    $("#content").html(data);
+                    $("#content").initPage(data);
                 }
             });
         }

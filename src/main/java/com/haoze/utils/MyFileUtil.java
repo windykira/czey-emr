@@ -37,7 +37,7 @@ public class MyFileUtil {
 	  	}
 	  	file = new File(path+name);
 	  	if(file.exists()) {
-	  		name = name+"_dup";//stupid code for some bureaucratic fool 
+	  		name = name+"_dup";//stupid code
 	  		file = new File(path+name);
 	  	}
 	  	
@@ -46,7 +46,7 @@ public class MyFileUtil {
         try {
         	fw = new FileWriter(file);
             out = new BufferedWriter(fw);
-            out.write(content, 0, content.length()-1);
+            out.write(content, 0, content.length());
             out.close();
 
             return true;
