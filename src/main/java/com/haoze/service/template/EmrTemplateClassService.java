@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.haoze.common.model.BaseService;
 import com.haoze.common.model.QueryParam;
 import com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity;
-import com.haoze.model.template.templateclass.po.EmrTemplateClassVO;
+import com.haoze.model.template.templateclass.po.EmrTemplateClassPO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,5 +20,5 @@ public interface EmrTemplateClassService extends BaseService<EmrTemplateClassEnt
      * @param queryParam
      * @return
      */
-    Page<EmrTemplateClassVO> listEmrTemplateClass(QueryParam queryParam);
+    Page<EmrTemplateClassPO> listEmrTemplateClass(QueryParam queryParam);
 }

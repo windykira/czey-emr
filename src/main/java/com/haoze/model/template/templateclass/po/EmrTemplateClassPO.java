@@ -5,7 +5,7 @@ package com.haoze.model.template.templateclass.po;
  * @author maxl
  * @time 2018-06-01。
  */
-public class EmrTemplateClassVO {
+public class EmrTemplateClassPO {
 
     private String templateId;//模板ID
     private String templateName;//模板名称
