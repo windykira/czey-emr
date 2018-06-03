@@ -207,7 +207,7 @@
     where PK_TMP_CLASS = #{pkTmpClass,jdbcType=VARCHAR}
   </update>
 
-  <select id="listEmrTemplateClass" parameterType="java.util.Map" resultType="com.haoze.model.template.templateclass.po.EmrTemplateClassVO">
+  <select id="listEmrTemplateClass" parameterType="java.util.Map" resultType="com.haoze.model.template.templateclass.po.EmrTemplateClassPO">
       select
         et.PK_TEMPLATE TemplateId,et.NAME_TMP TemplateName,et.RANGE Range,su.NAME_USER Creator,et.CREATE_TIME CreateTime
       from EMR_TEMPLATE et INNER JOIN EMR_TMP_CLASS etc on et.PK_TMP_CLASS=etc.PK_TMP_CLASS
