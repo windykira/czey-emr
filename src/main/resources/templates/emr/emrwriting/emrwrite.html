@@ -63,8 +63,8 @@
                 <h3 class="panel-title">医嘱</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
+                <table class="table table-bordered table-striped" id="doctorAdvice">
+                    <!--<thead>
                     <tr>
                         <th> 模板名称 </th>
                         <th>创建人</th>
@@ -106,7 +106,7 @@
                         <td>xxx</td>
                         <td>2018-06-18</td>
                     </tr>
-                    </tbody>
+                    </tbody>-->
                 </table>
             </div>
         </div>
@@ -119,8 +119,8 @@
                 <h3 class="panel-title">检查</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
+                <table class="table table-bordered table-striped" id="checkUp">
+                    <!--<thead>
                     <tr>
                         <th> 模板名称 </th>
                         <th>创建人</th>
@@ -165,7 +165,7 @@
                         <td>xxx</td>
                         <td>2018-06-18</td>
                     </tr>
-                    </tbody>
+                    </tbody>-->
                 </table>
             </div>
         </div>
@@ -178,8 +178,8 @@
                 <h3 class="panel-title">检验</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
+                <table class="table table-bordered table-striped" id="inspect">
+                    <!--<thead>
                     <tr>
                         <th> 模板名称 </th>
                         <th>创建人</th>
@@ -221,7 +221,7 @@
                         <td>xxx</td>
                         <td>2018-06-18</td>
                     </tr>
-                    </tbody>
+                    </tbody>-->
                 </table>
             </div>
         </div>
@@ -234,8 +234,8 @@
                 <h3 class="panel-title">处方</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
+                <table class="table table-bordered table-striped" id="prescription">
+                    <!--<thead>
                     <tr>
                         <th> 模板名称 </th>
                         <th>创建人</th>
@@ -280,7 +280,7 @@
                         <td>xxx</td>
                         <td>2018-06-18</td>
                     </tr>
-                    </tbody>
+                    </tbody>-->
                 </table>
             </div>
         </div>
@@ -463,8 +463,9 @@
 <div th:include="emrinclude::footer"></div>
 <script src="/js/jquery.ztree.core-3.5.js"></script>
 <script src="/js/appjs/emr/emrwriting/emrwrite.js"></script>
-<script>
-    //CKEDITOR.replace( 'editor1' );
+<script src="/js/appjs/emr/emrwriting/buttonshow.js"></script>
+<!--<script>
+    CKEDITOR.replace( 'editor1' );
     $(function(){
         //弹出窗
         $("#btnPop1").click(function(){
@@ -492,6 +493,6 @@
         });
 
     })
-</script>
+</script>-->
 </body>
 </html>

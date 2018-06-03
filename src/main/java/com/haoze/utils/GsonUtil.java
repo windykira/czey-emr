@@ -1,6 +1,9 @@
 package com.haoze.utils;
 
 import com.google.gson.Gson;
+import com.haoze.model.emr.emrwriting.po.HisResponseDataPO;
+
+import java.util.List;
 
 /**
  * JSON解析工具。
@@ -15,7 +18,8 @@ public class GsonUtil {
         return gson.toJson(object);
     }
 
-    public static <T> T fromJson(String json,Class<T> clazz){
+    public static <T> T fromJson(String json, Class<T> clazz){
         return gson.fromJson(json,clazz);
     }
+
 }
