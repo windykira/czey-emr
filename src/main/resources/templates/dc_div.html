@@ -1,5 +1,5 @@
 <div th:fragment="dc">
-<div width="100%" style="z-index:100">
+<div width="100%" style="z-index:auto">
 	<!--<div class="">-->
 		<!--<button class="btn btn-default" type="button" onclick="frontpage()" data-toggle="modal" data-backdrop="static" data-target="#addMedical">新增</button>-->
 		<!--<button class="btn btn-default" type="button" onclick="saveTemplate()">保存</button>-->
@@ -192,18 +192,19 @@
 
 	</script>
 </div>
-	<div style="z-index:1;width:100%">
+	<div style="z-index:-1;width:100%">
 	<object id="myWriter" name="myWriter" onclick="closeMenu()"
 					classid="clsid:00012345-6789-ABCD-EF01-2345678900ff" 
-				    codebase="http://172.30.100.155:8081/cab/DCWriterWeb.cab"
+					codebase="http://localhost:8081/cab/DCWriterWeb.cab"
 					style="position:relative ;width: 100%;overflow-x:hidden;border:solid 1 black">
 				    <param name="CodeBaseForUpdateAssembly"   
-				        value="http://172.30.100.155:8081/cab/DCWriterWeb.cab#Version=1,2015,12,23" />
+				        value="http://localhost:8081/cab/DCWriterWeb.cab#Version=1,2015,12,23"
+					/>
 				    <param name="BackColor" value="Gray" />
 				    <param name="BorderStyle" value="3DFixed" />
 				    <param name="InitalizeParameterValues" value="PatientName:张三" />
 				    <param name="Font" value="宋体,20" />
-				    <param name="wmode" value="transparent" />
+					<!--<param name="wmode" value="transparent" />-->
 					<param name="wmode" value="opaque" />
 				    <span style="border-width:1;border-style:solid;border-color:black;background-color:yellow" >
 				        没能下载安装控件，请联系管理员来设置安全站点。</span>

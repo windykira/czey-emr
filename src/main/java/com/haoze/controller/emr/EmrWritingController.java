@@ -33,6 +33,11 @@ public class EmrWritingController extends BaseController{
 
     private String prefix="emr/emrwriting";
 
+    @GetMapping("/test")
+    String test(Model model){
+        return "/test";
+    }
+
     @GetMapping("/emrwrite")
     String emrWrite(Model model){
 

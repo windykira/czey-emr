@@ -6,6 +6,15 @@ $(function() {
     $(".nav-tabs li").click(function () {
         $(this).addClass("active").siblings(".active").removeClass("active");
     });
+
+    /*$('#addMedical').on('shown.bs.modal', function () {
+        $("#dcContainer").hide();
+        $("#boxPop1,#boxPop2,#boxPop3,#boxPop4,#boxPop5").slideUp(200);
+    })
+    $('#addMedical').on('hidden.bs.modal', function () {
+        $("#dcContainer").show();
+    })*/
+
 });
 
 var zTree = "";
@@ -26,15 +35,44 @@ function loadEmrCataLog(){
     });
 }
 
+function loadDcEditor(){
+
+    var ctl = document.getElementById("myWriter");
+    $.ajax({
+        url:"/emr/dc/getXML/index",
+        dataType:"text",
+        success:function(data){
+            ctl.ExecuteCommand("FileOpenString", false, data);
+        },
+        error:function(){
+            alert("读取出错");
+        }
+    })
+    $("#dcContainer").show();
+    $('#addMedical').modal('hide')
+}
+
 function showModal(){
 
     //$("#addMedical").modal("toggle");
     var selectNodes = zTree.getSelectedNodes();
     if(selectNodes.length == 0){
-        layer.msg("请选择病历目录。");
+        //layer.msg("请选择病历目录。");
+        alert("请选择病历目录。");
         return;
     }
-    $.ajax({
+
+    layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : '/emr/emrwriting/test'
+    });
+    //$("#templateIFrame").attr("src", "/test");
+
+    /*$.ajax({
         type : "GET",
         url : "/template/class/list/"+selectNodes[0].id,
         success : function(datas) {
@@ -47,6 +85,7 @@ function showModal(){
                     $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
                 }
             });
+            //$("#dcDiv").hide();
             $("#addMedical").modal("toggle");
             //加载模板表格数据
             loadTemplateTable(1);
@@ -54,7 +93,7 @@ function showModal(){
                 $(this).addClass("active").siblings(".active").removeClass("active");
             });
         }
-    });
+    });*/
 }
 
 function reloadTemplate(e){
@@ -137,7 +176,7 @@ function loadTemplateTable(rangeValue){
                 },
                 columns: [
                     {
-                        checkbox: true
+                        radio: true
                     },
                     {
                         field: 'templateId',

@@ -1,65 +1,25 @@
-package com.haoze.utils;
+package com.haoze;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import com.haoze.utils.ChineseCharactersCode;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import org.junit.Test;
+
+import java.util.Map;
 
 /**
- * 汉字格式化工具。
- * @author maxl
- * @time 2018-05-13。
+ * Created by haoz-dev4 on 2018/6/4.
  */
-public class ChineseCharactersCode {
+public class MyTest {
 
-    public static String getPinyinCode(String chineseCharacters) throws BadHanyuPinyinOutputFormatCombination {
-        HanyuPinyinOutputFormat hypyfm = new HanyuPinyinOutputFormat();
-        hypyfm.setCaseType(HanyuPinyinCaseType.LOWERCASE);
-        hypyfm.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-        hypyfm.setVCharType(HanyuPinyinVCharType.WITH_V);
+    @Test
+    public void chineseCharactersCodeTest() throws BadHanyuPinyinOutputFormatCombination {
 
-        char[] ch = chineseCharacters.toCharArray();
-        StringBuilder simplePrint = new StringBuilder();
-        for (int i = 0; i < ch.length; ++i) {
-            String[] temp = PinyinHelper.toHanyuPinyinStringArray(ch[i], hypyfm);
-            simplePrint.append(temp[0].charAt(0));
-        }
-        return simplePrint.toString();
+        String code = ChineseCharactersCode.getWBCode("黄路");
+        String str = ChineseCharactersCode.getPinyinCode("消化科");
+        assert code != null;
     }
 
-    public static String getWBCode(String str) {
-
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < str.length(); i++) {
-            char character = str.charAt(i);
-            int asciiCode = (int) character;
-            //如果是254以内的ASCII 表示是西文字母和字符，直接显示，无需翻译
-            if (asciiCode >= 1 && asciiCode <= 254) {
-                buffer.append(character);
-            } else {
-                //循环遍历汉字五笔的字库（按照五笔首字符字符分组）
-                for (int j = 0; j < WB.length; j++) {
-                    char[] dbTmp = WB[j].toCharArray();
-                    for (int k = 1; k < dbTmp.length; k++) {
-                        if ((int) character == (int) dbTmp[k]) {
-                            //如果在WB最后一行，表明是中文标点符号，直接显示，否则显示对应的五笔首字母(该行的第1个字符)
-                            if (j == WB.length - 1) {
-                                buffer.append(dbTmp[k]);
-                            } else {
-                                buffer.append(dbTmp[0]);
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return buffer.toString();
-    }
-
-    private static String[] WB = new String[]{
+    private static String[] WB = new String[] {
             "A鞴鞲鞣鞫鞯鞔鞒鞑鞅靼銎跫綦翳蛩颟鹳鹋鸫鸢慝觐觋贳瓯戡檠迓甙忒弋撖摁廾蘼蘖蘩蘅蘧藿藜藁藓薰薷薹薅薜薮蕹薏薇薨薤蕻蕲蕃瞢蕺蕞蕤蕨蕈蕙蓼蓿蔻蕖蔺蔟蔹蓰蔸甍蔌蓣蓥蒗蒴蒹蒡蓠蒺蒿蓊蓓蒽蓦蓐蓍蓁葭萱蒎蒌葶葩葆萼葸蒉葺蒈蒇葳葙葚葑葜菡菰萦菀菅菪菹菸萃萏菟菔萆萑萸萜菖菽菝萋萘堇菘菥萁菁莼莺莨莞莘荻莸荽莩莶荼莅莜莓莪莠莴莳荸莰荮荭荪荬荩茛荨荥荦茳茺茭荠茗荀荟荃荇荏茯荞莛茱茴茼莒茈荜荛荑茜苕苠茕茔茆茚茑苓苻茌苘苒苴苜茇茏苤苷茉苡芤苎苄芟芪芡芴芩苁苌苋芮芷芘苣苊苈芰芾芸芫芙芗芑芎芄芨芊芏艿艽艹鄞郾邛劐蒯赜匾匮匦叵匚廿茁著芝蒸斟蔗蘸藻葬匝蕴苑芋荧营萤莹英荫茵艺颐医药尧燕雅牙芽鸦薛靴蓄芯薪邪鞋萧巷项匣熙昔芜巫卧蔚萎苇藤萄苔蓑蒜苏斯薯蔬世式甚芍苫莎散萨若蕊茹荣蓉茸戎惹鹊颧区擎芹勤莲荔莉蕾勒劳蓝莱葵匡苦恐苛勘菌巨菊鞠敬警茎荆靳芥藉戒节蕉匠蒋荐茧荚蓟基惑或获荤茄切翘鞘巧蔷其七欺期蒲菩葡莆萍苹匹蓬藕殴鸥欧孽蔫匿慕募幕暮墓某莫蘑摹蔑藐苗蒙萌茂茅莽茫芒蔓落萝芦菱黄荒划花葫菏荷邯菇苟共贡汞巩恭功攻工葛革戈甘芬匪菲芳范藩贰董东蒂荡葱茨臣茶茬草藏苍蔡菜菠鞭蔽蓖苯薄苞靶芭鞍艾蔼",
             "B粜蚩颞聩聒聍聆聃耵骘孢孓孑屮隳凵勐鄹隰隗隍隈陴陲陬陧陟陔陉陂阼阽阪阱阡阢阝卺亟丞阻子孜坠职阵障陨院隅隐阴也耶阳逊限陷险隙卫陀陶孙祟隧随隋陕阮孺娶取了辽聊联孔聚阶降际聘陪聂陌孟陆陋陇隆陵函孩孤耿隔附防耳堕队陡耽聪除出耻承陈陛隘阿",
             "C鍪蟊蝥颡矜皴鹬鹜甬瞀怼炱毵骧骥骣骢骠骟骝骛骖骓骒骐骊骈骅骁骀驿驺驸驷驵婺逡迨迳巯畚弁厶邰刭驻骤蚤允驭豫预予又勇恿以矣验驯熊戏驼驮通台双驶圣骚桑叁柔劝驱垒骏驹颈劲骄艰鸡骑骗能难牟矛马骆骡驴欢骇观对叠邓怠驰骋叉参驳巴",
@@ -86,5 +46,48 @@ public class ChineseCharactersCode {
             "X飨糸蠡颍鸶鸨犟畿幺缵缳缲缱缰缯缭缬缫缪缧缦缥缤缣缢缡缟缛缜缙缗缒缑缏缌缋缈缇缃缂缁绾绻绺绶缍绲绱绯绮绫绨绡绠绛绗绔绐绌绋绉绂绁绀纾纰纭纩纨纥纣纡纟鬻弼艴弭弪彘彖辔匕组纵综缀粥终纸旨织张绽约缘幼幽颖缨引绎肄彝疑绚续绪绣乡线弦纤细毋纹纬维统绦缩绥丝绳绅绍缮纱弱绒纫绕顷练缆绝绢纠经结皆绞缴疆缄纪继级缉绩绘强纽纳母缅绵弥络纶绿缕幻缓弧红弘贯弓给纲缚弗缝纷费纺缎缔弹绰纯绸弛缠编毖毙毕比绷绑绊",
             "Y麟麝鏖麒麋麈麇麂縻麾麽饔銮綮翩颏颃鹫鹧鹑鸾憝扉扈扃戽戾旖旒旎旌旃旄旆於斓齑膂肓昶栾娈膺廪廨廛廑廒赓庳庾庵庹庠庥庖庋庑庀奕弈壅塾劾邡邙邝谶谵谳谲谯谮谫谪谧谥谡谠谟谝谘谛谙谖谕谔谒谑谏谌谇谄谂谀诿诼诹诶诳诰诮诩诨诤诠诟诜诙诘诖诔诓诒诎诏诋诃诂讷讵讴讪讧讦讠羸蠃嬴禀裒脔亵袤亳亠丶座诅族卒谆庄主诛诸诌州衷证诊这遮肇斋诈育语诱永雍庸赢应鹰译谊议诣义裔亦衣夜谣谚言讶讯训询玄旋畜序许谢谐享详襄席误诬紊文谓为妄忘望亡弯庭亭讨唐谈谭诉诵讼说谁衰庶熟孰试市识诗施设认让瓤庆请廖谅亮良恋廉离朗郎廊谰廓库课刻亢康诀就京谨诫讲肩记计剂讥迹诲讳谎敲谴谦讫弃启旗齐谱评烹庞诺亩谋魔摩磨谬庙谜糜靡氓盲谩蛮麻论孪挛峦率旅鹿庐刘吝话户亨毫豪亥裹郭诡广雇庚膏高该讣腐府讽废诽放访房方讹敦度读订谍调店底诞词床充诚颤谗诧斌遍卞变扁庇褒谤哀",
             "！@#%…&*（）—；：”’？《》，。、~={}','|"};
+    public static String getWBCode(String str) {
+        StringBuffer result = new StringBuffer();
+        //用char循环取得每一个String的 字符
+        for (int i = 0; i < str.length(); i++) {
+            char temp1 = str.charAt(i);
+            int asciicode = (int)temp1;
+            //如果是254以内的ASCII 表示是西文字母和字符，直接显示，无需翻译
+            if (asciicode >= 1 && asciicode <= 254) {
+                result.append(temp1);
+            }else{
+                //循环遍历汉字五笔的字库（按照五笔首字符字符分组）
+                for (int j = 0; j < WB.length; j++) {
+                    char[] dbTmp = WB[j].toCharArray();
+                    //循环遍历每个英文字母的字库
+                    for (int k=1; k < dbTmp.length; k++) {
+                        //找到
+                        if((int)temp1==(int)dbTmp[k]){
+                            //如果在WB最后一行，表明是中文标点符号，直接显示，否则显示对应的五笔首字母(该行的第1个字符)
+                            if(j==WB.length-1){
+                                result.append(dbTmp[k]);
+                            }else {
+                                result.append(dbTmp[0]);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return result.toString();
+    }
 
+    public static void main(String[] args) {
+        String str = "呼吸科";//
+        String newStr = getWBCode(str);
+        System.out.println(getWBCode(str));
+        int total =0;
+        for (String string : WB) {
+            total+=string.length()-1;
+        }
+
+        System.out.println("共汉字:"+total);
+
+    }
 }

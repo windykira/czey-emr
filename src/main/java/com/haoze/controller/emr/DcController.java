@@ -96,7 +96,7 @@ public class DcController extends BaseController {
     	try {
             // File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "static/cab/past.xml");
             //reader = new FileReader(path+"\\xml\\1.xml");
-        	isr = new InputStreamReader(new FileInputStream("C:\\dc\\"+fileName+".xml"),"UTF-8");
+        	isr = new InputStreamReader(new FileInputStream("D:\\dc\\"+fileName+".xml"),"UTF-8");
         	int len;
         	char[] buf = new char[1024];
         	
