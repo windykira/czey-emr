@@ -93,8 +93,8 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
                 zTree.setIsParent(false);
             }else{
                 zTree.setIsParent(true);
-                zTree.setOpen(true);
             }
+            zTree.setOpen(false);
             zTrees.add(zTree);
         }
         return zTrees;

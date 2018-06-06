@@ -109,8 +109,11 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>科别</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>科别</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -136,8 +139,11 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>病区</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>病区</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -163,8 +169,11 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>床号</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>床号</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -190,8 +199,11 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>姓名</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>姓名</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -217,8 +229,11 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>住院号</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>住院号</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -256,6 +271,10 @@
       <Element xsi:type="XTextBody">
          <Attributes />
          <AcceptTab>true</AcceptTab>
+         <ValidateStyle>
+            <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
+            <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
+         </ValidateStyle>
          <XElements>
             <Element xsi:type="XInputField" StyleIndex="1">
                <Attributes>
@@ -384,11 +403,13 @@
                <BorderElementColor />
                <EventExpressions />
                <Name>主诉</Name>
+               <DisplayFormat />
                <InnerValue />
                <BackgroundText>主诉</BackgroundText>
                <BorderVisible>Hidden</BorderVisible>
                <EditorActiveMode>MouseClick</EditorActiveMode>
                <LastSelectedListItems />
+               <FieldSettings />
             </Element>
             <Element xsi:type="XParagraphFlag" StyleIndex="15" />
             <Element xsi:type="XTextTable" StyleIndex="16" NumOfRows="6" NumOfColumns="2">
@@ -606,6 +627,7 @@
                                  <BackgroundText>患者姓名</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="12" />
@@ -751,10 +773,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>职业</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>职业</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>F2 MouseDblClick MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings>
                                     <EditStyle>DropdownList</EditStyle>
                                     <ListSource>
@@ -1284,11 +1308,13 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>性别</Name>
+                                 <DisplayFormat />
                                  <InnerValue>2</InnerValue>
                                  <BackgroundText>性别</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>F2 MouseDblClick MouseClick</EditorActiveMode>
                                  <SelectedIndex>1</SelectedIndex>
+                                 <LastSelectedListItems />
                                  <FieldSettings>
                                     <EditStyle>DropdownList</EditStyle>
                                     <ListSource>
@@ -1448,10 +1474,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>工作单位地址</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>工作单位地址</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="13" />
@@ -1606,10 +1634,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>年龄</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>年龄</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="13" />
@@ -1755,10 +1785,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>住址</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>住址</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="13" />
@@ -1942,10 +1974,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>婚姻</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>婚姻</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>F2 MouseDblClick MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings>
                                     <EditStyle>DropdownList</EditStyle>
                                     <ListSource>
@@ -2163,10 +2197,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>病史陈述者</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>病史陈述者</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="13" />
@@ -2368,10 +2404,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>出生地</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>出生地</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" StyleIndex="13" />
@@ -2397,8 +2435,10 @@
                                  <XElements />
                                  <BorderElementColor />
                                  <EventExpressions />
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>入院日期</BackgroundText>
+                                 <LastSelectedListItems />
                                  <FieldSettings>
                                     <EditStyle>DateTime</EditStyle>
                                  </FieldSettings>
@@ -2556,10 +2596,12 @@
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>民族</Name>
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>民族</BackgroundText>
                                  <BorderVisible>Hidden</BorderVisible>
                                  <EditorActiveMode>F2 MouseDblClick MouseClick</EditorActiveMode>
+                                 <LastSelectedListItems />
                                  <FieldSettings>
                                     <EditStyle>DropdownList</EditStyle>
                                     <ListSource>
@@ -2611,6 +2653,7 @@
                                  <XElements />
                                  <BorderElementColor />
                                  <EventExpressions />
+                                 <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>记录日期</BackgroundText>
                                  <LastSelectedListItems />
@@ -2688,10 +2731,11 @@
                                  <EndBorderText>】</EndBorderText>
                                  <BorderElementColor />
                                  <EventExpressions />
+                                 <Name>症状</Name>
                                  <DisplayFormat />
                                  <InnerValue />
                                  <BackgroundText>请选择症状</BackgroundText>
-                                 <SelectedIndex>2</SelectedIndex>
+                                 <SelectedIndex>0</SelectedIndex>
                                  <FieldSettings>
                                     <EditStyle>DropdownList</EditStyle>
                                     <MultiSelect>true</MultiSelect>
@@ -2719,7 +2763,7 @@
                               </Element>
                               <Element xsi:type="XInputField">
                                  <Attributes />
-                                 <ID>field20</ID>
+                                 <ID>period</ID>
                                  <EnableValueValidate>true</EnableValueValidate>
                                  <ValidateStyle>
                                     <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
@@ -2729,10 +2773,11 @@
                                  <XElements />
                                  <BorderElementColor />
                                  <EventExpressions />
+                                 <UnitText>天</UnitText>
                                  <Name>持续时间</Name>
                                  <DisplayFormat />
+                                 <InnerValue />
                                  <BackgroundText>持续时间</BackgroundText>
-                                 <LastSelectedListItems />
                                  <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
@@ -2784,12 +2829,16 @@
                               <Element xsi:type="XInputField">
                                  <Attributes />
                                  <ID>现病史</ID>
+                                 <PropertyExpressions>
+                                    <Item Name="Visible">FIND('',[zz])&gt;=0&amp;&amp;FIND('',[period])&gt;=0</Item>
+                                 </PropertyExpressions>
                                  <EnableValueValidate>true</EnableValueValidate>
                                  <ValidateStyle>
                                     <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
                                     <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
                                  </ValidateStyle>
                                  <ValueBinding />
+                                 <VisibleExpression>FIND('',[zz])&gt;=0&amp;&amp;FIND('',[period])&gt;=0</VisibleExpression>
                                  <XElements>
                                     <Element xsi:type="XString">
                                        <XElements xsi:nil="true" />
@@ -2797,26 +2846,32 @@
                                     </Element>
                                     <Element xsi:type="XInputField">
                                        <Attributes />
-                                       <ID>field21</ID>
+                                       <ID>period2</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
                                        <ValidateStyle>
                                           <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
                                           <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
                                        </ValidateStyle>
                                        <ValueBinding />
+                                       <CopySource>
+                                          <SourceID>period</SourceID>
+                                          <SourcePropertyName />
+                                          <DescPropertyName />
+                                          <IgnoreChildElements>false</IgnoreChildElements>
+                                       </CopySource>
                                        <XElements>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
-                                             <Text>5年</Text>
+                                             <Text>1</Text>
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
                                        <EventExpressions />
+                                       <UnitText>天</UnitText>
                                        <Name>持续时间</Name>
                                        <DisplayFormat />
-                                       <InnerValue>5年</InnerValue>
+                                       <InnerValue>1</InnerValue>
                                        <BackgroundText>持续时间</BackgroundText>
-                                       <LastSelectedListItems />
                                        <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XString">
@@ -2825,25 +2880,27 @@
                                     </Element>
                                     <Element xsi:type="XInputField">
                                        <Attributes />
-                                       <ID>field22</ID>
+                                       <ID>zz2</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
                                        <ValidateStyle>
                                           <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
                                           <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
                                        </ValidateStyle>
                                        <ValueBinding />
-                                       <XElements>
-                                          <Element xsi:type="XString">
-                                             <XElements xsi:nil="true" />
-                                             <Text>咯血,咳嗽,咳痰</Text>
-                                          </Element>
-                                       </XElements>
+                                       <CopySource>
+                                          <SourceID>zz</SourceID>
+                                          <SourcePropertyName />
+                                          <DescPropertyName />
+                                          <IgnoreChildElements>false</IgnoreChildElements>
+                                       </CopySource>
+                                       <XElements />
                                        <StartBorderText>症状【</StartBorderText>
                                        <EndBorderText>】</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
+                                       <Name>症状</Name>
                                        <DisplayFormat />
-                                       <InnerValue>5654e145dc844c2e882a1a61991618b8,85a23421b9034f9ebee516948c395280,9202d5e45dab4aebb5e9733bd8ff3fca</InnerValue>
+                                       <InnerValue />
                                        <BackgroundText>请选择症状</BackgroundText>
                                        <SelectedIndex>2</SelectedIndex>
                                        <FieldSettings>
@@ -2867,7 +2924,6 @@
                                           </ListSource>
                                        </FieldSettings>
                                     </Element>
-                                    <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XInputField">
                                        <Attributes />
                                        <ID>field23</ID>
@@ -2887,6 +2943,7 @@
                                              <Text>咯血：</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <DisplayFormat />
@@ -2910,6 +2967,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>咯血量</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -2951,6 +3009,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>颜色和性状</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3005,6 +3064,7 @@
                                              <Text>咳嗽：</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <DisplayFormat />
@@ -3024,6 +3084,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>性质</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3061,6 +3122,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>时间</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3107,6 +3169,7 @@
                                              <Text>突发性咳嗽</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <StartBorderText>规律</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3152,6 +3215,7 @@
                                              <Text>金属音咳嗽</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <StartBorderText>音色</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3201,6 +3265,7 @@
                                              <Text>咳痰：</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <DisplayFormat />
@@ -3220,6 +3285,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>性质</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3285,6 +3351,7 @@
                                        <ValueBinding />
                                        <VisibleExpression>FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[field22])&gt;=0</VisibleExpression>
                                        <XElements />
+                                       <Visible>false</Visible>
                                        <StartBorderText>痰量</StartBorderText>
                                        <EndBorderText>，</EndBorderText>
                                        <BorderElementColor />
@@ -3312,11 +3379,6 @@
                                           </ListSource>
                                        </FieldSettings>
                                     </Element>
-                                    <Element xsi:type="XString">
-                                       <XElements xsi:nil="true" />
-                                       <Text>。</Text>
-                                    </Element>
-                                    <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XInputField">
                                        <Attributes />
                                        <ID>field34</ID>
@@ -3336,6 +3398,7 @@
                                              <Text>有</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>发热，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3377,6 +3440,7 @@
                                              <Text>有</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>胸痛，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3418,6 +3482,7 @@
                                              <Text>有</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>呛咳，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3459,6 +3524,7 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>脓痰，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3498,6 +3564,7 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>皮肤粘膜出血，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3537,6 +3604,7 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>黄疸，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3576,6 +3644,7 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>呼吸困难，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3619,6 +3688,7 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>咯血，</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3662,6 +3732,827 @@
                                              <Text>无</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>哮鸣音。</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>哮鸣音</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XParagraphFlag" />
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field97</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[field22])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValidateStyle>
+                                          <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
+                                          <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
+                                       </ValidateStyle>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[field22])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>5654e145dc844c2e882a1a61991618b8</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>咯血：</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咯血</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>咯血：</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>c1f452b13be344608cf9932bd1dd9414</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>咯血量</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咯血量</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>小量（~100ml/24h）</Text>
+                                                   <Value>3e00a58ab5544dcb9ff2bafeb39e6dfa</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>中等量（100~500ml/24h）</Text>
+                                                   <Value>c05faa383a954437bc84126d63185285</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>大量（500ml/24h以上或100~500ml/次）</Text>
+                                                   <Value>1b74c60a0b9a46868d3f8022c685a9e4</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>4617acbdbeac438bb618927ecec37e71</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>颜色和性状</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>颜色和性状</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>鲜红色</Text>
+                                                   <Value>454bc0e0ed4e4136b31215b46f9371d5</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>铁锈色血痰</Text>
+                                                   <Value>a60c68d833314ad8a200fcd5412dd0ef</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>砖红色胶冻样痰</Text>
+                                                   <Value>8b6cca9884044c84bdb3fc72ff90d0c7</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>暗红色</Text>
+                                                   <Value>d68e7209649a4020b438e82ea6407eb9</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>浆液性粉红色泡沫痰</Text>
+                                                   <Value>b44047b17edb4e7e959f337ef7d313ed</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>粘稠暗红色血痰</Text>
+                                                   <Value>10ece25aebb64307bb7b1d1cf4b5655d</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>85a23421b9034f9ebee516948c395280</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>咳嗽：</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咳嗽</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>咳嗽：</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>6e8876508fd541388e555ec8f0fade71</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>性质</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>性质</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>干咳</Text>
+                                                   <Value>36321963cc9b4958b03f1be5cf2a763c</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>刺激性咳嗽</Text>
+                                                   <Value>8aaf07e7f8844436bc1563f8b479d373</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>湿性咳嗽</Text>
+                                                   <Value>ca50665ede9d4e878710e06dc44cc339</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>f8f9f15723544dba809796554b8d552a</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>时间</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>时间</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>夜间咳嗽为主</Text>
+                                                   <Value>269ff58d4fef42aeb9cb0576abba5ca2</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>白天咳嗽为主</Text>
+                                                   <Value>529e167f347c40d784ed380513c0f6c0</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>白天及夜间相差不大</Text>
+                                                   <Value>556bbf0696b64d9ebe57081ffcdee463</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>4430db327d144b9d8205cd208a5b63c7</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>规律</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>规律</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>发作性咳嗽</Text>
+                                                   <Value>1f61d973ba774d4787e42137ddf06894</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>突发性咳嗽</Text>
+                                                   <Value>a1adc23f7ba448c1b2462b3ea592ba74</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>持续性咳嗽</Text>
+                                                   <Value>1c388ad9dd454989bbddceee7f41672a</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>332da92f18c84994818ba6cb598457ae</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>音色</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>音色</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>声音嘶哑</Text>
+                                                   <Value>340ecf36167d4fe2b6163f2898994bf9</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>鸡鸣样咳嗽</Text>
+                                                   <Value>1badd46bf5054087abf714adcf55898d</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>金属音咳嗽</Text>
+                                                   <Value>31022fe5d83a4b5bbb14e9be45e909a4</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>声音低微或无力</Text>
+                                                   <Value>9e6d0ed0cd8a4bafbd6434ffbd8ca845</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>9202d5e45dab4aebb5e9733bd8ff3fca</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>咳痰：</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咳痰</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>咳痰：</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>68a17bc1c4074eda89f85b319b78fea1</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>性质</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>性质</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>粘液性痰</Text>
+                                                   <Value>497d54fc16d5435eab5068abfab785a2</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>浆液性痰</Text>
+                                                   <Value>77e3f8f18ead461eb87ebd381bea4a2d</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>脓性痰</Text>
+                                                   <Value>cf124db245da4f609ab08e1dc3f8b39e</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>血性痰</Text>
+                                                   <Value>634c1f9930a540c3822d7fc71a2c1ad8</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>恶臭痰</Text>
+                                                   <Value>6017a4baab49486094b62dc6d7f2217e</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>铁锈色痰</Text>
+                                                   <Value>76c96e57a02c4c3ca79a9a8b193e3227</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>黄绿色或翠绿色痰</Text>
+                                                   <Value>8c516008625b4c7799771a021ecc2cd7</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>痰白粘稠且牵拉成丝状</Text>
+                                                   <Value>f57a0aaca8fd4622807d69a2c6a584ab</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>粉红色泡沫痰</Text>
+                                                   <Value>43e297ca89a0473f8ddab9d0b49f4616</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>浆液泡沫痰</Text>
+                                                   <Value>f1add607e8e74316b5450389e892f25d</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>56ceeba865e9494abca3ddae717e29e5</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>痰量</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>痰量</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>少量（20~50ml/24h）</Text>
+                                                   <Value>9c0b8c2ebfb84b049acd4d30f5819d58</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>中等量（50~100ml/24h）</Text>
+                                                   <Value>fa757f45c261420e9c85e8b9a049d287</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>大量（大于100ml/24h）</Text>
+                                                   <Value>1d3b411c461d4c6794191e6eb4da0bfc</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XParagraphFlag" />
+                                    <Element xsi:type="XInputField" StyleIndex="23">
+                                       <Attributes />
+                                       <ID>field118</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="23">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>发热，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>发热</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field119</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>胸痛，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>胸痛</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field120</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>呛咳，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>呛咳</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field121</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>脓痰，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>脓痰</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field122</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>皮肤粘膜出血，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>皮肤粘膜出血</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field123</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>黄疸，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>黄疸</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field124</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>呼吸困难，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>呼吸困难</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field125</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>咯血，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咯血</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                       <Attributes />
+                                       <ID>field126</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[zz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[zz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString" StyleIndex="22">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
                                        <EndBorderText>哮鸣音。</EndBorderText>
                                        <BorderElementColor />
                                        <EventExpressions />
@@ -3698,17 +4589,16 @@
                                        <XElements>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
-                                             <Text>有</Text>
+                                             <Text>无</Text>
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
-                                       <SelectedSpellCode />
-                                       <InnerValue>有</InnerValue>
+                                       <DisplayFormat />
+                                       <InnerValue>无</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
-                                       <SelectedIndex>0</SelectedIndex>
-                                       <LastSelectedListItems />
+                                       <SelectedIndex>1</SelectedIndex>
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -3746,13 +4636,15 @@
                                           </Element>
                                           <Element xsi:type="XInputField" StyleIndex="20">
                                              <Attributes />
-                                             <ID>field44636636194807410283</ID>
+                                             <ID>bywy</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <StartBorderText>【</StartBorderText>
                                              <EndBorderText>】</EndBorderText>
                                              <BorderElementColor />
                                              <EventExpressions />
+                                             <Name>本院外院</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>本院/外院</BackgroundText>
                                              <LastSelectedListItems />
@@ -3780,52 +4672,23 @@
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
-                                             <Text>，辅助检查</Text>
+                                             <Text>，</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="20">
+                                          <Element xsi:type="XInputField" StyleIndex="24">
                                              <Attributes />
-                                             <ID>field44636636194807410284</ID>
+                                             <ID>zljg</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
-                                             <StartBorderText>【</StartBorderText>
-                                             <EndBorderText>】</EndBorderText>
                                              <BorderElementColor />
                                              <EventExpressions />
+                                             <Name>本院诊疗经过</Name>
                                              <InnerValue />
-                                             <BackgroundText>检查内容</BackgroundText>
                                              <LastSelectedListItems />
-                                             <FieldSettings>
-                                                <EditStyle>DropdownList</EditStyle>
-                                                <MultiSelect>true</MultiSelect>
-                                                <ListSource>
-                                                   <SourceName />
-                                                   <Items>
-                                                      <Item>
-                                                         <TextInList />
-                                                         <Text>血常规</Text>
-                                                         <Value />
-                                                         <Group />
-                                                      </Item>
-                                                      <Item>
-                                                         <TextInList />
-                                                         <Text>铁蛋白</Text>
-                                                         <Value />
-                                                         <Group />
-                                                      </Item>
-                                                      <Item>
-                                                         <TextInList />
-                                                         <Text>粪便常规</Text>
-                                                         <Value />
-                                                         <Group />
-                                                      </Item>
-                                                   </Items>
-                                                </ListSource>
-                                                <ListValueFormatString />
-                                             </FieldSettings>
                                           </Element>
+                                          <Element xsi:type="XParagraphFlag" />
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
-                                             <Text>，予以治疗</Text>
+                                             <Text>予以治疗</Text>
                                           </Element>
                                           <Element xsi:type="XInputField" StyleIndex="20">
                                              <Attributes />
@@ -3836,8 +4699,10 @@
                                              <EndBorderText>】</EndBorderText>
                                              <BorderElementColor />
                                              <EventExpressions />
+                                             <DisplayFormat />
                                              <BackgroundText>治疗手段</BackgroundText>
                                              <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
@@ -3852,6 +4717,7 @@
                                              <EndBorderText>】</EndBorderText>
                                              <BorderElementColor />
                                              <EventExpressions />
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>有/无</BackgroundText>
                                              <LastSelectedListItems />
@@ -3879,49 +4745,785 @@
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
-                                             <Text>好转。今至我院门诊求治，为进一步明确门诊/急诊拟“入院诊断</Text>
+                                             <Text>好转。今至我院</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="20">
+                                          <Element xsi:type="XInputField" StyleIndex="21">
                                              <Attributes />
-                                             <ID>field25</ID>
+                                             <ID>mzjz</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <StartBorderText>【</StartBorderText>
                                              <EndBorderText>】</EndBorderText>
                                              <BorderElementColor />
                                              <EventExpressions />
+                                             <Name>门诊急诊</Name>
+                                             <DisplayFormat />
+                                             <InnerValue />
+                                             <BackgroundText>门诊/急诊</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings>
+                                                <EditStyle>DropdownList</EditStyle>
+                                                <ListSource>
+                                                   <SourceName />
+                                                   <Items>
+                                                      <Item>
+                                                         <TextInList />
+                                                         <Text>门诊</Text>
+                                                         <Value />
+                                                         <Group />
+                                                      </Item>
+                                                      <Item>
+                                                         <TextInList />
+                                                         <Text>急诊</Text>
+                                                         <Value />
+                                                         <Group />
+                                                      </Item>
+                                                   </Items>
+                                                </ListSource>
+                                                <ListValueFormatString />
+                                             </FieldSettings>
+                                          </Element>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>求治，为进一步明确</Text>
+                                          </Element>
+                                          <Element xsi:type="XInputField">
+                                             <Attributes />
+                                             <ID>mzjz2</ID>
+                                             <EnableValueValidate>true</EnableValueValidate>
+                                             <CopySource>
+                                                <SourceID>mzjz</SourceID>
+                                                <SourcePropertyName />
+                                                <DescPropertyName />
+                                                <IgnoreChildElements>false</IgnoreChildElements>
+                                             </CopySource>
+                                             <XElements />
+                                             <StartBorderText>【</StartBorderText>
+                                             <EndBorderText>】</EndBorderText>
+                                             <BorderElementColor />
+                                             <EventExpressions />
+                                             <Name>门诊急诊</Name>
+                                             <DisplayFormat />
+                                             <InnerValue />
+                                             <BackgroundText>门诊/急诊</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings>
+                                                <EditStyle>DropdownList</EditStyle>
+                                                <ListSource>
+                                                   <SourceName />
+                                                   <Items>
+                                                      <Item>
+                                                         <TextInList />
+                                                         <Text>门诊</Text>
+                                                         <Value />
+                                                         <Group />
+                                                      </Item>
+                                                      <Item>
+                                                         <TextInList />
+                                                         <Text>急诊</Text>
+                                                         <Value />
+                                                         <Group />
+                                                      </Item>
+                                                   </Items>
+                                                </ListSource>
+                                                <ListValueFormatString />
+                                             </FieldSettings>
+                                          </Element>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>拟“入院诊断</Text>
+                                          </Element>
+                                          <Element xsi:type="XInputField" StyleIndex="20">
+                                             <Attributes />
+                                             <ID>ryzd</ID>
+                                             <EnableValueValidate>true</EnableValueValidate>
+                                             <XElements />
+                                             <StartBorderText>【</StartBorderText>
+                                             <EndBorderText>】</EndBorderText>
+                                             <BorderElementColor />
+                                             <EventExpressions />
+                                             <Name>入院诊断</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>入院诊断</BackgroundText>
                                              <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
                                              <Text>”收住入院</Text>
                                           </Element>
                                        </XElements>
+                                       <Visible>false</Visible>
                                        <BorderElementColor />
                                        <EventExpressions />
-                                       <InnerValue>：医院【】，辅助检查【】，予以治疗【】，【】好转。今至我院门诊求治，为进一步明确门诊/急诊拟“入院诊断【】”收住入院</InnerValue>
+                                       <DisplayFormat />
+                                       <InnerValue>：医院【】，
+予以治疗【】，【】好转。今至我院【】求治，为进一步明确【】拟“入院诊断【】”收住入院</InnerValue>
                                        <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XString">
                                        <XElements xsi:nil="true" />
                                        <Text>。</Text>
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>ptzz</ID>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValidateStyle>
+                                          <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
+                                          <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
+                                       </ValidateStyle>
+                                       <ValueBinding />
+                                       <XElements />
+                                       <StartBorderText>排他症状【</StartBorderText>
+                                       <EndBorderText>】</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>排他症状</Name>
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <BackgroundText>请选择症状</BackgroundText>
+                                       <SelectedIndex>2</SelectedIndex>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <MultiSelect>true</MultiSelect>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>咯血</Text>
+                                                   <Value>5654e145dc844c2e882a1a61991618b8</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>咳嗽</Text>
+                                                   <Value>85a23421b9034f9ebee516948c395280</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>咳痰</Text>
+                                                   <Value>9202d5e45dab4aebb5e9733bd8ff3fca</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>发热</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>发热，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>发热</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>胸痛</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0||FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>胸痛，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>胸痛</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>呛咳</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>呛咳，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>呛咳</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>脓痰</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>脓痰，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>脓痰</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>皮肤粘膜出血</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>皮肤粘膜出血，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>皮肤粘膜出血</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>黄疸</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('5654e145dc844c2e882a1a61991618b8',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>黄疸，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>黄疸</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>呼吸困难</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>呼吸困难，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>呼吸困难</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>咯血</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValidateStyle>
+                                          <DateTimeMaxValue>1980-01-01T00:00:00</DateTimeMaxValue>
+                                          <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
+                                       </ValidateStyle>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>咯血，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咯血</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <SelectedIndex>1</SelectedIndex>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field97636638041268104840</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('1',[咯血])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('1',[咯血])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>咯血量</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>咯血量</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>小量（~100ml/24h）</Text>
+                                                   <Value>3e00a58ab5544dcb9ff2bafeb39e6dfa</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>中等量（100~500ml/24h）</Text>
+                                                   <Value>c05faa383a954437bc84126d63185285</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>大量（500ml/24h以上或100~500ml/次）</Text>
+                                                   <Value>1b74c60a0b9a46868d3f8022c685a9e4</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field97636638041268104841</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('1',[咯血])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('1',[咯血])&gt;=0</VisibleExpression>
+                                       <XElements />
+                                       <Visible>false</Visible>
+                                       <StartBorderText>颜色和性状</StartBorderText>
+                                       <EndBorderText>，</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>颜色和性状</Name>
+                                       <DisplayFormat />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>鲜红色</Text>
+                                                   <Value>454bc0e0ed4e4136b31215b46f9371d5</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>铁锈色血痰</Text>
+                                                   <Value>a60c68d833314ad8a200fcd5412dd0ef</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>砖红色胶冻样痰</Text>
+                                                   <Value>8b6cca9884044c84bdb3fc72ff90d0c7</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>暗红色</Text>
+                                                   <Value>d68e7209649a4020b438e82ea6407eb9</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>浆液性粉红色泡沫痰</Text>
+                                                   <Value>b44047b17edb4e7e959f337ef7d313ed</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>粘稠暗红色血痰</Text>
+                                                   <Value>10ece25aebb64307bb7b1d1cf4b5655d</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>哮鸣音</ID>
+                                       <PropertyExpressions>
+                                          <Item Name="Visible">FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</Item>
+                                       </PropertyExpressions>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <ValueBinding />
+                                       <VisibleExpression>FIND('85a23421b9034f9ebee516948c395280',[ptzz])&gt;=0||FIND('9202d5e45dab4aebb5e9733bd8ff3fca',[ptzz])&gt;=0</VisibleExpression>
+                                       <XElements>
+                                          <Element xsi:type="XString">
+                                             <XElements xsi:nil="true" />
+                                             <Text>无</Text>
+                                          </Element>
+                                       </XElements>
+                                       <Visible>false</Visible>
+                                       <EndBorderText>哮鸣音。</EndBorderText>
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <Name>哮鸣音</Name>
+                                       <DisplayFormat />
+                                       <InnerValue>2</InnerValue>
+                                       <BackgroundText>有/无</BackgroundText>
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <Items>
+                                                <Item>
+                                                   <Text>有</Text>
+                                                   <Value>1</Value>
+                                                </Item>
+                                                <Item>
+                                                   <Text>无</Text>
+                                                   <Value>2</Value>
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XParagraphFlag" />
+                                    <Element xsi:type="XString">
+                                       <XElements xsi:nil="true" />
+                                       <Text>一般情况描述：</Text>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field93</ID>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <XElements />
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <LabelText>神智</LabelText>
+                                       <Name>神智</Name>
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <SourceName />
+                                             <Items>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>清楚</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>不清楚</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                          <ListValueFormatString />
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XString">
+                                       <XElements xsi:nil="true" />
+                                       <Text>，</Text>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field94</ID>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <XElements />
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <LabelText>饮食</LabelText>
+                                       <Name>饮食</Name>
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <SourceName />
+                                             <Items>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>不正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                          <ListValueFormatString />
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XString">
+                                       <XElements xsi:nil="true" />
+                                       <Text>，</Text>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field95</ID>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <XElements />
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <LabelText>睡眠</LabelText>
+                                       <Name>睡眠</Name>
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <SourceName />
+                                             <Items>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>不正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                          <ListValueFormatString />
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XString">
+                                       <XElements xsi:nil="true" />
+                                       <Text>，</Text>
+                                    </Element>
+                                    <Element xsi:type="XInputField">
+                                       <Attributes />
+                                       <ID>field96</ID>
+                                       <EnableValueValidate>true</EnableValueValidate>
+                                       <XElements />
+                                       <BorderElementColor />
+                                       <EventExpressions />
+                                       <LabelText>大小便</LabelText>
+                                       <Name>大小便</Name>
+                                       <DisplayFormat />
+                                       <InnerValue />
+                                       <BackgroundText>请选择</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings>
+                                          <EditStyle>DropdownList</EditStyle>
+                                          <ListSource>
+                                             <SourceName />
+                                             <Items>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                                <Item>
+                                                   <TextInList />
+                                                   <Text>不正常</Text>
+                                                   <Value />
+                                                   <Group />
+                                                </Item>
+                                             </Items>
+                                          </ListSource>
+                                          <ListValueFormatString />
+                                       </FieldSettings>
+                                    </Element>
+                                    <Element xsi:type="XString">
+                                       <XElements xsi:nil="true" />
+                                       <Text>。</Text>
+                                    </Element>
                                  </XElements>
+                                 <Visible>false</Visible>
                                  <BorderElementColor />
                                  <EventExpressions />
                                  <Name>现病史</Name>
                                  <DisplayFormat />
-                                 <InnerValue>患者于5年前出现症状【咯血,咳嗽,咳痰】
-咯血：咯血量，颜色和性状，咳嗽：性质，时间，规律突发性咳嗽，音色金属音咳嗽，咳痰：性质，痰量，。
-有发热，有胸痛，有呛咳，无脓痰，无皮肤粘膜出血，无黄疸，无呼吸困难，无咯血，无哮鸣音。
-患者有诊疗经过：医院【】，辅助检查【】，予以治疗【】，【】好转。今至我院门诊求治，为进一步明确门诊/急诊拟“入院诊断【】”收住入院。
-</InnerValue>
+                                 <InnerValue />
                                  <FieldSettings />
                               </Element>
-                              <Element xsi:type="XParagraphFlag" />
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
                            <ColSpan>3</ColSpan>
@@ -3968,7 +5570,7 @@
                               <DateTimeMinValue>1980-01-01T00:00:00</DateTimeMinValue>
                            </ValidateStyle>
                            <XElements>
-                              <Element xsi:type="XInputField" StyleIndex="21">
+                              <Element xsi:type="XInputField" StyleIndex="2">
                                  <Attributes />
                                  <ID>field51</ID>
                                  <EnableValueValidate>true</EnableValueValidate>
@@ -3977,7 +5579,7 @@
                                        <XElements xsi:nil="true" />
                                        <Text>既往</Text>
                                     </Element>
-                                    <Element xsi:type="XInputField" StyleIndex="21">
+                                    <Element xsi:type="XInputField" StyleIndex="2">
                                        <Attributes />
                                        <ID>field52</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
@@ -3989,10 +5591,13 @@
                                        </XElements>
                                        <BorderElementColor />
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
+                                       <EventExpressions />
                                        <Name>高血压</Name>
+                                       <DisplayFormat />
                                        <InnerValue>有</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4019,7 +5624,7 @@
                                        <XElements xsi:nil="true" />
                                        <Text>高血压</Text>
                                     </Element>
-                                    <Element xsi:type="XInputField" StyleIndex="21">
+                                    <Element xsi:type="XInputField" StyleIndex="2">
                                        <Attributes />
                                        <ID>field53</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
@@ -4028,41 +5633,52 @@
                                              <XElements xsi:nil="true" />
                                              <Text>，病史</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="21">
+                                          <Element xsi:type="XInputField" StyleIndex="2">
                                              <Attributes />
                                              <ID>field54</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <BorderElementColor />
+                                             <EventExpressions />
                                              <Name>高血压病史</Name>
+                                             <DisplayFormat />
                                              <BackgroundText>时间</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
                                              <Text>，血压最高</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="21">
+                                          <Element xsi:type="XInputField" StyleIndex="2">
                                              <Attributes />
                                              <ID>field55</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <BorderElementColor />
+                                             <EventExpressions />
                                              <Name>高血压血压</Name>
+                                             <DisplayFormat />
                                              <BackgroundText>血压</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
                                              <Text>mmHg，现</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="21">
+                                          <Element xsi:type="XInputField" StyleIndex="2">
                                              <Attributes />
                                              <ID>field56</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <BorderElementColor />
+                                             <EventExpressions />
                                              <Name>高血压服药</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>服药情况</BackgroundText>
+                                             <LastSelectedListItems />
                                              <FieldSettings>
                                                 <EditStyle>DropdownList</EditStyle>
                                                 <ListSource>
@@ -4087,8 +5703,12 @@
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
+                                       <EventExpressions />
                                        <Name>有高血压</Name>
+                                       <DisplayFormat />
                                        <InnerValue>，病史，血压最高mmHg，现</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XString">
                                        <XElements xsi:nil="true" />
@@ -4109,6 +5729,7 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>糖尿病</Name>
+                                       <DisplayFormat />
                                        <InnerValue>有</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
@@ -4153,8 +5774,10 @@
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有糖尿病</Name>
+                                       <DisplayFormat />
                                        <BackgroundText>有糖尿病啊巴拉巴拉</BackgroundText>
                                        <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XParagraphFlag" />
@@ -4172,9 +5795,11 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>冠心病</Name>
+                                       <DisplayFormat />
                                        <InnerValue>有</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4215,8 +5840,11 @@
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有糖尿病</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有冠心病啊巴拉巴拉</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XParagraphFlag" />
@@ -4234,9 +5862,11 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>肝炎</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4277,8 +5907,11 @@
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有糖尿病</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有肝炎啊巴拉巴拉</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XParagraphFlag" />
@@ -4296,9 +5929,11 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>伤寒</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4339,13 +5974,18 @@
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有糖尿病</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有伤寒啊巴拉巴拉</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
                                  </XElements>
                                  <BorderElementColor />
+                                 <EventExpressions />
                                  <Name>既往史</Name>
+                                 <DisplayFormat />
                                  <InnerValue>既往有高血压，病史，血压最高mmHg，现。
 有糖尿病
 
@@ -4356,6 +5996,8 @@
 有伤寒
 </InnerValue>
                                  <BackgroundText>既往史</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                               <Element xsi:type="XString">
@@ -4400,7 +6042,7 @@
                         <Element xsi:type="XTextTableCell">
                            <Attributes />
                            <XElements>
-                              <Element xsi:type="XInputField" StyleIndex="21">
+                              <Element xsi:type="XInputField" StyleIndex="2">
                                  <Attributes />
                                  <ID>field65</ID>
                                  <EnableValueValidate>true</EnableValueValidate>
@@ -4424,6 +6066,7 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>吸烟史</Name>
+                                       <DisplayFormat />
                                        <InnerValue>有</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
@@ -4471,8 +6114,10 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>吸烟包日</Name>
+                                             <DisplayFormat />
                                              <BackgroundText>几</BackgroundText>
                                              <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
@@ -4486,8 +6131,10 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>吸烟年数</Name>
+                                             <DisplayFormat />
                                              <BackgroundText>几</BackgroundText>
                                              <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
@@ -4507,6 +6154,7 @@
                                              <DefaultEventExpression>value='已'</DefaultEventExpression>
                                              <EventExpressions />
                                              <Name>戒烟</Name>
+                                             <DisplayFormat />
                                              <InnerValue>已</InnerValue>
                                              <BackgroundText>是/否</BackgroundText>
                                              <SelectedIndex>0</SelectedIndex>
@@ -4554,8 +6202,10 @@
                                                    <BorderElementColor />
                                                    <EventExpressions />
                                                    <Name>戒烟年数</Name>
+                                                   <DisplayFormat />
                                                    <BackgroundText>几</BackgroundText>
                                                    <LastSelectedListItems />
+                                                   <FieldSettings />
                                                 </Element>
                                                 <Element xsi:type="XString">
                                                    <XElements xsi:nil="true" />
@@ -4565,15 +6215,19 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>已戒烟</Name>
+                                             <DisplayFormat />
                                              <InnerValue>，年</InnerValue>
                                              <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有吸烟史</Name>
+                                       <DisplayFormat />
                                        <InnerValue>：包/日*年，已戒烟，年</InnerValue>
                                        <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XString">
                                        <XElements xsi:nil="true" />
@@ -4595,9 +6249,11 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>饮酒史</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4641,8 +6297,11 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>饮酒斤日</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>几</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
@@ -4656,8 +6315,11 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>饮酒年数</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>几</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                           <Element xsi:type="XString">
                                              <XElements xsi:nil="true" />
@@ -4677,9 +6339,11 @@
                                              <DefaultEventExpression>value='已'</DefaultEventExpression>
                                              <EventExpressions />
                                              <Name>戒酒</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>是/否</BackgroundText>
                                              <SelectedIndex>0</SelectedIndex>
+                                             <LastSelectedListItems />
                                              <FieldSettings>
                                                 <EditStyle>DropdownList</EditStyle>
                                                 <ListSource>
@@ -4723,8 +6387,11 @@
                                                    <BorderElementColor />
                                                    <EventExpressions />
                                                    <Name>戒酒年数</Name>
+                                                   <DisplayFormat />
                                                    <InnerValue />
                                                    <BackgroundText>几</BackgroundText>
+                                                   <LastSelectedListItems />
+                                                   <FieldSettings />
                                                 </Element>
                                                 <Element xsi:type="XString">
                                                    <XElements xsi:nil="true" />
@@ -4734,13 +6401,19 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>已戒烟</Name>
+                                             <DisplayFormat />
                                              <InnerValue>，年</InnerValue>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有吸烟史</Name>
+                                       <DisplayFormat />
                                        <InnerValue>：斤/日*年，已戒酒，年</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XString">
                                        <XElements xsi:nil="true" />
@@ -4749,13 +6422,17 @@
                                     <Element xsi:type="XParagraphFlag" />
                                  </XElements>
                                  <BorderElementColor />
+                                 <EventExpressions />
                                  <Name>个人史</Name>
+                                 <DisplayFormat />
                                  <InnerValue>出生生长于原籍，否认长期外地居留史，否认工业毒物及粉尘接触史。否认血吸虫病及疫水接触史。
 有吸烟史：包/日*年，已戒烟，年。
 
 有饮酒史：斤/日*年，已戒酒，年。
 </InnerValue>
                                  <BackgroundText>个人史</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                            </XElements>
@@ -4795,7 +6472,7 @@
                         <Element xsi:type="XTextTableCell">
                            <Attributes />
                            <XElements>
-                              <Element xsi:type="XInputField" StyleIndex="21">
+                              <Element xsi:type="XInputField" StyleIndex="2">
                                  <Attributes />
                                  <ID>field80</ID>
                                  <EnableValueValidate>true</EnableValueValidate>
@@ -4805,7 +6482,7 @@
                                        <Text>25岁结婚，育有2子，家人体健。</Text>
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
-                                    <Element xsi:type="XInputField" StyleIndex="22">
+                                    <Element xsi:type="XInputField" StyleIndex="2">
                                        <Attributes />
                                        <ID>field81</ID>
                                        <PropertyExpressions>
@@ -4821,8 +6498,12 @@
                                        </XElements>
                                        <Visible>false</Visible>
                                        <BorderElementColor />
+                                       <EventExpressions />
                                        <Name>月经史</Name>
+                                       <DisplayFormat />
                                        <InnerValue>月经史：</InnerValue>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XInputField">
                                        <Attributes />
@@ -4840,14 +6521,21 @@
                                        </XElements>
                                        <BorderElementColor />
                                        <EventExpressions />
+                                       <DisplayFormat />
                                        <InnerValue>月经史：</InnerValue>
                                        <BackgroundText>月经史</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                  </XElements>
                                  <BorderElementColor />
+                                 <EventExpressions />
                                  <Name>婚育史</Name>
+                                 <DisplayFormat />
                                  <InnerValue>25岁结婚，育有2子，家人体健。
 月经史：</InnerValue>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                               <Element xsi:type="XParagraphFlag" />
@@ -4888,7 +6576,7 @@
                         <Element xsi:type="XTextTableCell">
                            <Attributes />
                            <XElements>
-                              <Element xsi:type="XInputField" StyleIndex="21">
+                              <Element xsi:type="XInputField" StyleIndex="2">
                                  <Attributes />
                                  <ID>field83</ID>
                                  <EnableValueValidate>true</EnableValueValidate>
@@ -4898,7 +6586,7 @@
                                        <Text>父母兄弟姐妹及子女健康状况：与患者同样疾病</Text>
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
-                                    <Element xsi:type="XInputField" StyleIndex="21">
+                                    <Element xsi:type="XInputField" StyleIndex="2">
                                        <Attributes />
                                        <ID>field84</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
@@ -4910,10 +6598,13 @@
                                        </XElements>
                                        <BorderElementColor />
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
+                                       <EventExpressions />
                                        <Name>传染性疾病</Name>
+                                       <DisplayFormat />
                                        <InnerValue>有</InnerValue>
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -4940,7 +6631,7 @@
                                        <XElements xsi:nil="true" />
                                        <Text>传染性疾病</Text>
                                     </Element>
-                                    <Element xsi:type="XInputField" StyleIndex="21">
+                                    <Element xsi:type="XInputField" StyleIndex="2">
                                        <Attributes />
                                        <ID>field85</ID>
                                        <EnableValueValidate>true</EnableValueValidate>
@@ -4949,20 +6640,28 @@
                                              <XElements xsi:nil="true" />
                                              <Text>：</Text>
                                           </Element>
-                                          <Element xsi:type="XInputField" StyleIndex="22">
+                                          <Element xsi:type="XInputField" StyleIndex="2">
                                              <Attributes />
                                              <ID>field86</ID>
                                              <EnableValueValidate>true</EnableValueValidate>
                                              <XElements />
                                              <BorderElementColor />
+                                             <EventExpressions />
                                              <Name>传染病</Name>
+                                             <DisplayFormat />
                                              <BackgroundText>请输入传染病</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
+                                       <EventExpressions />
                                        <Name>有传染病</Name>
+                                       <DisplayFormat />
                                        <InnerValue>：</InnerValue>
                                        <BackgroundText>传染病</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                     <Element xsi:type="XParagraphFlag" />
                                     <Element xsi:type="XInputField">
@@ -4979,9 +6678,11 @@
                                        <DefaultEventExpression>value='有'</DefaultEventExpression>
                                        <EventExpressions />
                                        <Name>遗传性疾病</Name>
+                                       <DisplayFormat />
                                        <InnerValue />
                                        <BackgroundText>有/无</BackgroundText>
                                        <SelectedIndex>0</SelectedIndex>
+                                       <LastSelectedListItems />
                                        <FieldSettings>
                                           <EditStyle>DropdownList</EditStyle>
                                           <ListSource>
@@ -5025,23 +6726,33 @@
                                              <BorderElementColor />
                                              <EventExpressions />
                                              <Name>传染病</Name>
+                                             <DisplayFormat />
                                              <InnerValue />
                                              <BackgroundText>请输入遗传疾病</BackgroundText>
+                                             <LastSelectedListItems />
+                                             <FieldSettings />
                                           </Element>
                                        </XElements>
                                        <BorderElementColor />
                                        <EventExpressions />
                                        <Name>有传染病</Name>
+                                       <DisplayFormat />
                                        <InnerValue>：</InnerValue>
                                        <BackgroundText>传染病</BackgroundText>
+                                       <LastSelectedListItems />
+                                       <FieldSettings />
                                     </Element>
                                  </XElements>
                                  <BorderElementColor />
+                                 <EventExpressions />
                                  <Name>家族史</Name>
+                                 <DisplayFormat />
                                  <InnerValue>父母兄弟姐妹及子女健康状况：与患者同样疾病
 有传染性疾病：
 有遗传性疾病：</InnerValue>
                                  <BackgroundText>家族史</BackgroundText>
+                                 <LastSelectedListItems />
+                                 <FieldSettings />
                               </Element>
                               <Element xsi:type="XParagraphFlag" />
                               <Element xsi:type="XParagraphFlag" />
@@ -5115,7 +6826,7 @@
    <Info>
       <LicenseText>本软件未注册。</LicenseText>
       <CreationTime>1980-01-01T00:00:00</CreationTime>
-      <LastModifiedTime>2018-06-03T14:01:13.1663871+08:00</LastModifiedTime>
+      <LastModifiedTime>2018-06-06T10:28:13.0428266+08:00</LastModifiedTime>
       <LastPrintTime>1980-01-01T00:00:00</LastPrintTime>
       <Operator>DCSoft.Writer Version:1.2015.12.23</Operator>
       <NumOfPage>2</NumOfPage>
@@ -5127,13 +6838,8 @@
 婚姻： 供史者(与患者关系)： 
 出生地： 入院日期： 
 民族： 记录日期： 
-主诉 症状【】，时间 
-现病史 患者于5年前出现症状【咯血,咳嗽,咳痰】
-咯血：咯血量，颜色和性状，咳嗽：性质，时间，规律突发性咳嗽，音色金属音咳嗽，咳痰：性质，痰量，。
-有发热，有胸痛，有呛咳，无脓痰，无皮肤粘膜出血，无黄疸，无呼吸困难，无咯血，无哮鸣音。
-患者有诊疗经过：医院【】，辅助检查【】，予以治疗【】，【】好转。今至我院门诊求治，为进一步明确门诊/急诊拟“入院诊断【】”收住入院。
-
- 
+主诉 症状【】，时间天 
+现病史   
 既往史 既往有高血压，病史，血压最高mmHg，现。
 有糖尿病
 
@@ -5308,6 +7014,14 @@
             <FontSize>12</FontSize>
          </Style>
          <Style Index="22">
+            <FontName>宋体</FontName>
+            <FontSize>12</FontSize>
+         </Style>
+         <Style Index="23">
+            <FontName>宋体</FontName>
+            <FontSize>12</FontSize>
+         </Style>
+         <Style Index="24">
             <FontName>宋体</FontName>
             <FontSize>12</FontSize>
          </Style>

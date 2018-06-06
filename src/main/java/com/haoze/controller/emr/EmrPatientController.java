@@ -60,4 +60,55 @@ public class EmrPatientController extends BaseController{
         }
         return res;
     }
+
+
+    @GetMapping("getJCDetailByCheckNo/{checkNo}")
+    @ResponseBody
+    String getJCDetailByCheckNo(Model model, HttpServletRequest request,@PathVariable("checkNo") String checkNo) {
+        String res = "";
+        try {
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionJcxxDetail?checkNo="+checkNo, "",null);
+            res = response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @GetMapping("getJYDetailByCheckNo/{checkNo}")
+    @ResponseBody
+    String getJYDetailByCheckNo(Model model, HttpServletRequest request,@PathVariable("checkNo") String checkNo) {
+        String res = "";
+        try {
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionJyxxDetail?examCode="+checkNo, "",null);
+            res = response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    @GetMapping("getPrescByPatientId/{patientId}")
+    @ResponseBody
+    String getPrescByPatientId(Model model, HttpServletRequest request,@PathVariable("patientId") String patientId) {
+        String res = "";
+        try {
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionMzcf?patientId="+patientId+"&visitId=11", "",null);
+            res = response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    @GetMapping("getDecisionByPrescNo/{patientId}/{prescNo}")
+    @ResponseBody
+    String getDecisionByPrescNo(Model model, HttpServletRequest request,@PathVariable("patientId") String patientId,@PathVariable("prescNo") String prescNo) {
+        String res = "";
+        try {
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionMzcfDiag?patientId="+patientId+"&visitId=11&prescNo="+prescNo, "",null);
+            res = response.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

@@ -1,3 +1,4 @@
+/*
 package com.haoze;
 
 import com.github.pagehelper.Page;
@@ -25,3 +26,4 @@ public class EmrProjectApplicationTests {
 	}
 
 }
+*/

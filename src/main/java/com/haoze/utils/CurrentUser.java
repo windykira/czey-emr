@@ -1,6 +1,7 @@
 package com.haoze.utils;
 
 import com.haoze.model.system.user.entity.EmrUserEntity;
+import com.haoze.service.system.EmrUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
@@ -15,6 +16,9 @@ public class CurrentUser {
 
     private final static String CURRENT_DEPT_KEY = "userDepartment";
     private final static String CURRENT_Organization_KEY = "userOrganization";
+    private static EmrUserService emrUserService = ApplicationContextUtil.getBean(EmrUserService.class);
+    private static String roleNames = "";
+    private static String departmentNames = "";
 
     public static void setCurrentUserOrganization(String organizationId){
         ShiroUtil.getSession().setAttribute(ShiroUtil.getUserId() + CURRENT_Organization_KEY,organizationId);
@@ -32,6 +36,16 @@ public class CurrentUser {
 
     public static void setCurrentUserDepartment(String departmentId){
         ShiroUtil.getSession().setAttribute(ShiroUtil.getUserId() + CURRENT_DEPT_KEY,departmentId);
+        roleNames = emrUserService.getUserRoleNames(ShiroUtil.getUserId());
+        departmentNames = emrUserService.getUserDepartmentNames(ShiroUtil.getUserId());
+    }
+
+    public static String getUserRoleNames(){
+        return roleNames;
+    }
+
+    public static String getDepartmentNames(){
+        return departmentNames;
     }
 
     public static EmrUserEntity getUser() {

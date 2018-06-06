@@ -87,4 +87,11 @@ public interface EmrUserService {
      */
     String getUserRoleNames(String userId);
 
+    /**
+     * 查询用户关联全部科室名称
+     * @param userId
+     * @return
+     */
+    String getUserDepartmentNames(String userId);
+
 }

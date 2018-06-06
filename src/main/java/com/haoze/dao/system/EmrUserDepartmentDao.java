@@ -36,4 +36,11 @@ public interface EmrUserDepartmentDao {
      * @return
      */
     List<UserDepartmentPO> listDepartmentsByUserId(String userId);
+
+    /**
+     * 查询用户关联全部科室名称
+     * @param userId
+     * @return
+     */
+    String getUserDepartmentNames(String userId);
 }

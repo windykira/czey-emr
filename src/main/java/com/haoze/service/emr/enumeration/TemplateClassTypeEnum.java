@@ -1,4 +1,4 @@
-package com.haoze.common.enumeration.emr;
+package com.haoze.service.emr.enumeration;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

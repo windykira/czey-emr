@@ -195,17 +195,18 @@
 	<div style="z-index:-1;width:100%">
 	<object id="myWriter" name="myWriter" onclick="closeMenu()"
 					classid="clsid:00012345-6789-ABCD-EF01-2345678900ff" 
-					codebase="http://localhost:8081/cab/DCWriterWeb.cab"
+					codebase="http://192.168.0.108:8081/cab/DCWriterWeb.cab"
 					style="position:relative ;width: 100%;overflow-x:hidden;border:solid 1 black">
 				    <param name="CodeBaseForUpdateAssembly"   
-				        value="http://localhost:8081/cab/DCWriterWeb.cab#Version=1,2015,12,23"
+				        value="http://192.168.0.108:8081/cab/DCWriterWeb.cab#Version=1,2015,12,23"
 					/>
 				    <param name="BackColor" value="Gray" />
 				    <param name="BorderStyle" value="3DFixed" />
 				    <param name="InitalizeParameterValues" value="PatientName:张三" />
 				    <param name="Font" value="宋体,20" />
-					<!--<param name="wmode" value="transparent" />-->
-					<param name="wmode" value="opaque" />
+					<param name="allowfullscreen" value="true" />
+					<param name="wmode" value="transparent" />
+					<!--<param name="wmode" value="opaque" />-->
 				    <span style="border-width:1;border-style:solid;border-color:black;background-color:yellow" >
 				        没能下载安装控件，请联系管理员来设置安全站点。</span>
 				</object>
@@ -218,12 +219,17 @@
 //设置右键菜单
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertrowup", "Table_InsertRowUp", "在上面插入表格行");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertrowdown", "Table_InsertRowDown", "在下面插入表格行");
+myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "deleterow", "Table_DeleteRow", "删除表格行");
 myWriter.AddContextMenuSeparatorByTypeName("XTextTableCellElement");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "mergecell", "Table_MergeCell", "合并单元格");
 myWriter.AddContextMenuItemByTypeName("XTextInputFieldElement", "openProperty", "ElementProperties", "属性");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "openProperty1", "ElementProperties", "属性");
 myWriter.AddContextMenuItemByTypeName("XTextDocument", "insertInput", "InsertInputField", "插入输入域");
 myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertInput1", "InsertInputField", "插入输入域");
+
+myWriter.ExecuteCommand("Zoom",false,"95%");
+myWriter.ExecuteCommand("RuleVisible",true,null);
+myWriter.BackColorString='#B1CAEB';
 
 </script>
 <script language=javascript  for="myWriter" event="EventMouseClickExt(eventSender,eventArgs)">
@@ -249,4 +255,146 @@ myWriter.AddContextMenuItemByTypeName("XTextTableCellElement", "insertInput1", "
 	}else{
 		$("#underline_btn").removeClass("ke-on");
 	}
+	//点击 入院诊断 加载 诊断结果内容
+	if(eventSender.CurrentInputField.name=="入院诊断"){
+		var patientId = "0002648607";
+		$.ajax({
+			url: "/emr/patient/getPrescByPatientId/" + patientId,
+			dataType: "json",
+			success: function (data) {
+				debugger
+				if(data.outPrescMaster){
+					var prescNo = data.outPrescMaster[0].prescNo;
+					$.ajax({
+						url: "/emr/patient/getDecisionByPrescNo/" + patientId+"/"+prescNo,
+						dataType: "json",
+						success: function (data) {
+							debugger;
+							if(data.mzcfDiag){
+								var decision = data.mzcfDiag[0].diagDesc;
+								var input = myWriter.Document.GetElementById("ryzd");
+								if (input != null) {
+									input = myWriter.ComConvertToXTextInputFieldElement(input);
+									if (input != null) {
+										input.Text=decision;
+									}
+								}
+							}
+						}
+					})
+				}
+			}
+		})
+	}
+</script>
+
+<script language=javascript  for="myWriter" event="EventAfterFieldContentEdit(eventSender,eventArgs)">
+	if(eventSender.CurrentInputField.name=="本院外院"){
+		if(eventSender.CurrentInputField.Text=="本院"){
+//			myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
+			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
+			if (input != null) {
+				input = myWriter.ComConvertToXTextInputFieldElement(input);
+				if (input != null) {
+					input.focus();
+				}
+			}
+			myWriter.ExecuteCommand("InsertString" , false , "\n\r");
+			$.ajax({
+				url: "/emr/emrwriting/listHisResponseDatas",
+				data:{
+					hisCallType:"2",
+					patientId:"852307"
+				},
+				async: false,
+				dataType: "json",
+				success: function(data){
+					if(data.length==0){//没有记录则直接返回
+						return;
+					}
+					myWriter.ExecuteCommand("InsertString" , false , "检查：");
+					var jc_count = 0;
+					for(var i in data){
+						jc_count++;
+						myWriter.ExecuteCommand("InsertString" , false , "检查名称："+jc_count+"."+data[i].checkClass+" 检查结果：");
+						var temp = data[i]
+						var checkNo = temp.checkNo;
+						$.ajax({
+							url: "/emr/patient/getJCDetailByCheckNo/" + checkNo,
+							type: "GET",
+							dataType: "json",
+							async: false,
+							success: function(data1){
+								if(data1.decisionJcxxDetail[0]){
+									var seen = data1.decisionJcxxDetail[0].checkSeen;
+									var c = seen.replace("\n","").replace("\r","")
+									myWriter.ExecuteCommand("InsertString" , false ,seen.replace(/\s/g,""));
+								}
+							}
+						})
+					myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
+					}
+
+				}
+			})
+
+			$.ajax({
+				url: "/emr/emrwriting/listHisResponseDatas",
+				data:{
+					hisCallType:"3",
+					patientId:"872745"
+				},
+				async: false,
+				dataType: "json",
+				success: function(data){
+					if(data.length==0){//没有记录则直接返回
+						return;
+					}
+					debugger;
+//					myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
+					myWriter.ExecuteCommand("InsertString" , false , "检验：");
+					var jy_count = 0;
+					for(var i in data){
+						jy_count++;
+						myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
+						myWriter.ExecuteCommand("InsertString" , false , jy_count+"."+"检验名称："+data[i].checkClass);
+						var temp = data[i]
+						var checkNo = temp.checkNo;
+						var content = "";
+						$.ajax({
+							url: "/emr/patient/getJYDetailByCheckNo/" + checkNo,
+							type: "GET",
+							dataType: "json",
+							async: false,
+							success: function(data1){
+								debugger;
+								var detail = data1.decisionJyxxDetail;
+								for(var i in detail){
+									if(detail[i].abnormalIndicator==="N"){//结果正常则不现实结果
+										continue;
+									}
+									content += detail[i].reportItemName+"："+detail[i].result+detail[i].units+"；";
+//									myWriter.ExecuteCommand("InsertString" , false ,str);
+								}
+							}
+						})
+						if(content !== ""){
+							myWriter.ExecuteCommand("InsertString" , false , "【"+content+"】");
+						}
+					}
+
+				}
+			})
+		}else if(eventSender.CurrentInputField.Text=="外院"){
+			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
+			if (input != null) {
+				input = myWriter.ComConvertToXTextInputFieldElement(input);
+				if (input != null) {
+					alert("clear")
+					input.innerText="";
+				}
+			}
+		}
+	}
+
 </script>

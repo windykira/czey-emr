@@ -1,3 +1,4 @@
+/*
 package com.haoze;
 
 import com.haoze.utils.ChineseCharactersCode;
@@ -6,9 +7,11 @@ import org.junit.Test;
 
 import java.util.Map;
 
+*/
 /**
  * Created by haoz-dev4 on 2018/6/4.
- */
+ *//*
+
 public class MyTest {
 
     @Test
@@ -91,3 +94,4 @@ public class MyTest {
 
     }
 }
+*/

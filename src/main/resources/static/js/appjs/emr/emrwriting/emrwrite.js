@@ -3,6 +3,11 @@ $(function() {
     //初始化病历目录数据
     loadEmrCataLog();
 
+    $("#timer").text($.getCurrentTime());
+    setInterval(function(){
+        $("#timer").text($.getCurrentTime());
+    },1000)
+
     $(".nav-tabs li").click(function () {
         $(this).addClass("active").siblings(".active").removeClass("active");
     });
@@ -14,6 +19,7 @@ $(function() {
     $('#addMedical').on('hidden.bs.modal', function () {
         $("#dcContainer").show();
     })*/
+    resize();
 
 });
 
@@ -38,6 +44,7 @@ function loadEmrCataLog(){
 function loadDcEditor(){
 
     var ctl = document.getElementById("myWriter");
+    //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
     $.ajax({
         url:"/emr/dc/getXML/index",
         dataType:"text",
@@ -61,14 +68,16 @@ function showModal(){
         alert("请选择病历目录。");
         return;
     }
-
     layer.open({
         type : 2,
-        title : '增加',
+        title : false,
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '800px', '520px' ],
-        content : '/emr/emrwriting/test'
+        area : [ '800px', '550px' ],
+        offset:['100px', ''],
+        //backgroundColor:'#FFEBCD',
+        skin: 'layui-layer-molv',
+        content : '/emr/emrwriting/templatetable'
     });
     //$("#templateIFrame").attr("src", "/test");
 
@@ -220,6 +229,11 @@ function loadTemplateTable(rangeValue){
                     }*/
                 ]
             });
+}
+
+function resize(){
+    var h = $("body").height();
+    $("#myWriter").css("height",h-168);
 }
 
 var treeObj = $.fn.zTree.getZTreeObj("tree");

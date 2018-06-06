@@ -1,4 +1,4 @@
-package com.haoze.common.enumeration.system.user;
+package com.haoze.service.system.enumeration.user;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

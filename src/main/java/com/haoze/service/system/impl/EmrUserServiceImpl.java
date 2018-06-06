@@ -250,5 +250,10 @@ public class EmrUserServiceImpl implements EmrUserService {
         return emrUserRoleMapper.getUserRoleNames(userId);
     }
 
+    @Override
+    public String getUserDepartmentNames(String userId) {
+        return emrUserDepartmentMapper.getUserDepartmentNames(userId);
+    }
+
 
 }

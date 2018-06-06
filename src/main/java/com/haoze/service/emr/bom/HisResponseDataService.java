@@ -1,9 +1,9 @@
 package com.haoze.service.emr.bom;
 
 import com.alibaba.fastjson.JSON;
-import com.haoze.common.enumeration.emr.HisCallTypeEnum;
 import com.haoze.model.emr.emrwriting.po.HisDoctorAdvicePO;
 import com.haoze.model.emr.emrwriting.po.HisResponseDataPO;
+import com.haoze.service.emr.enumeration.HisCallTypeEnum;
 import com.haoze.utils.GsonUtil;
 import com.haoze.utils.JsoupHttpRequest;
 import com.haoze.utils.SystemConfigParseUtil;

@@ -96,12 +96,13 @@ public class DcController extends BaseController {
     	try {
             // File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "static/cab/past.xml");
             //reader = new FileReader(path+"\\xml\\1.xml");
-        	isr = new InputStreamReader(new FileInputStream("D:\\dc\\"+fileName+".xml"),"UTF-8");
+
+        	isr = new InputStreamReader(this.getClass().getResourceAsStream("/static/cab/index.xml"),"UTF-8");
         	int len;
         	char[] buf = new char[1024];
         	
         	while ((len=isr.read(buf))!=-1){
-        		System.out.println(buf);
+//        		System.out.println(buf);
         		sb.append(buf);
         		buf=new char[1024];
         	}

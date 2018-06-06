@@ -49,17 +49,19 @@ public class EmrRoleServiceImpl implements EmrRoleService{
             List<EmrRoleMenuEntity> roleMenus = new ArrayList();
             for(String menuID : menuIDs){
 
-                EmrRoleMenuEntity roleMenuEntity = new EmrRoleMenuEntity();
-                roleMenuEntity.setPkRoleMenu(UUIDUtil.randomString());
-                roleMenuEntity.setPkRole(role.getID());
-                roleMenuEntity.setPkMenu(menuID);
-                roleMenuEntity.setCreateTime(new Date());
-                roleMenuEntity.setCreator(ShiroUtil.getUserId());
-                roleMenuEntity.setModifier(ShiroUtil.getUserId());
-                roleMenuEntity.setModifyTime(new Date());
-                roleMenuEntity.setDelFlag(DelFlagEnum.Not_Deleted.getEnumValue());
-                roleMenuEntity.setPkOrg(ShiroUtil.getUser().getUserOrganization());
-                roleMenus.add(roleMenuEntity);
+                if(!"-1".equals(menuID)){
+                    EmrRoleMenuEntity roleMenuEntity = new EmrRoleMenuEntity();
+                    roleMenuEntity.setPkRoleMenu(UUIDUtil.randomString());
+                    roleMenuEntity.setPkRole(role.getID());
+                    roleMenuEntity.setPkMenu(menuID);
+                    roleMenuEntity.setCreateTime(new Date());
+                    roleMenuEntity.setCreator(ShiroUtil.getUserId());
+                    roleMenuEntity.setModifier(ShiroUtil.getUserId());
+                    roleMenuEntity.setModifyTime(new Date());
+                    roleMenuEntity.setDelFlag(DelFlagEnum.Not_Deleted.getEnumValue());
+                    roleMenuEntity.setPkOrg(ShiroUtil.getUser().getUserOrganization());
+                    roleMenus.add(roleMenuEntity);
+                }
             }
             if(roleMenus.size() > 0){
                 emrRoleMenuMapper.batchSave(roleMenus);
@@ -67,6 +69,7 @@ public class EmrRoleServiceImpl implements EmrRoleService{
             return ResponseResult.success();
         }catch (Exception e){
             e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return ResponseResult.failure(0, "保存失败");
         }
     }

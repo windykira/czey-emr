@@ -100,7 +100,9 @@ public class EmrLoginController extends BaseController {
         model.addAttribute("userId", getUser().getID());
         model.addAttribute("departmentId",CurrentUser.getCurrentUserDepartment());
         model.addAttribute("picUrl","/img/photo_s.jpg");
-        model.addAttribute("footerName",getUser().getUserName() + " " + emrUserService.getUserRoleNames(getUser().getID()));
+        model.addAttribute("footerName",getUser().getUserName() + " " + CurrentUser.getDepartmentNames() +
+                " " + CurrentUser.getUserRoleNames());
+
         return "index";
     }
 

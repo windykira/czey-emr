@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>常州市第二人民医院住院电子病历</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/plugins/default/default.css" />
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- modal -->
+<!--<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">新增病历</h4>
+</div>-->
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-5 col-md-4">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" style="margin-bottom:8px;">
+                <li value="1" class="active" onclick="reloadTemplateTable(this.value)"><a href="#home" data-toggle="tab">全院</a></li>
+                <li value="2" onclick="reloadTemplateTable(this.value)"><a href="#profile" data-toggle="tab">科室</a></li>
+                <li value="3" onclick="reloadTemplateTable(this.value)"><a href="#messages" data-toggle="tab">个人</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <ul class="list-group">
+                        <!--<li class="list-group-item active">病案首页</li>
+                        <li class="list-group-item">入院记录</li>
+                        <li class="list-group-item">病程记录</li>
+                        <li class="list-group-item">手术记录</li>
+                        <li class="list-group-item">会诊记录</li>
+                        <li class="list-group-item">知情同意书</li>
+                        <li class="list-group-item">出院记录</li>-->
+                    </ul>
+                </div>
+                <div class="tab-pane" id="profile">22.</div>
+                <div class="tab-pane" id="messages">.33</div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-8">
+            <table id="templateTable" data-mobile-responsive="true">
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" onclick="cancel()">取消</button>
+    <!--<button type="button" class="btn btn-primary" onClick="window.open('template-manager-add.html')">确定</button>-->
+    <button type="button" class="btn btn-primary" onclick="loadDcEditor()">确定</button>
+</div>
+</div>
+
+<div th:include="emrinclude::footer"></div>
+<script src="/js/jquery.ztree.core-3.5.js"></script>
+<!--<script src="/js/appjs/emr/emrwriting/emrwrite.js"></script>-->
+<!--<script src="/js/appjs/emr/emrwriting/buttonshow.js"></script>-->
+<script>
+    $(function() {
+
+        loadTable();
+    });
+
+    function loadTable(){
+
+        var selectNodes = parent.zTree.getSelectedNodes();
+        $.ajax({
+            type : "GET",
+            url : "/template/class/list/"+selectNodes[0].id,
+            success : function(datas) {
+
+                $(".list-group").find("li").remove();
+                $.each(datas,function(i,e){
+                    if(i == 0){
+                        $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
+                    }else{
+                        $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
+                    }
+                });
+                //$("#dcDiv").hide();
+                //$("#addMedical").modal("toggle");
+
+                //加载模板表格数据
+                loadTemplateTable(1);
+                $(".list-group li").click(function () {
+                    $(this).addClass("active").siblings(".active").removeClass("active");
+                });
+            }
+        })
+    }
+
+    function loadTemplateTable(rangeValue){
+
+        $('#templateTable')
+                .bootstrapTable(
+                        {
+                            method: 'get', // 服务器数据的请求方式 get or post
+                            url: "/template/class/listEmrTemplateClass", // 服务器数据的加载地址
+                            iconSize: 'outline',
+                            toolbar: '#exampleToolbar',
+                            striped: true, // 设置为true会有隔行变色效果
+                            dataType: "json", // 服务器返回的数据类型
+                            pagination: true, // 设置为true会在底部显示分页条
+                            singleSelect: false, // 设置为true将禁止多选
+                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageNumber: 1, // 如果设置了分布，首页页码
+                            showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                            sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 server
+                            sortable: true,                     //是否启用排序
+                            sortOrder: "asc",
+                            queryParams: function (params) {
+                                return {
+                                    // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                    limit: params.limit,
+                                    page:(params.offset / params.limit) + 1,
+                                    range:rangeValue,
+                                    templateClassId:$(".list-group").find(".active").attr("value")
+                                    /*sort: params.sort,      //排序列名
+                                     sortOrder: params.order, //排位命令（desc，asc）
+                                     name: $('#searchName').val(),
+                                     createStatus: $('input[name="status"]:checked').val()*/
+                                };
+                            },
+                            columns: [
+                                {
+                                    radio: true
+                                },
+                                {
+                                    field: 'templateId',
+                                    title: '序号',
+                                    formatter: function (value, row, index) {
+                                        return index + 1;
+                                    }
+                                },
+                                {
+                                    field: 'templateName',
+                                    title: '模板名称',
+                                    sortable: true
+                                },
+                                {
+                                    field: 'creator',
+                                    title: '创建人'
+                                },
+                                {
+                                    field: 'createTime',
+                                    title: '创建时间'
+                                }
+                            ]
+                        });
+    }
+
+    function reloadTemplate(e){
+
+        $('#templateTable').bootstrapTable('refreshOptions',{
+            queryParams: function (params) {
+                return {
+                    // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                    limit: params.limit,
+                    page:(params.offset / params.limit) + 1,
+                    range:$(".nav-tabs").find(".active").attr("value"),
+                    templateClassId:$(e).attr("value")
+                };
+            }
+        });
+    }
+
+    function reloadTemplateTable(rangeValue){
+
+        //alert($(e).attr("value"));
+        $('#templateTable').bootstrapTable('refreshOptions',{
+            queryParams: function (params) {
+                return {
+                    // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                    limit: params.limit,
+                    page:(params.offset / params.limit) + 1,
+                    range:rangeValue,
+                    templateClassId:$(".list-group").find(".active").attr("value")
+                };
+            }
+        });
+    }
+
+    function loadDcEditor(){
+
+        var ctl = parent.document.getElementById("myWriter");
+        //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
+        $.ajax({
+            url:"/emr/dc/getXML/index",
+            dataType:"text",
+            success:function(data){
+                ctl.ExecuteCommand("FileOpenString", false, data);
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            },
+            error:function(){
+                alert("读取出错");
+            }
+        })
+    }
+
+    function cancel(){
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+</script>
+</body>
+
+</html>

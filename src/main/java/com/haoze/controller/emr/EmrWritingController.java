@@ -6,6 +6,7 @@ import com.haoze.common.model.PaginationResult;
 import com.haoze.model.emr.emrwriting.po.HisDoctorAdvicePO;
 import com.haoze.model.emr.emrwriting.po.HisResponseDataPO;
 import com.haoze.service.emr.bom.HisResponseDataService;
+import com.haoze.utils.CurrentUser;
 import com.haoze.utils.GsonUtil;
 import com.haoze.utils.JsoupHttpRequest;
 import com.haoze.utils.SystemConfigParseUtil;
@@ -33,14 +34,16 @@ public class EmrWritingController extends BaseController{
 
     private String prefix="emr/emrwriting";
 
-    @GetMapping("/test")
+    @GetMapping("/templatetable")
     String test(Model model){
-        return "/test";
+        return prefix + "/templatetable";
     }
 
     @GetMapping("/emrwrite")
     String emrWrite(Model model){
 
+        model.addAttribute("footerName",getUser().getUserName() + " " + CurrentUser.getDepartmentNames() +
+                " " + CurrentUser.getUserRoleNames());
         return prefix + "/emrwrite";
     }
 

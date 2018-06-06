@@ -1,10 +1,10 @@
 package com.haoze.service.emr.bom;
 
-import com.haoze.common.enumeration.emr.HisCallTypeEnum;
 import com.haoze.model.emr.emrwriting.po.HisDoctorAdvicePO;
 import com.haoze.model.emr.emrwriting.po.HisPatientCheckupPO;
 import com.haoze.model.emr.emrwriting.po.HisPatientInspectPO;
 import com.haoze.model.emr.emrwriting.po.HisPatientPrescriptionPO;
+import com.haoze.service.emr.enumeration.HisCallTypeEnum;
 import com.haoze.utils.SystemConfigParseUtil;
 
 import java.io.IOException;
