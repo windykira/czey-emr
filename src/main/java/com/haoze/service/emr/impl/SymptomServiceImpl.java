@@ -50,4 +50,10 @@ public class SymptomServiceImpl implements SymptomService {
     	result.put("simu", dao.getSimuInfo());
     	return result;
     }
+
+    @Override
+    public String getTemplateFilePathById(String id) {
+        return dao.getTemplateFilePathById(id);
+    }
+
 }

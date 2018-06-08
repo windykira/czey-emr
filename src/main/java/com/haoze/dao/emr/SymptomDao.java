@@ -1,7 +1,5 @@
 package com.haoze.dao.emr;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +13,6 @@ public interface SymptomDao {
 	List<Map> getSympTree();
 	List<Map> getSimuInfo();
 	List<Map> getSympInfo();
+
+	String getTemplateFilePathById(String id);
 }

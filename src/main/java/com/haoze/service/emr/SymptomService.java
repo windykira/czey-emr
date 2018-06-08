@@ -21,4 +21,6 @@ public interface SymptomService {
 	List<Map> getSympInfo();
 
 	Map getSympAndSimuInfo();
+
+	String getTemplateFilePathById(String id);
 }

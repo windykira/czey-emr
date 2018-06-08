@@ -130,7 +130,7 @@ function loadDcEditor(){
     var ctl = parent.document.getElementById("myWriter");
     //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
     $.ajax({
-        url:"/emr/dc/getTemplate/"+rows[0].id,
+        url:"/emr/dc/getTemplate/"+rows[0].templateId,
         dataType:"text",
         success:function(data){
             ctl.ExecuteCommand("FileOpenString", false, data);

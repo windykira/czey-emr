@@ -85,10 +85,11 @@ public class DcController extends BaseController {
     	return m;
     }
 
-    @RequestMapping(value="/getTemplate/{fileName}")
+    @RequestMapping(value="/getTemplate/{fileId}")
     @ResponseBody
-    public String getXML(HttpServletRequest request, @PathVariable String fileName) throws IOException {
-        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH")+fileName);
+    public String getTemplate(HttpServletRequest request, @PathVariable String fileId) throws IOException {
+        String path  = service.getTemplateFilePathById(fileId);
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH")+path);
     	return  xml;
     }
 }

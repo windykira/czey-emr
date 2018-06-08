@@ -48,4 +48,8 @@
     <select id="getSympInfo" resultType="Map">
     select pk_symp id,name_symp name from bd_symptom
     </select>
+
+    <select id="getTemplateFilePathById" parameterType="String" resultType="String">
+        select content from EMR_TEMPLATE where PK_TEMPLATE = #{id}
+    </select>
 </mapper>

@@ -40,9 +40,9 @@ function firstLoadPage(status){
                     };
                 },
                 columns: [
-                    {
-                        checkbox: true
-                    },
+                    /*{
+                        checkbox: false
+                    },*/
                     {
                         field: 'id',
                         title: '序号',
@@ -130,9 +130,9 @@ function loadPage(status){
                     };
                 },
                 columns: [
-                    {
-                        checkbox: true
-                    },
+                    /*{
+                        checkbox: false
+                    },*/
                     {
                         field: 'id',
                         title: '序号',
@@ -217,9 +217,9 @@ function loadPage(status){
                     };
                 },
                 columns: [
-                    {
-                        checkbox: true
-                    },
+                    /*{
+                        checkbox: false
+                    },*/
                     {
                         field: 'id', // 列字段名
                         title: '序号', // 列标题
