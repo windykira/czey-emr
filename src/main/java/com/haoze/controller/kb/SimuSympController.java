@@ -1,4 +1,29 @@
-package com.haoze.controller.kb;/*
+package com.haoze.controller.kb;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.haoze.common.annotation.Note;
+import com.haoze.common.controller.BaseController;
+import com.haoze.common.model.ResponseResult;
+import com.haoze.model.kb.symp.entity.SimuSympEntity;
+import com.haoze.service.kb.EmrSimuSympService;
+import com.haoze.utils.ChineseCharactersCode;
+
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+/*
 package com.haoze.controller.kb;
 
 import java.util.List;
@@ -11,82 +36,117 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.haoze.common.controller.BaseController;
-import com.haoze.model.system.role.entity.RoleEntity;
-import com.haoze.service.system.RoleService;
+import com.haoze.model.system.role.entity.SimuSympEntity;
+import com.haoze.service.system.simuService;
 
 */
 /**
  * 知识库伴随症状字典控制器信息。
  * @author daiyiming
  * @time 2018-05-03。
- *//*
+ */
 
 @RequestMapping("emrsys/kb/simusymp/")
 @Controller
 public class SimuSympController extends BaseController{
 
-    String prefix = "emrsys/kb/symp/";
+    String prefix = "repository/kb/simusymp";
     @Autowired
-    RoleService roleService;
+    EmrSimuSympService emrSympService;
 
-    @RequiresPermissions("kb:symp:symp")
+    @RequiresPermissions("kb:simusymp:simusymp")
     @GetMapping()
-    String symp() {
-        return prefix + "/symp";
+    String simusymp(Model model) {
+        return prefix + "/simusymp";
     }
 
-    @RequiresPermissions("kb:symp:symp")
+    @RequiresPermissions("kb:simusymp:simusymp")
     @GetMapping("/list")
     @ResponseBody()
-    List<RoleEntity> list() {
-        List<RoleEntity> roles = roleService.list();
+    List<SimuSympEntity> list() {
+        List<SimuSympEntity> roles = emrSympService.listRoles();
         return roles;
     }
 
-//    @Note("添加角色")
-//    @RequiresPermissions("sys:role:add")
-//    @GetMapping("/add")
-//    String add() {
-//        return prefix + "/add";
-//    }
+    @Note("新增症状")
+    @RequiresPermissions("kb:simusymp:add")
+    @GetMapping("/add")
+    String add() {
+        return prefix + "/add";
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Note("返回五笔和拼音码")
+    @GetMapping("/getWbPy")
+    @ResponseBody
+    Map getTypes(String simuSympName) {
+    	ChineseCharactersCode cc = new ChineseCharactersCode();
+		String wb = cc.getWBCode(simuSympName);
+		String py = "";
+		try {
+			py = cc.getPinyinCode(simuSympName);
+		} catch (BadHanyuPinyinOutputFormatCombination e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Map map = new HashMap<String,String>();
+    	map.put("py", py);
+    	map.put("wb", wb);
+    	return map;
+    }
 //
-//    @Note("编辑角色")
-//    @RequiresPermissions("sys:role:edit")
-//    @GetMapping("/edit/{id}")
-//    String edit(@PathVariable("id") Long id, Model model) {
-//        RoleEntity roleDO = roleService.get(id);
+    @Note("编辑症状")
+    @RequiresPermissions("kb:simusymp:edit")
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable("id") String id, Model model) {
+        SimuSympEntity sympDO = emrSympService.get(id);
+        model.addAttribute("simusymp", sympDO);
+        return prefix + "/edit";
+    }
+    
+    @Note("更新症状")
+    @RequiresPermissions("kb:simusymp:edit")
+    @PostMapping("/update")
+    @ResponseBody()
+    ResponseResult update(SimuSympEntity role) {
+        return emrSympService.update(role);
+    }
+    
+    @Note("删除菜单")
+    @RequiresPermissions("kb:simusymp:remove")
+    @PostMapping("/remove")
+    @ResponseBody
+    ResponseResult remove(String id) {
+        return emrSympService.remove(id);
+    }
+    
+//    @Note("配置可用科室")
+//    @RequiresPermissions("kb:simusymp:deployDept")
+//    @GetMapping("/deployDept/{id}")
+//    String deployDept(@PathVariable("id") String id, Model model) {
+//        SimuSympEntity roleDO = emrSympService.get(id);
 //        model.addAttribute("role", roleDO);
-//        return prefix + "/edit";
+//        return prefix + "/deployDept";
 //    }
+    
+//    @Note("配置伴随症状")
+//    @RequiresPermissions("kb:simusymp:deploySimu")
+//    @GetMapping("/deploySimu/{id}")
+//    String deploySimu(@PathVariable("id") String id, Model model) {
+//        SimuSympEntity roleDO = emrSympService.get(id);
+//        model.addAttribute("role", roleDO);
+//        return prefix + "/deploySimu";
+//    }
+
 //
-//    @Note("保存角色")
-//    @RequiresPermissions("sys:role:add")
-//    @PostMapping("/save")
-//    @ResponseBody()
-//    ResponseResult save(RoleEntity role) {
-//        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-//            return ResponseResult.failure(1, "演示系统不允许修改,完整体验请部署程序");
-//        }
-//        if (roleService.save(role) > 0) {
-//            return ResponseResult.success();
-//        } else {
-//            return ResponseResult.failure(1, "保存失败");
-//        }
-//    }
-//
-//    @Note("更新角色")
-//    @RequiresPermissions("sys:role:edit")
-//    @PostMapping("/update")
-//    @ResponseBody()
-//    ResponseResult update(RoleEntity role) {
-//        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-//            return ResponseResult.failure(1, "演示系统不允许修改,完整体验请部署程序");
-//        }
-//        if (roleService.update(role) > 0) {
-//            return ResponseResult.success();
-//        } else {
-//            return ResponseResult.failure(1, "保存失败");
-//        }
-//    }
+    @Note("保存症状")
+    @RequiresPermissions("kb:simusymp:add")
+    @PostMapping("/save")
+    @ResponseBody()
+    ResponseResult save(SimuSympEntity role) {
+    	
+       return emrSympService.save(role);
+    }
+    
 }
-*/
+

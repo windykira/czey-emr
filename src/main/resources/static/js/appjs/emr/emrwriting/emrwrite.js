@@ -69,8 +69,6 @@ function loadDcEditor(){
             alert("读取出错");
         }
     })
-    $("#dcContainer").show();
-    $('#addMedical').modal('hide')
 }
 
 function showModal(){
@@ -79,7 +77,7 @@ function showModal(){
     var selectNodes = zTree.getSelectedNodes();
     if(selectNodes.length == 0){
         //layer.msg("请选择病历目录。");
-        alert("请选择病历目录。");
+        layer.alert('请选择病历目录。', {icon: 6});
         return;
     }
     layer.open({

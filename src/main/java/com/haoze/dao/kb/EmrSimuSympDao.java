@@ -1,9 +1,8 @@
 package com.haoze.dao.kb;
 
-import com.haoze.model.system.role.entity.EmrRoleEntity;
-
 import java.util.List;
-import java.util.Map;
+
+import com.haoze.model.kb.symp.entity.SimuSympEntity;
 
 /**
  * 角色数据操作类。
@@ -13,36 +12,37 @@ import java.util.Map;
 public interface EmrSimuSympDao {
 
 
-    /**
+	  /**
      * 新增角色
      * @param role
+     * @return 
      */
-    void save(EmrRoleEntity role);
+    int save(SimuSympEntity role);
 
     /**
      * 删除角色
      * @param roleId
      */
-    void remove(String roleId);
+    void remove(String sympId);
 
     /**
      * 更新角色
      * @param role
      */
-    void update(EmrRoleEntity role);
+    void update(SimuSympEntity role);
 
     /**
      * 查询角色列表
      * @param paramsMap
      * @return
      */
-    List<EmrRoleEntity> listRoles(Map<String, Object> paramsMap);
+    List<SimuSympEntity> list();
 
     /**
      * 获取角色详情
      * @param roleId
      * @return
      */
-    EmrRoleEntity get(String roleId);
+    SimuSympEntity get(String roleId);
 
 }

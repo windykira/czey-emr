@@ -1,4 +1,4 @@
-package com.haoze.model.emr.symp.entity;
+package com.haoze.model.kb.symp.entity;
 
 import com.haoze.common.model.BaseEntity;
 

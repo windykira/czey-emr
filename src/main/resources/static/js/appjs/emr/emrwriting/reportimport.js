@@ -50,11 +50,10 @@ function cancel(){
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
 }
-
+var element = "";
 function initTable(hisCallType){
 
     var columns = "";
-    var element = "";
     switch (hisCallType){
         case "1":
             element = $("#doctorAdvice");
@@ -207,4 +206,18 @@ function initTable(hisCallType){
              },*/
             columns: columns
         });
-}
+    }
+
+    function importReport(){
+
+        var ctl = parent.document.getElementById("myWriter");
+        var rows = element.bootstrapTable('getSelections');
+
+        var reportContent = "";
+        $.each(rows, function (i, row) {
+            reportContent += row.doctorSign + row.orderText;
+        });
+        ctl.ExecuteCommand("InsertString", false, reportContent);
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }

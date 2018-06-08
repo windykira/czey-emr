@@ -104,7 +104,8 @@ function reloadTemplate(e){
 
 function reloadTemplateTable(rangeValue){
 
-    //alert($(e).attr("value"));
+
+
     $('#templateTable').bootstrapTable('refreshOptions',{
         queryParams: function (params) {
             return {
@@ -120,10 +121,16 @@ function reloadTemplateTable(rangeValue){
 
 function loadDcEditor(){
 
+    var rows = $('#templateTable').bootstrapTable('getSelections');
+    if (rows.length == 0) {
+        layer.alert('请选择要加载的模板。', {icon: 6});
+        return;
+    }
+
     var ctl = parent.document.getElementById("myWriter");
     //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
     $.ajax({
-        url:"/emr/dc/getXML/index",
+        url:"/emr/dc/getTemplate/"+rows[0].id,
         dataType:"text",
         success:function(data){
             ctl.ExecuteCommand("FileOpenString", false, data);

@@ -13,6 +13,16 @@ public class EmrTemplateClassPO {
     private String range;//模板类型：1-全院，2-科室，3-个人
     private String creator;//创建者
 
+    private String content;//模板路径
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getRange() {
         return range;
     }

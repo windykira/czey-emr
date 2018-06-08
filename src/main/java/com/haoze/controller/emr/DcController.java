@@ -1,13 +1,9 @@
 package com.haoze.controller.emr;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.haoze.common.controller.BaseController;
+import com.haoze.service.emr.SymptomService;
+import com.haoze.utils.MyFileUtil;
+import com.haoze.utils.SystemConfigParseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.haoze.common.controller.BaseController;
-import com.haoze.service.emr.SymptomService;
-import com.haoze.utils.PageUtil;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户相关控制器信息。
@@ -87,36 +85,11 @@ public class DcController extends BaseController {
     	return m;
     }
 
-    @RequestMapping(value="/getXML/{fileName}")
+    @RequestMapping(value="/getTemplate/{fileName}")
     @ResponseBody
-    public String getXML(HttpServletRequest request, @PathVariable String fileName){
-    	InputStreamReader isr = null;
-    	StringBuilder sb = new StringBuilder();
-        //File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "static/cab/past.xml");
-    	try {
-            // File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "static/cab/past.xml");
-            //reader = new FileReader(path+"\\xml\\1.xml");
-
-        	isr = new InputStreamReader(this.getClass().getResourceAsStream("/static/cab/index.xml"),"UTF-8");
-        	int len;
-        	char[] buf = new char[1024];
-        	
-        	while ((len=isr.read(buf))!=-1){
-//        		System.out.println(buf);
-        		sb.append(buf);
-        		buf=new char[1024];
-        	}
-//    	bufferedReader = new BufferedReader(reader);
-//    	String result = null;
-//    	
-//			while (  (result = bufferedReader.readLine() ) != null ){
-//				sb.append(result);
-//			 }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return  sb.toString();
+    public String getXML(HttpServletRequest request, @PathVariable String fileName) throws IOException {
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH")+fileName);
+    	return  xml;
     }
 }
 
