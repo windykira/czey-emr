@@ -2,17 +2,17 @@ package com.haoze.controller.emr;
 
 import com.haoze.common.controller.BaseController;
 import com.haoze.utils.CurrentUser;
+import com.haoze.utils.GsonUtil;
 import com.haoze.utils.JsoupHttpRequest;
+import com.haoze.utils.SystemConfigParseUtil;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.jsoup.Connection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 病人控制器信息。
@@ -32,35 +32,44 @@ public class EmrPatientController extends BaseController{
 
     @GetMapping("getPatientList")
     @ResponseBody
-    String getPatientList(Model model, HttpServletRequest request) {
-
-
-        String name = request.getParameter("name");
-        String bedNo = request.getParameter("bedNo");
-        String type = request.getParameter("type");
-        String patientId = request.getParameter("patientId");
-        name=name==null?"":name;
-        bedNo=bedNo==null?"":bedNo;
-        type=type==null?"":type;
-        patientId=patientId==null?"":patientId;
-        String empNo = "";
-        String deptNo = "";
-        if(type.equals(1)){
-            empNo = CurrentUser.getUser().getUserCode();
+    String getPatientList(Model model, HttpServletRequest request,@RequestParam Map<String, Object> params) {
+//        String name = request.getParameter("name");
+//        String bedNo = request.getParameter("bedNo");
+//        String type = request.getParameter("type");
+//        String patientId = request.getParameter("patientId");
+//        name=name==null?"":name;
+//        bedNo=bedNo==null?"":bedNo;
+//        type=type==null?"":type;
+//        patientId=patientId==null?"":patientId;
+//        String empNo = "";
+//        String deptNo = "";
+        if("1".equals(params.get("type").toString())){
+            params.put("empNo",CurrentUser.getUser().getUserCode());
+//            empNo = CurrentUser.getUser().getUserCode();
         }
-        if(type.equals(2)){
-            deptNo =  CurrentUser.getCurrentUserDepartment();
+        if("2".equals(params.get("type").toString())){
+//            deptNo =  CurrentUser.getCurrentUserDepartment();
+            params.put("deptCode",CurrentUser.getCurrentUserDepartment().getDepartmentCode());
         }
+        String paramString = paramsMap2UrlString(params);
         String res = "";
         try {
-            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://172.20.91.56:8181/getPatietInfoNew?deptCode=211003&costEmpNo=857&patientId=950677&name=%E5%80%AA%E5%9B%BD%E9%87%91&bedNo=23", "",null);
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest(SystemConfigParseUtil.getProperty("HIS_PATIENT_URL")+paramString, "",null);
             res = response.body();
+            Map<String,Object> m = GsonUtil.fromJson(res,Map.class);
+            res = GsonUtil.toJson(m.get("ROWS"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return res;
     }
-
+    public static String paramsMap2UrlString(Map<String,Object> m){
+        String result = "?";
+        for (Map.Entry<String, Object> entry : m.entrySet()) {
+            result += entry.getKey()+"="+entry.getValue().toString()+"&";
+        }
+        return result;
+    }
 
     @GetMapping("getJCDetailByCheckNo/{checkNo}")
     @ResponseBody

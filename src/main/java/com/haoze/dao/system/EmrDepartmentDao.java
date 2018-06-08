@@ -28,4 +28,11 @@ public interface EmrDepartmentDao {
     List<EmrDepartmentEntity> list(Map<String, Object> paramMap);
 
 	int save(Map<String, Object> params);
+
+    /**
+     * 获取部门详情
+     * @param departmentId
+     * @return
+     */
+    EmrDepartmentEntity get(String departmentId);
 }

@@ -2,36 +2,20 @@ $(function() {
     load();
 });
 function load() {
-    $.ajax({
-        url:"/emr/patient/getPatientList",
-        dataType:"json",
-        data:{
-            name : $('#name').val(),
-            bedNo : $('#bedNo').val(),
-            patientId : $('#patientId').val(),
-            type : $('#typeSel').val()
-        },
-        success:function(data){
-//			console.log(data);
-            var patientJson = data.date;
-//             myWriter.ExecuteCommand("InsertXML", false, data);
-//            $('#exampleTable').bootstrapTable('hideLoading');
             $('#exampleTable')
                 .bootstrapTable(
                     {
-//					method : 'get', // 服务器数据的请求方式 get or post
-//					url : prefix + "/list", // 服务器数据的加载地址
-                        // showRefresh : true,
-                        // showToggle : true,
-                        // showColumns : true,
+                        method: 'get', // 服务器数据的请求方式 get or post
+                        url: "/emr/patient/getPatientList",
+                        cache: false,//禁用缓存 默认为true
                         iconSize : 'outline',
-                        formatLoadingMessage: function(){
-                            return null;
-                        },
+                        //formatLoadingMessage: function(){
+                        //    return null;
+                        //},
                         //toolbar : '#exampleToolbar',
                         //search:true,
                         striped : true, // 设置为true会有隔行变色效果
-                        data : patientJson,
+
                         dataType : "json", // 服务器返回的数据类型
                         pagination : true, // 设置为true会在底部显示分页条
                         // queryParamsType : "limit",
@@ -45,24 +29,34 @@ function load() {
                         showColumns : false, // 是否显示内容下拉框（选择显示的列）
                         sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者
                         // "server"
-                        onLoadSuccess:function(){
-                            alert(1)
-                            $(".fixed-table-loading").hide();
-                        },
+                        //onLoadSuccess:function(){
+                        //    alert(1)
+                        //    $(".fixed-table-loading").hide();
+                        //},
                         uniqueId : 'PATIENT_ID',
+                        queryParams: function (params) {
+                            return {
+                                name : $('#name').val(),
+                                bedNo : $('#bedNo').val(),
+                                patientId : $('#patientId').val(),
+                                type : $('#typeSel').val()
+                            };
+                        },
                         columns : [
-                            {
-                                checkbox : true
-                            },
+                            //{
+                            //    checkbox : true
+                            //},
                             {
                                 field : 'PATIENT_ID', // 列字段名
                                 title : 'id', // 列标题
                                 visible : false
                             },
-
                             {
-                                field : 'BED_NO',
-                                title : '床号'
+                                field: 'id',
+                                title: '序号',
+                                formatter: function (value, row, index) {
+                                    return index + 1;
+                                }
                             },
                             {
                                 field : 'NAME',
@@ -81,27 +75,31 @@ function load() {
                                 title : '费用类型'
                             },
                             {
+                                field : 'INDATE',
+                                title : '入院时间'
+                            },
+                            {
                                 field : 'DEPT_ALIAS',
                                 title : '所在病区'
                             },
                             {
-                                field : 'INDATE',
-                                title : '入院时间'
+                                field : 'BED_NO',
+                                title : '床号'
                             },
                             {
                                 field : 'DIAGNOSIS',
                                 title : '主要诊断'
                             },
                             {
-                                field : 'DOCTNAME',
-                                title : '喻强'
+                                field : 'DOCNAME',
+                                title : '床位医生'
                             },
                             {
                                 title : '操作',
                                 field : 'NAME',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    var btn = '<button type="button" class="btn  btn-primary" onclick="add('+row.PATIENT_ID+')"><i class="fa fa-plus hidden" aria-hidden="true"></i>写病历 </button>';
+                                    var btn = '<button type="button" class="btn  btn-primary" onclick="openWriting('+row.PATIENT_ID+')"><i class="fa fa-plus hidden" aria-hidden="true"></i>写病历 </button>';
                                     return btn;
                                 }
                             }
@@ -115,14 +113,14 @@ function load() {
 //						}
                         ]
                     });
-        },
-        error:function(){
-            alert("读取出错");
-        }
-    })
-
 }
 function reLoad() {
-    //$('#exampleTable').bootstrapTable('refresh');
-    load();
+    $('#exampleTable').bootstrapTable('refresh');
+}
+
+var patientInfo;
+
+function openWriting(id){
+    patientInfo = $('#exampleTable').bootstrapTable('getRowByUniqueId', id);
+    window.open('/emr/emrwriting/emrwrite');
 }

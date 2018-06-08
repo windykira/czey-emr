@@ -1,21 +1,22 @@
 package com.haoze.service.kb.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.haoze.common.model.ResponseResult;
 import com.haoze.dao.system.EmrRoleDao;
 import com.haoze.dao.system.EmrRoleMenuDao;
 import com.haoze.model.system.role.entity.EmrRoleEntity;
 import com.haoze.model.system.role.entity.EmrRoleMenuEntity;
-import com.haoze.service.kb.EmrSympService;
+import com.haoze.service.kb.EmrSimuSympService;
 import com.haoze.utils.ShiroUtil;
 import com.haoze.utils.UUIDUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * 知识库症状数据服务接口实现类。
@@ -23,7 +24,7 @@ import java.util.List;
  * @time 2018-05-09。
  */
 @Service
-public class EmrSimuSympServiceImpl implements EmrSympService{
+public class EmrSimuSympServiceImpl implements EmrSimuSympService{
 
     @Autowired
     EmrRoleDao emrRoleMapper;

@@ -21,6 +21,13 @@
         DEL_FLAG,CREATOR,CREATE_TIME,MODIFIER,MODIFY_TIME,DATA_VERSION,MT_TYPE
     </sql>
 
+    <select id="get" resultMap="BaseResultMap" parameterType="String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SYS_DEPT
+        where PK_DEPT = #{_parameter}
+    </select>
+
     <select id="count" resultType="int">
         SELECT
         COUNT(1)
@@ -73,12 +80,6 @@
         )
     </insert>
     
-    <select id="get" resultType="com.haoze.model.system.department.entity.EmrDepartmentEntity">
-        select
-        `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept
-        where dept_id = #{value}
-    </select>
-
     <select id="listEmrDepartments" resultMap="BaseResultMap">
         SELECT
           SD.PK_DEPT,SD.CODE_DEPT,SD.NAME_DEPT

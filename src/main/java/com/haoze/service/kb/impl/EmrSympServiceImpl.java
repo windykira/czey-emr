@@ -1,21 +1,17 @@
 package com.haoze.service.kb.impl;
 
-import com.haoze.common.model.ResponseResult;
-import com.haoze.dao.system.EmrRoleDao;
-import com.haoze.dao.system.EmrRoleMenuDao;
-import com.haoze.model.system.role.entity.EmrRoleEntity;
-import com.haoze.model.system.role.entity.EmrRoleMenuEntity;
-import com.haoze.service.kb.EmrSympService;
-import com.haoze.utils.ShiroUtil;
-import com.haoze.utils.UUIDUtil;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import com.haoze.common.model.ResponseResult;
+import com.haoze.dao.kb.EmrSympDao;
+import com.haoze.model.kb.symp.entity.SympEntity;
+import com.haoze.model.system.role.entity.EmrRoleEntity;
+import com.haoze.service.kb.EmrSympService;
+import com.haoze.utils.UUIDUtil;
 
 /**
  * 知识库症状数据服务接口实现类。
@@ -26,54 +22,29 @@ import java.util.List;
 public class EmrSympServiceImpl implements EmrSympService{
 
     @Autowired
-    EmrRoleDao emrRoleMapper;
-    @Autowired
-    EmrRoleMenuDao emrRoleMenuMapper;
+    EmrSympDao emrRoleMapper;
 
     @Transactional
     @Override
-    public ResponseResult save(EmrRoleEntity role) {
-        try {
-            role.setID(UUIDUtil.randomString());
-            //新增角色
-            emrRoleMapper.save(role);
-            //新增角色菜单关联关系
-            List<String> menuIDs = role.getMenuIDs();
-            List<EmrRoleMenuEntity> roleMenus = new ArrayList();
-            for(String menuID : menuIDs){
-
-                EmrRoleMenuEntity roleMenuEntity = new EmrRoleMenuEntity();
-                roleMenuEntity.setPkRoleMenu(UUIDUtil.randomString());
-                roleMenuEntity.setPkRole(role.getID());
-                roleMenuEntity.setPkMenu(menuID);
-                roleMenuEntity.setCreateTime(new Date());
-                roleMenuEntity.setCreator(ShiroUtil.getUserId());
-                roleMenuEntity.setModifier(ShiroUtil.getUserId());
-                roleMenuEntity.setModifyTime(new Date());
-                roleMenuEntity.setDelFlag("0");
-                roleMenuEntity.setPkOrg(ShiroUtil.getUser().getUserOrganization());
-                roleMenus.add(roleMenuEntity);
-            }
-            if(roleMenus.size() > 0){
-                emrRoleMenuMapper.batchSave(roleMenus);
-            }
-            return ResponseResult.success();
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseResult.failure(0, "保存失败");
-        }
+    public ResponseResult save(SympEntity role) {
+    	 try {
+       role.setID(UUIDUtil.randomString());
+       emrRoleMapper.save(role);
+       return ResponseResult.success();
+         }catch (Exception e){
+             e.printStackTrace();
+             return ResponseResult.failure(0, "保存失败");
+         }
     }
 
     @Override
     @Transactional
-    public ResponseResult remove(String roleId) {
+    public ResponseResult remove(String sympId) {
         try {
             //TODO 如果角色绑定用户 则该角色不能删除
 
-            //删除角色菜单关联数据
-            emrRoleMenuMapper.removeByRoleId(roleId);
             //删除角色信息
-            emrRoleMapper.remove(roleId);
+            emrRoleMapper.remove(sympId);
             return ResponseResult.success();
         }catch (Exception e){
             e.printStackTrace();
@@ -81,55 +52,14 @@ public class EmrSympServiceImpl implements EmrSympService{
         }
     }
 
-    @Override
-    @Transactional
-    public ResponseResult batchRemove(String[] ids) {
-        try {
-            //TODO 如果角色绑定用户 则该角色不能删除
-
-            for(String id : ids){
-                //删除角色菜单关联数据
-                emrRoleMenuMapper.removeByRoleId(id);
-                //删除角色信息
-                emrRoleMapper.remove(id);
-            }
-            return ResponseResult.success();
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseResult.failure(0,"删除失败");
-        }
-    }
 
     @Override
     @Transactional
-    public ResponseResult update(EmrRoleEntity role) {
+    public ResponseResult update(SympEntity role) {
 
         try {
             emrRoleMapper.update(role);
             //删除原先角色菜单关联关系
-            emrRoleMenuMapper.removeByRoleId(role.getID());
-            if(role.getMenuIDs() != null && role.getMenuIDs().size() > 0){
-                //新增角色菜单关联关系
-                List<String> menuIDs = role.getMenuIDs();
-                List<EmrRoleMenuEntity> roleMenus = new ArrayList();
-                for(String menuID : menuIDs){
-
-                    EmrRoleMenuEntity roleMenuEntity = new EmrRoleMenuEntity();
-                    roleMenuEntity.setPkRoleMenu(UUIDUtil.randomString());
-                    roleMenuEntity.setPkRole(role.getID());
-                    roleMenuEntity.setPkMenu(menuID);
-                    roleMenuEntity.setCreateTime(new Date());
-                    roleMenuEntity.setCreator(ShiroUtil.getUserId());
-                    roleMenuEntity.setModifier(ShiroUtil.getUserId());
-                    roleMenuEntity.setModifyTime(new Date());
-                    roleMenuEntity.setDelFlag("0");
-                    roleMenuEntity.setPkOrg(ShiroUtil.getUser().getUserOrganization());
-                    roleMenus.add(roleMenuEntity);
-                }
-                if(roleMenus.size() > 0){
-                    emrRoleMenuMapper.batchSave(roleMenus);
-                }
-            }
             return ResponseResult.success();
         }catch (Exception e){
             e.printStackTrace();
@@ -138,14 +68,21 @@ public class EmrSympServiceImpl implements EmrSympService{
     }
 
     @Override
-    public List<EmrRoleEntity> listRoles() {
-        return emrRoleMapper.listRoles(new HashMap());
+    public List<SympEntity> listRoles() {
+        return emrRoleMapper.list();
     }
 
-    @Override
-    public EmrRoleEntity get(String roleId) {
-        //查询角色信息
-        EmrRoleEntity emrRoleEntity = emrRoleMapper.get(roleId);
-        return emrRoleEntity;
-    }
+	@Override
+	public ResponseResult batchRemove(String[] ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public com.haoze.model.kb.symp.entity.SympEntity get(String roleId) {
+		// TODO Auto-generated method stub
+		SympEntity sympEntity = emrRoleMapper.get(roleId);
+	     return sympEntity;
+	}
+
 }

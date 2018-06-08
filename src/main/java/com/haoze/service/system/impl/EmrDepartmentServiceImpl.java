@@ -28,7 +28,7 @@ public class EmrDepartmentServiceImpl implements EmrDepartmentService {
     @Autowired
     EmrDepartmentDao emrDepartmentMapper;
     @Autowired
-    EmrUserDepartmentDao emrUserDepartmentDao;
+    EmrUserDepartmentDao emrUserDepartmentMapper;
 
     @Override
     public List<EmrDepartmentEntity> listEmrDepartmentsByUserId(String userId) {
@@ -66,7 +66,7 @@ public class EmrDepartmentServiceImpl implements EmrDepartmentService {
         List<String> userDeptIds = new ArrayList();
         if(paramMap.get("userId") != null){
             //查询用户关联科室
-            userDeptIds = emrUserDepartmentDao.listUserDepartments(paramMap.get("userId").toString());
+            userDeptIds = emrUserDepartmentMapper.listUserDepartments(paramMap.get("userId").toString());
         }
 
         List<Tree<EmrDepartmentEntity>> trees = new ArrayList();
@@ -92,5 +92,10 @@ public class EmrDepartmentServiceImpl implements EmrDepartmentService {
         Tree<EmrDepartmentEntity> tree = TreeBuildUtil.build(trees);
         //OcsCache.put("deptTree" + paramMap.get("orgId"),GsonUtil.toJson(tree));
         return tree;
+    }
+
+    @Override
+    public EmrDepartmentEntity get(String departmentId) {
+        return emrDepartmentMapper.get(departmentId);
     }
 }

@@ -97,6 +97,27 @@
 	$("#print_btn").click(function(e){
 		print();
 	});
+	//预览按钮
+	$("#preview_btn").click(function(e){
+//		var input = myWriter.Document.GetElementById("zz");//获取诊疗经过输入域
+//		if (input != null) {
+//			input = myWriter.ComConvertToXTextInputFieldElement(input);
+//			if (input != null) {
+//				input.PrintVisibility=1;
+//				alert('ok')
+//			}
+//		}
+//		myWriter.DocumentOptions.ViewOptions.IgnoreFieldBorderWhenPrint = false;
+//		myWriter.DocumentOptions.ViewOptions.FiledBorderColor = 'red';
+		preview();
+
+	});
+	function preview(){
+		myWriter.ExecuteCommand("FilePrintPreview", true , null );
+	}
+	function print(){
+		myWriter.ExecuteCommand("FilePrint",true,null);
+	}
 	//字体按钮
 	$("#font_btn").click(function(e){
 		var top = $(this).position().top+$(this).height()+8;
@@ -231,6 +252,30 @@ myWriter.ExecuteCommand("Zoom",false,"95%");
 myWriter.ExecuteCommand("RuleVisible",true,null);
 myWriter.BackColorString='#B1CAEB';
 
+
+
+function bindDataSource(data){
+	debugger;
+// 	var jsonstr2 = '{"NAME":"张冰心","SEX":"女","AGE":"30","MARITAL_STATUS":null,"AREA_NAME":"安徽省滁州市定远县","NATION":null,"OCCUPATION":null,"SERVICE_AGENCY":null,"MAILING_ADDRESS":"江苏省常州市武进区聚盛花园8幢甲单元202室","INDATE":"2018-05-14"}';
+// 	var jsonstr = '{"NAME":"张三","career":"农民","gender":"女","careerAdress":"常州二院","age":"55","adress":"什么路多少号","marriage":"已婚","teller":"儿子","birthplace":"常州","inDate":"","nation":"","recDate":""}';
+	var jsonstr = JSON.stringify(data);
+	//jsonstr = jsonstr.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'");
+	var json = JSON.parse(jsonstr);
+	var xml = JSON2XML(json);
+	alert(xml);
+	myWriter.SetDocumentParameterValueXml("patient", xml);
+	myWriter.WriteDataFromDataSourceToDocument();
+}
+function JSON2XML(json){
+	var xml = "<x>";
+	for(var i in json){
+		var text = json[i]||"";
+		xml = xml + "<" + i + ">" + text + "</" + i + ">";
+	}
+	xml = xml + "</x>";
+	return xml;
+}
+
 </script>
 <script language=javascript  for="myWriter" event="EventMouseClickExt(eventSender,eventArgs)">
 	//关闭菜单
@@ -256,35 +301,37 @@ myWriter.BackColorString='#B1CAEB';
 		$("#underline_btn").removeClass("ke-on");
 	}
 	//点击 入院诊断 加载 诊断结果内容
-	if(eventSender.CurrentInputField.name=="入院诊断"){
-		var patientId = "0002648607";
-		$.ajax({
-			url: "/emr/patient/getPrescByPatientId/" + patientId,
-			dataType: "json",
-			success: function (data) {
-				debugger
-				if(data.outPrescMaster){
-					var prescNo = data.outPrescMaster[0].prescNo;
-					$.ajax({
-						url: "/emr/patient/getDecisionByPrescNo/" + patientId+"/"+prescNo,
-						dataType: "json",
-						success: function (data) {
-							debugger;
-							if(data.mzcfDiag){
-								var decision = data.mzcfDiag[0].diagDesc;
-								var input = myWriter.Document.GetElementById("ryzd");
-								if (input != null) {
-									input = myWriter.ComConvertToXTextInputFieldElement(input);
+	if(eventSender.CurrentInputField){
+		if(eventSender.CurrentInputField.name=="入院诊断"){
+			var patientId = "0002648607";
+			$.ajax({
+				url: "/emr/patient/getPrescByPatientId/" + patientId,
+				dataType: "json",
+				success: function (data) {
+					debugger
+					if(data.outPrescMaster){
+						var prescNo = data.outPrescMaster[0].prescNo;
+						$.ajax({
+							url: "/emr/patient/getDecisionByPrescNo/" + patientId+"/"+prescNo,
+							dataType: "json",
+							success: function (data) {
+								debugger;
+								if(data.mzcfDiag){
+									var decision = data.mzcfDiag[0].diagDesc;
+									var input = myWriter.Document.GetElementById("ryzd");
 									if (input != null) {
-										input.Text=decision;
+										input = myWriter.ComConvertToXTextInputFieldElement(input);
+										if (input != null) {
+											input.Text=decision;
+										}
 									}
 								}
 							}
-						}
-					})
+						})
+					}
 				}
-			}
-		})
+			})
+		}
 	}
 </script>
 

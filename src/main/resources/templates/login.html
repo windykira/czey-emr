@@ -97,7 +97,7 @@
                 content :  ['emrsys/dept/choose','no']
               })
             }else{
-              $("#departmentId").val(data.departmentsData.id);
+              $("#departmentId").val(data.departmentsData[0].id);
               $.ajax({
                 type: "POST",
                 url: ctx+"login",

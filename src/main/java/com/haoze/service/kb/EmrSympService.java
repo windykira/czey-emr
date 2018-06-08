@@ -1,10 +1,11 @@
 package com.haoze.service.kb;
 
-import com.haoze.common.model.ResponseResult;
-import com.haoze.model.system.role.entity.EmrRoleEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.haoze.common.model.ResponseResult;
+import com.haoze.model.kb.symp.entity.SympEntity;
 
 /**
  * 知识库症状服务接口。
@@ -19,7 +20,7 @@ public interface EmrSympService {
      * @param role
      * @return
      */
-    ResponseResult save(EmrRoleEntity role);
+	ResponseResult save(SympEntity role);
 
     /**
      *删除角色
@@ -38,18 +39,18 @@ public interface EmrSympService {
      * 更新角色
      * @param role
      */
-    ResponseResult update(EmrRoleEntity role);
+    ResponseResult update(SympEntity role);
 
     /**
      * 查询角色列表
      * @return
      */
-    List<EmrRoleEntity> listRoles();
+    List<SympEntity> listRoles();
 
     /**
      * 获取角色信息
      * @param roleId
      * @return
      */
-    EmrRoleEntity get(String roleId);
+    SympEntity get(String roleId);
 }

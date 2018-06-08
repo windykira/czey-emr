@@ -57,4 +57,11 @@ public interface EmrDepartmentService {
      * @return
      */
     Tree<EmrDepartmentEntity> getTree(Map<String, Object> paramMap);
+
+    /**
+     * 获取部门详情
+     * @param departmentId
+     * @return
+     */
+    EmrDepartmentEntity get(String departmentId);
 }

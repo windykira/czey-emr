@@ -2,7 +2,7 @@ $(function() {
 
     //初始化病历目录数据
     loadEmrCataLog();
-
+    loadNavi();
     $("#timer").text($.getCurrentTime());
     setInterval(function(){
         $("#timer").text($.getCurrentTime());
@@ -22,7 +22,20 @@ $(function() {
     resize();
 
 });
-
+//加载导航信息
+var info;
+function loadNavi(){
+    info = window.opener.patientInfo;
+    document.getElementById("patient_name").innerHTML = info.NAME;
+    document.getElementById("patient_bedNo").innerHTML = info.BED_NO;
+    document.getElementById("patient_patientId").innerHTML = info.PATIENT_ID;
+    document.getElementById("patient_sex").innerHTML = info.SEX;
+    document.getElementById("patient_age").innerHTML = info.AGE;
+    document.getElementById("patient_chargeType").innerHTML = info.CHARGE_TYPE;
+    document.getElementById("patient_deptAlias").innerHTML = info.DEPT_ALIAS;
+    document.getElementById("patient_indate").innerHTML = info.INDATE;
+    document.getElementById("patient_diagnosis").innerHTML = info.DIAGNOSIS;
+}
 var zTree = "";
 //var selectNodes = zTree.getSelectedNodes();
 function loadEmrCataLog(){
@@ -37,6 +50,7 @@ function loadEmrCataLog(){
         url : "/emr/catalog/list",
         success : function(data) {
             zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
+            zTree.expandAll(true);
         }
     });
 }
@@ -236,5 +250,5 @@ function resize(){
     $("#myWriter").css("height",h-168);
 }
 
-var treeObj = $.fn.zTree.getZTreeObj("tree");
-treeObj.expandAll(true);
+//var treeObj = $.fn.zTree.getZTreeObj("tree");
+//treeObj.expandAll(true);
