@@ -124,6 +124,7 @@ function loadDcEditor(){
     var rows = $('#templateTable').bootstrapTable('getSelections');
     if (rows.length == 0) {
         layer.alert('请选择要加载的模板。', {icon: 6});
+        //alert("请选择要加载的模板。");
         return;
     }
 
@@ -145,6 +146,7 @@ function loadDcEditor(){
 }
 
 function cancel(){
-    var index = parent.layer.getFrameIndex(window.name);
-    parent.layer.close(index);
+    /*var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);*/
+    parent.$("#tmpTable").hide();
 }

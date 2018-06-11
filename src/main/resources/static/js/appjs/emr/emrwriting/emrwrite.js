@@ -1,3 +1,7 @@
+$(window).resize(function() {
+    resize();
+});
+
 $(function() {
 
     //初始化病历目录数据
@@ -20,6 +24,20 @@ $(function() {
         $("#dcContainer").show();
     })*/
     resize();
+
+    /*$("#addBtn").click(function(){
+        window.dialog = $("#addCaseDiv").clone().dialog({
+            title: "可疑案例历史详细",
+            width : '100%',
+            height : 600,
+            modal : true
+        });
+        $("iframe",dialog).attr("scrolling","no");
+        $("iframe",dialog).attr("frameborder","0");
+        $("iframe",dialog).attr("height","100%");
+        $("iframe",dialog).attr("width","100%");
+        $("iframe",dialog).attr("src","/emr/emrwriting/templatetable");
+    })*/
 
 });
 //加载导航信息
@@ -73,20 +91,29 @@ function loadDcEditor(){
 
 function showModal(){
 
+    $("#tmpTable").attr("src","/emr/emrwriting/templatetable");
+    $("#tmpTable").attr("width","1000px");
+    $("#tmpTable").attr("height","610px");
+    $("#tmpTable").show();
+    return;
     //$("#addMedical").modal("toggle");
+
     var selectNodes = zTree.getSelectedNodes();
     if(selectNodes.length == 0){
         //layer.msg("请选择病历目录。");
-        layer.alert('请选择病历目录。', {icon: 6});
+        //layer.alert('请选择病历目录。', {icon: 6});
+        alert("请选择病历目录。");
         return;
     }
+
     layer.open({
         type : 2,
+        closeBtn:0,
         title : false,
         maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
+        shadeClose : true, // 点击遮罩关闭层
         area : [ '800px', '550px' ],
-        offset:['100px', ''],
+        //offset:['100px', ''],
         //backgroundColor:'#FFEBCD',
         skin: 'layui-layer-molv',
         content : '/emr/emrwriting/templatetable'

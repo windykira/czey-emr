@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>常州市第二人民医院住院电子病历</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -55,6 +56,7 @@
             <button type="button" class="btn btn-default">存为个人模板</button>
             <button type="button" class="btn btn-default">预览</button>
             <button type="button" class="btn btn-default">打印</button>
+            <button type="button" class="btn btn-default" id="addBtn">测试</button>
         </div>
         <div class="btn-group pull-right" id="pageBtn">
             <button id="btnPop1" type="button" class="btn btn-default" onclick="openReport('1')">医嘱</button>
@@ -135,6 +137,7 @@
     </div>
     <!-- /弹出窗5 -->
 </div>
+
 <!-- footer -->
 <footer class="footer">
     <h5 class="pull-left mr-20" th:text="${footerName}"><i class="fa fa-user-md fa-lg text-primary" aria-hidden="true"></i></h5>
@@ -192,6 +195,7 @@
         </div>
     </div>
 </div>
+<iframe id="tmpTable" frameborder="1" style="display:none;position:absolute;top:250px;left:580px;" src=""></iframe>
 <!-- /modal -->
 <div th:include="emrinclude::footer"></div>
 <script src="/js/jquery.ztree.core-3.5.js"></script>

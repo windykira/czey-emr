@@ -69,10 +69,10 @@
 		<!--<span><button onclick="pp()">测试</button></span>-->
 		<!--<span><button onclick="saveTemplate()">保存模板</button></span>-->
 	</div>
-	<iframe id="font_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:321px;z-index:100" src="fontMenu"></iframe>
-	<iframe id="size_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:255px;z-index:100" src="sizeMenu"></iframe>
-	<iframe id="color_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="colorMenu"></iframe>
-	<iframe id="bgcolor_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="bgcolorMenu"></iframe>
+	<iframe id="font_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:321px;z-index:100" src="/emr/dc/fontMenu"></iframe>
+	<iframe id="size_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:156px;height:255px;z-index:100" src="/emr/dc/sizeMenu"></iframe>
+	<iframe id="color_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="/emr/dc/colorMenu"></iframe>
+	<iframe id="bgcolor_menu_frame" class="menu_frame" frameborder="no" border="0" style="display:none;background-color:transparent;position:absolute;width:140px;height:122px;z-index:100" src="/emr/dc/bgcolorMenu"></iframe>
 	<script type="text/javascript" src="/js/jquery.min.js" ></script>
 	<script>
 	//文档点击事件--控制下拉菜单的显示隐藏
@@ -262,7 +262,6 @@ function bindDataSource(data){
 	//jsonstr = jsonstr.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'");
 	var json = JSON.parse(jsonstr);
 	var xml = JSON2XML(json);
-	alert(xml);
 	myWriter.SetDocumentParameterValueXml("patient", xml);
 	myWriter.WriteDataFromDataSourceToDocument();
 }
@@ -437,7 +436,6 @@ function JSON2XML(json){
 			if (input != null) {
 				input = myWriter.ComConvertToXTextInputFieldElement(input);
 				if (input != null) {
-					alert("clear")
 					input.innerText="";
 				}
 			}

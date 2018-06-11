@@ -1,5 +1,8 @@
 package com.haoze.utils;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
 import java.io.*;
 
 
@@ -91,5 +94,32 @@ public class MyFileUtil {
 		}
         return sb.toString();
     }
+
+	public static String resolveFile(String filePath){
+
+		InputStreamReader isr = null;
+		StringBuilder sb = new StringBuilder();
+		Resource resource = new ClassPathResource(filePath);
+		try {
+
+			File file = resource.getFile();
+			isr = new InputStreamReader(new FileInputStream(file),"UTF-8");
+			int len;
+			char[] buf = new char[1024];
+			while ((len=isr.read(buf))!=-1){
+				sb.append(buf);
+				buf=new char[1024];
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				isr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+	}
 
 }

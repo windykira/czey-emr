@@ -89,7 +89,9 @@ public class DcController extends BaseController {
     @ResponseBody
     public String getTemplate(HttpServletRequest request, @PathVariable String fileId) throws IOException {
         String path  = service.getTemplateFilePathById(fileId);
-        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH")+path);
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH") + "index.xml");
+        //this.getClass().getResource("/static/cab/index.xml");
+        //String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
     	return  xml;
     }
 }

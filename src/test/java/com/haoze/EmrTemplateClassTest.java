@@ -5,10 +5,14 @@ import com.haoze.common.model.QueryParam;
 import com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity;
 import com.haoze.service.template.EmrTemplateClassService;
 import com.haoze.utils.JsoupHttpRequest;
+import com.haoze.utils.MyFileUtil;
+import com.haoze.utils.SystemConfigParseUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -39,5 +43,11 @@ public class EmrTemplateClassTest {
         Map map = new HashMap();
         map.put("deptCode","211601");
         JsoupHttpRequest.sendHttpRequest("http://172.20.91.56:8181/getPatietInfoNew","",map);
+    }
+
+    @Test
+    public void test(){
+        Resource resource = new ClassPathResource("/static/cab/index.xml");
+        //MyFileUtil.readFile("/static/cab/index.xml");
     }
 }

@@ -10,9 +10,8 @@ function openReport(hisCallType){
         closeBtn:0,
         title: false,
         maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['1100px', '620px'],
-        offset:['300px', '450px'],
+        shadeClose: true, // 点击遮罩关闭层
+        area: ['850px', '610px'],
         content: '/emr/emrwriting/reportimport/' + hisCallType
     });
 }
