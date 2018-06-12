@@ -1,48 +1,37 @@
-$(window).resize(function() {
+$(window).resize(function () {
     resize();
 });
 
-$(function() {
+$(function () {
 
     //初始化病历目录数据
     loadEmrCataLog();
     loadNavi();
     $("#timer").text($.getCurrentTime());
-    setInterval(function(){
+    setInterval(function () {
         $("#timer").text($.getCurrentTime());
-    },1000)
+    }, 1000)
 
     $(".nav-tabs li").click(function () {
         $(this).addClass("active").siblings(".active").removeClass("active");
     });
-
-    /*$('#addMedical').on('shown.bs.modal', function () {
-        $("#dcContainer").hide();
-        $("#boxPop1,#boxPop2,#boxPop3,#boxPop4,#boxPop5").slideUp(200);
-    })
-    $('#addMedical').on('hidden.bs.modal', function () {
-        $("#dcContainer").show();
-    })*/
     resize();
 
-    /*$("#addBtn").click(function(){
-        window.dialog = $("#addCaseDiv").clone().dialog({
-            title: "可疑案例历史详细",
-            width : '100%',
-            height : 600,
-            modal : true
-        });
-        $("iframe",dialog).attr("scrolling","no");
-        $("iframe",dialog).attr("frameborder","0");
-        $("iframe",dialog).attr("height","100%");
-        $("iframe",dialog).attr("width","100%");
-        $("iframe",dialog).attr("src","/emr/emrwriting/templatetable");
-    })*/
-
+    $("#retract").click(function () {
+        if($("#retract").attr("value") == "open"){
+            $(".sidebar2").css("width",0);
+            $(".main2").css("left","20px");
+            $("#retract").attr("value","close");
+        }else{
+            $(".sidebar2").css("width","220px");
+            $(".main2").css("left","220px");
+            $("#retract").attr("value","open");
+        }
+    });
 });
 //加载导航信息
 var info;
-function loadNavi(){
+function loadNavi() {
     info = window.opener.patientInfo;
     document.getElementById("patient_name").innerHTML = info.NAME;
     document.getElementById("patient_bedNo").innerHTML = info.BED_NO;
@@ -56,141 +45,150 @@ function loadNavi(){
 }
 var zTree = "";
 //var selectNodes = zTree.getSelectedNodes();
-function loadEmrCataLog(){
+function loadEmrCataLog() {
     var setting = {
         data: {
             simpleData: {
-                enable: true}
+                enable: true
+            }
         }
     };
     $.ajax({
-        type : "GET",
-        url : "/emr/catalog/list",
-        success : function(data) {
+        type: "GET",
+        url: "/emr/catalog/list",
+        success: function (data) {
             zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
             zTree.expandAll(true);
         }
     });
 }
 
-function loadDcEditor(){
+function loadDcEditor() {
 
     var ctl = document.getElementById("myWriter");
     //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
     $.ajax({
-        url:"/emr/dc/getXML/index",
-        dataType:"text",
-        success:function(data){
+        url: "/emr/dc/getXML/index",
+        dataType: "text",
+        success: function (data) {
             ctl.ExecuteCommand("FileOpenString", false, data);
         },
-        error:function(){
+        error: function () {
             alert("读取出错");
         }
     })
 }
 
-function showModal(){
-
-    $("#tmpTable").attr("src","/emr/emrwriting/templatetable");
-    $("#tmpTable").attr("width","1000px");
-    $("#tmpTable").attr("height","610px");
-    $("#tmpTable").show();
-    return;
-    //$("#addMedical").modal("toggle");
+function showModal() {
 
     var selectNodes = zTree.getSelectedNodes();
-    if(selectNodes.length == 0){
-        //layer.msg("请选择病历目录。");
-        //layer.alert('请选择病历目录。', {icon: 6});
+    if (selectNodes.length == 0) {
+        //layer.alert('请选择要加载的模板。', {icon: 6});
         alert("请选择病历目录。");
         return;
     }
+    /*var top = $(window).height() / 40;
+     var left = $(window).width() / 160;
+     var css = {
+     "position": "absolute",
+     "top":"10px",
+     "left":"10px",
+     "width":"840px",
+     "height":"500px",
+     "z-index":1002
+     };
+     $("#tmpTable").css(css);
+     $("#tmpTable").attr("src", "/emr/emrwriting/templatetable");
+     $("#tmpTable").show();
+     return;*/
 
     layer.open({
-        type : 2,
-        closeBtn:0,
-        title : false,
-        maxmin : true,
-        shadeClose : true, // 点击遮罩关闭层
-        area : [ '800px', '550px' ],
+        type: 2,
+        closeBtn: 0,
+        title: "新增病历",
+        maxmin: true,
+        shadeClose: true, // 点击遮罩关闭层
+        area: ['840px', '550px'],
         //offset:['100px', ''],
         //backgroundColor:'#FFEBCD',
+        offset: 't',
         skin: 'layui-layer-molv',
-        content : '/emr/emrwriting/templatetable'
+        content: '/emr/emrwriting/templatetable'
     });
+
     //$("#templateIFrame").attr("src", "/test");
 
     /*$.ajax({
-        type : "GET",
-        url : "/template/class/list/"+selectNodes[0].id,
-        success : function(datas) {
+     type : "GET",
+     url : "/template/class/list/"+selectNodes[0].id,
+     success : function(datas) {
 
-            $(".list-group").find("li").remove();
-            $.each(datas,function(i,e){
-                if(i == 0){
-                    $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
-                }else{
-                    $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
-                }
-            });
-            //$("#dcDiv").hide();
-            $("#addMedical").modal("toggle");
-            //加载模板表格数据
-            loadTemplateTable(1);
-            $(".list-group li").click(function () {
-                $(this).addClass("active").siblings(".active").removeClass("active");
-            });
-        }
-    });*/
+     $(".list-group").find("li").remove();
+     $.each(datas,function(i,e){
+     if(i == 0){
+     $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
+     }else{
+     $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
+     }
+     });
+     //$("#dcDiv").hide();
+     $("#addMedical").modal("toggle");
+     //加载模板表格数据
+     loadTemplateTable(1);
+     $(".list-group li").click(function () {
+     $(this).addClass("active").siblings(".active").removeClass("active");
+     });
+     }
+     });*/
 }
 
-function reloadTemplate(e){
+function reloadTemplate(e) {
 
-    $('#templateTable').bootstrapTable('refreshOptions',{
+    $('#templateTable').bootstrapTable('refreshOptions', {
         queryParams: function (params) {
             return {
                 // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                 limit: params.limit,
-                page:(params.offset / params.limit) + 1,
-                range:$(".nav-tabs").find(".active").attr("value"),
-                templateClassId:$(e).attr("value")
+                page: (params.offset / params.limit) + 1,
+                range: $(".nav-tabs").find(".active").attr("value"),
+                templateClassId: $(e).attr("value")
             };
         }
     });
 }
 
-function reloadTemplateTable(rangeValue){
+function reloadTemplateTable(rangeValue) {
 
     //alert($(e).attr("value"));
-    $('#templateTable').bootstrapTable('refreshOptions',{
+    $('#templateTable').bootstrapTable('refreshOptions', {
         queryParams: function (params) {
             return {
                 // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                 limit: params.limit,
-                page:(params.offset / params.limit) + 1,
-                range:rangeValue,
-                templateClassId:$(".list-group").find(".active").attr("value")
+                page: (params.offset / params.limit) + 1,
+                range: rangeValue,
+                templateClassId: $(".list-group").find(".active").attr("value")
             };
         }
     });
 }
 
 /*function reloadTemplateTable(templateClassId,rangeValue){
-    $('#templateTable').bootstrapTable('refreshOptions',{
+ $('#templateTable').bootstrapTable('refreshOptions',{
 
-        queryParams: function (params) {
-            return {
-                // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                limit: params.limit,
-                page:(params.offset / params.limit) + 1,
-                range:rangeValue,
-                templateClassId:$(".list-group").find(".active").attr("value")
-            };
-        }
-    });
-}*/
+ queryParams: function (params) {
+ return {
+ // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+ limit: params.limit,
+ page:(params.offset / params.limit) + 1,
+ range:rangeValue,
+ templateClassId:$(".list-group").find(".active").attr("value")
+ };
+ }
+ });
+ }*/
 
-function loadTemplateTable(rangeValue){
+function loadTemplateTable(rangeValue) {
 
     $('#templateTable')
         .bootstrapTable(
@@ -213,13 +211,13 @@ function loadTemplateTable(rangeValue){
                     return {
                         // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        page:(params.offset / params.limit) + 1,
-                        range:rangeValue,
-                        templateClassId:$(".list-group").find(".active").attr("value")
+                        page: (params.offset / params.limit) + 1,
+                        range: rangeValue,
+                        templateClassId: $(".list-group").find(".active").attr("value")
                         /*sort: params.sort,      //排序列名
-                        sortOrder: params.order, //排位命令（desc，asc）
-                        name: $('#searchName').val(),
-                        createStatus: $('input[name="status"]:checked').val()*/
+                         sortOrder: params.order, //排位命令（desc，asc）
+                         name: $('#searchName').val(),
+                         createStatus: $('input[name="status"]:checked').val()*/
                     };
                 },
                 columns: [
@@ -247,32 +245,32 @@ function loadTemplateTable(rangeValue){
                         title: '创建时间'
                     }
                     /*{
-                        title: '操作',
-                        field: 'id',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.id
-                                + '\')"><i class="fa fa-edit "></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.id
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\''
-                                + row.id
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            var g = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="新增"  mce_href="#" onclick="add(\''
-                                + row.pkEmp
-                                + '\')"><i class="fa fa-save"></i></a> ';
-                            return g;
-                        }
-                    }*/
+                     title: '操作',
+                     field: 'id',
+                     align: 'center',
+                     formatter: function (value, row, index) {
+                     var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                     + row.id
+                     + '\')"><i class="fa fa-edit "></i></a> ';
+                     var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                     + row.id
+                     + '\')"><i class="fa fa-remove"></i></a> ';
+                     var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="重置密码"  mce_href="#" onclick="resetPwd(\''
+                     + row.id
+                     + '\')"><i class="fa fa-key"></i></a> ';
+                     var g = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="新增"  mce_href="#" onclick="add(\''
+                     + row.pkEmp
+                     + '\')"><i class="fa fa-save"></i></a> ';
+                     return g;
+                     }
+                     }*/
                 ]
             });
 }
 
-function resize(){
+function resize() {
     var h = $("body").height();
-    $("#myWriter").css("height",h-168);
+    $("#myWriter").css("height", h - 168);
 }
 
 //var treeObj = $.fn.zTree.getZTreeObj("tree");

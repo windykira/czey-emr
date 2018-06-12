@@ -1,49 +1,7 @@
-var elementMap = new Map();
 $(function(){
 
-    initElementMap();
     initTable($("#hisCallType").val());
-
-    //bindTableCheck();
-    /*$("#doctorAdvice").on('check.bs.table', function (e, row, element){
-        $(element).parent().parent().children().addClass("rowChecked");
-    });
-
-    $("#doctorAdvice").on('uncheck.bs.table', function (e, row, element){
-        $(element).parent().parent().children().removeClass("rowChecked");
-    });*/
-
 })
-
-function bindTableCheck(){
-
-    elementMap.forEach(function (item, key, mapObj) {
-
-        $(mapObj.get(key)).on('check.bs.table', function (e, row, element){
-            $(element).parent().parent().children().addClass("rowChecked");
-        });
-        $(mapObj.get(key)).on('uncheck.bs.table', function (e, row, element){
-            $(element).parent().parent().children().removeClass("rowChecked");
-        });
-
-        $(mapObj.get(key)).on('check-all.bs.table', function (e, row){
-
-
-        });
-        $(mapObj.get(key)).on('uncheck-all.bs.table', function (e, row, element){
-            $(element).parent().parent().children().removeClass("rowChecked");
-        });
-    })
-}
-
-function initElementMap(){
-
-    elementMap.set("1", $("#doctorAdvice"));
-    elementMap.set("2", $("#checkUp"));
-    elementMap.set("3", $("#inspect"));
-    elementMap.set("4", $("#prescription"));
-    elementMap.set("5", $("#operation"));
-}
 
 function cancel(){
 
@@ -161,15 +119,6 @@ function initTable(hisCallType){
         hisCallType:hisCallType,
         patientId:"343939"
     };
-
-    /*elementMap.forEach(function (item, key, mapObj) {
-
-        if(key == hisCallType){
-            elementMap.get(key).show();
-        }else{
-            elementMap.get(key).hide();
-        }
-    });*/
 
     element.bootstrapTable(
         {

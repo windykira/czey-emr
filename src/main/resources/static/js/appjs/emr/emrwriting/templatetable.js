@@ -89,6 +89,7 @@ function loadTemplateTable(rangeValue){
 
 function reloadTemplate(e){
 
+    //debugger;
     $('#templateTable').bootstrapTable('refreshOptions',{
         queryParams: function (params) {
             return {
@@ -146,7 +147,6 @@ function loadDcEditor(){
 }
 
 function cancel(){
-    /*var index = parent.layer.getFrameIndex(window.name);
-    parent.layer.close(index);*/
-    parent.$("#tmpTable").hide();
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
 }

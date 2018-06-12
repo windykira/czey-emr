@@ -4,7 +4,7 @@ html {
 body {
 	position: relative;
 	height: 100%;
-	padding-top: 50px;
+	padding-top: 10px;
 	padding-bottom: 60px;
 }
 .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
@@ -136,7 +136,7 @@ a:hover {
 	border-right: 1px solid #eee;
 }
 .sidebar2 {
-	top: 96px;
+	top: 98px;
 }
 .sidebar .panel {
 	margin: 0;
@@ -153,7 +153,7 @@ a:hover {
 	padding: 15px;
 }
 .main2 {
-	top: 96px;
+	top: 98px;
 }
 /* footer */
 .footer {
@@ -204,4 +204,8 @@ a:hover {
 	padding: 4px 12px;
 	position: relative;
 	width: 100%;
+}
+
+.layui-layer-molv{
+	background: #7ebfc1;
 }

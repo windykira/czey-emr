@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=8">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>常州市第二人民医院住院电子病历</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -39,6 +39,7 @@
 <!-- sidebar -->
 <div class="sidebar2">
     <div class="content_wrap">
+        <!--<div id="retract" style="cursor: pointer;">收起</div>-->
         <div class="zTreeDemoBackground left">
             <ul id="treeDemo" class="ztree">
             </ul>
@@ -46,8 +47,12 @@
     </div>
 </div>
 <!-- /sidebar -->
+
 <div class="main2">
+
     <div class="well well-sm">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-default "
+           href="#" title="收起左侧菜单" id="retract" value="open"><i class="fa fa-bars"></i> </a>
         <div class="btn-group">
             <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addMedical" data-backdrop="static">新增</button>-->
             <button type="button" class="btn btn-default" data-backdrop="static" onclick="showModal()">新增</button>
@@ -136,6 +141,8 @@
         </div>
     </div>
     <!-- /弹出窗5 -->
+
+    <!--<iframe id="tmpTable" frameborder="1" style="display:none;" src=""></iframe>-->
 </div>
 
 <!-- footer -->
@@ -195,12 +202,37 @@
         </div>
     </div>
 </div>
-<iframe id="tmpTable" frameborder="1" style="display:none;position:absolute;top:250px;left:580px;" src=""></iframe>
+
 <!-- /modal -->
 <div th:include="emrinclude::footer"></div>
 <script src="/js/jquery.ztree.core-3.5.js"></script>
 <script src="/js/appjs/emr/emrwriting/emrwrite.js"></script>
-<script src="/js/appjs/emr/emrwriting/reportopen.js"></script>
+<script>
+    function openReport(hisCallType){
+
+        var title = "";
+        switch(hisCallType){
+
+            case "1":title="医嘱";break;
+            case "2":title="检查";break;
+            case "3":title="检验";break;
+            case "4":title="处方";break;
+            case "5":title="手术";
+        }
+
+        layer.open({
+            type: 2,
+            closeBtn:1,
+            title: title,
+            maxmin: false,
+            shadeClose: true, // 点击遮罩关闭层
+            area: ['880px', '610px'],
+            skin: 'layui-layer-molv',
+            offset: 't',
+            content: '/emr/emrwriting/reportimport/' + hisCallType
+        });
+    }
+</script>
 <!--<script src="/js/appjs/emr/emrwriting/buttonshow.js"></script>-->
 </body>
 </html>
