@@ -255,7 +255,6 @@ myWriter.BackColorString='#B1CAEB';
 
 
 function bindDataSource(data){
-	debugger;
 // 	var jsonstr2 = '{"NAME":"张冰心","SEX":"女","AGE":"30","MARITAL_STATUS":null,"AREA_NAME":"安徽省滁州市定远县","NATION":null,"OCCUPATION":null,"SERVICE_AGENCY":null,"MAILING_ADDRESS":"江苏省常州市武进区聚盛花园8幢甲单元202室","INDATE":"2018-05-14"}';
 // 	var jsonstr = '{"NAME":"张三","career":"农民","gender":"女","careerAdress":"常州二院","age":"55","adress":"什么路多少号","marriage":"已婚","teller":"儿子","birthplace":"常州","inDate":"","nation":"","recDate":""}';
 	var jsonstr = JSON.stringify(data);
@@ -299,6 +298,12 @@ function JSON2XML(json){
 	}else{
 		$("#underline_btn").removeClass("ke-on");
 	}
+	//调用页面实现该方法 用来在单击编辑器时关闭各种弹出层
+	debugger;
+	if(window.closeLayer){
+		closeLayer();
+	}
+
 	//点击 入院诊断 加载 诊断结果内容
 	if(eventSender.CurrentInputField){
 		if(eventSender.CurrentInputField.name=="入院诊断"){
@@ -307,14 +312,12 @@ function JSON2XML(json){
 				url: "/emr/patient/getPrescByPatientId/" + patientId,
 				dataType: "json",
 				success: function (data) {
-					debugger
 					if(data.outPrescMaster){
 						var prescNo = data.outPrescMaster[0].prescNo;
 						$.ajax({
 							url: "/emr/patient/getDecisionByPrescNo/" + patientId+"/"+prescNo,
 							dataType: "json",
 							success: function (data) {
-								debugger;
 								if(data.mzcfDiag){
 									var decision = data.mzcfDiag[0].diagDesc;
 									var input = myWriter.Document.GetElementById("ryzd");
@@ -335,110 +338,119 @@ function JSON2XML(json){
 </script>
 
 <script language=javascript  for="myWriter" event="EventAfterFieldContentEdit(eventSender,eventArgs)">
-	if(eventSender.CurrentInputField.name=="本院外院"){
-		if(eventSender.CurrentInputField.Text=="本院"){
-//			myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
-			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
-			if (input != null) {
-				input = myWriter.ComConvertToXTextInputFieldElement(input);
-				if (input != null) {
-					input.focus();
-				}
-			}
-			myWriter.ExecuteCommand("InsertString" , false , "\n\r");
-			$.ajax({
-				url: "/emr/emrwriting/listHisResponseDatas",
-				data:{
-					hisCallType:"2",
-					patientId:"852307"
-				},
-				async: false,
-				dataType: "json",
-				success: function(data){
-					if(data.length==0){//没有记录则直接返回
-						return;
-					}
-					myWriter.ExecuteCommand("InsertString" , false , "检查：");
-					var jc_count = 0;
-					for(var i in data){
-						jc_count++;
-						myWriter.ExecuteCommand("InsertString" , false , "检查名称："+jc_count+"."+data[i].checkClass+" 检查结果：");
-						var temp = data[i]
-						var checkNo = temp.checkNo;
-						$.ajax({
-							url: "/emr/patient/getJCDetailByCheckNo/" + checkNo,
-							type: "GET",
-							dataType: "json",
-							async: false,
-							success: function(data1){
-								if(data1.decisionJcxxDetail[0]){
-									var seen = data1.decisionJcxxDetail[0].checkSeen;
-									var c = seen.replace("\n","").replace("\r","")
-									myWriter.ExecuteCommand("InsertString" , false ,seen.replace(/\s/g,""));
-								}
-							}
-						})
-					myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
-					}
+//	if(eventSender.CurrentInputField.name=="本院外院"){
+//		if(eventSender.CurrentInputField.Text=="本院"){
+////			myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
+//			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
+//			if (input != null) {
+//				input = myWriter.ComConvertToXTextInputFieldElement(input);
+//				if (input != null) {
+//					input.focus();
+//				}
+//			}
+//			myWriter.ExecuteCommand("InsertString" , false , "\n\r");
+//			$.ajax({
+//				url: "/emr/emrwriting/listHisResponseDatas",
+//				data:{
+//					hisCallType:"2",
+//					patientId:"852307"
+//				},
+//				async: false,
+//				dataType: "json",
+//				success: function(data){
+//					if(data.length==0){//没有记录则直接返回
+//						return;
+//					}
+//					myWriter.ExecuteCommand("InsertString" , false , "检查：");
+//					var jc_count = 0;
+//					for(var i in data){
+//						jc_count++;
+//						myWriter.ExecuteCommand("InsertString" , false , "检查名称："+jc_count+"."+data[i].checkClass+" 检查结果：");
+//						var temp = data[i]
+//						var checkNo = temp.checkNo;
+//						$.ajax({
+//							url: "/emr/patient/getJCDetailByCheckNo/" + checkNo,
+//							type: "GET",
+//							dataType: "json",
+//							async: false,
+//							success: function(data1){
+//								if(data1.decisionJcxxDetail[0]){
+//									var seen = data1.decisionJcxxDetail[0].checkSeen;
+//									var c = seen.replace("\n","").replace("\r","")
+//									myWriter.ExecuteCommand("InsertString" , false ,seen.replace(/\s/g,""));
+//								}
+//							}
+//						})
+//					myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
+//					}
+//
+//				}
+//			})
+//
+//			$.ajax({
+//				url: "/emr/emrwriting/listHisResponseDatas",
+//				data:{
+//					hisCallType:"3",
+//					patientId:"872745"
+//				},
+//				async: false,
+//				dataType: "json",
+//				success: function(data){
+//					if(data.length==0){//没有记录则直接返回
+//						return;
+//					}
+//					debugger;
+////					myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
+//					myWriter.ExecuteCommand("InsertString" , false , "检验：");
+//					var jy_count = 0;
+//					for(var i in data){
+//						jy_count++;
+//						myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
+//						myWriter.ExecuteCommand("InsertString" , false , jy_count+"."+"检验名称："+data[i].checkClass);
+//						var temp = data[i]
+//						var checkNo = temp.checkNo;
+//						var content = "";
+//						$.ajax({
+//							url: "/emr/patient/getJYDetailByCheckNo/" + checkNo,
+//							type: "GET",
+//							dataType: "json",
+//							async: false,
+//							success: function(data1){
+//								debugger;
+//								var detail = data1.decisionJyxxDetail;
+//								for(var i in detail){
+//									if(detail[i].abnormalIndicator==="N"){//结果正常则不现实结果
+//										continue;
+//									}
+//									content += detail[i].reportItemName+"："+detail[i].result+detail[i].units+"；";
+////									myWriter.ExecuteCommand("InsertString" , false ,str);
+//								}
+//							}
+//						})
+//						if(content !== ""){
+//							myWriter.ExecuteCommand("InsertString" , false , "【"+content+"】");
+//						}
+//					}
+//
+//				}
+//			})
+//		}else if(eventSender.CurrentInputField.Text=="外院"){
+//			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
+//			if (input != null) {
+//				input = myWriter.ComConvertToXTextInputFieldElement(input);
+//				if (input != null) {
+//					input.innerText="";
+//				}
+//			}
+//		}
+//	}
 
-				}
-			})
-
-			$.ajax({
-				url: "/emr/emrwriting/listHisResponseDatas",
-				data:{
-					hisCallType:"3",
-					patientId:"872745"
-				},
-				async: false,
-				dataType: "json",
-				success: function(data){
-					if(data.length==0){//没有记录则直接返回
-						return;
-					}
-					debugger;
-//					myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
-					myWriter.ExecuteCommand("InsertString" , false , "检验：");
-					var jy_count = 0;
-					for(var i in data){
-						jy_count++;
-						myWriter.ExecuteCommand("InsertString" , false ,"\n\r");
-						myWriter.ExecuteCommand("InsertString" , false , jy_count+"."+"检验名称："+data[i].checkClass);
-						var temp = data[i]
-						var checkNo = temp.checkNo;
-						var content = "";
-						$.ajax({
-							url: "/emr/patient/getJYDetailByCheckNo/" + checkNo,
-							type: "GET",
-							dataType: "json",
-							async: false,
-							success: function(data1){
-								debugger;
-								var detail = data1.decisionJyxxDetail;
-								for(var i in detail){
-									if(detail[i].abnormalIndicator==="N"){//结果正常则不现实结果
-										continue;
-									}
-									content += detail[i].reportItemName+"："+detail[i].result+detail[i].units+"；";
-//									myWriter.ExecuteCommand("InsertString" , false ,str);
-								}
-							}
-						})
-						if(content !== ""){
-							myWriter.ExecuteCommand("InsertString" , false , "【"+content+"】");
-						}
-					}
-
-				}
-			})
-		}else if(eventSender.CurrentInputField.Text=="外院"){
-			var input = myWriter.Document.GetElementById("zljg");//获取诊疗经过输入域
-			if (input != null) {
-				input = myWriter.ComConvertToXTextInputFieldElement(input);
-				if (input != null) {
-					input.innerText="";
-				}
-			}
+	if(eventSender.CurrentInputField.name=="检查检验单选") {
+		if (eventSender.CurrentInputField.Text == "检查") {
+			openReport('2');
+		}
+		if (eventSender.CurrentInputField.Text == "检验") {
+			openReport('3');
 		}
 	}
 

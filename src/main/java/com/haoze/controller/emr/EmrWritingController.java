@@ -52,12 +52,14 @@ public class EmrWritingController extends BaseController{
 
     @GetMapping("/listHisResponseDatas")
     @ResponseBody
-    List<HisResponseDataPO> listHisResponseDatas(Model model, @RequestParam Map<String,Object> params){
+    List<Map> listHisResponseDatas(Model model, @RequestParam Map<String,Object> params){
 
         try {
             params.put("visitId",1);
             params.put("repeatIndicator",1);
-            List<HisResponseDataPO> advice = HisResponseDataService.listHisResponseData(params);
+            //params.put("patientId","955635");
+            //List<? extends HisResponseDataPO> advice = HisResponseDataService.listHisResponseData(params);
+            List<Map> advice = HisResponseDataService.listHisResponseData(params);
             return advice;
         }catch (Exception e){
             e.printStackTrace();

@@ -19,12 +19,22 @@ $(function () {
 
     $("#retract").click(function () {
         if($("#retract").attr("value") == "open"){
+            $(".navbar").hide();
+            $("#patient").hide();
+            $(".main2").css("top",0);
+
             $(".sidebar2").css("width",0);
             $(".main2").css("left","20px");
+
             $("#retract").attr("value","close");
         }else{
+            $(".navbar").show();
+            $("#patient").show();
+            $(".main2").css("top","98px");
+
             $(".sidebar2").css("width","220px");
             $(".main2").css("left","220px");
+
             $("#retract").attr("value","open");
         }
     });
@@ -270,7 +280,7 @@ function loadTemplateTable(rangeValue) {
 
 function resize() {
     var h = $("body").height();
-    $("#myWriter").css("height", h - 168);
+    $("#myWriter").css("height", h - 30);
 }
 
 //var treeObj = $.fn.zTree.getZTreeObj("tree");

@@ -9,6 +9,7 @@ import com.haoze.utils.SystemConfigParseUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * HIS请求参数构造。
@@ -23,7 +24,7 @@ public class HisRequestParamFactory {
      * @return
      * @throws IOException
      */
-    public static HisRequestParam createHisRequestParam(HisCallTypeEnum hisCallTypeEnum) throws IOException {
+    /*public static HisRequestParam createHisRequestParam(HisCallTypeEnum hisCallTypeEnum) throws IOException {
 
         //不同请求类型对应不同返回数据类型
         switch (hisCallTypeEnum.getEnumValue()){
@@ -35,6 +36,28 @@ public class HisRequestParamFactory {
                     ,HisResponseDataKey.PATIENT_INSPECT,new ArrayList<HisPatientInspectPO>().getClass());
             case "4":return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_PRESCRIPTION")
                     ,HisResponseDataKey.PRESCRIPTION,new ArrayList<HisPatientPrescriptionPO>().getClass());
+        }
+        return null;
+    }*/
+
+    /**
+     * 构建HIS请求参数
+     * @param hisCallTypeEnum
+     * @return
+     * @throws IOException
+     */
+    public static HisRequestParam createHisRequestParam(HisCallTypeEnum hisCallTypeEnum) throws IOException {
+
+        //不同请求类型对应不同返回数据类型
+        switch (hisCallTypeEnum.getEnumValue()){
+            case "1":return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_DOCTOR_ADVICE")
+                    ,HisResponseDataKey.DOCTOR_ADVICE);
+            case "2":return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_CHECKUP")
+                    ,HisResponseDataKey.PATIENT_CHECKUP);
+            case "3":return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_INSPECT")
+                    ,HisResponseDataKey.PATIENT_INSPECT);
+            case "4":return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_PRESCRIPTION")
+                    ,HisResponseDataKey.PRESCRIPTION);
         }
         return null;
     }

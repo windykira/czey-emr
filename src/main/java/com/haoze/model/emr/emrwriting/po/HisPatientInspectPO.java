@@ -7,27 +7,28 @@ package com.haoze.model.emr.emrwriting.po;
  */
 public class HisPatientInspectPO implements HisResponseDataPO{
 
-    private String applyTime;//提供时间
-    private String checkClass;//检查类型
+    /*private String applyTime;//报告日期
     private String checkNo;//检查编号
-    private String resultStatus;//
-    private String state;//
-    private String status;//
+    private String examItem;//检查项目
+    private String result;//结果
+    private String units;//单位
+    private String textRange;//正常参考值
+    private String abnormalIndicator;//异常*/
 
-    public String getApplyTime() {
+    private String RESULT_DATE_TIME;//报告日期
+    private String ITEM_NO;//检查编号
+    private String REPORT_ITEM_NAME;//检查项目
+    private String RESULT;//结果
+    private String ABNORMAL_INDICATOR;//异常
+    private String UNITS;//单位
+    private String TEXT_RANGE;//正常参考值
+
+    /*public String getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(String applyTime) {
-        this.applyTime = applyTime;
-    }
-
-    public String getCheckClass() {
-        return checkClass;
-    }
-
-    public void setCheckClass(String checkClass) {
-        this.checkClass = checkClass;
+    public void setApplyTime() {
+        this.applyTime = getRESULT_DATE_TIME();
     }
 
     public String getCheckNo() {
@@ -38,27 +39,100 @@ public class HisPatientInspectPO implements HisResponseDataPO{
         this.checkNo = checkNo;
     }
 
-    public String getResultStatus() {
-        return resultStatus;
+    public String getExamItem() {
+        return examItem;
     }
 
-    public void setResultStatus(String resultStatus) {
-        this.resultStatus = resultStatus;
+    public void setExamItem(String examItem) {
+        this.examItem = examItem;
     }
 
-    public String getState() {
-        return state;
+    public String getResult() {
+        return result;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUnits() {
+        return units;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUnits(String units) {
+        this.units = units;
     }
+
+    public String getTextRange() {
+        return textRange;
+    }
+
+    public void setTextRange(String textRange) {
+        this.textRange = textRange;
+    }
+
+    public String getAbnormalIndicator() {
+        return abnormalIndicator;
+    }
+
+    public void setAbnormalIndicator(String abnormalIndicator) {
+        this.abnormalIndicator = abnormalIndicator;
+    }*/
+
+    public String getRESULT_DATE_TIME() {
+        return RESULT_DATE_TIME;
+    }
+
+    public void setRESULT_DATE_TIME(String RESULT_DATE_TIME) {
+        this.RESULT_DATE_TIME = RESULT_DATE_TIME;
+    }
+
+    public String getITEM_NO() {
+        return ITEM_NO;
+    }
+
+    public void setITEM_NO(String ITEM_NO) {
+        this.ITEM_NO = ITEM_NO;
+    }
+
+    public String getREPORT_ITEM_NAME() {
+        return REPORT_ITEM_NAME;
+    }
+
+    public void setREPORT_ITEM_NAME(String REPORT_ITEM_NAME) {
+        this.REPORT_ITEM_NAME = REPORT_ITEM_NAME;
+    }
+
+    public String getRESULT() {
+        return RESULT;
+    }
+
+    public void setRESULT(String RESULT) {
+        this.RESULT = RESULT;
+    }
+
+    public String getABNORMAL_INDICATOR() {
+        return ABNORMAL_INDICATOR;
+    }
+
+    public void setABNORMAL_INDICATOR(String ABNORMAL_INDICATOR) {
+        this.ABNORMAL_INDICATOR = ABNORMAL_INDICATOR;
+    }
+
+    public String getUNITS() {
+        return UNITS;
+    }
+
+    public void setUNITS(String UNITS) {
+        this.UNITS = UNITS;
+    }
+
+    public String getTEXT_RANGE() {
+        return TEXT_RANGE;
+    }
+
+    public void setTEXT_RANGE(String TEXT_RANGE) {
+        this.TEXT_RANGE = TEXT_RANGE;
+    }
+
 }

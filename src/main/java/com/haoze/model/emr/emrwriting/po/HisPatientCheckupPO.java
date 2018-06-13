@@ -7,19 +7,25 @@ package com.haoze.model.emr.emrwriting.po;
  */
 public class HisPatientCheckupPO implements HisResponseDataPO{
 
-    private String applyTime;//提供时间
-    private String checkClass;//检查类型
+    /*private String applyTime;//检查时间
+    private String checkClass;//检查项目
     private String checkNo;//检查编号
-    private String resultStatus;//
-    private String state;//
-    private String status;//
+    private String description;//印象可见
+    private String impression;//检查结论*/
 
-    public String getApplyTime() {
+    //HIS返回字段
+    private String REPORT_DATE_TIME;//报告日期
+    private String EXAM_NO;//检查单号
+    private String EXAM_ITEM;//检查项目
+    private String DESCRIPTION;//印象可见
+    private String IMPRESSION;//检查结论
+
+    /*public String getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(String applyTime) {
-        this.applyTime = applyTime;
+    public void setApplyTime() {
+        this.applyTime = getREPORT_DATE_TIME();
     }
 
     public String getCheckClass() {
@@ -38,27 +44,59 @@ public class HisPatientCheckupPO implements HisResponseDataPO{
         this.checkNo = checkNo;
     }
 
-    public String getResultStatus() {
-        return resultStatus;
+    public String getDescription() {
+        return description;
     }
 
-    public void setResultStatus(String resultStatus) {
-        this.resultStatus = resultStatus;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getState() {
-        return state;
+    public String getImpression() {
+        return impression;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setImpression(String impression) {
+        this.impression = impression;
+    }*/
+
+    public String getREPORT_DATE_TIME() {
+        return REPORT_DATE_TIME;
     }
 
-    public String getStatus() {
-        return status;
+    public void setREPORT_DATE_TIME(String REPORT_DATE_TIME) {
+        this.REPORT_DATE_TIME = REPORT_DATE_TIME;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getEXAM_NO() {
+        return EXAM_NO;
+    }
+
+    public void setEXAM_NO(String EXAM_NO) {
+        this.EXAM_NO = EXAM_NO;
+    }
+
+    public String getEXAM_ITEM() {
+        return EXAM_ITEM;
+    }
+
+    public void setEXAM_ITEM(String EXAM_ITEM) {
+        this.EXAM_ITEM = EXAM_ITEM;
+    }
+
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
+    }
+
+    public void setDESCRIPTION(String DESCRIPTION) {
+        this.DESCRIPTION = DESCRIPTION;
+    }
+
+    public String getIMPRESSION() {
+        return IMPRESSION;
+    }
+
+    public void setIMPRESSION(String IMPRESSION) {
+        this.IMPRESSION = IMPRESSION;
     }
 }

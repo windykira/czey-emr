@@ -46,8 +46,8 @@
 					<button class="btn btn-default" type="button" onclick="saveTemplate()">保存</button>
 					<button class="btn btn-default" type="button" onclick="pp()">删除</button>
 					<button class="btn btn-default" type="button">存为个人模板</button>
-					<button class="btn btn-default" type="button">预览</button>
-					<button class="btn btn-default" type="button">打印</button>
+					<button class="btn btn-default" type="button" onclick="preview()">预览</button>
+					<button class="btn btn-default" type="button" onclick="print()">打印</button>
 					<button class="btn btn-default" type="button" onclick="insertTime()">时间</button>
 
 					<button class="btn btn-default" type="button" onclick="page_setting()">页面设置</button>
@@ -214,6 +214,7 @@
 	function insertSympDescript(node){
 		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
 		var simuInput = myWriter.ComCreateXTextInputFieldElement();
+		myWriter.ExecuteCommand("InsertString", false, node.name+"-");
 		simuInput.ID = node["id"];
 		simuInput.name = node["name"];
 		simuInput.BackgroundText = "请选择";
@@ -221,10 +222,10 @@
 		simuInput.FieldSettings.EditStyle = 1;
 		simuInput.FieldSettings.MultiSelect = false;
 		simuInput.FieldSettings.DynamicListItems = false;
-		var sympId = node.getParentNode().id;
-		simuInput.VisibleExpression="FIND('"+sympId+"',[zz])>=0";
-		simuInput.startBorderText = node["name"];
-		simuInput.endBorderText = "，";
+//		var sympId = node.getParentNode().id;
+//		simuInput.VisibleExpression="FIND('"+sympId+"',[zz])>=0";
+//		simuInput.startBorderText = node["name"];
+//		simuInput.endBorderText = "，";
 
 		//获取下拉选项数值
 		var list = node.children;
@@ -236,7 +237,7 @@
 //		simuInput.innerText="有";
 		myWriter.ExecuteCommand("InsertInputField", false, simuInput);
 	}
-	//插入一个症状的系列内容：描述+伴随症状
+	//插入一个症状的系列内容：描述
 	function insertSympPack(node){
 		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
 		var input = myWriter.ComCreateXTextInputFieldElement();
@@ -245,20 +246,29 @@
 		input.FieldSettings = myWriter.ComCreateInputFieldSettings();
 		input.FieldSettings.EditStyle = 1;
 		input.VisibleExpression="FIND('"+node.id+"',[zz])>=0";
-		input.innerText=node.name+"：";
+//		input.innerText=node.name+"：";
 		myWriter.ExecuteCommand("InsertInputField", false, input);
+		input.focus();
+		myWriter.ExecuteCommand("InsertString", false, node.name+"：");
 		var list = node.children;
 		for(var i in list){
 			if(list[i]["attrType"]==="1"){//插入描述
 				insertSympDescript(list[i]);
+				if(i==list.length-2){
+					myWriter.ExecuteCommand("InsertString", false, "。");
+				}else{
+					myWriter.ExecuteCommand("InsertString", false, "，");
+				}
 			}
 //			if(list[i]["attrType"]==="2"){//插入伴随症状
 //				insertSimuSympList(list[i]);
 //			}
 		}
+		myWriter.ExecuteCommand("MoveTo" , false , "AfterField");//症状描述插入完毕，光标移动到输入域的外面
 	}
 	//插入症状多选
 	function insertSymptomMultiSel(node){
+		myWriter.ExecuteCommand("InsertString", false, "症状【");
 		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
 		var sympInput = myWriter.ComCreateXTextInputFieldElement();
 		sympInput.ID = "zz";
@@ -273,20 +283,42 @@
 		for(var i in list){
 			sympInput.FieldSettings.ListSource.Items.AddByTextValue(list[i]["name"], list[i]["id"]);
 		}
-		sympInput.startBorderText = "症状【";
-		sympInput.endBorderText = "】";
+//		sympInput.startBorderText = "症状【";
+//		sympInput.endBorderText = "】";
+
 		myWriter.ExecuteCommand("InsertInputField", false, sympInput);
+		myWriter.ExecuteCommand("InsertString", false, "】");
 		hideRMenu();
 	}
 
 	function insertSymp(){
 		insertSymptomMultiSel(selectedNode);
 	}
-
-	function insertSimus(){
+	//插入排他症状
+	function insertSimusWithSymp(){
+		myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+		var sympInput = myWriter.ComCreateXTextInputFieldElement();
+		sympInput.ID = "ptzz";
+		sympInput.name = "排他症状";
+		sympInput.BackgroundText = "请选择症状";
+		sympInput.FieldSettings = myWriter.ComCreateInputFieldSettings();
+		sympInput.FieldSettings.EditStyle = 1;
+		sympInput.FieldSettings.MultiSelect = true;
+		sympInput.FieldSettings.DynamicListItems = false;
+		//加载症状选项
+		var list = zTree.getNodes()[0].children;
+		for(var i in list){
+			sympInput.FieldSettings.ListSource.Items.AddByTextValue(list[i]["name"], list[i]["id"]);
+		}
+//		sympInput.startBorderText = "排他症状【";
+//		sympInput.endBorderText = "】";
+		myWriter.ExecuteCommand("InsertString", false, "排他症状【");
+		myWriter.ExecuteCommand("InsertInputField", false, sympInput);
+		myWriter.ExecuteCommand("InsertString", false, "】");
 		var root = zTree.getNodes()[0].children;
 		var simus = {};
 		var simus_size = 0;
+		//按中文去重
 		for(var i= 0,len=root.length;i<len;i++){
 			var sympList = root[i].children;
 			var sympName =  root[i].name;
@@ -299,10 +331,10 @@
 						var simu = simuList[k];
 						if(!simus[simu.name]){//当前伴随症状第一次出现
 //							simus[simu.name]["sympId"] = sympId;
-							simus[simu.name] = {"exp":"FIND('"+sympId+"',[zz])>=0"};
+							simus[simu.name] = {"exp":"FIND('"+sympId+"',[ptzz])>=0"};
 							simus_size++;
 						}else{//name已存在
-							simus[simu.name]["exp"] += "||FIND('"+sympId+"',[zz])>=0"
+							simus[simu.name]["exp"] += "||FIND('"+sympId+"',[ptzz])>=0"
 						}
 					}
 				}
@@ -313,6 +345,15 @@
 			var punc = "，";
 			if(count===simus_size) punc = "。";
 			myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+			//先插入一个输入域用来显示标签 和控制显隐
+			var input = myWriter.ComCreateXTextInputFieldElement();
+			input.name = "伴随-"+simu;
+			input.FieldSettings = myWriter.ComCreateInputFieldSettings();
+			input.FieldSettings.EditStyle = 1;
+			input.VisibleExpression = simus[simu].exp;
+//		input.innerText=node.name+"：";
+			myWriter.ExecuteCommand("InsertInputField", false, input);
+			input.focus();
 			var simuInput = myWriter.ComCreateXTextInputFieldElement();
 //			simuInput.ID = node["id"];
 			simuInput.Name = simu;
@@ -321,18 +362,23 @@
 			simuInput.FieldSettings.EditStyle = 1;
 			simuInput.FieldSettings.MultiSelect = false;
 			simuInput.FieldSettings.DynamicListItems = false;
-			simuInput.VisibleExpression = simus[simu].exp;
-			simuInput.endBorderText = simu+punc
+//			simuInput.VisibleExpression = simus[simu].exp;
+//			simuInput.endBorderText = simu+punc
 			simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
 			simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
 			simuInput.innerText="无";
 			myWriter.ExecuteCommand("InsertInputField", false, simuInput);
+//			simuInput.style.Underline = true;
+			simuInput.style.BorderBottom=true;
+			simuInput.style.BorderWidth=2;
+			myWriter.ExecuteCommand("InsertString", false, simu+punc);
+			myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
 			count++;
 		}
 		hideRMenu();
 	}
-	//插入排他症状内容
-	function insertSimusWithSymp(){
+	//插入伴随症状内容
+	function insertSimus(){
 		var root = zTree.getNodes()[0].children;
 		var simus = {};
 		var simus_size = 0;
@@ -364,6 +410,14 @@
 			var punc = "，";
 			if(count===simus_size) punc = "。";
 			myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+			var input1 = myWriter.ComCreateXTextInputFieldElement();
+			input1.name = "排他-"+simu;
+			input1.FieldSettings = myWriter.ComCreateInputFieldSettings();
+			input1.FieldSettings.EditStyle = 1;
+			input1.VisibleExpression = simus[simu].exp;
+//		input.innerText=node.name+"：";
+			myWriter.ExecuteCommand("InsertInputField", false, input1);
+			input1.focus();
 			var simuInput = myWriter.ComCreateXTextInputFieldElement();
 			simuInput.ID = simu;
 			simuInput.Name = simu;
@@ -372,19 +426,34 @@
 			simuInput.FieldSettings.EditStyle = 1;
 			simuInput.FieldSettings.MultiSelect = false;
 			simuInput.FieldSettings.DynamicListItems = false;
-			simuInput.VisibleExpression = simus[simu].exp;
-			simuInput.endBorderText = simu+punc
+//			simuInput.VisibleExpression = simus[simu].exp;
+//			simuInput.endBorderText = simu+punc
 			simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
 			simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
 			simuInput.innerText="无";
 			myWriter.ExecuteCommand("InsertInputField", false, simuInput);
+			simuInput.style.BorderBottom=true;
+			simuInput.style.BorderWidth=2;
+			myWriter.ExecuteCommand("InsertString", false, simu+punc);
+
 			if(symps[simu]){//有中文名相同的主症状
 				var node = symps[simu];
 				var list = node.children;
 				for(var i in list) {
+					var punc1 = "，";
+					if(i==list.length-1) punc1 = "";
 					if (list[i]["attrType"] === "1") {//插入描述
 						var node1 = list[i];
 						myWriter.DocumentOptions.BehaviorOptions.AutoCreateInstanceInProperty = true;
+
+						var input3 = myWriter.ComCreateXTextInputFieldElement();
+						input3.name = "排他-"+node1["name"];
+						input3.FieldSettings = myWriter.ComCreateInputFieldSettings();
+						input3.FieldSettings.EditStyle = 1;
+						input3.VisibleExpression =  "FIND('1',[" + simu + "])>=0";
+						myWriter.ExecuteCommand("InsertInputField", false, input3);
+						input3.focus();
+
 						var input = myWriter.ComCreateXTextInputFieldElement();
 						input.ID = node1["id"];
 						input.name = node1["name"];
@@ -394,9 +463,9 @@
 						input.FieldSettings.MultiSelect = false;
 						input.FieldSettings.DynamicListItems = false;
 //						var sympId = node.getParentNode().id;
-						input.VisibleExpression = "FIND('1',[" + simu + "])>=0";
-						input.startBorderText = node1["name"];
-						input.endBorderText = "，";
+//						input.VisibleExpression = "FIND('1',[" + simu + "])>=0";
+//						input.startBorderText = node1["name"];
+//						input.endBorderText = "，";
 
 						//获取下拉选项数值
 						var list2 = node1.children;
@@ -406,10 +475,16 @@
 //		simuInput.FieldSettings.ListSource.Items.AddByTextValue("有", "1");
 //		simuInput.FieldSettings.ListSource.Items.AddByTextValue("无", "2");
 //		simuInput.innerText="有";
+						myWriter.ExecuteCommand("InsertString", false, node1["name"]);
 						myWriter.ExecuteCommand("InsertInputField", false, input);
+						input.style.BorderBottom=true;
+						input.style.BorderWidth=2;
+						myWriter.ExecuteCommand("InsertString", false, punc);
+						myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
 					}
 				}
 			}
+			myWriter.ExecuteCommand("MoveTo" , false , "AfterField");
 			count++;
 		}
 		hideRMenu();
@@ -444,7 +519,7 @@
 //     var contextPath = $('#contextPath').attr('href');//获取应用的根目录，我的绝对路径是http://localhost:80/
 //     myWriter.ExecuteCommand("FileOpen", false, contextPath+"/cab/index.xml");
 		$.ajax({
-			url:"getXML/index",
+			url:"/emr/dc/getTemplate/8fdb6e3721394fefa0dc08923f93b853",
 			dataType:"text",
 			success:function(data){
 				myWriter.ExecuteCommand("FileOpenString", false, data);
@@ -454,30 +529,7 @@
 			}
 		})
 	}
-	function print(){
-		myWriter.ExecuteCommand("FilePrint",true,null);
-	}
 
-	function bindDataSource(data){
-// 	var jsonstr2 = '{"NAME":"张冰心","SEX":"女","AGE":"30","MARITAL_STATUS":null,"AREA_NAME":"安徽省滁州市定远县","NATION":null,"OCCUPATION":null,"SERVICE_AGENCY":null,"MAILING_ADDRESS":"江苏省常州市武进区聚盛花园8幢甲单元202室","INDATE":"2018-05-14"}';
-// 	var jsonstr = '{"NAME":"张三","career":"农民","gender":"女","careerAdress":"常州二院","age":"55","adress":"什么路多少号","marriage":"已婚","teller":"儿子","birthplace":"常州","inDate":"","nation":"","recDate":""}';
-		var jsonstr = JSON.stringify(data);
-		//jsonstr = jsonstr.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'");
-		var json = JSON.parse(jsonstr);
-		var xml = JSON2XML(json);
-		alert(xml);
-		myWriter.SetDocumentParameterValueXml("patient", xml);
-		myWriter.WriteDataFromDataSourceToDocument();
-	}
-	function JSON2XML(json){
-		var xml = "<x>";
-		for(var i in json){
-			var text = json[i]||"";
-			xml = xml + "<" + i + ">" + text + "</" + i + ">";
-		}
-		xml = xml + "</x>";
-		return xml;
-	}
 
 	function saveTemplate(){
 		var templateData = {

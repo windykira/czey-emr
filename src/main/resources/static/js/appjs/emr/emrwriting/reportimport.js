@@ -50,19 +50,24 @@ function initTable(hisCallType){
                     checkbox: true
                 },
                 {
-                    field: 'checkNo',
-                    title: '编号',
-                    formatter: function (value, row, index) {
-                        return index + 1;
-                    }
+                    field: 'REPORT_DATE_TIME',
+                    title: '报告日期'
                 },
                 {
-                    field: 'checkClass',
-                    title: '检查类型'
+                    field: 'EXAM_NO',
+                    title: '检查单号'
                 },
                 {
-                    field: 'applyTime',
-                    title: '时间'
+                    field: 'EXAM_ITEM',
+                    title: '检查项目'
+                },
+                {
+                    field: 'DESCRIPTION',
+                    title: '印象可见'
+                },
+                {
+                    field: 'IMPRESSION',
+                    title: '检查结论'
                 }
             ];break;
         case "3":
@@ -72,19 +77,32 @@ function initTable(hisCallType){
                     checkbox: true
                 },
                 {
-                    field: 'checkNo',
-                    title: '编号',
-                    formatter: function (value, row, index) {
-                        return index + 1;
-                    }
+                    field: 'RESULT_DATE_TIME',
+                    title: '报告日期'
                 },
                 {
-                    field: 'checkClass',
-                    title: '检查类型'
+                    field: 'ITEM_NO',
+                    title: '检验单号'
                 },
                 {
-                    field: 'applyTime',
-                    title: '时间'
+                    field: 'REPORT_ITEM_NAME',
+                    title: '检验项目名称'
+                },
+                {
+                    field: 'RESULT',
+                    title: '结果'
+                },
+                {
+                    field: 'ABNORMAL_INDICATOR',
+                    title: '异常'
+                },
+                {
+                    field: 'UNITS',
+                    title: '单位'
+                },
+                {
+                    field: 'TEXT_RANGE',
+                    title: '正常参考值'
                 }
             ];break;
         case "4":
@@ -117,9 +135,8 @@ function initTable(hisCallType){
 
     var params = {
         hisCallType:hisCallType,
-        patientId:"343939"
+        patientId:parent.document.getElementById("patient_patientId").innerHTML
     };
-
     element.bootstrapTable(
         {
             method: 'get', // 服务器数据的请求方式 get or post
@@ -159,14 +176,49 @@ function initTable(hisCallType){
 
     function importReport(){
 
-        var ctl = parent.document.getElementById("myWriter");
-        var rows = element.bootstrapTable('getSelections');
+        switch ($("#hisCallType").val()) {
+            case "2"://检查
+                var rows = element.bootstrapTable('getSelections');
+                var reportContent = "\r\n检查：";
+                var count = 0;
+                var myWriter = parent.myWriter;
+                $.each(rows, function (i, row) {
+                    count++;
+                    reportContent += "\r\n" + count + "." + row.EXAM_ITEM + "(" + row.EXAM_DATE_TIME + ")：" + row.IMPRESSION;
+                });
+                var input = myWriter.Document.GetElementById("jcxx");
+                if (input != null) {
+                    input = myWriter.ComConvertToXTextInputFieldElement(input);
+                    if (input != null) {
+                        input.Text = "";
+                        input.focus();
+                    }
+                }
+                myWriter.ExecuteCommand("InsertString", false, reportContent);
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                break;
+            case "3"://检验
+                var rows = element.bootstrapTable('getSelections');
+                var reportContent = "\r\n检验：";
+                var count = 0;
+                var myWriter = parent.myWriter;
+                $.each(rows, function (i, row) {
+                    count++;
+                    reportContent += "\r\n" + count + "." + row.REPORT_ITEM_NAME + " " + row.RESULT + row.UNITS ;
+                });
+                var input = myWriter.Document.GetElementById("jyxx");
+                if (input != null) {
+                    input = myWriter.ComConvertToXTextInputFieldElement(input);
+                    if (input != null) {
+                        input.Text = "";
+                        input.focus();
+                    }
+                }
+                myWriter.ExecuteCommand("InsertString", false, reportContent);
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                break;
+        }
 
-        var reportContent = "";
-        $.each(rows, function (i, row) {
-            reportContent += row.doctorSign + row.orderText;
-        });
-        ctl.ExecuteCommand("InsertString", false, reportContent);
-        var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
     }

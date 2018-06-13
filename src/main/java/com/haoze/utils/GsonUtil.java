@@ -1,6 +1,8 @@
 package com.haoze.utils;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.haoze.model.emr.emrwriting.po.HisPatientCheckupPO;
 import com.haoze.model.emr.emrwriting.po.HisResponseDataPO;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  * @author maxl
  * @time 2018-05-17。
  */
-public class GsonUtil {
+public class GsonUtil<T> {
 
     private static Gson gson = new Gson();
 

@@ -5,10 +5,10 @@ package com.haoze.service.emr.bom;
  * @author maxl
  * @time 2018-06-03。
  */
-public class HisResponseDataKey {
+public final class HisResponseDataKey {
 
     public final static String DOCTOR_ADVICE = "orderData";
-    public final static String PATIENT_CHECKUP = "decisionJcxx";
-    public final static String PATIENT_INSPECT = "decisionJyxx";
+    public final static String PATIENT_CHECKUP = "ROWS";
+    public final static String PATIENT_INSPECT = "ROWS";
     public final static String PRESCRIPTION = "outPrescMaster";
 }

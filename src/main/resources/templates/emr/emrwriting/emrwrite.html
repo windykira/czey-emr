@@ -25,7 +25,7 @@
     </div>
 </nav>
 <!-- /navbar -->
-<div class="well well-sm">
+<div class="well well-sm" id="patient">
     <strong>姓名：</strong><span id="patient_name"></span>&nbsp;&nbsp;&nbsp;&nbsp;
     <strong>床号：</strong><span id="patient_bedNo"></span>&nbsp;&nbsp;&nbsp;&nbsp;
     <strong>住院号：</strong><span id="patient_patientId"></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -61,7 +61,6 @@
             <button type="button" class="btn btn-default">存为个人模板</button>
             <button type="button" class="btn btn-default">预览</button>
             <button type="button" class="btn btn-default">打印</button>
-            <button type="button" class="btn btn-default" id="addBtn">测试</button>
         </div>
         <div class="btn-group pull-right" id="pageBtn">
             <button id="btnPop1" type="button" class="btn btn-default" onclick="openReport('1')">医嘱</button>
@@ -208,6 +207,7 @@
 <script src="/js/jquery.ztree.core-3.5.js"></script>
 <script src="/js/appjs/emr/emrwriting/emrwrite.js"></script>
 <script>
+    var current_index;
     function openReport(hisCallType){
 
         var title = "";
@@ -220,17 +220,21 @@
             case "5":title="手术";
         }
 
-        layer.open({
+        current_index = layer.open({
             type: 2,
             closeBtn:1,
             title: title,
             maxmin: false,
             shadeClose: true, // 点击遮罩关闭层
-            area: ['880px', '610px'],
+            area: ['1000px', '610px'],
             skin: 'layui-layer-molv',
             offset: 't',
             content: '/emr/emrwriting/reportimport/' + hisCallType
         });
+    }
+
+    function closeLayer(){
+        layer.close(current_index);
     }
 </script>
 <!--<script src="/js/appjs/emr/emrwriting/buttonshow.js"></script>-->

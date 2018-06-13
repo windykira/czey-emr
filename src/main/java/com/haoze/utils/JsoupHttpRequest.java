@@ -27,7 +27,7 @@ public class JsoupHttpRequest {
                 connection.data(map.getKey(), String.valueOf(map.getValue()));
             }
         }
-        Connection.Response response = connection.ignoreContentType(true).timeout(5000).execute();
+        Connection.Response response = connection.ignoreContentType(true).timeout(18000).execute();
         return response;
     }
 
