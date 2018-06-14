@@ -1,6 +1,5 @@
 package com.haoze.service.emr.bom;
 
-import com.haoze.model.emr.emrwriting.newpo.*;
 import com.haoze.service.emr.enumeration.HisCallTypeEnum;
 import org.apache.commons.lang.StringUtils;
 

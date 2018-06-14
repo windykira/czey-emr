@@ -13,10 +13,10 @@ import java.util.Date;
 public class EmrCataLogEntity extends BaseEntity{
 
     private String pkOrg;//机构
-    private String codeCatalog;//
-    private String nameCatalog;//
-    private String img;//
-    private String pkFather;//
+    private String codeCatalog;//目录代码
+    private String nameCatalog;//目录名称
+    private String img;//图标
+    private String pkFather;//上级目录
     private String typeCatalog;//类型：1-普通，2婴儿
     private String pyCode;//拼音码
     private String wbCode;//五笔码

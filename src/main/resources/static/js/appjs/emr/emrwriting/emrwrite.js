@@ -23,8 +23,9 @@ $(function () {
             $("#patient").hide();
             $(".main2").css("top",0);
 
-            $(".sidebar2").css("width",0);
-            $(".main2").css("left","20px");
+            //$(".sidebar2").css("width",0);
+            $(".sidebar2").hide();
+            $(".main2").css("left",0);
 
             $("#retract").attr("value","close");
         }else{
@@ -32,10 +33,18 @@ $(function () {
             $("#patient").show();
             $(".main2").css("top","98px");
 
-            $(".sidebar2").css("width","220px");
+            //$(".sidebar2").css("width","220px");
+            $(".sidebar2").show();
             $(".main2").css("left","220px");
 
             $("#retract").attr("value","open");
+        }
+    });
+
+    $("#test").click(function(){
+        var agent= navigator.userAgent.toLowerCase();
+        if(agent.indexOf("win64")>=0||agent.indexOf("wow64")>=0){
+            alert(agent);
         }
     });
 });

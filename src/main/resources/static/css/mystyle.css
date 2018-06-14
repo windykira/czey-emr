@@ -1,3 +1,7 @@
 body{
     padding-top:10px;
 }
+
+.control-label{
+    text-align: left;
+}

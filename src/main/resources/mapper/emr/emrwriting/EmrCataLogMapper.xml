@@ -38,6 +38,14 @@
     </where>
   </select>
 
+  <select id="count" resultType="int" parameterType="java.util.Map">
+    select count(*) from EMR_CATALOG
+    <where>
+      <if test="codeCatalog != null and codeCatalog != ''"> and CODE_CATALOG = #{codeCatalog} </if>
+      <if test="nameCatalog != null and nameCatalog != ''"> and NAME_CATALOG = #{nameCatalog} </if>
+    </where>
+  </select>
+
   <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
     SELECT
     <include refid="Base_Column_List"/>

@@ -4,10 +4,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.haoze.common.enumeration.common.DelFlagEnum;
 import com.haoze.common.model.QueryParam;
+import com.haoze.common.model.Tree;
 import com.haoze.common.model.ZTree;
 import com.haoze.dao.emr.EmrCataLogDao;
 import com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity;
+import com.haoze.model.system.department.entity.EmrDepartmentEntity;
 import com.haoze.service.emr.EmrCataLogService;
+import com.haoze.utils.TreeBuildUtil;
 import com.haoze.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,9 +103,28 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
         return zTrees;
     }
 
+    @Override
+    public Tree<EmrCataLogEntity> getTree() {
+
+        Page<EmrCataLogEntity> cataLogEntities = emrCataLogDao.list(QueryParam.getDefaultQueryParam());
+        List<Tree<EmrCataLogEntity>> trees = new ArrayList();
+        cataLogEntities.forEach(emrCataLogEntity->{
+            Tree<EmrCataLogEntity> tree = new Tree();
+            tree.setId(emrCataLogEntity.getID());
+            tree.setParentId(emrCataLogEntity.getPkFather());
+            tree.setText(emrCataLogEntity.getNameCatalog());
+            Map<String, Object> state = new HashMap();
+            state.put("opened", true);
+            tree.setState(state);
+            trees.add(tree);
+        });
+        Tree<EmrCataLogEntity> tree = TreeBuildUtil.build(trees);
+        return tree;
+    }
+
 
     @Override
     public int count(QueryParam queryParam) {
-        return 0;
+        return emrCataLogDao.count(queryParam);
     }
 }

@@ -205,3 +205,10 @@ a:hover {
 	position: relative;
 	width: 100%;
 }
+
+/* Validation */
+label.error {
+	color: #cc5965;
+	display: inline-block;
+	margin-left: 5px;
+}

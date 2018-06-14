@@ -11,10 +11,10 @@ $().ready(function() {
                 select.append("<option value='"+datas[i].PK_TMP_CLASS+"'>"  
                         + datas[i].NAME_CLASS + "</option>");  
             }  
-       	 var select = $("#rangeSel");  
-       	 select.append("<option value='QY'>全院</option>");  
-       	 select.append("<option value='KS'>科室</option>");  
-       	 select.append("<option value='GR'>个人</option>");  
+       	 //var select = $("#rangeSel");
+       	 //select.append("<option value='QY'>全院</option>");
+       	 //select.append("<option value='KS'>科室</option>");
+       	 //select.append("<option value='GR'>个人</option>");
 
         }
     });
@@ -85,4 +85,15 @@ function validateRule() {
 function cancel(){
 	var index = parent.layer.getFrameIndex(window.name);
 	parent.layer.close(index);
+}
+alert(1)
+function openCatalog(){
+	layer.open({
+		type:2,
+		title:"选择上级目录",
+		shadeClose: true,
+		area : [ '400px', '600px' ],
+		skin: 'layui-layer-molv',
+		content:"/template/medicalrecord/catalogTree"
+	})
 }

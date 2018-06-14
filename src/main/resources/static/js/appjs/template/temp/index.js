@@ -6,6 +6,7 @@ var typeSel;
 var openFlag = 0;
 $(function() {
 	load();
+    loadEmrCataLog();
 });
 
 function load() {
@@ -49,7 +50,7 @@ function load() {
              // showToggle : true,
              // showColumns : true,
              iconSize: 'outline',
-             toolbar: '#exampleToolbar',
+             //toolbar: '#exampleToolbar',
              striped: true, // 设置为true会有隔行变色效果
              dataType: "json", // 服务器返回的数据类型
              pagination: true, // 设置为true会在底部显示分页条
@@ -79,7 +80,8 @@ function load() {
                      range: $('#range_sel').val(),
                      type : $('#type_sel').val(),
                      status : $('#status_sel').val(),
-                     name : $('#name').val()
+                     name : $('#name').val(),
+                     cata : $('#cata').val()
                  };
              },
              // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -151,6 +153,10 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
+    var cataId = "";
+    if(zTree.getSelectedNodes().level===2){
+        cataId = zTree.getSelectedNodes().id;
+    }
 	layer.open({
 		type : 2,
 		title : '增加',
@@ -178,4 +184,32 @@ function loadEditPage(){
 
     });
     //layer.full(index1);
+}
+var zTree;
+//var selectNodes = zTree.getSelectedNodes();
+function loadEmrCataLog() {
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: function (event, treeId, treeNode) {
+                debugger;
+                if(treeNode.level === 2){
+                    $('#cata').val(treeNode.id);
+                    reLoad();
+                }
+            }
+        }
+    };
+    $.ajax({
+        type: "GET",
+        url: "/emr/catalog/list",
+        success: function (data) {
+            zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
+            zTree.expandAll(true);
+        }
+    });
 }
