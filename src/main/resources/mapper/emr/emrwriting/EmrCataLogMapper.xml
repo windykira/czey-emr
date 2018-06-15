@@ -37,6 +37,15 @@
       <if test="_parameter != null and _parameter != ''"> and PK_CATALOG = #{_parameter} </if>
     </where>
   </select>
+  
+    <select id="getNameCatalog" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from EMR_CATALOG
+    <where>
+     PK_CATALOG = #{id}
+    </where>
+  </select>
 
   <select id="count" resultType="int" parameterType="java.util.Map">
     select count(*) from EMR_CATALOG
@@ -55,9 +64,9 @@
     </where>
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="delete" parameterType="java.lang.String" >
     delete from EMR_CATALOG
-    where PK_CATALOG = #{pkCatalog,jdbcType=VARCHAR}
+    where PK_CATALOG = #{catalogId,jdbcType=VARCHAR}
   </delete>
 
   <insert id="insert" parameterType="com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity" >
@@ -198,6 +207,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="update" parameterType="com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity" >
     update EMR_CATALOG
     <set >
@@ -239,12 +249,6 @@
       </if>
       <if test="stopFlag != null" >
         STOP_FLAG = #{stopFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null" >
-        CREATOR = #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=DATE},
       </if>
       <if test="modifier != null" >
         MODIFIER = #{modifier,jdbcType=VARCHAR},

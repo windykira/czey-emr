@@ -54,10 +54,10 @@ public class TemplateClassServiceImpl implements TemplateClassService {
 
     @Override
     @Transactional
-    public ResponseResult update(EmrTemplateClassEntity role) {
+    public ResponseResult update(EmrTemplateClassEntity tempClass) {
 
         try {
-            templateClassDao.update(role);
+            templateClassDao.update(tempClass);
             //删除原先角色菜单关联关系
             return ResponseResult.success();
         }catch (Exception e){
@@ -78,6 +78,5 @@ public class TemplateClassServiceImpl implements TemplateClassService {
 		EmrTemplateClassEntity EmrTemplateClassEntity = templateClassDao.get(roleId);
 	     return EmrTemplateClassEntity;
 	}
-
 
 }

@@ -4,34 +4,16 @@ $(function() {
 
 $.validator.setDefaults({
     submitHandler : function() {
-        save();
+        update();
     }
 });
 
-function openCatalog(){
-    layer.open({
-        type:2,
-        title:"选择上级目录",
-        shadeClose: true,
-        area : [ '400px', '600px' ],
-        skin: 'layui-layer-molv',
-            content:"/template/medicalrecord/catalogTree",
-                btn: ['确定', '取消', ],
-                yes: function(index, layero){
-                var iframeWin = window[layero.find('iframe')[0]['name']];
-                var object = iframeWin.callBack();
-                layer.close(index);
-                $("#pkFatherName").val(object.catalogName);
-                $("#pkFather").val(object.catalogId);
-        }
-    })
-}
+function update(){
 
-function save() {
     $.ajax({
         type : "POST",
-        url : "/template/medicalrecord/save",
-        data : $('#addCatalog').serialize(),// 你的formid
+        url : "/template/medicalrecord/update",
+        data : $('#addCatalog').serialize(),
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -39,7 +21,7 @@ function save() {
         },
         success : function(data) {
             if (data.code == 1) {
-                parent.layer.msg("新增成功");
+                parent.layer.msg("操作成功");
                 parent.loadEmrCataLog();
                 var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
                 parent.layer.close(index);
@@ -50,11 +32,30 @@ function save() {
 
         }
     });
+}
 
+function openCatalog(){
+    layer.open({
+        type:2,
+        title:"选择上级目录",
+        shadeClose: true,
+        area : [ '400px', '600px' ],
+        skin: 'layui-layer-molv',
+        content:"/template/medicalrecord/catalogTree",
+        btn: ['确定', '取消', ],
+        yes: function(index, layero){
+            var iframeWin = window[layero.find('iframe')[0]['name']];
+            var object = iframeWin.callBack();
+            layer.close(index);
+            $("#pkFatherName").val(object.catalogName);
+            $("#pkFather").val(object.catalogId);
+        }
+    })
 }
 
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
+
     $("#addCatalog").validate({
         rules : {
             codeCatalog : {

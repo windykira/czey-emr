@@ -4,21 +4,20 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.haoze.common.enumeration.common.DelFlagEnum;
 import com.haoze.common.model.QueryParam;
+import com.haoze.common.model.ResponseResult;
 import com.haoze.common.model.Tree;
 import com.haoze.common.model.ZTree;
 import com.haoze.dao.emr.EmrCataLogDao;
 import com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
 import com.haoze.service.emr.EmrCataLogService;
-import com.haoze.utils.TreeBuildUtil;
-import com.haoze.utils.UUIDUtil;
+import com.haoze.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 病历目录数据服务实现类。
@@ -33,23 +32,53 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
     EmrCataLogDao emrCataLogDao;
 
     @Override
-    public void insert(EmrCataLogEntity emrCataLogEntity) {
+    @Transactional
+    public ResponseResult insert(EmrCataLogEntity emrCataLogEntity) {
 
+        try {
+            FixedFieldInitializedUtil.initialize(emrCataLogEntity);
+            emrCataLogEntity.setWbCode(ChineseCharactersCode.getWBCode(emrCataLogEntity.getNameCatalog()));
+            emrCataLogEntity.setPyCode(ChineseCharactersCode.getPinyinCode(emrCataLogEntity.getNameCatalog()));
+            emrCataLogDao.insert(emrCataLogEntity);
+            return ResponseResult.success();
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponseResult.failure(0, "新增失败");
+        }
     }
 
     @Override
-    public void delete(String s) {
-
+    @Transactional
+    public ResponseResult delete(String catalogId) {
+        try {
+            emrCataLogDao.delete(catalogId);
+            return ResponseResult.success();
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponseResult.failure(0, "删除失败");
+        }
     }
 
     @Override
-    public void update(EmrCataLogEntity emrCataLogEntity) {
-
+    @Transactional
+    public ResponseResult update(EmrCataLogEntity emrCataLogEntity) {
+        try {
+            emrCataLogEntity.setModifier(CurrentUser.getUserId());
+            emrCataLogEntity.setModifyTime(new Date());
+            emrCataLogDao.update(emrCataLogEntity);
+            return ResponseResult.success();
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponseResult.failure(0, "更新失败");
+        }
     }
 
     @Override
-    public EmrCataLogEntity get(String s) {
-        return null;
+    public EmrCataLogEntity get(String CatalogId) {
+        return emrCataLogDao.get(CatalogId);
     }
 
     @Override
@@ -127,4 +156,10 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
     public int count(QueryParam queryParam) {
         return emrCataLogDao.count(queryParam);
     }
+
+	@Override
+	public EmrCataLogEntity getNameCatalog(String id) {
+		// TODO Auto-generated method stub
+		return emrCataLogDao.getNameCatalog(id);
+	}
 }

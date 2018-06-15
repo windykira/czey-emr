@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.haoze.dao.template.EmrTemplateClassDao" >
   <resultMap id="BaseResultMap" type="com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity" >
     <id column="PK_TMP_CLASS" property="ID" jdbcType="VARCHAR" />
@@ -30,7 +31,7 @@
       <if test="cataLogId != null and cataLogId!= ''"> AND PK_CATALOG = #{cataLogId} </if>
     </where>
   </select>
-
+  
   <select id="count" resultType="int">
     select count(et.PK_TEMPLATE)
       from EMR_TEMPLATE et INNER JOIN EMR_TMP_CLASS etc on et.PK_TMP_CLASS=etc.PK_TMP_CLASS

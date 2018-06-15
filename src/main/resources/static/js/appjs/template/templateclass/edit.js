@@ -19,6 +19,25 @@ $.validator.setDefaults({
 		update();
 	}
 });
+
+function openCatalog(){
+    layer.open({
+        type:2,
+        title:"选择上级目录",
+        shadeClose: true,
+        area : [ '400px', '600px' ],
+        skin: 'layui-layer-molv',
+            content:"/template/medicalrecord/catalogTree",
+                btn: ['确定', '取消', ],
+                yes: function(index, layero){
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                var object = iframeWin.callBack();
+                layer.close(index);
+                $("#pkCatalogName").val(object.catalogName);
+                $("#pkCatalog").val(object.catalogId);
+        }
+    })
+}
 function update() {
 	$('#menuIDs').val(menuIds);
 	var role = $('#signupForm').serialize();

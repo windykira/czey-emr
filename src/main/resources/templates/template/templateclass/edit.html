@@ -20,6 +20,8 @@
 								name="menuIDs" type="hidden">
 							<input id="stopFl"  class="form-control"
 										type="hidden" th:value="${tempClass.stopFlag}" >
+							<input id="pkCatalog"  class="form-control"
+										type="hidden" th:value="${tempClass.pkCatalog}" >
 							<div class="form-group">
 								<label class="col-sm-3 control-label">类型名称：</label>
 								<div class="col-sm-8">
@@ -46,6 +48,12 @@
 									<input id="pyCode" name="pyCode" class="form-control" type="text" th:value="${tempClass.wbCode}" readonly="readonly">
 								</div>
 							</div>
+							<div class="form-group">
+                			<label for="inputPassword3" class="col-sm-3 control-label">上级目录</label>
+                				<div class="col-sm-8">
+                    		<input type="text" class="form-control" id="pkCatalogName"  onclick="openCatalog()" th:value="${nameCatalog}">
+                				</div>
+            				</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">状态：</label>
 								<div class="col-sm-8">

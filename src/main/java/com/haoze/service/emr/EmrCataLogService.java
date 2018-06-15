@@ -30,4 +30,6 @@ public interface EmrCataLogService extends BaseService<EmrCataLogEntity,String> 
      */
     Tree<EmrCataLogEntity> getTree();
 
+	EmrCataLogEntity getNameCatalog(String id);
+
 }

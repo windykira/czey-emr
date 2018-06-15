@@ -5,3 +5,6 @@ body{
 .control-label{
     text-align: left;
 }
+.col-sm-3{
+    width: 15%;
+}

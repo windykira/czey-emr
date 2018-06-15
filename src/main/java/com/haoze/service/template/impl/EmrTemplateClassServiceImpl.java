@@ -3,6 +3,7 @@ package com.haoze.service.template.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.haoze.common.model.QueryParam;
+import com.haoze.common.model.ResponseResult;
 import com.haoze.dao.template.EmrTemplateClassDao;
 import com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity;
 import com.haoze.model.template.templateclass.po.EmrTemplateClassPO;
@@ -22,18 +23,20 @@ public class EmrTemplateClassServiceImpl implements EmrTemplateClassService {
     EmrTemplateClassDao emrTemplateClassDao;
 
     @Override
-    public void insert(EmrTemplateClassEntity emrTemplateClassEntity) {
-
+    public ResponseResult insert(EmrTemplateClassEntity emrTemplateClassEntity) {
+        return null;
     }
 
     @Override
-    public void delete(String s) {
+    public ResponseResult delete(String s) {
 
+        return null;
     }
 
     @Override
-    public void update(EmrTemplateClassEntity emrTemplateClassEntity) {
+    public ResponseResult update(EmrTemplateClassEntity emrTemplateClassEntity) {
 
+        return null;
     }
 
     @Override

@@ -104,16 +104,21 @@ public class TemplateTmpClassController extends BaseController{
     @Note("编辑模板类型")
     @GetMapping("/edit/{id}")
     String edit(@PathVariable("id") String id, Model model) {
-        EmrTemplateClassEntity sympDO = templateClassService.get(id);
-        model.addAttribute("tempClass", sympDO);
+        EmrTemplateClassEntity tempClass = templateClassService.get(id);
+        String pkCatalog = tempClass.getPkCatalog();
+        //查询上级目录名称
+        EmrCataLogEntity emr = emrCataLogService.getNameCatalog(pkCatalog);
+        
+        model.addAttribute("nameCatalog", emr.getNameCatalog());
+        model.addAttribute("tempClass", tempClass);
         return prefix + "/edit";
     }
     
     @Note("更新模板类型")
     @PostMapping("/update")
     @ResponseBody()
-    ResponseResult update(EmrTemplateClassEntity role) {
-        return templateClassService.update(role);
+    ResponseResult update(EmrTemplateClassEntity tempClass) {
+        return templateClassService.update(tempClass);
     }
     
     @Note("删除菜单")
@@ -123,6 +128,15 @@ public class TemplateTmpClassController extends BaseController{
         return templateClassService.remove(id);
     }
      
+    
+    @Note("停用")
+    @PostMapping("/stop")
+    @ResponseBody
+    ResponseResult stop(String id) {
+        EmrTemplateClassEntity tempClass = templateClassService.get(id);
+        tempClass.setStopFlag("0");
+        return templateClassService.update(tempClass);
+    }
 //
     @Note("保存模板类型")
     @PostMapping("/save")

@@ -118,6 +118,13 @@
       </if>
     </trim>
   </insert>
+   <select id="get" resultMap="BaseResultMap">
+        SELECT 
+          <include refid="Base_Column_List"/>
+        FROM EMR_TMP_CLASS where PK_TMP_CLASS = #{classId}
+    </select>
+  
+  
   <update id="update" parameterType="com.haoze.model.template.templateclass.entity.EmrTemplateClassEntity" >
     update EMR_TMP_CLASS
     <set >
@@ -158,7 +165,7 @@
         DEL_FLAG = #{delFlag,jdbcType=CHAR},
       </if>
     </set>
-    where PK_TMP_CLASS = #{tempClass,jdbcType=VARCHAR}
+    where PK_TMP_CLASS = #{ID,jdbcType=VARCHAR}
   </update>
 
 

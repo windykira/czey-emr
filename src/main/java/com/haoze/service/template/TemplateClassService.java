@@ -52,5 +52,4 @@ public interface TemplateClassService{
      */
     EmrTemplateClassEntity get(String roleId);
 
-
 }

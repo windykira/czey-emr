@@ -21,9 +21,7 @@ function openCatalog(){
                 var object = iframeWin.callBack();
                 layer.close(index);
                 $("#pkCatalogName").val(object.catalogName);
-                $("#pkCatalog").val(object.codeCatalog);
-                alert(object.catalogName);
-                alert(object.codeCatalog);
+                $("#pkCatalog").val(object.catalogId);
         }
     })
 }

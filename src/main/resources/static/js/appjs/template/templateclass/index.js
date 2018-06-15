@@ -61,7 +61,12 @@ function load() {
 							},
 							{
 								field : 'stopFlag',
-								title : '状态'
+								title : '状态',
+								formatter : function(value, row, index) {
+									if(value == '0'){ return '停用'};
+									if(value == '1'){ return '启用'};
+								}
+								
 							},
 							{
 								title : '操作',
@@ -122,11 +127,31 @@ function remove(id) {
 function edit(id) {
 	layer.open({
 		type : 2,
-		title : '症状修改',
+		title : '模板类型修改',
 		maxmin : true,
 		shadeClose : true, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
+		area : [ '1200px', '800px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-function stop() {}
+function stop(id) {
+	layer.confirm('确定要停用选中的记录？', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			url : prefix + "/stop",
+			type : "post",
+			data : {
+				id : id
+			},
+			success : function(r) {
+				if (r.code == 1) {
+					layer.msg("停用成功");
+					reLoad();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	})
+}

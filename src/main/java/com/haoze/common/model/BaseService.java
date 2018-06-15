@@ -9,9 +9,9 @@ import com.github.pagehelper.Page;
  */
 public interface BaseService<T,K> {
 
-    void insert(T t);
-    void delete(K k);
-    void update(T t);
+    ResponseResult insert(T t);
+    ResponseResult delete(K k);
+    ResponseResult update(T t);
     T get(K k);
     Page<T> list(QueryParam queryParam);
     int count(QueryParam queryParam);

@@ -32,19 +32,17 @@ public interface TemplateClassDao extends BaseDao<EmrTemplateClassEntity,String>
 
     /**
      * 删除角色
-     * @param roleId
+     * @param classId
      */
     void remove(String classId);
 
     /**
      * 更新角色
-     * @param role
      */
     void update(EmrTemplateClassEntity tempClass);
 
     /**
      * 查询角色列表
-     * @param paramsMap
      * @return
      */
     List<EmrTemplateClassEntity> list();
@@ -54,7 +52,7 @@ public interface TemplateClassDao extends BaseDao<EmrTemplateClassEntity,String>
      * @param roleId
      * @return
      */
-    EmrTemplateClassEntity get(String roleId);
+    EmrTemplateClassEntity get(String classId);
 
 	Page<EmrTemplateClassPO> listEmrTemplateClass(QueryParam queryParam);
 
