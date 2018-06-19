@@ -30,7 +30,7 @@ function openCatalog() {
             var iframeWin = window[layero.find('iframe')[0]['name']];
             var object = iframeWin.callBack();
             layer.close(index);
-            $("#parentCatalog").val(object.catalogName);
+            $("#pkFatherName").val(object.catalogName);
         }
     })
 }
@@ -46,13 +46,14 @@ function loadEmrCataLog() {
         callback: {
             onClick: function (event, treeId, treeNode) {
 
-                /*$.ajax({
+                $.ajax({
                  type: "GET",
                  url: "/template/medicalrecord/get/" + treeNode.id,
                  success: function (data) {
-                 $('#catalogForm').initForm(data);
-                 }
-                 });*/
+                     data.emrCataLog.pkFatherName = data.pkFatherName;
+                     $('#catalogForm').initForm(data.emrCataLog);
+                    }
+                 });
             }
         }
     };
@@ -80,8 +81,25 @@ function deleteCatalog() {
         return;
     }
 
-    //判断该目录是否关联模板类型
-    $.ajax({
+    layer.confirm('确定要删除该目录么?', function(index){
+        $.ajax({
+            type: "POST",
+            data: {
+                'catalogId': selectedNode.id
+            },
+            url: "/template/medicalrecord/delete",
+            success: function (data) {
+                if (data.code == 1){
+                    layer.msg("删除成功。");
+                    loadEmrCataLog();
+                    layer.close(index);
+                }else {
+                    layer.alert(data.msg)
+                }
+            }
+        });
+    });
+    /*$.ajax({
         type: "GET",
         url: "/template/medicalrecord/count/" + selectedNode.id,
         success: function (data) {
@@ -108,7 +126,7 @@ function deleteCatalog() {
                 });
             }
         }
-    });
+    });*/
 }
 
 function updateCatalog() {

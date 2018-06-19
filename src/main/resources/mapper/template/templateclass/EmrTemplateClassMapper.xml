@@ -31,7 +31,15 @@
       <if test="cataLogId != null and cataLogId!= ''"> AND PK_CATALOG = #{cataLogId} </if>
     </where>
   </select>
-  
+
+  <select id="countByCatalogId" parameterType="String" resultType="int">
+    select count(*)
+    from EMR_TMP_CLASS
+    <where>
+      <if test="_parameter != null and _parameter!= ''"> AND PK_CATALOG = #{_parameter} </if>
+    </where>
+  </select>
+
   <select id="count" resultType="int">
     select count(et.PK_TEMPLATE)
       from EMR_TEMPLATE et INNER JOIN EMR_TMP_CLASS etc on et.PK_TMP_CLASS=etc.PK_TMP_CLASS

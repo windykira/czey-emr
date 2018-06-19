@@ -6,6 +6,7 @@ import com.haoze.common.model.QueryParam;
 import com.haoze.common.model.ResponseResult;
 import com.haoze.common.model.Tree;
 import com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity;
+import com.haoze.model.emr.emrwriting.vo.EmrCataLogVO;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
 import com.haoze.model.system.menu.entity.EmrMenuEntity;
 import com.haoze.model.system.role.entity.EmrRoleEntity;
@@ -92,8 +93,21 @@ public class MedicalRecordController {
 
     @GetMapping("/get/{catalogId}")
     @ResponseBody
-    EmrCataLogEntity get(Model model, @PathVariable("catalogId") String catalogId) {
-        return emrCataLogService.get(catalogId);
+    EmrCataLogVO get(Model model, @PathVariable("catalogId") String catalogId) {
+        EmrCataLogVO emrCataLogVO = new EmrCataLogVO();
+        EmrCataLogEntity emrCataLogEntity = emrCataLogService.get(catalogId);
+        if(emrCataLogEntity == null){
+            return emrCataLogVO;
+        }
+
+        emrCataLogVO.setEmrCataLog(emrCataLogEntity);
+        if(emrCataLogEntity.getPkFather() == null){
+            emrCataLogVO.setPkFatherName("病程");
+        }else{
+            EmrCataLogEntity parentEmrCataLog = emrCataLogService.get(emrCataLogEntity.getPkFather());
+            emrCataLogVO.setPkFatherName(parentEmrCataLog.getNameCatalog());
+        }
+        return emrCataLogVO;
     }
 
     @GetMapping("/count/{catalogId}")

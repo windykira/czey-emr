@@ -19,4 +19,11 @@ public interface EmrTemplateClassDao extends BaseDao<EmrTemplateClassEntity,Stri
      * @return
      */
     Page<EmrTemplateClassPO> listEmrTemplateClass(QueryParam queryParam);
+
+    /**
+     * 根据目录ID统计
+     * @param catalogId
+     * @return
+     */
+    int countByCatalogId(String catalogId);
 }

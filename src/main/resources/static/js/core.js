@@ -3,11 +3,11 @@
     var time = "";
 
     $.fn.extend({
-        initForm:function(options){
+        initForm: function (options) {
             //默认参数
             var defaults = {
-                jsonValue:"",
-                isDebug:false   //是否需要调试，这个用于开发阶段，发布阶段请将设置为false，默认为false,true将会把name value打印出来
+                jsonValue: "",
+                isDebug: false   //是否需要调试，这个用于开发阶段，发布阶段请将设置为false，默认为false,true将会把name value打印出来
             }
             //如果传入的json字符串，将转为json对象
             if ($.type(options) === "string") {
@@ -16,36 +16,36 @@
                 defaults.jsonValue = options;
             }
             //设置参数
-            // var setting = $.extend({}, defaults, tempData);
+            //var setting = $.extend({}, defaults, options);
             var setting = defaults;
             var form = this;
             var jsonValue = setting.jsonValue;
             //如果传入的json对象为空，则不做任何操作
-            if(!$.isEmptyObject(jsonValue)){
+            if (!$.isEmptyObject(jsonValue)) {
                 var debugInfo = "";
-                $.each(jsonValue,function(key,value){
+                $.each(jsonValue, function (key, value) {
                     //是否开启调试，开启将会把name value打印出来
-                    if(setting.isDebug){
-                        alert("name:"+key+"; value:"+value);
-                        debugInfo += "name:"+key+"; value:"+value+" || ";
+                    if (setting.isDebug) {
+                        alert("name:" + key + "; value:" + value);
+                        debugInfo += "name:" + key + "; value:" + value + " || ";
                     }
-                    var formField = form.find("[name='"+key+"']");
-                    if($.type(formField[0]) === "undefined"){
-                        if(setting.isDebug){
-                            alert("can not find name:["+key+"] in form!!!");    //没找到指定name的表单
+                    var formField = form.find("[name='" + key + "']");
+                    if ($.type(formField[0]) === "undefined") {
+                        if (setting.isDebug) {
+                            alert("can not find name:[" + key + "] in form!!!");    //没找到指定name的表单
                         }
                     } else {
                         var fieldTagName = formField[0].tagName.toLowerCase();
-                        if(fieldTagName == "input"){
-                            if(formField.attr("type") == "radio"){
-                                $("input:radio[name='"+key+"'][value='"+value+"']").attr("checked","checked");
+                        if (fieldTagName == "input") {
+                            if (formField.attr("type") == "radio") {
+                                $("input:radio[name='" + key + "'][value='" + value + "']").attr("checked", "checked");
                             } else {
                                 formField.val(value);
                             }
-                        } else if(fieldTagName == "select"){
+                        } else if (fieldTagName == "select") {
                             //do something special
                             formField.val(value);
-                        } else if(fieldTagName == "textarea"){
+                        } else if (fieldTagName == "textarea") {
                             //do something special
                             formField.val(value);
                         } else {
@@ -53,16 +53,17 @@
                         }
                     }
                 })
-                if(setting.isDebug){
+                if (setting.isDebug) {
                     alert(debugInfo);
                 }
             }
-            return form;    //返回对象，提供链式操作
+            //返回对象，提供链式操作
+            return form;
         }
     });
 
     $.extend({
-        getCurrentTime:function() {
+        getCurrentTime: function () {
             var nowDate = new Date();
             var year = nowDate.getFullYear();
             var month = standardNumber(nowDate.getMonth() + 1);
@@ -86,11 +87,11 @@
         }, 1000);
     };
 
-    $.fn.initPage = function(r){
+    $.fn.initPage = function (r) {
 
-        if($(r).find("#emrLoginPage").val() == undefined){
+        if ($(r).find("#emrLoginPage").val() == undefined) {
             this.html(r);
-        }else{
+        } else {
             parent.location.href = "/login";
         }
     }

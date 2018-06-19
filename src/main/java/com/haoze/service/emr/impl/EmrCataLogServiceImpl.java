@@ -8,6 +8,7 @@ import com.haoze.common.model.ResponseResult;
 import com.haoze.common.model.Tree;
 import com.haoze.common.model.ZTree;
 import com.haoze.dao.emr.EmrCataLogDao;
+import com.haoze.dao.template.EmrTemplateClassDao;
 import com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity;
 import com.haoze.model.system.department.entity.EmrDepartmentEntity;
 import com.haoze.service.emr.EmrCataLogService;
@@ -30,6 +31,8 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
 
     @Autowired
     EmrCataLogDao emrCataLogDao;
+    @Autowired
+    EmrTemplateClassDao emrTemplateClassDao;
 
     @Override
     @Transactional
@@ -52,6 +55,11 @@ public class EmrCataLogServiceImpl implements EmrCataLogService {
     @Transactional
     public ResponseResult delete(String catalogId) {
         try {
+
+            int count = emrTemplateClassDao.countByCatalogId(catalogId);
+            if(count > 0){
+                return ResponseResult.failure(0, "该节点已关联模板类型，无法删除。");
+            }
             emrCataLogDao.delete(catalogId);
             return ResponseResult.success();
         }catch (Exception e){

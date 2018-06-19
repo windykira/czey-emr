@@ -67,7 +67,8 @@ function validateRule() {
                     data : { // 要传递的数据
                         codeCatalog : function() {
                             return $("#codeCatalog").val();
-                        }
+                        },
+                        catalogId:$("#ID").val()
                     }
                 }
             },
@@ -81,7 +82,8 @@ function validateRule() {
                     data : { // 要传递的数据
                         nameCatalog : function() {
                             return $("#nameCatalog").val();
-                        }
+                        },
+                        catalogId:$("#ID").val()
                     }
                 }
             },

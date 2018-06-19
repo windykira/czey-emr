@@ -52,6 +52,7 @@
     <where>
       <if test="codeCatalog != null and codeCatalog != ''"> and CODE_CATALOG = #{codeCatalog} </if>
       <if test="nameCatalog != null and nameCatalog != ''"> and NAME_CATALOG = #{nameCatalog} </if>
+      <if test="catalogId != null and catalogId != ''"> and PK_CATALOG <![CDATA[ <> ]]> #{catalogId} </if>
     </where>
   </select>
 
@@ -66,7 +67,7 @@
 
   <delete id="delete" parameterType="java.lang.String" >
     delete from EMR_CATALOG
-    where PK_CATALOG = #{catalogId,jdbcType=VARCHAR}
+    where PK_CATALOG = #{_parameter}
   </delete>
 
   <insert id="insert" parameterType="com.haoze.model.emr.emrwriting.entity.EmrCataLogEntity" >
