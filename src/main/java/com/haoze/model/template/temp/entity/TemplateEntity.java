@@ -17,6 +17,8 @@ public class TemplateEntity {
 
 	private String pkDept;
 
+	private String deptName;
+
 	private String pkUser;
 
 	private String pkTmpClass;
@@ -42,8 +44,35 @@ public class TemplateEntity {
 	private String tmpClassName;
 	
 	private String createTimeString;
-	
-	
+
+	private String pkCatalog;
+
+	private String nameCatalog;
+
+	public String getNameCatalog() {
+		return nameCatalog;
+	}
+
+	public void setNameCatalog(String nameCatalog) {
+		this.nameCatalog = nameCatalog;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPkCatalog() {
+		return pkCatalog;
+	}
+
+	public void setPkCatalog(String pkCatalog) {
+		this.pkCatalog = pkCatalog;
+	}
+
 	public String getCreateTimeString() {
 		return createTimeString;
 	}

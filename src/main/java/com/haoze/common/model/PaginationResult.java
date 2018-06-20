@@ -14,18 +14,18 @@ import java.util.List;
 public class PaginationResult<T> implements Serializable {
 
     private int total;
-    private Page<T> rows;
+    private List<T> rows;
 
-    public PaginationResult(Page<T> rows, int total) {
+    public PaginationResult(List<T> rows, int total) {
         this.rows = rows;
         this.total = total;
     }
 
-    public Page<T> getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(Page<T> rows) {
+    public void setRows(List<T> rows) {
         this.rows = rows;
     }
 

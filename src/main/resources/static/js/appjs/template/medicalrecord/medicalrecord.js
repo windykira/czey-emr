@@ -2,7 +2,29 @@ $(function () {
 
     //初始化病历目录数据
     loadEmrCataLog();
+
+    $("#searchName").keyup(function () {
+        selectNode();
+    });
 });
+
+function selectNode(){
+
+    if ($("#searchName").val() != '') {
+        var nodes = zTree.getNodesByParamFuzzy("name", $("#searchName").val(), null);
+        if (nodes.length > 0) {
+            zTree.selectNode(nodes[0]);
+            $.ajax({
+                type: "GET",
+                url: "/template/medicalrecord/get/" + nodes[0].id,
+                success: function (data) {
+                    data.emrCataLog.pkFatherName = data.pkFatherName;
+                    $('#catalogForm').initForm(data.emrCataLog);
+                }
+            });
+        }
+    }
+}
 
 function addCatalog() {
 
@@ -47,13 +69,13 @@ function loadEmrCataLog() {
             onClick: function (event, treeId, treeNode) {
 
                 $.ajax({
-                 type: "GET",
-                 url: "/template/medicalrecord/get/" + treeNode.id,
-                 success: function (data) {
-                     data.emrCataLog.pkFatherName = data.pkFatherName;
-                     $('#catalogForm').initForm(data.emrCataLog);
+                    type: "GET",
+                    url: "/template/medicalrecord/get/" + treeNode.id,
+                    success: function (data) {
+                        data.emrCataLog.pkFatherName = data.pkFatherName;
+                        $('#catalogForm').initForm(data.emrCataLog);
                     }
-                 });
+                });
             }
         }
     };
@@ -62,7 +84,7 @@ function loadEmrCataLog() {
         url: "/emr/catalog/list",
         success: function (data) {
             zTree = $.fn.zTree.init($("#treeRm"), setting, data);
-            zTree.expandAll(true);
+            zTree.expandAll(false);
         }
     });
 }
@@ -81,7 +103,7 @@ function deleteCatalog() {
         return;
     }
 
-    layer.confirm('确定要删除该目录么?', function(index){
+    layer.confirm('确定要删除该目录么?', function (index) {
         $.ajax({
             type: "POST",
             data: {
@@ -89,44 +111,44 @@ function deleteCatalog() {
             },
             url: "/template/medicalrecord/delete",
             success: function (data) {
-                if (data.code == 1){
+                if (data.code == 1) {
                     layer.msg("删除成功。");
                     loadEmrCataLog();
                     layer.close(index);
-                }else {
+                } else {
                     layer.alert(data.msg)
                 }
             }
         });
     });
     /*$.ajax({
-        type: "GET",
-        url: "/template/medicalrecord/count/" + selectedNode.id,
-        success: function (data) {
-            if (data > 0) {
-                layer.alert("该节点已关联模板类型，无法删除。");
-            } else {
-                layer.confirm('确定要删除该目录么?', function(index){
-                    $.ajax({
-                        type: "POST",
-                        data: {
-                            'catalogId': selectedNode.id
-                        },
-                        url: "/template/medicalrecord/delete",
-                        success: function (data) {
-                            if (data.code == 1){
-                                layer.msg("删除成功。");
-                                loadEmrCataLog();
-                                layer.close(index);
-                            }else {
-                                layer.alert(data.msg)
-                            }
-                        }
-                    });
-                });
-            }
-        }
-    });*/
+     type: "GET",
+     url: "/template/medicalrecord/count/" + selectedNode.id,
+     success: function (data) {
+     if (data > 0) {
+     layer.alert("该节点已关联模板类型，无法删除。");
+     } else {
+     layer.confirm('确定要删除该目录么?', function(index){
+     $.ajax({
+     type: "POST",
+     data: {
+     'catalogId': selectedNode.id
+     },
+     url: "/template/medicalrecord/delete",
+     success: function (data) {
+     if (data.code == 1){
+     layer.msg("删除成功。");
+     loadEmrCataLog();
+     layer.close(index);
+     }else {
+     layer.alert(data.msg)
+     }
+     }
+     });
+     });
+     }
+     }
+     });*/
 }
 
 function updateCatalog() {

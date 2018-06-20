@@ -11,7 +11,8 @@ $().ready(function() {
                 select.append("<option value='"+datas[i].PK_TMP_CLASS+"'>"  
                         + datas[i].NAME_CLASS + "</option>");  
             }
-			//var select = $("#rangeSel");
+			$("#typeSel").val(parent.typeSel);
+       	 //var select = $("#rangeSel");
        	 //select.append("<option value='QY'>全院</option>");
        	 //select.append("<option value='KS'>科室</option>");
        	 //select.append("<option value='GR'>个人</option>");
@@ -77,13 +78,14 @@ function validateRule() {
 				required : true,
 				minlength : 2,
 				remote : {
-					url : "/template/temp/codeCheck", // 后台处理程序
+					url : "/template/temp/codeCheckWhenEdit", // 后台处理程序
 					type : "post", // 数据发送方式
 					dataType : "json", // 接受数据格式
 					data : { // 要传递的数据
 						templateCode : function() {
 							return $("#templateCode").val();
-						}
+						},
+						id: parent.currentEditId
 					}
 				}
 			},

@@ -38,6 +38,7 @@ public class TemplateController extends BaseController{
     TemplateService templateService;
     @Autowired
     EmrMenuService emrMenuService;
+
     private String prefix="template/temp";
 
     @GetMapping("index")
@@ -67,6 +68,12 @@ public class TemplateController extends BaseController{
     String add(){
         return prefix+"/add";
     }
+
+    @GetMapping("/edit")
+    String edit(){
+        return prefix+"/edit";
+    }
+
     @PostMapping("/save")
     @ResponseBody
     ResponseResult save(HttpServletRequest request){
@@ -83,17 +90,37 @@ public class TemplateController extends BaseController{
     	e.setPkTmpClass(request.getParameter("typeSel"));
     	e.setPkUser(user.getID());
     	e.setRange(request.getParameter("rangeSel"));
-    	e.setStopFlag("0");
+    	e.setStopFlag(request.getParameter("statusSel"));
+        e.setCodeTmp(request.getParameter("templateCode"));
+        e.setPkCatalog(request.getParameter("catalogId"));
+        e.setPatientType(request.getParameter("patientTypeSel"));
 
     	return templateService.save(e,xml);
-
-//    	String name = request.getParameter("templateName");
-//    	String range = request.getParameter("rangeSel");
-//    	String type = request.getParameter("typeSel");
-//    	System.out.println(filePath);
-//    	MyFileUtil.writeFile(filePath+"dcdc\\","xxx.xml",xml);
     }
 
+    @PostMapping("/update")
+    @ResponseBody
+    ResponseResult update(HttpServletRequest request){
+        String xml = request.getParameter("xml");
+        EmrUserEntity user =  ShiroUtil.getUser();
+
+        TemplateEntity e = new TemplateEntity();
+        e.setPkTemplate(request.getParameter("id"));
+        e.setModifier(user.getID());
+        e.setDelFlag("0");
+        e.setNameTmp(request.getParameter("templateName"));
+        e.setPkDept("9DC5168174974A8FAC3836EF07C4EAD0");//需要改成dept
+        e.setPkOrg("e736c3b028cd4fb599a0175c00f6266c");//gggggggggggggggggggggg
+        e.setPkTmpClass(request.getParameter("typeSel"));
+//        e.setPkUser(user.getID());
+        e.setRange(request.getParameter("rangeSel"));
+        e.setStopFlag(request.getParameter("statusSel"));
+        e.setCodeTmp(request.getParameter("templateCode"));
+        e.setPkCatalog(request.getParameter("catalogId"));
+        e.setPatientType(request.getParameter("patientTypeSel"));
+
+        return templateService.update(e,xml);
+    }
 
     @GetMapping("/submenu/{menuId}")
     String submenu(Model model,@PathVariable("menuId") String menuId ) {
@@ -103,6 +130,37 @@ public class TemplateController extends BaseController{
         model.addAttribute("menus",menus);
         model.addAttribute("userId", getUser().getID());
         return "template/submenu";
+    }
+
+    @PostMapping("/codeCheck")
+    @ResponseBody
+    boolean codeCheck(@RequestParam Map<String, Object> params) {
+        // 存在，不通过，false
+        return !templateService.codeCheck(params);
+    }
+
+    @PostMapping("/codeCheckWhenEdit")
+    @ResponseBody
+    boolean codeCheckWhenEdit(@RequestParam Map<String, Object> params) {
+        return !templateService.codeCheckWhenEdit(params);
+    }
+
+    @GetMapping("/startUsing")
+    @ResponseBody
+    ResponseResult startUsing(@RequestParam Map<String, Object> params) {
+        return templateService.startUsing(params);
+    }
+
+    @GetMapping("/stopUsing")
+    @ResponseBody
+    ResponseResult stopUsing(@RequestParam Map<String, Object> params) {
+        return templateService.stopUsing(params);
+    }
+
+    @GetMapping("/deleteTemplate")
+    @ResponseBody
+    ResponseResult deleteTemplate(@RequestParam Map<String, Object> params) {
+        return templateService.deleteTemplate(params);
     }
 }
 

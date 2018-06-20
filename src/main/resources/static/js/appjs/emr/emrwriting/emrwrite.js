@@ -120,6 +120,9 @@ function showModal() {
      $("#tmpTable").attr("src", "/emr/emrwriting/templatetable");
      $("#tmpTable").show();
      return;*/
+    $("#myiframe").css("top",$("#dcContainer").position().top);
+    $("#myiframe").css("left",$("#dcContainer").position().left);
+    $("#myiframe").show();
 
     layer.open({
         type: 2,

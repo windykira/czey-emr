@@ -21,7 +21,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">病历目录</div>
                 <div class="panel-body">
+                    <!--<div class="columns pull-left col-md-4 nopadding">
+                        <input id="searchName" type="text" class="form-control" placeholder="">
+                    </div>-->
                     <div class="content_wrap">
+                        <input id="searchName" type="text" class="form-control" placeholder="" style="width:50%;">
                         <div class="zTreeDemoBackground left">
                             <ul id="treeRm" class="ztree">
                             </ul>
@@ -42,19 +46,19 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-3 control-label">目录代码</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="codeCatalog" name="codeCatalog" placeholder="">
+                                <input type="text" class="form-control" id="codeCatalog" name="codeCatalog" placeholder="" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">目录名称</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nameCatalog" name="nameCatalog" placeholder="">
+                                <input type="text" class="form-control" id="nameCatalog" name="nameCatalog" placeholder="" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">图标</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="img" name="img" placeholder="">
+                                <input type="text" class="form-control" id="img" name="img" placeholder="" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,7 +71,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">目录类型</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="typeCatalog" name="typeCatalog">
+                                <select class="form-control" id="typeCatalog" name="typeCatalog" readonly>
                                     <option value="0">普通</option>
                                     <option value="1">婴儿</option>
                                 </select>
@@ -76,7 +80,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">医生模式</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="doctorMode" name="doctorMode">
+                                <select class="form-control" id="doctorMode" name="doctorMode" readonly>
                                     <option value="0">不可见</option>
                                     <option value="1">可见</option>
                                     <option value="2">可见只读</option>
@@ -87,7 +91,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">护士模式</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="nurseMode" name="nurseMode">
+                                <select class="form-control" id="nurseMode" name="nurseMode" readonly>
                                     <option value="0">不可见</option>
                                     <option value="1">可见</option>
                                     <option value="2">可见只读</option>
@@ -98,13 +102,13 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">排序号</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="sortNo" name="sortNo" placeholder="">
+                                <input type="text" class="form-control" id="sortNo" name="sortNo" placeholder="" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">状态</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="stopFlag" name="stopFlag">
+                                <select class="form-control" id="stopFlag" name="stopFlag" readonly>
                                     <option value="1">启用</option>
                                     <option value="0">停用</option>
                                 </select>
@@ -113,7 +117,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">备注</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="remark" name="remark" cols="30" rows="5"></textarea>
+                                <textarea class="form-control" id="remark" name="remark" cols="30" rows="5" readonly></textarea>
                             </div>
                         </div>
                     </form>

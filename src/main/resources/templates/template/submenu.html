@@ -35,7 +35,15 @@
     });
   });
 
+  //默认加载病历模板
   function load(){
+
+    $(".list-group a").each(function(i,e){
+      if($(this).attr("url") == "template/temp/index"){
+        $(this).addClass("active");
+      }
+    });
+
     $.ajax({
       type: "GET",
       url: "/template/temp/index",

@@ -1,8 +1,13 @@
 
 var prefix = "/template/temp";
 var templateName;
+var templateCode;
 var rangeSel;
 var typeSel;
+var catalogId;
+var patientTypeSel;
+var statusSel;
+var currentEditId;
 var openFlag = 0;
 $(function() {
 	load();
@@ -34,9 +39,9 @@ function load() {
         	 
         	 var select = $("#range_sel");
              select.append("<option value=''> </option>");
-             select.append("<option value='QY'>全院</option>");
-             select.append("<option value='KS'>科室</option>");
-        	 select.append("<option value='GR'>个人</option>");  
+             select.append("<option value='1'>全院</option>");
+             select.append("<option value='2'>科室</option>");
+        	 select.append("<option value='3'>个人</option>");
 
          }
      });  
@@ -66,6 +71,7 @@ function load() {
              sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 server
              sortable: true,                     //是否启用排序
              sortOrder: "asc",
+             uniqueId : 'pkTemplate',
              // "server"
              queryParams: function (params) {
                  return {
@@ -91,59 +97,60 @@ function load() {
              // sortOrder.
              // 返回false将会终止请求
              columns: [
+                 //{
+                 //    checkbox: true
+                 //},
                  {
-                     checkbox: true
-                 },
-                 {
-                     field: 'pkTemplate', // 列字段名
-                     title: '序号', // 列标题
-                     formatter: function (value, row, index) {
-                         return index + 1;
-                     }
-                 },
-                 {
-                     field: 'stopFlag',
-                     title: '状态',
-                     sortable: true,
-                     formatter: function (value, row, index) {
-                    	 if(value==='0'){
-                    		 return '可用';
-                    	 }
-                    	 if(value==='1'){
-                    		 return '不可用';
-                    	 }
-                     }
-                 },
-                 {
-                     field: 'tmpClassName',
-                     title: '模板类型',
-                     sortable: true
+                     field: 'codeTmp',
+                     title: '模板代码'
                  },
                  {
                      field: 'nameTmp',
                      title: '模板名称',
                  },
                  {
-                     field: 'creatorName',
-                     title: '创建人'
-                 },
-                 {
-                     field: 'createTimeString',
-                     title: '创建时间'
+                     field: 'tmpClassName',
+                     title: '模板类型',
                  },
                  {
                      field: 'range',
                      title: '适用范围',
                      formatter: function (value, row, index) {
-                    	 if(value==='QY'){
-                    		 return '全院';
-                    	 }
-                    	 if(value==='KS'){
-                    		 return '科室';
-                    	 }
-                    	 if(value==='GR'){
-                    		 return '个人';
-                    	 }
+                         if(value==='1'){
+                             return '全院';
+                         }
+                         if(value==='2'){
+                             return '科室';
+                         }
+                         if(value==='3'){
+                             return '个人';
+                         }
+                     }
+                 },
+                 {
+                     field: 'deptName',
+                     title: '创建科室',
+                 },
+                 {
+                     field: 'creatorName',
+                     title: '创建人',
+                 },
+                 {
+                     field: 'createTimeString',
+                     title: '创建时间',
+                 },
+                 {
+                     field: 'pkTemplate', // 列字段名
+                     title: '操作', // 列标题
+                     formatter : function(value, row, index) {
+                         //var btn = '<button type="button" class="btn  btn-primary" onclick="openWriting('+row.PATIENT_ID+')"><i class="fa fa-plus hidden" aria-hidden="true"></i>写病历 </button>';
+                         var statusName = "";
+                         if(row.stopFlag === '0') statusName="停用";
+                         if(row.stopFlag === '1') statusName="启用";
+                         var btns = '<button class="btn btn-default btn-sm" type="button" onclick=editTemplate("'+row.pkTemplate+'")>编辑</button>&nbsp;&nbsp;' +
+                              '<button class="btn btn-default btn-sm" type="button" onclick=changeStatus("'+row.pkTemplate+'","'+row.stopFlag+'")>'+statusName+'</button>&nbsp;&nbsp;' +
+                              '<button class="btn btn-default btn-sm" type="button" onclick=deleteTemplate("'+row.pkTemplate+'")>删除</button>';
+                         return btns;
                      }
                  }
                 ]
@@ -153,9 +160,12 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
+    currentEditId = null;
     var cataId = "";
-    if(zTree.getSelectedNodes().level===2){
-        cataId = zTree.getSelectedNodes().id;
+    var cataName = "";
+    if(zTree.getSelectedNodes()[0]&&zTree.getSelectedNodes()[0].level===2){
+        cataId = zTree.getSelectedNodes()[0].id;
+        cataName = zTree.getSelectedNodes()[0].name;
     }
 	layer.open({
 		type : 2,
@@ -163,27 +173,18 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
+        skin: 'layui-layer-molv',
 		content : prefix + '/add',
-		end : function(){
-
+        success : function(layero,index){
+            var iframeWin = window[layero.find('iframe')[0]['name']];
+            iframeWin.jQuery("#catalogId").val(cataId)
+            iframeWin.jQuery("#catalogName").val(cataName)
 		}
 	});
 }
 var index1;
 function loadEditPage(){
-    index1 =layer.open({
-        type : 2,
-        title : '增加',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '800px', '520px' ],
-        content : '/emr/dc/index',
-        yes : function(index, layero){
-            myWindow = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
-        },
-
-    });
-    //layer.full(index1);
+    window.open('/emr/dc/index');
 }
 var zTree;
 //var selectNodes = zTree.getSelectedNodes();
@@ -196,7 +197,6 @@ function loadEmrCataLog() {
         },
         callback: {
             onClick: function (event, treeId, treeNode) {
-                debugger;
                 if(treeNode.level === 2){
                     $('#cata').val(treeNode.id);
                     reLoad();
@@ -212,4 +212,72 @@ function loadEmrCataLog() {
             zTree.expandAll(true);
         }
     });
+}
+
+function editTemplate(id){
+    var row = $('#exampleTable').bootstrapTable('getRowByUniqueId', id);
+    currentEditId = id;
+    layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        skin: 'layui-layer-molv',
+        content : prefix + '/edit',
+        success : function(layero,index){
+            var iframeWin = window[layero.find('iframe')[0]['name']];
+            iframeWin.jQuery("#templateCode").val(row.codeTmp);
+            iframeWin.jQuery("#catalogName").val(row.nameCatalog);
+            iframeWin.jQuery("#catalogId").val(row.pkCatalog);
+            iframeWin.jQuery("#templateName").val(row.nameTmp);
+            iframeWin.jQuery("#rangeSel").val(row.range);
+            iframeWin.jQuery("#patientTypeSel").val(row.patientType);
+            iframeWin.jQuery("#statusSel").val(row.stopFlag);
+            iframeWin.editFlag = true;
+            //编辑子页面加载下拉完成后 自动填入当前父页面的typesSel值
+            typeSel = row.pkTmpClass;
+        }
+    });
+}
+function deleteTemplate(id){
+    $.ajax({
+        url : "/template/temp/deleteTemplate",
+        type : "GET",
+        data : {id:id},
+        dataType :"json",
+        success:function(data){
+            if (data.code == 1) {
+                layer.msg("操作成功");
+                reLoad();
+            } else {
+                layer.alert(data.msg)
+            }
+        },
+        error:function(){
+            layer.alert("发生错误");
+        }
+    })
+}
+function changeStatus(id,status){
+    var url = "";
+    if(status === '0') url = "/template/temp/stopUsing";
+    if(status === '1') url = "/template/temp/startUsing";
+    $.ajax({
+        url : url,
+        type : "GET",
+        data : {id:id},
+        dataType :"json",
+        success:function(data){
+            if (data.code == 1) {
+                layer.msg("操作成功");
+                reLoad();
+            } else {
+                layer.alert(data.msg)
+            }
+        },
+        error:function(){
+            layer.alert("发生错误");
+        }
+    })
 }

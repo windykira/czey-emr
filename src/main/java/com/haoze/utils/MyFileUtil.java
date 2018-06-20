@@ -19,51 +19,80 @@ public class MyFileUtil {
   private MyFileUtil() {
 
   }
-  
-  /**
-   * write file
-   * 
-   * @param path
-   * @param name
-   * @param content
-   * @return return false if content is empty, true otherwise
-   * @throws RuntimeException if an error occurs while operator FileWriter
-   */
+
+	/**
+	 * write file
+	 *
+	 * @param path
+	 * @param name
+	 * @param content
+	 * @return return false if content is empty, true otherwise
+	 * @throws RuntimeException if an error occurs while operator FileWriter
+	 */
 	public static boolean writeFile(String path, String name, String content) {
 		if(content==null||"".equals(content)) {
 			return false;
 		}
 		File file = new File(path);
-	  	if(!file.exists()) {
-	  		if(file.mkdirs()) {
-	  		}
-	  	}
-	  	file = new File(path+name);
-	  	if(file.exists()) {
-	  		name = name+"_dup";//stupid code
-	  		file = new File(path+name);
-	  	}
-	  	
-	  	FileWriter fw = null;
-	  	BufferedWriter out = null;
-        try {
-        	fw = new FileWriter(file);
-            out = new BufferedWriter(fw);
-            out.write(content, 0, content.length());
-            out.close();
+		if(!file.exists()) {
+			if(file.mkdirs()) {
+			}
+		}
+		file = new File(path+name);
+		if(file.exists()) {
+			name = name+"_dup";//stupid code
+			file = new File(path+name);
+		}
 
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        	try {
+		FileWriter fw = null;
+		BufferedWriter out = null;
+		try {
+			fw = new FileWriter(file);
+			out = new BufferedWriter(fw);
+			out.write(content, 0, content.length());
+			out.close();
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
 				fw.close();
 				out.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        }
-        return false;
+		}
+		return false;
+	}
+	/**
+	 * write file
+	 *
+	 * @param path
+	 * @param content
+	 * @return return false if content is empty, true otherwise
+	 * @throws RuntimeException if an error occurs while operator FileWriter
+	 */
+	public static boolean rewriteFile(String path, String content) {
+		FileWriter fw = null;
+		BufferedWriter out = null;
+		try {
+			fw = new FileWriter(path);
+			out = new BufferedWriter(fw);
+			out.write(content, 0, content.length());
+			out.close();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fw.close();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 	
 	/**

@@ -20,6 +20,7 @@ import java.util.Map;
 
 /**
  * 用户相关控制器信息。
+ *
  * @author maxl
  * @time 2018-05-02。
  */
@@ -29,10 +30,10 @@ public class DcController extends BaseController {
 
     @Autowired
     private SymptomService service;
-    
-    private String prefix="emr/dc";
 
-//    @RequiresPermissions("sys:user:user")
+    private String prefix = "emr/dc";
+
+    //    @RequiresPermissions("sys:user:user")
     @GetMapping("index")
     String index(Model model) {
         return prefix + "/index";
@@ -61,37 +62,37 @@ public class DcController extends BaseController {
     @GetMapping("getSympTree")
     @ResponseBody
     List<Map> getSympTree(Model model) {
-    	return service.getSympTree();
+        return service.getSympTree();
     }
 
     @SuppressWarnings("rawtypes")
-	@GetMapping("getSympInfo")
+    @GetMapping("getSympInfo")
     @ResponseBody
     List<Map> getSympInfo(Model model) {
-    	List list = service.getSympInfo();
-    	return list;
+        List list = service.getSympInfo();
+        return list;
     }
 
     @GetMapping("getSimuInfo")
     @ResponseBody
     List<Map> getSimuInfo(Model model) {
-    	return service.getSimuInfo();
+        return service.getSimuInfo();
     }
 
     @GetMapping("getSympAndSimuInfo")
     @ResponseBody
     Map getSympAndSimuInfo(Model model) {
-    	Map m = service.getSympAndSimuInfo();
-    	return m;
+        Map m = service.getSympAndSimuInfo();
+        return m;
     }
 
-    @RequestMapping(value="/getTemplate/{fileId}")
+    @RequestMapping(value = "/getTemplate/{fileId}")
     @ResponseBody
     public String getTemplate(HttpServletRequest request, @PathVariable String fileId) throws IOException {
-        String path  = service.getTemplateFilePathById(fileId);
-        String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
-        //String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH")+"index.xml");
-    	return  xml;
+        String path = service.getTemplateFilePathById(fileId);
+        //String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH") + path);
+        return xml;
     }
 }
 

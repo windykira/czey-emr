@@ -72,8 +72,21 @@
 
 	$(document).ready(function () {
 	    load();
-		parent.layer.full(parent.index1)
-		setTimeout(resize,5000)
+		resize();
+		if(!window.opener.currentEditId){
+			return;
+		}
+		$.ajax({
+			url: "/emr/dc/getTemplate/"+window.opener.currentEditId,
+			dataType: "text",
+			success: function (data) {
+				myWriter.ExecuteCommand("FileOpenString", false, data);
+			},
+			error: function () {
+				alert("读取出错");
+			}
+		})
+//		setTimeout(resize,5000)
 //		resize();
 	});
 	var zTree;
@@ -532,26 +545,38 @@
 
 
 	function saveTemplate(){
+		var url = "";
+		if(window.opener.currentEditId){
+			url = "/template/temp/update";
+		}else{
+			url = "/template/temp/save";
+		}
 		var templateData = {
-			templateName : parent.templateName,
-			rangeSel : parent.rangeSel,
-			typeSel : parent.typeSel,
+			templateName : window.opener.templateName,
+			templateCode : window.opener.templateCode,
+			rangeSel : window.opener.rangeSel,
+			typeSel : window.opener.typeSel,
+			catalogId : window.opener.catalogId,
+			patientTypeSel : window.opener.patientTypeSel,
+			statusSel : window.opener.statusSel,
+			id :window.opener.currentEditId,
 			xml : myWriter.XMLText
 		}
 		$.ajax({
-			url:"/template/temp/save",
+			url:url,
 			type : "POST",
 			data : templateData,
 			dataType :"json",
 			success:function(data){
 				if (data.code == 1) {
-					parent.layer.msg("操作成功");
-					parent.reLoad();
-					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-					parent.layer.close(index);
+					window.opener.layer.msg("操作成功");
+					window.opener.reLoad();
+//					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+//					parent.layer.close(index);
+					window.close();
 
 				} else {
-					parent.layer.alert(data.msg)
+					window.opener.layer.alert(data.msg)
 				}
 			},
 			error:function(){
