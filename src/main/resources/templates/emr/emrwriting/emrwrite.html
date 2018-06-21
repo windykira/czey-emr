@@ -56,12 +56,11 @@
         <div class="btn-group">
             <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addMedical" data-backdrop="static">新增</button>-->
             <button type="button" class="btn btn-default" data-backdrop="static" onclick="showModal()">新增</button>
-            <button type="button" class="btn btn-default">保存</button>
+            <button type="button" class="btn btn-default" onclick="saveEmr()">保存</button>
             <button type="button" class="btn btn-default">删除</button>
             <button type="button" class="btn btn-default">存为个人模板</button>
-            <button type="button" class="btn btn-default">预览</button>
-            <button type="button" class="btn btn-default">打印</button>
-            <button type="button" class="btn btn-default" id="test">测试</button>
+            <button type="button" class="btn btn-default" onclick="preview()">预览</button>
+            <button type="button" class="btn btn-default" onclick="print()">打印</button>
         </div>
         <div class="btn-group pull-right" id="pageBtn">
             <button id="btnPop1" type="button" class="btn btn-default" onclick="openReport('1')">医嘱</button>

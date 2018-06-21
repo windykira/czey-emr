@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +34,7 @@ public class EmrPatientController extends BaseController{
 
     @GetMapping("getPatientList")
     @ResponseBody
-    String getPatientList(Model model, HttpServletRequest request,@RequestParam Map<String, Object> params) {
+    Map getPatientList(Model model, HttpServletRequest request,@RequestParam Map<String, Object> params) {
 //        String name = request.getParameter("name");
 //        String bedNo = request.getParameter("bedNo");
 //        String type = request.getParameter("type");
@@ -52,16 +54,19 @@ public class EmrPatientController extends BaseController{
             params.put("deptCode",CurrentUser.getCurrentUserDepartment().getDepartmentCode());
         }
         String paramString = paramsMap2UrlString(params);
-        String res = "";
+        Map resultMap = new HashMap();
         try {
             Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest(SystemConfigParseUtil.getProperty("HIS_PATIENT_URL")+paramString, "",null);
-            res = response.body();
+            String res = response.body();
             Map<String,Object> m = GsonUtil.fromJson(res,Map.class);
-            res = GsonUtil.toJson(m.get("ROWS"));
+            List rows = GsonUtil.fromJson(GsonUtil.toJson(m.get("ROWS")),List.class);
+//            int total = Integer.parseInt(GsonUtil.toJson(m.get("TOTALRECORDS")));
+            resultMap.put("rows",rows);
+            resultMap.put("total",(int)Float.parseFloat(GsonUtil.toJson(m.get("TOTALRECORDS"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return res;
+        return resultMap;
     }
     public static String paramsMap2UrlString(Map<String,Object> m){
         String result = "?";

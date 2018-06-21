@@ -27,7 +27,7 @@ function load() {
                         pageNumber : 1, // 如果设置了分布，首页页码
                         // search : true, // 是否显示搜索框
                         showColumns : false, // 是否显示内容下拉框（选择显示的列）
-                        sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者
+                        sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
                         // "server"
                         //onLoadSuccess:function(){
                         //    alert(1)
@@ -35,11 +35,19 @@ function load() {
                         //},
                         uniqueId : 'PATIENT_ID',
                         queryParams: function (params) {
+                            var sortParam = "";
+                            if(params.sort){
+                                sortParam = params.sort+" "+params.order;
+                            }
                             return {
                                 name : $('#name').val(),
                                 bedNo : $('#bedNo').val(),
                                 patientId : $('#patientId').val(),
-                                type : $('#typeSel').val()
+                                type : $('#typeSel').val(),
+                                pageSize: params.limit,
+                                curPage:(params.offset / params.limit) + 1,
+                                sort: sortParam      //排序列名
+
                             };
                         },
                         columns : [
@@ -68,7 +76,8 @@ function load() {
                             },
                             {
                                 field : 'AGE',
-                                title : '年龄'
+                                title : '年龄',
+                                sortable: true
                             },
                             {
                                 field : 'CHARGE_TYPE',
@@ -76,7 +85,8 @@ function load() {
                             },
                             {
                                 field : 'INDATE',
-                                title : '入院时间'
+                                title : '入院时间',
+                                sortable: true
                             },
                             {
                                 field : 'DEPT_ALIAS',
@@ -84,7 +94,8 @@ function load() {
                             },
                             {
                                 field : 'BED_NO',
-                                title : '床号'
+                                title : '床号',
+                                sortable: true
                             },
                             {
                                 field : 'DIAGNOSIS',

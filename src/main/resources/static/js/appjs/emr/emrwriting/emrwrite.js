@@ -41,13 +41,27 @@ $(function () {
         }
     });
 
-    $("#test").click(function(){
-        var agent= navigator.userAgent.toLowerCase();
-        if(agent.indexOf("win64")>=0||agent.indexOf("wow64")>=0){
-            alert(agent);
+});
+
+function saveEmr(){
+
+    var xmlContent = getXMLString();
+    $.ajax({
+        type: "POST",
+        url: "/emr/emrwriting/saveEmr",
+        data: {
+            xmlContent : xmlContent
+        },
+        success: function (data) {
+            alert(data.msg);
+        },
+        error: function (request) {
+            alert("Connection error");
         }
     });
-});
+}
+
+
 //加载导航信息
 var info;
 function loadNavi() {
@@ -63,7 +77,6 @@ function loadNavi() {
     document.getElementById("patient_diagnosis").innerHTML = info.DIAGNOSIS;
 }
 var zTree = "";
-//var selectNodes = zTree.getSelectedNodes();
 function loadEmrCataLog() {
     var setting = {
         data: {
@@ -81,6 +94,23 @@ function loadEmrCataLog() {
         }
     });
 }
+/*function loadEmrCataLog() {
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    $.ajax({
+        type: "GET",
+        url: "/emr/catalog/list",
+        success: function (data) {
+            zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
+            zTree.expandAll(true);
+        }
+    });
+}*/
 
 function loadDcEditor() {
 
@@ -99,30 +129,12 @@ function loadDcEditor() {
 }
 
 function showModal() {
-
     var selectNodes = zTree.getSelectedNodes();
     if (selectNodes.length == 0) {
         //layer.alert('请选择要加载的模板。', {icon: 6});
         alert("请选择病历目录。");
         return;
     }
-    /*var top = $(window).height() / 40;
-     var left = $(window).width() / 160;
-     var css = {
-     "position": "absolute",
-     "top":"10px",
-     "left":"10px",
-     "width":"840px",
-     "height":"500px",
-     "z-index":1002
-     };
-     $("#tmpTable").css(css);
-     $("#tmpTable").attr("src", "/emr/emrwriting/templatetable");
-     $("#tmpTable").show();
-     return;*/
-    $("#myiframe").css("top",$("#dcContainer").position().top);
-    $("#myiframe").css("left",$("#dcContainer").position().left);
-    $("#myiframe").show();
 
     layer.open({
         type: 2,
@@ -138,30 +150,6 @@ function showModal() {
         content: '/emr/emrwriting/templatetable'
     });
 
-    //$("#templateIFrame").attr("src", "/test");
-
-    /*$.ajax({
-     type : "GET",
-     url : "/template/class/list/"+selectNodes[0].id,
-     success : function(datas) {
-
-     $(".list-group").find("li").remove();
-     $.each(datas,function(i,e){
-     if(i == 0){
-     $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
-     }else{
-     $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
-     }
-     });
-     //$("#dcDiv").hide();
-     $("#addMedical").modal("toggle");
-     //加载模板表格数据
-     loadTemplateTable(1);
-     $(".list-group li").click(function () {
-     $(this).addClass("active").siblings(".active").removeClass("active");
-     });
-     }
-     });*/
 }
 
 function reloadTemplate(e) {

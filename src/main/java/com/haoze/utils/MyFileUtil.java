@@ -44,21 +44,26 @@ public class MyFileUtil {
 			file = new File(path+name);
 		}
 
-		FileWriter fw = null;
-		BufferedWriter out = null;
+//		FileWriter fw = null;
+//		BufferedWriter out = null;
+		FileOutputStream fos = null;
+		OutputStreamWriter osw = null;
 		try {
-			fw = new FileWriter(file);
-			out = new BufferedWriter(fw);
-			out.write(content, 0, content.length());
-			out.close();
-
+			fos = new FileOutputStream(file);
+			osw = new OutputStreamWriter(fos, "UTF-8");
+			osw.write(content);
+			osw.flush();
+//			fw = new FileWriter(file);
+//			out = new BufferedWriter(fw);
+//			out.write(content, 0, content.length());
+//			out.close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				fw.close();
-				out.close();
+				fos.close();
+				osw.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -74,20 +79,20 @@ public class MyFileUtil {
 	 * @throws RuntimeException if an error occurs while operator FileWriter
 	 */
 	public static boolean rewriteFile(String path, String content) {
-		FileWriter fw = null;
-		BufferedWriter out = null;
+		FileOutputStream fos = null;
+		OutputStreamWriter osw = null;
 		try {
-			fw = new FileWriter(path);
-			out = new BufferedWriter(fw);
-			out.write(content, 0, content.length());
-			out.close();
+			fos = new FileOutputStream(path);
+			osw = new OutputStreamWriter(fos, "UTF-8");
+			osw.write(content);
+			osw.flush();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				fw.close();
-				out.close();
+				fos.close();
+				osw.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

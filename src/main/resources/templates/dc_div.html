@@ -99,24 +99,17 @@
 	});
 	//预览按钮
 	$("#preview_btn").click(function(e){
-//		var input = myWriter.Document.GetElementById("zz");//获取诊疗经过输入域
-//		if (input != null) {
-//			input = myWriter.ComConvertToXTextInputFieldElement(input);
-//			if (input != null) {
-//				input.PrintVisibility=1;
-//				alert('ok')
-//			}
-//		}
-//		myWriter.DocumentOptions.ViewOptions.IgnoreFieldBorderWhenPrint = false;
-//		myWriter.DocumentOptions.ViewOptions.FiledBorderColor = 'red';
 		preview();
-
 	});
+
 	function preview(){
 		myWriter.ExecuteCommand("FilePrintPreview", true , null );
 	}
 	function print(){
 		myWriter.ExecuteCommand("FilePrint",true,null);
+	}
+	function getXMLString(){
+		return myWriter.XMLText;
 	}
 	//字体按钮
 	$("#font_btn").click(function(e){
