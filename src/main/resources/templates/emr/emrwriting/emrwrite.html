@@ -207,6 +207,7 @@
     var current_index;
     function openReport(hisCallType){
 
+        $("#dcContainer").hide();
         var title = "";
         switch(hisCallType){
 
@@ -226,7 +227,10 @@
             area: ['1000px', '610px'],
             skin: 'layui-layer-molv',
             offset: 't',
-            content: '/emr/emrwriting/reportimport/' + hisCallType
+            content: '/emr/emrwriting/reportimport/' + hisCallType,
+            end:function(){
+                $("#dcContainer").show();
+            }
         });
     }
 

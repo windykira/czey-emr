@@ -133,9 +133,9 @@ function initTable(hisCallType){
             ];break;
     }
 
-    var params = {
+    var trendsParams = {
         hisCallType:hisCallType,
-        patientId:parent.document.getElementById("patient_patientId").innerHTML
+        patientId:parent.document.getElementById("patient_patientId").innerHTML,
     };
     element.bootstrapTable(
         {
@@ -157,7 +157,12 @@ function initTable(hisCallType){
             sidePagination: "client", // 设置在哪里进行分页，可选值为"client" 或者 server
             sortable: true,                     //是否启用排序
             sortOrder: "asc",
-            queryParams : params,
+            queryParams : function (params){
+                return $.extend(trendsParams,{
+                    limit: params.limit,
+                    page:(params.offset / params.limit) + 1
+                });
+            },
             /*queryParams: function (params) {
              return {
              //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对

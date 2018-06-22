@@ -63,9 +63,11 @@ public class EmrWritingController extends BaseController {
         try {
             params.put("visitId", 1);
             params.put("repeatIndicator", 1);
-            //params.put("patientId","955635");
+            QueryParam queryParam = new QueryParam(params);
+            queryParam.put("curPage",queryParam.getPage());
+            queryParam.put("pageSize",queryParam.getLimit());
             //List<? extends HisResponseDataPO> advice = HisResponseDataService.listHisResponseData(params);
-            List<Map> advice = HisResponseDataService.listHisResponseData(params);
+            List<Map> advice = HisResponseDataService.listHisResponseData(queryParam);
             return advice;
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +102,7 @@ public class EmrWritingController extends BaseController {
                 emrFileEntity.setCodeDept(CurrentUser.getCurrentUserDepartment().getDepartmentCode());
                 emrFileEntity.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
                 emrFileService.insert(emrFileEntity);
-                return ResponseResult.success();
+                return ResponseResult.success().put("emrFileId",emrFileEntity.getID());
             }
             return ResponseResult.failure(0, "保存失败");
         } catch (Exception e) {

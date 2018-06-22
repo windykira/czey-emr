@@ -48,12 +48,14 @@ function deleteEmr(){
     var selectedNodes = zTree.getSelectedNodes();
     if (selectedNodes.length == 0) {
         layer.alert("请选择要删除的病历。");
+        $("#dcContainer").show();
         return;
     }
 
     var selectedNode = selectedNodes[0];
     if (selectedNode.isParent) {
         alert("不能删除目录。");
+        //$("#dcContainer").show();
         return;
     }
 
@@ -116,6 +118,8 @@ function saveEmr(){
         success: function (data) {
             alert(data.msg);
             loadEmrCataLog();
+            parent.document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, xmlContent);
+            parent.document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
         },
         error: function (request) {
             alert("Connection error");
@@ -206,25 +210,23 @@ function loadDcEditor() {
 }
 
 function showModal() {
-    /*var selectNodes = zTree.getSelectedNodes();
-    if (selectNodes.length == 0) {
-        //layer.alert('请选择要加载的模板。', {icon: 6});
-        alert("请选择病历目录。");
-        return;
-    }*/
 
+    $("#dcContainer").hide();
     layer.open({
         type: 2,
-        closeBtn: 0,
+        closeBtn: 1,
         title: "新增病历",
-        maxmin: true,
+        maxmin: false,
         shadeClose: true, // 点击遮罩关闭层
         area: ['840px', '650px'],
         //offset:['100px', ''],
         //backgroundColor:'#FFEBCD',
         offset: 't',
         skin: 'layui-layer-molv',
-        content: '/emr/emrwriting/templatetable'
+        content: '/emr/emrwriting/templatetable',
+        end:function(){
+            $("#dcContainer").show();
+        }
     });
 
 }

@@ -1,5 +1,6 @@
 package com.haoze.service.emr.bom;
 
+import com.haoze.common.model.QueryParam;
 import com.haoze.model.emr.emrwriting.po.HisResponseDataPO;
 import com.haoze.service.emr.enumeration.HisCallTypeEnum;
 import com.haoze.utils.GsonUtil;
@@ -38,7 +39,7 @@ public final class HisResponseDataService {
      * @return
      * @throws IOException
      */
-    public static List<Map> listHisResponseData(Map<String,Object> params) throws IOException {
+    public static List<Map> listHisResponseData(QueryParam params) throws IOException {
 
         HisRequestParam hisRequestParam = HisRequestParamFactory.createHisRequestParam(HisCallTypeEnum.fromValue(String.valueOf(params.get("hisCallType"))));
         if(hisRequestParam == null){
