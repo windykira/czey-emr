@@ -129,7 +129,7 @@ a:hover {
 	left: 0;
 	z-index: 1000;
 	display: block;
-	width: 220px;
+	width: 250px;
 	padding: 5px;
 	overflow: auto;
 	background-color: #f5f5f5;
@@ -149,7 +149,7 @@ a:hover {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	left: 220px;
+	left: 250px;
 	padding: 15px;
 }
 .main2 {

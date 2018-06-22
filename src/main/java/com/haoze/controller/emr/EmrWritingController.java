@@ -4,15 +4,21 @@ import com.haoze.common.controller.BaseController;
 import com.haoze.common.model.QueryParam;
 import com.haoze.common.model.ResponseResult;
 import com.haoze.common.model.ZTree;
+import com.haoze.model.emr.emrwriting.entity.EmrFileEntity;
+import com.haoze.model.emr.emrwriting.vo.EmrFileVO;
 import com.haoze.service.emr.EmrFileService;
 import com.haoze.service.emr.bom.HisResponseDataService;
 import com.haoze.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -69,20 +75,31 @@ public class EmrWritingController extends BaseController {
 
     @GetMapping("/list")
     @ResponseBody
-    List<ZTree> list(Model model,String patientId) {
+    List<ZTree> list(Model model, String patientId) {
+        QueryParam queryParam = QueryParam.getDefaultQueryParam();
+        queryParam.put("patientId", patientId);
         List<ZTree> zTrees = emrFileService.getZtree(QueryParam.getDefaultQueryParam());
         return zTrees;
     }
 
     @PostMapping("/saveEmr")
     @ResponseBody
-    ResponseResult saveEmr(Model model, String xmlContent) {
+    ResponseResult saveEmr(Model model, EmrFileVO emrFileVO) {
 
         try {
+            String fileName = CurrentUser.getUser().getUserName() + "-" + CurrentUser.getUserRoleNames() + "-" + emrFileVO.getCatalogName() + "-"
+                    + DateFormatUtil.formatDate(new Date());
             String emrId = UUIDUtil.randomString();
-            boolean isSuccess = MyFileUtil.writeFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml", xmlContent);
+            boolean isSuccess = MyFileUtil.writeFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml", emrFileVO.getXmlContent());
             //FileUpload.upload(xmlContent,SystemConfigParseUtil.getProperty("EMR_FILE_PATH"),emrId + ".xml");
             if (isSuccess) {
+                EmrFileEntity emrFileEntity = emrFileVO.getEmrFile();
+                FixedFieldInitializedUtil.initialize(emrFileEntity);
+                emrFileEntity.setFileLoc(SystemConfigParseUtil.getProperty("EMR_FILE_PATH") + emrId + ".xml");
+                emrFileEntity.setEmrFileName(fileName);
+                emrFileEntity.setCodeDept(CurrentUser.getCurrentUserDepartment().getDepartmentCode());
+                emrFileEntity.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
+                emrFileService.insert(emrFileEntity);
                 return ResponseResult.success();
             }
             return ResponseResult.failure(0, "保存失败");
@@ -90,6 +107,24 @@ public class EmrWritingController extends BaseController {
             e.printStackTrace();
             return ResponseResult.failure(0, "保存失败");
         }
+    }
+
+    @RequestMapping(value = "/getEmrFile/{emrFileId}")
+    @ResponseBody
+    public String getEmrFile(HttpServletRequest request, @PathVariable String emrFileId) throws IOException {
+        EmrFileEntity emrFileEntity = emrFileService.get(emrFileId);
+        //String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
+        if(emrFileEntity == null){
+            return "";
+        }
+        String xml = MyFileUtil.readFile(emrFileEntity.getFileLoc());
+        return xml;
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    ResponseResult delete(String emrFileId) {
+        return emrFileService.delete(emrFileId);
     }
 
 }

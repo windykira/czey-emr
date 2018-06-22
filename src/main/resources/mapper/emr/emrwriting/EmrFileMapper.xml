@@ -21,13 +21,30 @@
     <result column="LOCKER" property="locker" jdbcType="VARCHAR" />
     <result column="LOCK_TIME" property="lockTime" jdbcType="DATE" />
     <result column="PK_TEMPLATE" property="pkTemplate" jdbcType="VARCHAR" />
+
+    <result column="PK_CATALOG" property="catalogId" jdbcType="VARCHAR" />
+    <result column="PK_CATALOG_PNT" property="parentCatalogId" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     PK_EMR_FILEID, PK_ORG, PK_DEPT, CODE_DEPT, PK_TMP_CLASS, PATIENT_ID, FILE_LOC, CREATOR, 
     CREATE_TIME, MODIFIER, MODIFY_TIME, OP_NUM, EMR_FILE_NAME, DEL_FLAG, LOCK_FLAG, LOCKER, 
-    LOCK_TIME, PK_TEMPLATE
+    LOCK_TIME, PK_TEMPLATE,PK_CATALOG,PK_CATALOG_PNT
   </sql>
+
+  <select id="get" parameterType="String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+      from EMR_FILE
+    <where>
+      PK_EMR_FILEID = #{_parameter}
+    </where>
+  </select>
+
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from EMR_FILE
+    where PK_EMR_FILEID = #{_parameter}
+  </delete>
 
   <select id="listEmrFiles" parameterType="java.util.Map" resultType="com.haoze.model.emr.emrwriting.po.EmrFilePO">
     select ef.PATIENT_ID PatientId,
@@ -50,20 +67,22 @@
     delete from EMR_FILE
     where PK_EMR_FILEID = #{pkEmrFileid,jdbcType=VARCHAR}
   </delete>
+
   <insert id="insert" parameterType="com.haoze.model.emr.emrwriting.entity.EmrFileEntity" >
     insert into EMR_FILE (PK_EMR_FILEID, PK_ORG, PK_DEPT, 
       CODE_DEPT, PK_TMP_CLASS, PATIENT_ID, 
       FILE_LOC, CREATOR, CREATE_TIME, 
       MODIFIER, MODIFY_TIME, OP_NUM, 
       EMR_FILE_NAME, DEL_FLAG, LOCK_FLAG, 
-      LOCKER, LOCK_TIME, PK_TEMPLATE
+      LOCKER, LOCK_TIME, PK_TEMPLATE,PK_CATALOG,PK_CATALOG_PNT
       )
-    values (#{pkEmrFileid,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, 
+    values (#{ID,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR},
       #{codeDept,jdbcType=VARCHAR}, #{pkTmpClass,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, 
       #{fileLoc,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
       #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=DATE}, #{opNum,jdbcType=VARCHAR}, 
       #{emrFileName,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{lockFlag,jdbcType=VARCHAR}, 
-      #{locker,jdbcType=VARCHAR}, #{lockTime,jdbcType=DATE}, #{pkTemplate,jdbcType=VARCHAR}
+      #{locker,jdbcType=VARCHAR}, #{lockTime,jdbcType=DATE}, #{pkTemplate,jdbcType=VARCHAR},
+      #{catalogId,jdbcType=VARCHAR},#{parentCatalogId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.haoze.model.emr.emrwriting.entity.EmrFileEntity" >

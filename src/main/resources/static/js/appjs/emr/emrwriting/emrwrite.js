@@ -4,9 +4,9 @@ $(window).resize(function () {
 
 $(function () {
 
+    loadNavi();
     //初始化病历目录数据
     loadEmrCataLog();
-    loadNavi();
     $("#timer").text($.getCurrentTime());
     setInterval(function () {
         $("#timer").text($.getCurrentTime());
@@ -35,7 +35,7 @@ $(function () {
 
             //$(".sidebar2").css("width","220px");
             $(".sidebar2").show();
-            $(".main2").css("left","220px");
+            $(".main2").css("left","250px");
 
             $("#retract").attr("value","open");
         }
@@ -43,6 +43,61 @@ $(function () {
 
 });
 
+function deleteEmr(){
+
+    var selectedNodes = zTree.getSelectedNodes();
+    if (selectedNodes.length == 0) {
+        layer.alert("请选择要删除的病历。");
+        return;
+    }
+
+    var selectedNode = selectedNodes[0];
+    if (selectedNode.isParent) {
+        alert("不能删除目录。");
+        return;
+    }
+
+    var r = confirm('确定要删除该病历么?');
+    if(r){
+        $.ajax({
+            type: "POST",
+            data: {
+                'emrFileId': selectedNode.id
+            },
+            url: "/emr/emrwriting/delete",
+            success: function (data) {
+                if (data.code == 1) {
+                    alert("删除成功。");
+                    loadEmrCataLog();
+                } else {
+                    alert(data.msg)
+                }
+            }
+        });
+    }
+    /*layer.confirm('确定要删除该病历么?', function (index) {
+        $.ajax({
+            type: "POST",
+            data: {
+                'emrFileId': selectedNode.id
+            },
+            url: "/emr/emrwriting/delete",
+            success: function (data) {
+                if (data.code == 1) {
+                    layer.msg("删除成功。");
+                    loadEmrCataLog();
+                } else {
+                    layer.alert(data.msg)
+                }
+            }
+        });
+    });*/
+}
+
+var templateId = "";
+var catalogId = "";
+var catalogName = "";
+var parentCatalogId = "";
 function saveEmr(){
 
     var xmlContent = getXMLString();
@@ -50,10 +105,17 @@ function saveEmr(){
         type: "POST",
         url: "/emr/emrwriting/saveEmr",
         data: {
-            xmlContent : xmlContent
+            "xmlContent":xmlContent,
+            "catalogName":catalogName,
+            "emrFile.patientId":info.PATIENT_ID,
+            "emrFile.pkTmpClass":$(".list-group").find(".active").attr("value"),
+            "emrFile.pkTemplate":templateId,
+            "emrFile.catalogId":catalogId,
+            "emrFile.parentCatalogId":parentCatalogId
         },
         success: function (data) {
             alert(data.msg);
+            loadEmrCataLog();
         },
         error: function (request) {
             alert("Connection error");
@@ -83,11 +145,26 @@ function loadEmrCataLog() {
             simpleData: {
                 enable: true
             }
+        },
+        callback: {
+            onClick: function (event, treeId, treeNode) {
+                $.ajax({
+                    type: "GET",
+                    url: "/emr/emrwriting/getEmrFile/" + treeNode.id,
+                    success: function (data) {
+                        parent.document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, data);
+                        parent.document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
+                    }
+                });
+            }
         }
     };
     $.ajax({
         type: "GET",
-        url: "/emr/catalog/list",
+        url: "/emr/emrwriting/list",
+        data:{
+            patientId:info.PATIENT_ID
+        },
         success: function (data) {
             zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
             zTree.expandAll(true);
@@ -129,12 +206,12 @@ function loadDcEditor() {
 }
 
 function showModal() {
-    var selectNodes = zTree.getSelectedNodes();
+    /*var selectNodes = zTree.getSelectedNodes();
     if (selectNodes.length == 0) {
         //layer.alert('请选择要加载的模板。', {icon: 6});
         alert("请选择病历目录。");
         return;
-    }
+    }*/
 
     layer.open({
         type: 2,
@@ -142,7 +219,7 @@ function showModal() {
         title: "新增病历",
         maxmin: true,
         shadeClose: true, // 点击遮罩关闭层
-        area: ['840px', '550px'],
+        area: ['840px', '650px'],
         //offset:['100px', ''],
         //backgroundColor:'#FFEBCD',
         offset: 't',

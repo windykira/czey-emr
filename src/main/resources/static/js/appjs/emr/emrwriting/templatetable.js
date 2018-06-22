@@ -1,25 +1,53 @@
-$(function() {
-    loadTable();
+$(function () {
+    loadTable("0");
 });
 
-function loadTable(){
+function openCatalog() {
+    layer.open({
+        type: 2,
+        title: "选择病历目录",
+        shadeClose: true,
+        area: ['400px', '600px'],
+        skin: 'layui-layer-molv',
+        content: "/template/medicalrecord/catalogTree",
+        btn: ['确定', '取消',],
+        yes: function (index, layero) {
+            var iframeWin = window[layero.find('iframe')[0]['name']];
+            var object = iframeWin.callBack();
+            layer.close(index);
+            $("#pkFatherName").val(object.catalogName);
+            $("#pkFather").val(object.catalogId);
+            loadTable(object.catalogId);
+            parent.catalogId = object.catalogId;
+            parent.catalogName = object.catalogName;
+            parent.parentCatalogId = object.parentCatalogId;
+            //reloadTemplateTable($(".nav-tabs").find(".active").attr("value"));
+        }
+    })
+}
 
-    var selectNodes = parent.zTree.getSelectedNodes();
+function loadTable(catalogId) {
+
+    //var selectNodes = parent.zTree.getSelectedNodes();
     $.ajax({
-        type : "GET",
-        url : "/template/class/list/"+selectNodes[0].id,
-        success : function(datas) {
+        type: "GET",
+        url: "/template/class/list/" + catalogId,
+        success: function (datas) {
 
             $(".list-group").find("li").remove();
-            $.each(datas,function(i,e){
-                if(i == 0){
-                    $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
-                }else{
-                    $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value="+e.id+" onclick='reloadTemplate(this)'>"+e.nameClass+"</li>")
+            $.each(datas, function (i, e) {
+                if (i == 0) {
+                    $(".list-group").append(" <li class='list-group-item active' style='cursor: pointer;' value=" + e.id + " onclick='reloadTemplate(this)'>" + e.nameClass + "</li>")
+                } else {
+                    $(".list-group").append(" <li class='list-group-item' style='cursor: pointer;' value=" + e.id + " onclick='reloadTemplate(this)'>" + e.nameClass + "</li>")
                 }
             });
-            //加载模板表格数据
-            loadTemplateTable(1);
+            if("0" == catalogId){
+                //加载模板表格数据
+                loadTemplateTable(1);
+            }else{
+                reloadTemplateTable($(".nav-tabs").find(".active").attr("value"));
+            }
             $(".list-group li").click(function () {
                 $(this).addClass("active").siblings(".active").removeClass("active");
             });
@@ -27,7 +55,7 @@ function loadTable(){
     })
 }
 
-function loadTemplateTable(rangeValue){
+function loadTemplateTable(rangeValue) {
 
     $('#templateTable')
         .bootstrapTable(
@@ -46,18 +74,18 @@ function loadTemplateTable(rangeValue){
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 server
                 sortable: true,                     //是否启用排序
                 sortOrder: "asc",
-                onCheck:function(row,$element){
-                    $("#templateTable").find("tbody").find("tr").css("background-color","");
-                    $element .parent().closest("tr").css("background-color","#7ebfc1");
+                onCheck: function (row, $element) {
+                    $("#templateTable").find("tbody").find("tr").css("background-color", "");
+                    $element.parent().closest("tr").css("background-color", "#7ebfc1");
 
                 },
                 queryParams: function (params) {
                     return {
                         // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        page:(params.offset / params.limit) + 1,
-                        range:rangeValue,
-                        templateClassId:$(".list-group").find(".active").attr("value")
+                        page: (params.offset / params.limit) + 1,
+                        range: rangeValue,
+                        templateClassId: $(".list-group").find(".active").attr("value") == undefined ? "" : $(".list-group").find(".active").attr("value")
                         /*sort: params.sort,      //排序列名
                          sortOrder: params.order, //排位命令（desc，asc）
                          name: $('#searchName').val(),
@@ -92,40 +120,37 @@ function loadTemplateTable(rangeValue){
             });
 }
 
-function reloadTemplate(e){
+function reloadTemplate(e) {
 
-    //debugger;
-    $('#templateTable').bootstrapTable('refreshOptions',{
+    $('#templateTable').bootstrapTable('refreshOptions', {
         queryParams: function (params) {
             return {
                 // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                 limit: params.limit,
-                page:(params.offset / params.limit) + 1,
-                range:$(".nav-tabs").find(".active").attr("value"),
-                templateClassId:$(e).attr("value")
+                page: (params.offset / params.limit) + 1,
+                range: $(".nav-tabs").find(".active").attr("value"),
+                templateClassId: $(e).attr("value")
             };
         }
     });
 }
 
-function reloadTemplateTable(rangeValue){
+function reloadTemplateTable(rangeValue) {
 
-
-
-    $('#templateTable').bootstrapTable('refreshOptions',{
+    $('#templateTable').bootstrapTable('refreshOptions', {
         queryParams: function (params) {
             return {
                 // 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                 limit: params.limit,
-                page:(params.offset / params.limit) + 1,
-                range:rangeValue,
-                templateClassId:$(".list-group").find(".active").attr("value")
+                page: (params.offset / params.limit) + 1,
+                range: rangeValue,
+                templateClassId: $(".list-group").find(".active").attr("value")
             };
         }
     });
 }
 
-function loadDcEditor(){
+function loadDcEditor() {
 
     var rows = $('#templateTable').bootstrapTable('getSelections');
     if (rows.length == 0) {
@@ -136,22 +161,23 @@ function loadDcEditor(){
 
     var ctl = parent.document.getElementById("myWriter");
     //ctl.ExecuteCommand("FileOpen", false, "/cab/index.xml");
+    parent.templateId = rows[0].templateId;
     $.ajax({
-        url:"/emr/dc/getTemplate/"+rows[0].templateId,
-        dataType:"text",
-        success:function(data){
+        url: "/emr/dc/getTemplate/" + rows[0].templateId,
+        dataType: "text",
+        success: function (data) {
             ctl.ExecuteCommand("FileOpenString", false, data);
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
             parent.bindDataSource(parent.info);
         },
-        error:function(){
+        error: function () {
             alert("读取出错");
         }
     })
 }
 
-function cancel(){
+function cancel() {
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
 }

@@ -19,6 +19,25 @@ public class EmrFileEntity extends BaseEntity{
     private Date lockTime;//锁定时间
     private String pkTemplate;//病历来源模板ID
 
+    private String catalogId;//病历目录ID
+    private String parentCatalogId;//病历目录父ID
+
+    public String getCatalogId() {
+        return catalogId;
+    }
+
+    public void setCatalogId(String catalogId) {
+        this.catalogId = catalogId;
+    }
+
+    public String getParentCatalogId() {
+        return parentCatalogId;
+    }
+
+    public void setParentCatalogId(String parentCatalogId) {
+        this.parentCatalogId = parentCatalogId;
+    }
+
     public String getPkOrg() {
         return pkOrg;
     }

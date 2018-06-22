@@ -71,9 +71,11 @@
         var ref = $('#catalogTree').jstree(true);
         var catalogId = ref.get_selected();
         var catalogName = $('#catalogTree').jstree().get_node("#"+catalogId).text;
+        var parentCatalogId = $('#catalogTree').jstree().get_node("#"+catalogId).parent;
         var object = {
-            "catalogId":catalogId,
-            "catalogName":catalogName
+            "catalogId":catalogId[0],
+            "catalogName":catalogName,
+            "parentCatalogId":parentCatalogId
         };
         return object;
     }
