@@ -89,11 +89,10 @@ public class EmrWritingController extends BaseController {
     ResponseResult saveEmr(Model model, EmrFileVO emrFileVO) {
 
         try {
-            String fileName = CurrentUser.getUser().getUserName() + "-" + CurrentUser.getUserRoleNames() + "-" + emrFileVO.getCatalogName() + "-"
+            String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
                     + DateFormatUtil.formatDate(new Date());
             String emrId = UUIDUtil.randomString();
             boolean isSuccess = MyFileUtil.writeFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml", emrFileVO.getXmlContent());
-            //FileUpload.upload(xmlContent,SystemConfigParseUtil.getProperty("EMR_FILE_PATH"),emrId + ".xml");
             if (isSuccess) {
                 EmrFileEntity emrFileEntity = emrFileVO.getEmrFile();
                 FixedFieldInitializedUtil.initialize(emrFileEntity);
@@ -106,6 +105,28 @@ public class EmrWritingController extends BaseController {
             }
             return ResponseResult.failure(0, "保存失败");
         } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.failure(0, "保存失败");
+        }
+    }
+
+    @PostMapping("/updateEmr")
+    @ResponseBody
+    ResponseResult update(Model model, EmrFileVO emrFileVO) {
+
+        try {
+            String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
+                    + DateFormatUtil.formatDate(new Date());
+            EmrFileEntity emrFileEntity = emrFileService.get(emrFileVO.getEmrFile().getID());
+            String emrId = emrFileEntity.getFileLoc();
+            emrId = emrId.substring(emrId.lastIndexOf("\\") + 1).replace(".xml","");
+
+            FileUpload.upload(emrFileVO.getXmlContent(),SystemConfigParseUtil.getProperty("EMR_FILE_PATH"),emrId + ".xml");
+            emrFileEntity.setEmrFileName(fileName);
+            emrFileEntity.setModifyTime(new Date());
+            emrFileService.update(emrFileEntity);
+            return ResponseResult.success().put("emrFileId",emrFileEntity.getID());
+        }catch (Exception e){
             e.printStackTrace();
             return ResponseResult.failure(0, "保存失败");
         }

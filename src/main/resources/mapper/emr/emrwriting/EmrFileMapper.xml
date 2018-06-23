@@ -200,7 +200,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.haoze.model.emr.emrwriting.entity.EmrFileEntity" >
+
+  <update id="update" parameterType="com.haoze.model.emr.emrwriting.entity.EmrFileEntity" >
     update EMR_FILE
     <set >
       <if test="pkOrg != null" >
@@ -255,8 +256,9 @@
         PK_TEMPLATE = #{pkTemplate,jdbcType=VARCHAR},
       </if>
     </set>
-    where PK_EMR_FILEID = #{pkEmrFileid,jdbcType=VARCHAR}
+    where PK_EMR_FILEID = #{ID,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.haoze.model.emr.emrwriting.entity.EmrFileEntity" >
     update EMR_FILE
     set PK_ORG = #{pkOrg,jdbcType=VARCHAR},

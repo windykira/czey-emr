@@ -7,8 +7,9 @@ function openCatalog() {
         type: 2,
         title: "选择病历目录",
         shadeClose: true,
-        area: ['400px', '600px'],
+        area: ['400px', '560px'],
         skin: 'layui-layer-molv',
+        offset:"t",
         content: "/template/medicalrecord/catalogTree",
         btn: ['确定', '取消',],
         yes: function (index, layero) {
@@ -154,7 +155,7 @@ function loadDcEditor() {
 
     var rows = $('#templateTable').bootstrapTable('getSelections');
     if (rows.length == 0) {
-        layer.alert('请选择要加载的模板。', {icon: 6});
+        layer.alert('请选择要加载的模板。');
         //alert("请选择要加载的模板。");
         return;
     }
@@ -170,6 +171,7 @@ function loadDcEditor() {
             var index = parent.layer.getFrameIndex(window.name);
             parent.layer.close(index);
             parent.bindDataSource(parent.info);
+            parent.cancelSelectNode();
         },
         error: function () {
             alert("读取出错");

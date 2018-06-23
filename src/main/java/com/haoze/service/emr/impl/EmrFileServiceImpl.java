@@ -57,8 +57,16 @@ public class EmrFileServiceImpl implements EmrFileService{
     }
 
     @Override
+    @Transactional
     public ResponseResult update(EmrFileEntity emrFileEntity) {
-        return null;
+        try {
+            emrFileDao.update(emrFileEntity);
+            return ResponseResult.success();
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponseResult.failure(0,"保存失败。");
+        }
     }
 
     @Override

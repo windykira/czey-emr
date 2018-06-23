@@ -23,21 +23,18 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">新增病历</h4>
 </div>-->
+
 <div class="modal-body">
+
+    <div class="">
+        <input type="hidden" id="pkFather" name="pkFather"/>
+        <input type="text" class="form-control" style="width: 31%;margin-bottom: 10px;" id="pkFatherName" name="pkFatherName"  onclick="openCatalog()" placeholder="请选择病历目录">
+    </div>
+
     <div class="row">
-
-        <!--<div class="form-group">-->
-            <label for="inputPassword3" class="col-sm-3 control-label">病历目录</label>
-            <div class="col-sm-6">
-                <input type="hidden" id="pkFather" name="pkFather"/>
-                <input type="text" class="form-control" id="pkFatherName" name="pkFatherName"  onclick="openCatalog()">
-            </div>
-        <!--</div>-->
-
         <div class="col-sm-4 col-md-3">
-
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" style="margin-bottom:8px;">
+            <ul class="nav nav-tabs catalog-choose" style="margin-bottom:8px;">
                 <li value="1" class="active" onclick="reloadTemplateTable(this.value)"><a href="#" data-toggle="tab">全院</a></li>
                 <li value="2" onclick="reloadTemplateTable(this.value)"><a href="#" data-toggle="tab">科室</a></li>
                 <li value="3" onclick="reloadTemplateTable(this.value)"><a href="#" data-toggle="tab">个人</a></li>
@@ -55,8 +52,6 @@
                         <li class="list-group-item">出院记录</li>-->
                     </ul>
                 </div>
-                <div class="tab-pane" id="profile">22.</div>
-                <div class="tab-pane" id="messages">.33</div>
             </div>
         </div>
         <div class="col-sm-6 col-md-7">

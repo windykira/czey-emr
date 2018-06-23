@@ -6,7 +6,7 @@ $(function () {
 
     loadNavi();
     //初始化病历目录数据
-    loadEmrCataLog();
+    loadEmrCataLog("");
     $("#timer").text($.getCurrentTime());
     setInterval(function () {
         $("#timer").text($.getCurrentTime());
@@ -47,7 +47,7 @@ function deleteEmr(){
 
     var selectedNodes = zTree.getSelectedNodes();
     if (selectedNodes.length == 0) {
-        layer.alert("请选择要删除的病历。");
+        alert("请选择要删除的病历。");
         $("#dcContainer").show();
         return;
     }
@@ -69,8 +69,8 @@ function deleteEmr(){
             url: "/emr/emrwriting/delete",
             success: function (data) {
                 if (data.code == 1) {
-                    alert("删除成功。");
-                    loadEmrCataLog();
+                    //alert("删除成功。");
+                    loadEmrCataLog("");
                 } else {
                     alert(data.msg)
                 }
@@ -103,23 +103,37 @@ var parentCatalogId = "";
 function saveEmr(){
 
     var xmlContent = getXMLString();
+    var data = {
+        "xmlContent":xmlContent,
+        "catalogName":catalogName,
+        "emrFile.patientId":info.PATIENT_ID,
+        "emrFile.pkTmpClass":$(".list-group").find(".active").attr("value"),
+        "emrFile.pkTemplate":templateId,
+        "emrFile.catalogId":catalogId,
+        "emrFile.parentCatalogId":parentCatalogId,
+        "emrFile.ID":emrFileId
+    };
+    var url = "";
+    //更新
+    if(emrFileId != ""){
+        url = "/emr/emrwriting/updateEmr";
+    }else{
+        url = "/emr/emrwriting/saveEmr";
+        if(templateId == ""){
+            alert("请选择模板。");
+            return;
+        }
+    }
+
     $.ajax({
         type: "POST",
-        url: "/emr/emrwriting/saveEmr",
-        data: {
-            "xmlContent":xmlContent,
-            "catalogName":catalogName,
-            "emrFile.patientId":info.PATIENT_ID,
-            "emrFile.pkTmpClass":$(".list-group").find(".active").attr("value"),
-            "emrFile.pkTemplate":templateId,
-            "emrFile.catalogId":catalogId,
-            "emrFile.parentCatalogId":parentCatalogId
-        },
+        url: url,
+        data: data,
         success: function (data) {
             alert(data.msg);
-            loadEmrCataLog();
-            parent.document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, xmlContent);
-            parent.document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
+            loadEmrCataLog(data.emrFileId);
+            document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, xmlContent);
+            //document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
         },
         error: function (request) {
             alert("Connection error");
@@ -143,7 +157,8 @@ function loadNavi() {
     document.getElementById("patient_diagnosis").innerHTML = info.DIAGNOSIS;
 }
 var zTree = "";
-function loadEmrCataLog() {
+var emrFileId = "";
+function loadEmrCataLog(treeNodeId) {
     var setting = {
         data: {
             simpleData: {
@@ -152,12 +167,13 @@ function loadEmrCataLog() {
         },
         callback: {
             onClick: function (event, treeId, treeNode) {
+                emrFileId = treeNode.id;
                 $.ajax({
                     type: "GET",
                     url: "/emr/emrwriting/getEmrFile/" + treeNode.id,
                     success: function (data) {
-                        parent.document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, data);
-                        parent.document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
+                        document.getElementById("myWriter").ExecuteCommand("FileOpenString", false, data);
+                        //document.getElementById("myWriter").ExecuteCommand("ReadViewMode", false, null);
                     }
                 });
             }
@@ -172,6 +188,12 @@ function loadEmrCataLog() {
         success: function (data) {
             zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
             zTree.expandAll(true);
+            if(treeNodeId != ""){
+                var node = zTree.getNodeByParam("id",treeNodeId);
+                zTree.cancelSelectedNode();
+                zTree.selectNode(node);
+                emrFileId = treeNodeId;
+            }
         }
     });
 }
@@ -218,7 +240,7 @@ function showModal() {
         title: "新增病历",
         maxmin: false,
         shadeClose: true, // 点击遮罩关闭层
-        area: ['840px', '650px'],
+        area: ['840px', '600px'],
         //offset:['100px', ''],
         //backgroundColor:'#FFEBCD',
         offset: 't',
@@ -360,6 +382,11 @@ function loadTemplateTable(rangeValue) {
 function resize() {
     var h = $("body").height();
     $("#myWriter").css("height", h - 30);
+}
+
+function cancelSelectNode(){
+    zTree.cancelSelectedNode();
+    emrFileId = "";
 }
 
 //var treeObj = $.fn.zTree.getZTreeObj("tree");
