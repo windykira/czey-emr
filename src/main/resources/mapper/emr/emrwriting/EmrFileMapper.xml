@@ -53,7 +53,7 @@
       (select NAME_CATALOG from EMR_CATALOG where ef.PK_CATALOG_PNT = PK_CATALOG) ParentCatalogName
       from EMR_FILE ef INNER JOIN EMR_CATALOG ec on ef.PK_CATALOG = ec.PK_CATALOG
     <where>
-      <if test="PatientId != null and PatientId != ''"> and ef.PATIENT_ID = #{PatientId} </if>
+      <if test="patientId != null and patientId != ''"> and ef.PATIENT_ID = #{patientId} </if>
     </where>
   </select>
 

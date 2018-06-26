@@ -23,7 +23,7 @@ public class FileUpload {
             return;
         }
         File dir = new File(path);
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         FileOutputStream out = new FileOutputStream(new File(path + fileName));
@@ -31,11 +31,22 @@ public class FileUpload {
         osw.write(xmlContent);
         osw.flush();
 
-        if(osw != null){
+        if (osw != null) {
             osw.close();
         }
-        if(out != null){
+        if (out != null) {
             out.close();
         }
+    }
+
+    public static void delete(File file) {
+
+        if (file.isDirectory()) {
+            String[] children = file.list();
+            for (int i = 0; i < children.length; i++) {
+                delete(new File(file, children[i]));
+            }
+        }
+        file.delete();
     }
 }

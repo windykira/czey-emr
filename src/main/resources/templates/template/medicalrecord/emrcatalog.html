@@ -31,6 +31,18 @@
 <script type="text/javascript">
     $(document).ready(function() {
         getTreeData()
+
+        $('#catalogTree').bind("dblclick.jstree",function(){
+            var object = callBack();
+            var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+            parent.layer.close(index);
+            parent.$("#pkFatherName").val(object.catalogName);
+            parent.$("#pkFather").val(object.catalogId);
+            parent.loadTable(object.catalogId);
+            parent.parent.catalogId = object.catalogId;
+            parent.parent.catalogName = object.catalogName;
+            parent.parent.parentCatalogId = object.parentCatalogId;
+        });
     });
     function getTreeData() {
 

@@ -41,6 +41,11 @@ public class HisCallTypeEnum {
      */
     public final static HisCallTypeEnum Operation = new HisCallTypeEnum("5","手术");
 
+    /**
+     * 病人列表。
+     */
+    public final static HisCallTypeEnum PatientList = new HisCallTypeEnum("6","病人列表");
+
     private HisCallTypeEnum(String enumValue, String enumName){
         this.enumValue = enumValue;
         this.enumName = enumName;

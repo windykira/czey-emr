@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
@@ -61,13 +62,14 @@ public class EmrWritingController extends BaseController {
     List<Map> listHisResponseDatas(Model model, @RequestParam Map<String, Object> params) {
 
         try {
-            params.put("visitId", 1);
+            /*params.put("visitId", 1);
             params.put("repeatIndicator", 1);
             QueryParam queryParam = new QueryParam(params);
-            queryParam.put("curPage",queryParam.getPage());
-            queryParam.put("pageSize",queryParam.getLimit());
+            queryParam.put("curPage", queryParam.getPage());
+            queryParam.put("pageSize", queryParam.getLimit());*/
             //List<? extends HisResponseDataPO> advice = HisResponseDataService.listHisResponseData(params);
-            List<Map> advice = HisResponseDataService.listHisResponseData(queryParam);
+            //List<Map> advice = HisResponseDataService.listHisResponseData(queryParam);
+            List<Map> advice = HisResponseDataService.listHisResponseData(params);
             return advice;
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +82,7 @@ public class EmrWritingController extends BaseController {
     List<ZTree> list(Model model, String patientId) {
         QueryParam queryParam = QueryParam.getDefaultQueryParam();
         queryParam.put("patientId", patientId);
-        List<ZTree> zTrees = emrFileService.getZtree(QueryParam.getDefaultQueryParam());
+        List<ZTree> zTrees = emrFileService.getZtree(queryParam);
         return zTrees;
     }
 
@@ -96,12 +98,12 @@ public class EmrWritingController extends BaseController {
             if (isSuccess) {
                 EmrFileEntity emrFileEntity = emrFileVO.getEmrFile();
                 FixedFieldInitializedUtil.initialize(emrFileEntity);
-                emrFileEntity.setFileLoc(SystemConfigParseUtil.getProperty("EMR_FILE_PATH") + emrId + ".xml");
+                emrFileEntity.setFileLoc(emrId + ".xml");
                 emrFileEntity.setEmrFileName(fileName);
                 emrFileEntity.setCodeDept(CurrentUser.getCurrentUserDepartment().getDepartmentCode());
                 emrFileEntity.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
                 emrFileService.insert(emrFileEntity);
-                return ResponseResult.success().put("emrFileId",emrFileEntity.getID());
+                return ResponseResult.success().put("emrFileId", emrFileEntity.getID());
             }
             return ResponseResult.failure(0, "保存失败");
         } catch (Exception e) {
@@ -119,14 +121,14 @@ public class EmrWritingController extends BaseController {
                     + DateFormatUtil.formatDate(new Date());
             EmrFileEntity emrFileEntity = emrFileService.get(emrFileVO.getEmrFile().getID());
             String emrId = emrFileEntity.getFileLoc();
-            emrId = emrId.substring(emrId.lastIndexOf("\\") + 1).replace(".xml","");
+            emrId = emrId.replace(".xml", "");
 
-            FileUpload.upload(emrFileVO.getXmlContent(),SystemConfigParseUtil.getProperty("EMR_FILE_PATH"),emrId + ".xml");
+            FileUpload.upload(emrFileVO.getXmlContent(), SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml");
             emrFileEntity.setEmrFileName(fileName);
             emrFileEntity.setModifyTime(new Date());
             emrFileService.update(emrFileEntity);
-            return ResponseResult.success().put("emrFileId",emrFileEntity.getID());
-        }catch (Exception e){
+            return ResponseResult.success().put("emrFileId", emrFileEntity.getID());
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseResult.failure(0, "保存失败");
         }
@@ -137,10 +139,10 @@ public class EmrWritingController extends BaseController {
     public String getEmrFile(HttpServletRequest request, @PathVariable String emrFileId) throws IOException {
         EmrFileEntity emrFileEntity = emrFileService.get(emrFileId);
         //String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
-        if(emrFileEntity == null){
+        if (emrFileEntity == null) {
             return "";
         }
-        String xml = MyFileUtil.readFile(emrFileEntity.getFileLoc());
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH") + emrFileEntity.getFileLoc());
         return xml;
     }
 
