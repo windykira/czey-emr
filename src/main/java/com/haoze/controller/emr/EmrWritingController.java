@@ -62,19 +62,14 @@ public class EmrWritingController extends BaseController {
     List<Map> listHisResponseDatas(Model model, @RequestParam Map<String, Object> params) {
 
         try {
-            /*params.put("visitId", 1);
-            params.put("repeatIndicator", 1);
-            QueryParam queryParam = new QueryParam(params);
-            queryParam.put("curPage", queryParam.getPage());
-            queryParam.put("pageSize", queryParam.getLimit());*/
             //List<? extends HisResponseDataPO> advice = HisResponseDataService.listHisResponseData(params);
             //List<Map> advice = HisResponseDataService.listHisResponseData(queryParam);
             List<Map> advice = HisResponseDataService.listHisResponseData(params);
             return advice;
         } catch (Exception e) {
             e.printStackTrace();
+            return Collections.EMPTY_LIST;
         }
-        return Collections.EMPTY_LIST;
     }
 
     @GetMapping("/list")
@@ -93,12 +88,14 @@ public class EmrWritingController extends BaseController {
         try {
             String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
                     + DateFormatUtil.formatDate(new Date());
-            String emrId = UUIDUtil.randomString();
-            boolean isSuccess = MyFileUtil.writeFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml", emrFileVO.getXmlContent());
+            //String emrId = UUIDUtil.randomString();
+            String diskFileName = CurrentUser.getUser().getUserName() + "_" + CurrentUser.getUserRoleNames()
+                    + "_" + emrFileVO.getCatalogName() + "_" + DateFormatUtil.formatDate(new Date(), "yyyy-MM-dd HHmmss");
+            boolean isSuccess = MyFileUtil.writeFile(SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), diskFileName + ".xml", emrFileVO.getXmlContent());
             if (isSuccess) {
                 EmrFileEntity emrFileEntity = emrFileVO.getEmrFile();
                 FixedFieldInitializedUtil.initialize(emrFileEntity);
-                emrFileEntity.setFileLoc(emrId + ".xml");
+                emrFileEntity.setFileLoc(diskFileName + ".xml");
                 emrFileEntity.setEmrFileName(fileName);
                 emrFileEntity.setCodeDept(CurrentUser.getCurrentUserDepartment().getDepartmentCode());
                 emrFileEntity.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
@@ -119,12 +116,17 @@ public class EmrWritingController extends BaseController {
         try {
             String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
                     + DateFormatUtil.formatDate(new Date());
+            String diskFileName = CurrentUser.getUser().getUserName() + "_" + CurrentUser.getUserRoleNames()
+                    + "_" + emrFileVO.getCatalogName() + "_" + DateFormatUtil.formatDate(new Date(), "yyyy-MM-dd HHmmss");
             EmrFileEntity emrFileEntity = emrFileService.get(emrFileVO.getEmrFile().getID());
-            String emrId = emrFileEntity.getFileLoc();
-            emrId = emrId.replace(".xml", "");
 
-            FileUpload.upload(emrFileVO.getXmlContent(), SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), emrId + ".xml");
+            //保存文件到磁盘
+            FileUpload.upload(emrFileVO.getXmlContent(), SystemConfigParseUtil.getProperty("EMR_FILE_PATH"), diskFileName + ".xml");
+            //删除磁盘旧文件
+            FileUpload.delete(new File(SystemConfigParseUtil.getProperty("EMR_FILE_PATH") + emrFileEntity.getFileLoc()));
+
             emrFileEntity.setEmrFileName(fileName);
+            emrFileEntity.setFileLoc(diskFileName + ".xml");
             emrFileEntity.setModifyTime(new Date());
             emrFileService.update(emrFileEntity);
             return ResponseResult.success().put("emrFileId", emrFileEntity.getID());

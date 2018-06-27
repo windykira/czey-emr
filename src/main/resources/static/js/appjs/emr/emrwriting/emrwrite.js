@@ -70,6 +70,7 @@ function deleteEmr(){
             success: function (data) {
                 if (data.code == 1) {
                     //alert("删除成功。");
+                    document.getElementById("myWriter").ExecuteCommand("FileNew", false, null);
                     loadEmrCataLog("");
                 } else {
                     alert(data.msg)

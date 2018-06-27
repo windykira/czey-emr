@@ -58,13 +58,16 @@ public class HisRequestParamFactory {
                 return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_CHECKUP")
                         , SystemConfigParseUtil.getProperty("HIS_DATA_KEY"));
             case "3":
-                return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_INSPECT")
+                return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_COLLECTINSPECT")
                         , SystemConfigParseUtil.getProperty("HIS_DATA_KEY"));
             case "4":
                 return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_PRESCRIPTION")
                         , SystemConfigParseUtil.getProperty("HIS_DATA_KEY"));
             case "6":
                 return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_URL")
+                        , SystemConfigParseUtil.getProperty("HIS_DATA_KEY"));
+            case "7":
+                return new HisRequestParam(SystemConfigParseUtil.getProperty("HIS_PATIENT_DETAILINSPECT")
                         , SystemConfigParseUtil.getProperty("HIS_DATA_KEY"));
         }
         return null;

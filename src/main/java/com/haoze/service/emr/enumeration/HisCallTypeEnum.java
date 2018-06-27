@@ -27,9 +27,14 @@ public class HisCallTypeEnum {
     public final static HisCallTypeEnum PatientCheckUp = new HisCallTypeEnum("2","检查");
 
     /**
-     * 检验。
+     * 检验汇总。
      */
-    public final static HisCallTypeEnum PatientInspect = new HisCallTypeEnum("3","检验");
+    public final static HisCallTypeEnum PatientInspect = new HisCallTypeEnum("3","检验汇总");
+
+    /**
+     * 检验明细。
+     */
+    public final static HisCallTypeEnum PatientDetailInspect = new HisCallTypeEnum("7","检验明细");
 
     /**
      * 处方。

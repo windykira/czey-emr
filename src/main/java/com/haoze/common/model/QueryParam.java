@@ -15,11 +15,13 @@ public class QueryParam extends LinkedHashMap<String, Object> {
     private int limit;
     private int page;
 
+    private static int MAX_SIZE = 9999;
+
     public QueryParam(Map<String, Object> params) {
         this.putAll(params);
         // 分页参数
-        this.limit = params.get("limit") == null ? 1 : Integer.parseInt(params.get("limit").toString());
-        this.page = params.get("page") == null ? Integer.MAX_VALUE : Integer.parseInt(params.get("page").toString());
+        this.page = params.get("page") == null ? 1 : Integer.parseInt(params.get("page").toString());
+        this.limit = params.get("limit") == null ? MAX_SIZE : Integer.parseInt(params.get("limit").toString());
         //this.limit = Integer.parseInt(params.get("limit").toString());
         //this.page = Integer.parseInt(params.get("page").toString());
         this.put("page", page);
@@ -29,7 +31,7 @@ public class QueryParam extends LinkedHashMap<String, Object> {
     public static QueryParam getDefaultQueryParam() {
         QueryParam queryParam = new QueryParam();
         queryParam.put("page", 1);
-        queryParam.put("limit", Integer.MAX_VALUE);
+        queryParam.put("limit", MAX_SIZE);
         return queryParam;
     }
 
