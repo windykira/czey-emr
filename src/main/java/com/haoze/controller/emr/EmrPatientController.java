@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,23 @@ public class EmrPatientController extends BaseController{
         return result;
     }
 
+    @GetMapping("getJYListByPatientId/{patientId}")
+    @ResponseBody
+    String getJYListByPatientId(Model model, HttpServletRequest request,@PathVariable("patientId") String patientId) {
+        String res = "";
+        try {
+            Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionJyxx?visitId=1&patientId="+patientId, "",null);
+            res = response.body();
+            Map<String,Object> m = GsonUtil.fromJson(res,Map.class);
+            res = m.get("decisionJyxx").toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+
+
     @GetMapping("getJCDetailByCheckNo/{checkNo}")
     @ResponseBody
     String getJCDetailByCheckNo(Model model, HttpServletRequest request,@PathVariable("checkNo") String checkNo) {
@@ -91,15 +109,17 @@ public class EmrPatientController extends BaseController{
 
     @GetMapping("getJYDetailByCheckNo/{checkNo}")
     @ResponseBody
-    String getJYDetailByCheckNo(Model model, HttpServletRequest request,@PathVariable("checkNo") String checkNo) {
-        String res = "";
+    List getJYDetailByCheckNo(Model model, HttpServletRequest request,@PathVariable("checkNo") String checkNo) {
+        List rows = new ArrayList();
         try {
             Connection.Response response = (Connection.Response) JsoupHttpRequest.sendHttpRequest("http://58.216.175.154:8181/getDecisionJyxxDetail?examCode="+checkNo, "",null);
-            res = response.body();
+            String res = response.body();
+            Map<String,Object> m = GsonUtil.fromJson(res,Map.class);
+            rows = GsonUtil.fromJson(GsonUtil.toJson(m.get("decisionJyxxDetail")),List.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return res;
+        return rows;
     }
     @GetMapping("getPrescByPatientId/{patientId}")
     @ResponseBody

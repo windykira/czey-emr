@@ -53,29 +53,33 @@ function load() {
 							},
 							{
 								field : 'range',
-								title : '使用范围'
+								title : '使用范围',
+								formatter:function(value){
+									if(value == 'C'){return '全院';}
+									if(value == 'D'){return '科室';}
+								}
 							},
 							{
 								title : '操作',
 								field : 'ID',
 								align : 'center',
 								formatter : function(value, row, index) {
-									var f = '';
-									if (row.range == 'D'){
-										f = '<a class="btn btn-primary btn-sm '+s_deploy_dept+'" href="#" mce_href="#" title="配置可用科室" onclick="deployDept(\''
-										+ row.id
-										+ '\')"><i class="fa fa-envelope-o"></i></a> ';
-									}
-									var g = '<a class="btn btn-warning btn-sm '+s_deploy_simu+'" href="#" title="配置伴随症状"  mce_href="#" onclick="deploySimu(\''
-									+ row.id
-									+ '\')"><i class="fa fa-institution"></i></a> ';
+//									var f = '';
+//									if (row.range == 'D'){
+//										f = '<a class="btn btn-primary btn-sm '+s_deploy_dept+'" href="#" mce_href="#" title="配置可用科室" onclick="deployDept(\''
+//										+ row.id
+//										+ '\')"><i class="fa fa-envelope-o"></i></a> ';
+//									}
+//									var g = '<a class="btn btn-warning btn-sm '+s_deploy_simu+'" href="#" title="配置伴随症状"  mce_href="#" onclick="deploySimu(\''
+//									+ row.id
+//									+ '\')"><i class="fa fa-institution"></i></a> ';
 									var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 											+ row.id
 											+ '\')"><i class="fa fa-edit"></i></a> ';
 									var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 											+ row.id
 											+ '\')"><i class="fa fa-remove"></i></a> ';
-									return f + g + e + d;
+									return e + d;
 								}
 							} 
 							]

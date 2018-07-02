@@ -85,4 +85,12 @@ public class EmrSimuSympServiceImpl implements EmrSimuSympService{
 	     return SimuSympEntity;
 	}
 
+	@Override
+	public SimuSympEntity getByName(String simuSympName) {
+		// TODO Auto-generated method stub
+		
+		SimuSympEntity SimuSympEntity = emrSimuSympDao.getByName(simuSympName);
+		return SimuSympEntity;
+	}
+
 }

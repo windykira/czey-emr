@@ -100,7 +100,7 @@
 	     CREATOR, CREATE_TIME, MODIFIER, 
 	     MODIFY_TIME, DEL_FLAG,PK_CATALOG)
 	   values (#{pkTemplate,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},  #{codeTmp,jdbcType=VARCHAR}, 
-	     #{nameTmp,jdbcType=VARCHAR}, 'template\\'||#{pkTemplate,jdbcType=VARCHAR}||#{codeTmp,jdbcType=VARCHAR}||'.xml', #{range,jdbcType=VARCHAR}, 
+	     #{nameTmp,jdbcType=VARCHAR}, #{pkTemplate,jdbcType=VARCHAR}||#{codeTmp,jdbcType=VARCHAR}||'.xml', #{range,jdbcType=VARCHAR},
 	     #{pkDept,jdbcType=VARCHAR}, #{pkUser,jdbcType=VARCHAR}, #{pkTmpClass,jdbcType=VARCHAR}, 
 	     #{patientType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{patientType,jdbcType=VARCHAR},
 	     #{creator,jdbcType=VARCHAR}, sysdate, #{modifier,jdbcType=VARCHAR}, 

@@ -53,4 +53,6 @@ public interface EmrSympService {
      * @return
      */
     SympEntity get(String roleId);
+
+	SympEntity getByName(String sympName);
 }

@@ -45,5 +45,7 @@ public interface EmrSympDao {
      * @return
      */
     SympEntity get(String roleId);
+    
+    SympEntity getByName(String sympName);
 
 }

@@ -33,7 +33,7 @@ public class DcController extends BaseController {
 
     private String prefix = "emr/dc";
 
-    //    @RequiresPermissions("sys:user:user")
+    // @RequiresPermissions("sys:user:user")
     @GetMapping("index")
     String index(Model model) {
         return prefix + "/index";
@@ -90,8 +90,14 @@ public class DcController extends BaseController {
     @ResponseBody
     public String getTemplate(HttpServletRequest request, @PathVariable String fileId) throws IOException {
         String path = service.getTemplateFilePathById(fileId);
-        String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
-        //String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH") + path);
+        //String xml = MyFileUtil.resolveFile("/static/cab/index.xml");
+        String xml = MyFileUtil.readFile(SystemConfigParseUtil.getProperty("FILE_PATH") + path);
+        return xml;
+    }
+    @RequestMapping(value="/getXML/{fileId}")
+    @ResponseBody
+    public String getXML(HttpServletRequest request, @PathVariable String fileId) throws IOException {
+        String xml = MyFileUtil.readFile("C:\\dc\\tgjc\\"+fileId+".xml");
         return xml;
     }
 }

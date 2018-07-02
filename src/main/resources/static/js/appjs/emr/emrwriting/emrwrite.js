@@ -101,11 +101,16 @@ var templateId = "";
 var catalogId = "";
 var catalogName = "";
 var parentCatalogId = "";
+
+var zTree = "";
+var emrFileId = "";
+
 function saveEmr(){
 
     var xmlContent = getXMLString();
+    debugger;
     var data = {
-        "xmlContent":xmlContent,
+        "xmlContent":"",
         "catalogName":catalogName,
         "emrFile.patientId":info.PATIENT_ID,
         "emrFile.pkTmpClass":$(".list-group").find(".active").attr("value"),
@@ -115,6 +120,7 @@ function saveEmr(){
         "emrFile.ID":emrFileId
     };
     var url = "";
+
     //更新
     if(emrFileId != ""){
         url = "/emr/emrwriting/updateEmr";
@@ -157,8 +163,7 @@ function loadNavi() {
     document.getElementById("patient_indate").innerHTML = info.INDATE;
     document.getElementById("patient_diagnosis").innerHTML = info.DIAGNOSIS;
 }
-var zTree = "";
-var emrFileId = "";
+
 function loadEmrCataLog(treeNodeId) {
     var setting = {
         data: {

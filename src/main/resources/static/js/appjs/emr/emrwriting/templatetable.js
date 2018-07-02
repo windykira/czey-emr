@@ -10,7 +10,7 @@ function openCatalog() {
         area: ['400px', '560px'],
         skin: 'layui-layer-molv',
         offset:"t",
-        content: "/template/medicalrecord/catalogTree",
+        content: "/template/medicalrecord/catalogTree/1" ,
         btn: ['确定', '取消',],
         yes: function (index, layero) {
             var iframeWin = window[layero.find('iframe')[0]['name']];

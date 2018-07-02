@@ -44,5 +44,7 @@ public interface EmrSimuSympDao {
      * @return
      */
     SimuSympEntity get(String roleId);
+    
+    SimuSympEntity getByName(String simuSympName);
 
 }

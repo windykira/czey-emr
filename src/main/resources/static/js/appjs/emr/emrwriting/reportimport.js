@@ -9,8 +9,12 @@ function cancel(){
     parent.layer.close(index);
 }
 var element = "";
-function initTable(hisCallType){
 
+function initTable(hisCallType){
+    if(hisCallType=="3"){
+        initTableJy(hisCallType);
+        return;
+    }
     var columns = "";
     switch (hisCallType){
         case "1":
@@ -76,33 +80,53 @@ function initTable(hisCallType){
                 {
                     checkbox: true
                 },
+                //{
+                //    field: 'RESULT_DATE_TIME',
+                //    title: '报告日期'
+                //},
+                //{
+                //    field: 'ITEM_NO',
+                //    title: '检验单号'
+                //},
+                //{
+                //    field: 'REPORT_ITEM_NAME',
+                //    title: '检验项目名称'
+                //},
+                //{
+                //    field: 'RESULT',
+                //    title: '结果'
+                //},
+                //{
+                //    field: 'ABNORMAL_INDICATOR',
+                //    title: '异常'
+                //},
+                //{
+                //    field: 'UNITS',
+                //    title: '单位'
+                //},
+                //{
+                //    field: 'TEXT_RANGE',
+                //    title: '正常参考值'
+                //}
+
                 {
-                    field: 'RESULT_DATE_TIME',
+                    field: 'applyTime',
                     title: '报告日期'
                 },
                 {
-                    field: 'ITEM_NO',
+                    field: 'checkNo',
                     title: '检验单号'
                 },
                 {
-                    field: 'REPORT_ITEM_NAME',
+                    field: 'checkClass',
                     title: '检验项目名称'
                 },
                 {
-                    field: 'RESULT',
-                    title: '结果'
-                },
-                {
-                    field: 'ABNORMAL_INDICATOR',
-                    title: '异常'
-                },
-                {
-                    field: 'UNITS',
-                    title: '单位'
-                },
-                {
-                    field: 'TEXT_RANGE',
-                    title: '正常参考值'
+                    field: 'state',
+                    title: '操作',
+                    formatter:function(value, row, index){
+                        return "<a onclick=''>"
+                    }
                 }
             ];break;
         case "4":
@@ -179,6 +203,132 @@ function initTable(hisCallType){
         });
     }
 
+    function initTableJy(hisCallType){
+        element = $("#inspect");
+        var columns = [
+            //{
+            //    checkbox: true
+            //},
+            {
+                field: 'RESULT_DATE_TIME',
+                title: '报告日期'
+            },
+            {
+                field: 'TEST_NO',
+                title: '检验单号'
+            },
+            {
+                field: 'SPECIMEN',
+                title: '检验项目名称'
+            },
+            {
+                field: '',
+                title: '操作',
+                formatter:function(value, row, index){
+                    return '<a style="color:black;text-decoration:underline;cursor: pointer" onclick=jyDetail("'+row.TEST_NO+'",this)>查看检验明细</a>';
+                }
+            }
+        ];
+        var params = {
+            hisCallType:hisCallType,
+            patientId:parent.document.getElementById("patient_patientId").innerHTML
+        };
+        element.bootstrapTable(
+            {
+                method: 'get', // 服务器数据的请求方式 get or post
+                url: "/emr/emrwriting/listHisResponseDatas",  // 服务器数据的加载地址
+                iconSize: 'outline',
+                //toolbar: '#exampleToolbar',
+                /*onCheck:function(row,$element){
+                 //$element.children().toggleClass("rowChecked");
+                 $(element).parent().parent().children().addClass("rowChecked");
+                 },*/
+                striped: true, // 设置为true会有隔行变色效果
+                dataType: "json", // 服务器返回的数据类型
+                //pagination: true, // 设置为true会在底部显示分页条
+                singleSelect: false, // 设置为true将禁止多选
+                //pageSize: 10, // 如果设置了分页，每页数据条数
+                //pageNumber: 1, // 如果设置了分布，首页页码
+                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                //sidePagination: "client", // 设置在哪里进行分页，可选值为"client" 或者 server
+                //sortable: true,                     //是否启用排序
+                //sortOrder: "asc",
+                uniqueId : 'TEST_NO',
+                queryParams : {
+                    hisCallType:3,
+                    patientId:parent.document.getElementById("patient_patientId").innerHTML//'368023'
+                },
+                columns: columns
+            });
+    }
+
+    function jyDetail(no,item){
+        if($("#son_"+no).length>0){
+            $("#tr_"+no).toggle();
+        }else{
+
+            $(item).parent().parent().after("<tr id='tr_"+no+"'><td colspan='4' style='padding:0'><table id='son_"+no+"' class='son_table'></table></td></tr>");
+            $("#son_"+no).bootstrapTable(
+                {
+                    method: 'get', // 服务器数据的请求方式 get or post
+                    url: "/emr/emrwriting/listHisResponseDatas",  // 服务器数据的加载地址
+                    queryParams : {
+                        hisCallType:7,
+                        testNo:no,
+                        patientId:parent.document.getElementById("patient_patientId").innerHTML
+                    },
+                    iconSize: 'outline',
+                    //toolbar: '#exampleToolbar',
+                    /*onCheck:function(row,$element){
+                     //$element.children().toggleClass("rowChecked");
+                     $(element).parent().parent().children().addClass("rowChecked");
+                     },*/
+                    striped: true, // 设置为true会有隔行变色效果
+                    dataType: "json", // 服务器返回的数据类型
+                    //pagination: true, // 设置为true会在底部显示分页条
+                    singleSelect: false, // 设置为true将禁止多选
+                    //pageSize: 10, // 如果设置了分页，每页数据条数
+                    //pageNumber: 1, // 如果设置了分布，首页页码
+                    showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                    //sidePagination: "client", // 设置在哪里进行分页，可选值为"client" 或者 server
+                    //sortable: true,                     //是否启用排序
+                    //sortOrder: "asc",
+                    uniqueId : 'checkNo',
+                    //queryParams : params,
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: 'REPORT_ITEM_CODE',
+                            title: '报告项目代码'
+                        },
+                        {
+                            field: 'REPORT_ITEM_NAME',
+                            title: '报告项目名称'
+                        },
+                        {
+                            field: 'RESULT',
+                            title: '结果'
+                        },
+                        {
+                            field: 'ABNORMAL_INDICATOR',
+                            title: '异常'
+                        },
+                        {
+                            field: 'UNITS',
+                            title: '单位'
+                        },
+                        {
+                            field: 'TEXT_RANGE',
+                            title: '正常参考值'
+                        },
+                    ]
+                });
+        }
+
+    }
+
     function importReport(){
 
         switch ($("#hisCallType").val()) {
@@ -204,14 +354,34 @@ function initTable(hisCallType){
                 parent.layer.close(index);
                 break;
             case "3"://检验
-                var rows = element.bootstrapTable('getSelections');
+                var all = "";
                 var reportContent = "\r\n检验：";
-                var count = 0;
+                for(var i= 0;i<$(".son_table").length;i++){
+                    var tb = $(".son_table")[i];
+                    var rows = $(tb).bootstrapTable('getSelections');
+                    if(rows.length==0){
+                        continue;
+                    }
+                    var no = tb.id.replace("son_","");
+                    var f_row = $('#inspect').bootstrapTable('getRowByUniqueId', no);
+                    var name =  f_row.SPECIMEN;
+                    var resultItem = "\r\n查【"+name+"】：是【";
+                    var count = 0;
+
+                    //var myWriter = parent.myWriter;
+                    $.each(rows, function (i, row) {
+                        var punc = "，";
+                        if(i==rows.length-1){
+                            punc = "";
+                        }
+                        count++;
+                        resultItem += row.REPORT_ITEM_NAME + " " + row.RESULT + row.UNITS + punc ;
+                    });
+                    resultItem += "】";
+                    reportContent += resultItem;
+                }
+                //console.log(reportContent);
                 var myWriter = parent.myWriter;
-                $.each(rows, function (i, row) {
-                    count++;
-                    reportContent += "\r\n" + count + "." + row.REPORT_ITEM_NAME + " " + row.RESULT + row.UNITS ;
-                });
                 var input = myWriter.Document.GetElementById("jyxx");
                 if (input != null) {
                     input = myWriter.ComConvertToXTextInputFieldElement(input);
@@ -223,6 +393,26 @@ function initTable(hisCallType){
                 myWriter.ExecuteCommand("InsertString", false, reportContent);
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
+
+                //var rows = element.bootstrapTable('getSelections');
+                //var reportContent = "\r\n检验：";
+                //var count = 0;
+                //var myWriter = parent.myWriter;
+                //$.each(rows, function (i, row) {
+                //    count++;
+                //    reportContent += "\r\n" + count + "." + row.REPORT_ITEM_NAME + " " + row.RESULT + row.UNITS ;
+                //});
+                //var input = myWriter.Document.GetElementById("jyxx");
+                //if (input != null) {
+                //    input = myWriter.ComConvertToXTextInputFieldElement(input);
+                //    if (input != null) {
+                //        input.Text = "";
+                //        input.focus();
+                //    }
+                //}
+                //myWriter.ExecuteCommand("InsertString", false, reportContent);
+                //var index = parent.layer.getFrameIndex(window.name);
+                //parent.layer.close(index);
                 break;
         }
 

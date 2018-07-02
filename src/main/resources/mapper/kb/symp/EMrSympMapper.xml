@@ -29,6 +29,12 @@
           <include refid="Base_Column_List"/>
         FROM bd_symptom where PK_SYMP = #{roleId}
     </select>
+    
+    <select id="getByName" resultMap="BaseResultMap">
+        SELECT 
+          <include refid="Base_Column_List"/>
+        FROM bd_symptom where NAME_SYMP = #{sympName}
+    </select>
 
     <insert id="save" parameterType="com.haoze.model.kb.symp.entity.SympEntity"
             useGeneratedKeys="true" keyProperty="id">

@@ -11,11 +11,6 @@ $().ready(function() {
                 select.append("<option value='"+datas[i].PK_TMP_CLASS+"'>"  
                         + datas[i].NAME_CLASS + "</option>");  
             }
-			//var select = $("#rangeSel");
-       	 //select.append("<option value='QY'>全院</option>");
-       	 //select.append("<option value='KS'>科室</option>");
-       	 //select.append("<option value='GR'>个人</option>");
-
         }
     });
 	
@@ -39,28 +34,6 @@ function save() {
 	var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 	parent.layer.close(index);
 	parent.loadEditPage();
-	return;
-//	$.ajax({
-//		cache : true,
-//		type : "POST",
-//		url : "/emrsys/dept/add",
-//		data : $('#templateForm').serialize(),// 你的formid
-//		async : false,
-//		error : function(request) {
-//			parent.layer.alert("Connection error");
-//		},
-//		success : function(data) {
-//			if (data.code == 1) {
-//				parent.layer.msg("操作成功");
-//				parent.reLoad();
-//				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-//				parent.layer.close(index);
-//
-//			} else {
-//				parent.layer.alert(data.msg)
-//			}
-//		}
-//	});
 
 }
 function validateRule() {
@@ -109,6 +82,11 @@ function cancel(){
 	parent.layer.close(index);
 }
 
+function callBack(id, name){
+	$("#catalogName").val(name);
+	$("#catalogId").val(id);
+}
+
 function openCatalog(){
 	layer.open({
 		type:2,
@@ -116,7 +94,7 @@ function openCatalog(){
 		shadeClose: true,
 		area : [ '400px', '450px' ],
 		skin: 'layui-layer-molv',
-		content:"/template/medicalrecord/catalogTree",
+		content:"/template/medicalrecord/catalogTree/2",
 		btn: ['确认', '取消'],
 		yes:function(index,layero){
 			var iframeWin = window[layero.find('iframe')[0]['name']];

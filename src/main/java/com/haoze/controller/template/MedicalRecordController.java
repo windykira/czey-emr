@@ -49,8 +49,9 @@ public class MedicalRecordController {
     }
 
     @RequiresPermissions("template:medicalrecord:medicalrecord")
-    @GetMapping("/catalogTree")
-    String catalogTree(Model model) {
+    @GetMapping("/catalogTree/{callSource}")
+    String catalogTree(Model model,@PathVariable("callSource") String callSource) {
+        model.addAttribute("callSource",callSource);
         return prefix + "/emrcatalog";
     }
 

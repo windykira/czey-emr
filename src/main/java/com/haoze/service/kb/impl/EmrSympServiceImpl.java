@@ -85,4 +85,11 @@ public class EmrSympServiceImpl implements EmrSympService{
 	     return sympEntity;
 	}
 
+	@Override
+	public SympEntity getByName(String sympName) {
+		// TODO Auto-generated method stub
+		SympEntity sympEntity = emrRoleMapper.getByName(sympName);
+	     return sympEntity;
+	}
+
 }

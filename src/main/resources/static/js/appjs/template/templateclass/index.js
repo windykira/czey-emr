@@ -73,7 +73,7 @@ function load() {
 								field : 'ID',
 								align : 'center',
 								formatter : function(value, row, index) {
-									var	f = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="停用" onclick="stop(\''
+									var	f = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="状态" onclick="stop(\''
 										+ row.id
 										+ '\')"><i class="fa fa-envelope-o"></i></a> ';
 									var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
@@ -135,7 +135,7 @@ function edit(id) {
 	});
 }
 function stop(id) {
-	layer.confirm('确定要停用选中的记录？', {
+	layer.confirm('确定要改变选中记录的状态？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
@@ -146,7 +146,7 @@ function stop(id) {
 			},
 			success : function(r) {
 				if (r.code == 1) {
-					layer.msg("停用成功");
+					layer.msg("操作成功");
 					reLoad();
 				} else {
 					layer.msg(r.msg);

@@ -43,7 +43,7 @@ public class EmrFileServiceImpl implements EmrFileService {
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return ResponseResult.failure(0, "保存失败。");
+            return ResponseResult.failure(0, "新增失败。");
         }
     }
 
@@ -75,7 +75,7 @@ public class EmrFileServiceImpl implements EmrFileService {
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return ResponseResult.failure(0, "保存失败。");
+            return ResponseResult.failure(0, "更新失败。");
         }
     }
 

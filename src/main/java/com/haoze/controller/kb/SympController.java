@@ -18,6 +18,7 @@ import com.haoze.common.annotation.Note;
 import com.haoze.common.controller.BaseController;
 import com.haoze.common.model.Constant;
 import com.haoze.common.model.ResponseResult;
+import com.haoze.model.kb.symp.entity.SimuSympEntity;
 import com.haoze.model.kb.symp.entity.SympEntity;
 import com.haoze.model.system.role.entity.EmrRoleEntity;
 import com.haoze.service.kb.EmrSympService;
@@ -129,7 +130,19 @@ public class SympController extends BaseController{
     @ResponseBody()
     ResponseResult save(SympEntity role) {
     	
-       return emrSympService.save(role);
+    	
+    	SympEntity sympDO = emrSympService.getByName(role.getSympName());
+        if(sympDO==null) {
+       	 
+       	 return emrSympService.save(role);
+        }
+        else {
+       	 ResponseResult re = new ResponseResult();
+       	 re.put("code", 0);
+       	 re.put("msg", "该症状已录入");
+       	 return re;
+        }
+    	
     }
     
     

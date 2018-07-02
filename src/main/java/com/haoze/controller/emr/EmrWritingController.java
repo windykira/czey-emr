@@ -83,7 +83,7 @@ public class EmrWritingController extends BaseController {
 
     @PostMapping("/saveEmr")
     @ResponseBody
-    ResponseResult saveEmr(Model model, EmrFileVO emrFileVO) {
+    ResponseResult saveEmr(EmrFileVO emrFileVO) {
 
         try {
             String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
@@ -102,10 +102,10 @@ public class EmrWritingController extends BaseController {
                 emrFileService.insert(emrFileEntity);
                 return ResponseResult.success().put("emrFileId", emrFileEntity.getID());
             }
-            return ResponseResult.failure(0, "保存失败");
+            return ResponseResult.failure(0, "新增失败");
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseResult.failure(0, "保存失败");
+            return ResponseResult.failure(0, "新增失败");
         }
     }
 
@@ -132,7 +132,7 @@ public class EmrWritingController extends BaseController {
             return ResponseResult.success().put("emrFileId", emrFileEntity.getID());
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseResult.failure(0, "保存失败");
+            return ResponseResult.failure(0, "更新失败");
         }
     }
 

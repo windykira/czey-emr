@@ -111,6 +111,25 @@
 	function getXMLString(){
 		return myWriter.XMLText;
 	}
+	function getJSONString(){
+		var tmp = myWriter.getelementsbytypename("xtextinputfieldelement");
+		var ct = tmp.Count;
+		var inputInfoArray = [] ;
+		for(var i=0;i<ct;i++){
+			var input = myWriter.ComConvertToXTextInputFieldElement(tmp.GetItem(i));
+			var id = input.ID;
+			var name = input.name;
+			var value = input.innerText;
+			var info = {
+				"id": id,
+				"name": name,
+				"value": value
+			}
+			inputInfoArray.push(info);
+		}
+		var str = JSON.stringify(inputInfoArray);
+		return str;
+	}
 	//字体按钮
 	$("#font_btn").click(function(e){
 		var top = $(this).position().top+$(this).height()+8;
@@ -256,6 +275,39 @@ function bindDataSource(data){
 	var xml = JSON2XML(json);
 	myWriter.SetDocumentParameterValueXml("patient", xml);
 	myWriter.WriteDataFromDataSourceToDocument();
+	//手动设置可见性
+	var inputm = myWriter.Document.GetElementById("生殖-男");
+	if (inputm != null) {
+		inputm = myWriter.ComConvertToXTextInputFieldElement(inputm);
+	}
+	var inputw = myWriter.Document.GetElementById("生殖-女");
+	if (inputw != null) {
+		inputw = myWriter.ComConvertToXTextInputFieldElement(inputw);
+	}
+	if(json.SEX=="男"){
+		inputm.Visible=true;
+		inputw.Visible=false;
+	}else if(json.SEX=="女"){
+		inputw.Visible=true;
+		inputm.Visible=false;
+	}
+	if(json.AGE<=14){
+		var row = myWriter.Document.GetElementById("婚育史行");
+		if (row != null) {
+			row = myWriter.ComConvertToXTextTableRowElement(row);
+		}
+		row.Visible = false;
+	}else{
+		if(json.SEX!="女"){
+			var row = myWriter.Document.GetElementById("月经史行");
+			if (row != null) {
+				row = myWriter.ComConvertToXTextTableRowElement(row);
+			}
+			row.Visible = false;
+		}
+	}
+	myWriter.RefreshDocument();
+
 }
 function JSON2XML(json){
 	var xml = "<x>";

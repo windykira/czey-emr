@@ -9,12 +9,12 @@ import com.haoze.model.system.user.entity.EmrUserEntity;
 import com.haoze.model.template.temp.entity.TemplateEntity;
 import com.haoze.service.system.EmrMenuService;
 import com.haoze.service.template.TemplateService;
+import com.haoze.utils.CurrentUser;
 import com.haoze.utils.PageUtil;
 import com.haoze.utils.ShiroUtil;
 import com.haoze.utils.UUIDUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +32,6 @@ import java.util.Map;
 @Controller
 public class TemplateController extends BaseController{
 
-	@Value("${filePath}")
-	private String filePath;
     @Autowired
     TemplateService templateService;
     @Autowired
@@ -85,8 +83,8 @@ public class TemplateController extends BaseController{
     	e.setCreator(user.getID());
     	e.setDelFlag("0");
     	e.setNameTmp(request.getParameter("templateName"));
-    	e.setPkDept("9DC5168174974A8FAC3836EF07C4EAD0");//需要改成dept
-    	e.setPkOrg("e736c3b028cd4fb599a0175c00f6266c");//gggggggggggggggggggggg
+    	e.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
+    	e.setPkOrg(CurrentUser.getUser().getUserOrganization());
     	e.setPkTmpClass(request.getParameter("typeSel"));
     	e.setPkUser(user.getID());
     	e.setRange(request.getParameter("rangeSel"));
@@ -109,8 +107,8 @@ public class TemplateController extends BaseController{
         e.setModifier(user.getID());
         e.setDelFlag("0");
         e.setNameTmp(request.getParameter("templateName"));
-        e.setPkDept("9DC5168174974A8FAC3836EF07C4EAD0");//需要改成dept
-        e.setPkOrg("e736c3b028cd4fb599a0175c00f6266c");//gggggggggggggggggggggg
+        e.setPkDept(CurrentUser.getCurrentUserDepartment().getID());
+        e.setPkOrg(CurrentUser.getUser().getUserOrganization());
         e.setPkTmpClass(request.getParameter("typeSel"));
 //        e.setPkUser(user.getID());
         e.setRange(request.getParameter("rangeSel"));

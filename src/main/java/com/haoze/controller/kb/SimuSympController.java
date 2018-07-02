@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,13 +53,11 @@ public class SimuSympController extends BaseController{
     @Autowired
     EmrSimuSympService emrSympService;
 
-    @RequiresPermissions("kb:simusymp:simusymp")
-    @GetMapping()
+    @GetMapping("index")
     String simusymp(Model model) {
         return prefix + "/simusymp";
     }
 
-    @RequiresPermissions("kb:simusymp:simusymp")
     @GetMapping("/list")
     @ResponseBody()
     List<SimuSympEntity> list() {
@@ -69,7 +66,6 @@ public class SimuSympController extends BaseController{
     }
 
     @Note("新增症状")
-    @RequiresPermissions("kb:simusymp:add")
     @GetMapping("/add")
     String add() {
         return prefix + "/add";
@@ -96,7 +92,6 @@ public class SimuSympController extends BaseController{
     }
 //
     @Note("编辑症状")
-    @RequiresPermissions("kb:simusymp:edit")
     @GetMapping("/edit/{id}")
     String edit(@PathVariable("id") String id, Model model) {
         SimuSympEntity sympDO = emrSympService.get(id);
@@ -105,7 +100,6 @@ public class SimuSympController extends BaseController{
     }
     
     @Note("更新症状")
-    @RequiresPermissions("kb:simusymp:edit")
     @PostMapping("/update")
     @ResponseBody()
     ResponseResult update(SimuSympEntity role) {
@@ -113,7 +107,6 @@ public class SimuSympController extends BaseController{
     }
     
     @Note("删除菜单")
-    @RequiresPermissions("kb:simusymp:remove")
     @PostMapping("/remove")
     @ResponseBody
     ResponseResult remove(String id) {
@@ -140,12 +133,20 @@ public class SimuSympController extends BaseController{
 
 //
     @Note("保存症状")
-    @RequiresPermissions("kb:simusymp:add")
     @PostMapping("/save")
     @ResponseBody()
     ResponseResult save(SimuSympEntity role) {
-    	
-       return emrSympService.save(role);
+     SimuSympEntity sympDO = emrSympService.getByName(role.getSimuSympName());
+     if(sympDO==null) {
+    	 
+    	 return emrSympService.save(role);
+     }
+     else {
+    	 ResponseResult re = new ResponseResult();
+    	 re.put("code", 0);
+    	 re.put("msg", "该伴随症状已录入");
+    	 return re;
+     }
     }
     
 }

@@ -129,12 +129,18 @@ public class TemplateTmpClassController extends BaseController{
     }
      
     
-    @Note("停用")
+    @Note("状态")
     @PostMapping("/stop")
     @ResponseBody
     ResponseResult stop(String id) {
         EmrTemplateClassEntity tempClass = templateClassService.get(id);
-        tempClass.setStopFlag("0");
+        String stopFlag  = tempClass.getStopFlag();
+        if("1".equals(stopFlag)) {
+        	tempClass.setStopFlag("0");
+        }
+        if("0".equals(stopFlag)) {
+        	tempClass.setStopFlag("1");
+        }
         return templateClassService.update(tempClass);
     }
 //

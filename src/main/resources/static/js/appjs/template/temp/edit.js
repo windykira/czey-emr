@@ -111,6 +111,11 @@ function cancel(){
 	parent.layer.close(index);
 }
 
+function callBack(id, name){
+	$("#catalogName").val(name);
+	$("#catalogId").val(id);
+}
+
 function openCatalog(){
 	layer.open({
 		type:2,
@@ -118,7 +123,7 @@ function openCatalog(){
 		shadeClose: true,
 		area : [ '400px', '450px' ],
 		skin: 'layui-layer-molv',
-		content:"/template/medicalrecord/catalogTree",
+		content:"/template/medicalrecord/catalogTree/2",
 		btn: ['确认', '取消'],
 		yes:function(index,layero){
 			var iframeWin = window[layero.find('iframe')[0]['name']];
