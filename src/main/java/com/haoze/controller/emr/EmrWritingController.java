@@ -8,6 +8,7 @@ import com.haoze.model.emr.emrwriting.entity.EmrFileEntity;
 import com.haoze.model.emr.emrwriting.vo.EmrFileVO;
 import com.haoze.service.emr.EmrFileService;
 import com.haoze.service.emr.bom.HisResponseDataService;
+import com.haoze.service.template.TemplateService;
 import com.haoze.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,6 @@ import java.util.Map;
 
 /**
  * 书写病历控制器信息。
- *
  * @author maxl
  * @time 2018-05-31。
  */
@@ -35,6 +35,8 @@ public class EmrWritingController extends BaseController {
 
     @Autowired
     EmrFileService emrFileService;
+    @Autowired
+    TemplateService  templateService;
 
     private String prefix = "emr/emrwriting";
 
@@ -86,6 +88,7 @@ public class EmrWritingController extends BaseController {
     ResponseResult saveEmr(EmrFileVO emrFileVO) {
 
         try {
+
             String fileName = CurrentUser.getUser().getUserName() + " " + CurrentUser.getUserRoleNames() + " " + emrFileVO.getCatalogName() + " "
                     + DateFormatUtil.formatDate(new Date());
             //String emrId = UUIDUtil.randomString();
